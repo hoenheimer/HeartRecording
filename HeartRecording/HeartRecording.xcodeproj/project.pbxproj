@@ -3,13 +3,27 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1825C87626285BD1001C0FB3 /* AnaNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C87526285BD1001C0FB3 /* AnaNavigationController.swift */; };
+		1825C87F26285C05001C0FB3 /* UIViewController+Addition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C87B26285C05001C0FB3 /* UIViewController+Addition.swift */; };
+		1825C88026285C05001C0FB3 /* UIView+Addition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C87C26285C05001C0FB3 /* UIView+Addition.swift */; };
+		1825C88126285C05001C0FB3 /* UIImage+Additon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C87D26285C05001C0FB3 /* UIImage+Additon.swift */; };
+		1825C88226285C05001C0FB3 /* UIColor+Addition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C87E26285C05001C0FB3 /* UIColor+Addition.swift */; };
+		1825C88826285C33001C0FB3 /* Iconfont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C88726285C33001C0FB3 /* Iconfont.swift */; };
+		1825C88E26285C5B001C0FB3 /* iconfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1825C88D26285C5B001C0FB3 /* iconfont.ttf */; };
+		1825C89926285D32001C0FB3 /* AnaLargeTitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C89526285D32001C0FB3 /* AnaLargeTitleViewController.swift */; };
+		1825C89A26285D32001C0FB3 /* AnaTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C89626285D32001C0FB3 /* AnaTabBar.swift */; };
+		1825C89B26285D32001C0FB3 /* AnaTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C89726285D32001C0FB3 /* AnaTabBarController.swift */; };
+		1825C89C26285D32001C0FB3 /* AnaLargeTitleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C89826285D32001C0FB3 /* AnaLargeTitleTableViewController.swift */; };
+		1825C8A1262860C0001C0FB3 /* FeedbackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C8A0262860C0001C0FB3 /* FeedbackManager.swift */; };
+		1825C8A726286158001C0FB3 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C8A626286158001C0FB3 /* RecordViewController.swift */; };
+		1825C8AF26286E09001C0FB3 /* RippleAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C8AE26286E09001C0FB3 /* RippleAnimationView.swift */; };
+		2AA03A87C31471ABCF75F182 /* Pods_HeartRecording.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10A0A03456011A891D4C9651 /* Pods_HeartRecording.framework */; };
 		6CD6CA13262771330099F063 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6CA12262771330099F063 /* AppDelegate.swift */; };
 		6CD6CA15262771330099F063 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6CA14262771330099F063 /* SceneDelegate.swift */; };
-		6CD6CA17262771330099F063 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6CA16262771330099F063 /* ViewController.swift */; };
 		6CD6CA1A262771330099F063 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CD6CA18262771330099F063 /* Main.storyboard */; };
 		6CD6CA1C262771350099F063 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6CD6CA1B262771350099F063 /* Assets.xcassets */; };
 		6CD6CA1F262771350099F063 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CD6CA1D262771350099F063 /* LaunchScreen.storyboard */; };
@@ -35,10 +49,25 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		10A0A03456011A891D4C9651 /* Pods_HeartRecording.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HeartRecording.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1825C87526285BD1001C0FB3 /* AnaNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnaNavigationController.swift; sourceTree = "<group>"; };
+		1825C87B26285C05001C0FB3 /* UIViewController+Addition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Addition.swift"; sourceTree = "<group>"; };
+		1825C87C26285C05001C0FB3 /* UIView+Addition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Addition.swift"; sourceTree = "<group>"; };
+		1825C87D26285C05001C0FB3 /* UIImage+Additon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Additon.swift"; sourceTree = "<group>"; };
+		1825C87E26285C05001C0FB3 /* UIColor+Addition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Addition.swift"; sourceTree = "<group>"; };
+		1825C88726285C33001C0FB3 /* Iconfont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Iconfont.swift; sourceTree = "<group>"; };
+		1825C88D26285C5B001C0FB3 /* iconfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = iconfont.ttf; sourceTree = "<group>"; };
+		1825C89526285D32001C0FB3 /* AnaLargeTitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnaLargeTitleViewController.swift; sourceTree = "<group>"; };
+		1825C89626285D32001C0FB3 /* AnaTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnaTabBar.swift; sourceTree = "<group>"; };
+		1825C89726285D32001C0FB3 /* AnaTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnaTabBarController.swift; sourceTree = "<group>"; };
+		1825C89826285D32001C0FB3 /* AnaLargeTitleTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnaLargeTitleTableViewController.swift; sourceTree = "<group>"; };
+		1825C8A0262860C0001C0FB3 /* FeedbackManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackManager.swift; sourceTree = "<group>"; };
+		1825C8A626286158001C0FB3 /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
+		1825C8AE26286E09001C0FB3 /* RippleAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RippleAnimationView.swift; sourceTree = "<group>"; };
+		4F0ADFA14A26D0B9EF8D696B /* Pods-HeartRecording.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HeartRecording.release.xcconfig"; path = "Target Support Files/Pods-HeartRecording/Pods-HeartRecording.release.xcconfig"; sourceTree = "<group>"; };
 		6CD6CA0F262771330099F063 /* HeartRecording.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HeartRecording.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CD6CA12262771330099F063 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6CD6CA14262771330099F063 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		6CD6CA16262771330099F063 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		6CD6CA19262771330099F063 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6CD6CA1B262771350099F063 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6CD6CA1E262771350099F063 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +78,7 @@
 		6CD6CA30262771350099F063 /* HeartRecordingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HeartRecordingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CD6CA34262771350099F063 /* HeartRecordingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartRecordingUITests.swift; sourceTree = "<group>"; };
 		6CD6CA36262771350099F063 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B9BDCA6BEECE37628F1A116A /* Pods-HeartRecording.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HeartRecording.debug.xcconfig"; path = "Target Support Files/Pods-HeartRecording/Pods-HeartRecording.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2AA03A87C31471ABCF75F182 /* Pods_HeartRecording.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +107,64 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1825C87426285BB8001C0FB3 /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				1825C87526285BD1001C0FB3 /* AnaNavigationController.swift */,
+				1825C89826285D32001C0FB3 /* AnaLargeTitleTableViewController.swift */,
+				1825C89526285D32001C0FB3 /* AnaLargeTitleViewController.swift */,
+				1825C89626285D32001C0FB3 /* AnaTabBar.swift */,
+				1825C89726285D32001C0FB3 /* AnaTabBarController.swift */,
+			);
+			path = Global;
+			sourceTree = "<group>";
+		};
+		1825C87A26285BE9001C0FB3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1825C87E26285C05001C0FB3 /* UIColor+Addition.swift */,
+				1825C87D26285C05001C0FB3 /* UIImage+Additon.swift */,
+				1825C87C26285C05001C0FB3 /* UIView+Addition.swift */,
+				1825C87B26285C05001C0FB3 /* UIViewController+Addition.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		1825C88626285C1C001C0FB3 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				1825C88726285C33001C0FB3 /* Iconfont.swift */,
+				1825C8A0262860C0001C0FB3 /* FeedbackManager.swift */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		1825C88C26285C3A001C0FB3 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				1825C88D26285C5B001C0FB3 /* iconfont.ttf */,
+			);
+			path = "Support Files";
+			sourceTree = "<group>";
+		};
+		1825C8A526286145001C0FB3 /* Record */ = {
+			isa = PBXGroup;
+			children = (
+				1825C8A626286158001C0FB3 /* RecordViewController.swift */,
+				1825C8AE26286E09001C0FB3 /* RippleAnimationView.swift */,
+			);
+			path = Record;
+			sourceTree = "<group>";
+		};
+		3A6626D646AC353EC3BEE451 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B9BDCA6BEECE37628F1A116A /* Pods-HeartRecording.debug.xcconfig */,
+				4F0ADFA14A26D0B9EF8D696B /* Pods-HeartRecording.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		6CD6CA06262771330099F063 = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +172,8 @@
 				6CD6CA28262771350099F063 /* HeartRecordingTests */,
 				6CD6CA33262771350099F063 /* HeartRecordingUITests */,
 				6CD6CA10262771330099F063 /* Products */,
+				3A6626D646AC353EC3BEE451 /* Pods */,
+				BD071EDCE7FC36497C819B75 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -101,11 +192,15 @@
 			children = (
 				6CD6CA12262771330099F063 /* AppDelegate.swift */,
 				6CD6CA14262771330099F063 /* SceneDelegate.swift */,
-				6CD6CA16262771330099F063 /* ViewController.swift */,
 				6CD6CA18262771330099F063 /* Main.storyboard */,
 				6CD6CA1B262771350099F063 /* Assets.xcassets */,
 				6CD6CA1D262771350099F063 /* LaunchScreen.storyboard */,
 				6CD6CA20262771350099F063 /* Info.plist */,
+				1825C87426285BB8001C0FB3 /* Global */,
+				1825C8A526286145001C0FB3 /* Record */,
+				1825C87A26285BE9001C0FB3 /* Extensions */,
+				1825C88626285C1C001C0FB3 /* Tools */,
+				1825C88C26285C3A001C0FB3 /* Support Files */,
 			);
 			path = HeartRecording;
 			sourceTree = "<group>";
@@ -128,6 +223,14 @@
 			path = HeartRecordingUITests;
 			sourceTree = "<group>";
 		};
+		BD071EDCE7FC36497C819B75 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				10A0A03456011A891D4C9651 /* Pods_HeartRecording.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -135,9 +238,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6CD6CA39262771350099F063 /* Build configuration list for PBXNativeTarget "HeartRecording" */;
 			buildPhases = (
+				DCD2ADDCBE547FC871091A0F /* [CP] Check Pods Manifest.lock */,
 				6CD6CA0B262771330099F063 /* Sources */,
 				6CD6CA0C262771330099F063 /* Frameworks */,
 				6CD6CA0D262771330099F063 /* Resources */,
+				2161842C100DA08FB261AD29 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -231,6 +336,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1825C88E26285C5B001C0FB3 /* iconfont.ttf in Resources */,
 				6CD6CA1F262771350099F063 /* LaunchScreen.storyboard in Resources */,
 				6CD6CA1C262771350099F063 /* Assets.xcassets in Resources */,
 				6CD6CA1A262771330099F063 /* Main.storyboard in Resources */,
@@ -253,14 +359,68 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2161842C100DA08FB261AD29 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HeartRecording/Pods-HeartRecording-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HeartRecording/Pods-HeartRecording-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HeartRecording/Pods-HeartRecording-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DCD2ADDCBE547FC871091A0F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HeartRecording-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		6CD6CA0B262771330099F063 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6CD6CA17262771330099F063 /* ViewController.swift in Sources */,
+				1825C89A26285D32001C0FB3 /* AnaTabBar.swift in Sources */,
+				1825C89926285D32001C0FB3 /* AnaLargeTitleViewController.swift in Sources */,
+				1825C8AF26286E09001C0FB3 /* RippleAnimationView.swift in Sources */,
+				1825C87F26285C05001C0FB3 /* UIViewController+Addition.swift in Sources */,
+				1825C8A726286158001C0FB3 /* RecordViewController.swift in Sources */,
+				1825C87626285BD1001C0FB3 /* AnaNavigationController.swift in Sources */,
+				1825C88026285C05001C0FB3 /* UIView+Addition.swift in Sources */,
+				1825C88826285C33001C0FB3 /* Iconfont.swift in Sources */,
+				1825C89B26285D32001C0FB3 /* AnaTabBarController.swift in Sources */,
 				6CD6CA13262771330099F063 /* AppDelegate.swift in Sources */,
+				1825C88226285C05001C0FB3 /* UIColor+Addition.swift in Sources */,
+				1825C89C26285D32001C0FB3 /* AnaLargeTitleTableViewController.swift in Sources */,
 				6CD6CA15262771330099F063 /* SceneDelegate.swift in Sources */,
+				1825C88126285C05001C0FB3 /* UIImage+Additon.swift in Sources */,
+				1825C8A1262860C0001C0FB3 /* FeedbackManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,6 +593,7 @@
 		};
 		6CD6CA3A262771350099F063 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B9BDCA6BEECE37628F1A116A /* Pods-HeartRecording.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -451,6 +612,7 @@
 		};
 		6CD6CA3B262771350099F063 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4F0ADFA14A26D0B9EF8D696B /* Pods-HeartRecording.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
