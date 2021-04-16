@@ -1,5 +1,6 @@
 PODS:
   - DeviceKit (4.2.1)
+  - DFPlayer (2.0.3)
   - FFPopup (1.1.4)
   - ReactiveCocoa (11.1.0):
     - ReactiveSwift (~> 6.2)
@@ -9,6 +10,7 @@ PODS:
 
 DEPENDENCIES:
   - DeviceKit (= 4.2.1)
+  - DFPlayer (= 2.0.3)
   - FFPopup (= 1.1.4)
   - ReactiveCocoa (= 11.1.0)
   - SnapKit
@@ -17,6 +19,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - DeviceKit
+    - DFPlayer
     - FFPopup
     - ReactiveCocoa
     - ReactiveSwift
@@ -25,12 +28,13 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   DeviceKit: cadb5ff25d45fe186778bf2d0fd2ea4750542189
+  DFPlayer: 3d10b0b39ab12b94afdd82555b74c96fec81ac0a
   FFPopup: 3bec8070665b892d8f54f2acaca447fdccc7f30b
   ReactiveCocoa: 7bc87ad2d361b9de141278b1950edd7fe91b15b1
   ReactiveSwift: be9407e2aaf8a11e53a5229255693cffd9a63ccf
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftyStoreKit: 6b9c08810269f030586dac1fae8e75871a82e84a
 
-PODFILE CHECKSUM: 1605a2d7d2e25acd39372b94c30a7cd2c3cb2e88
+PODFILE CHECKSUM: 355cbe0537cef4d48c685ebad86274301078590f
 
 COCOAPODS: 1.10.1

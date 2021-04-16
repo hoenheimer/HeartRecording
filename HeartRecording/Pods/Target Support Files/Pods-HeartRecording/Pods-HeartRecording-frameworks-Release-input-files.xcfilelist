@@ -1,4 +1,5 @@
 ${PODS_ROOT}/Target Support Files/Pods-HeartRecording/Pods-HeartRecording-frameworks.sh
+${BUILT_PRODUCTS_DIR}/DFPlayer/DFPlayer.framework
 ${BUILT_PRODUCTS_DIR}/DeviceKit/DeviceKit.framework
 ${BUILT_PRODUCTS_DIR}/FFPopup/FFPopup.framework
 ${BUILT_PRODUCTS_DIR}/ReactiveCocoa/ReactiveCocoa.framework

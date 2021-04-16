@@ -15,11 +15,23 @@ class RecordViewController: AnaLargeTitleViewController {
     var mainView: UIView!
     var heartImageView: UIImageView!
     var label: UILabel!
+    var timerLabel: UILabel!
     var buttonBackgroundView: UIView!
     var buttonGradient: CAGradientLayer!
     var button: UIButton!
     
     let manager = RecordManager()
+    var recordStartDate = Date()
+    var timer: Timer?
+    var visiableTime: CGFloat = 0
+    
+    
+    deinit {
+        if timer != nil && timer!.isValid {
+            timer!.invalidate()
+            timer = nil
+        }
+    }
     
     
     override func configure() {
@@ -46,6 +58,12 @@ class RecordViewController: AnaLargeTitleViewController {
         label.textColor = .white
         label.font = UIFont(name: "Poppins-Light", size: 14)
         mainView.addSubview(label)
+        
+        timerLabel = UILabel()
+        timerLabel.textColor = .white
+        timerLabel.font = UIFont(name: "Poppins-SemiBold", size: 44)
+        timerLabel.isHidden = true
+        mainView.addSubview(timerLabel)
         
         buttonBackgroundView = UIView()
         buttonBackgroundView.backgroundColor = .clear
@@ -77,10 +95,43 @@ class RecordViewController: AnaLargeTitleViewController {
                 if self.manager.isRecording {
                     button.setTitle("Done", for: .normal)
                 }
+                
+                self.timerLabel.text = "00:00"
+                self.view.layoutNow()
+                self.timerLabel.isHidden = false
+                self.label.isHidden = true
+                self.recordStartDate = Date()
+                self.visiableTime = 0
+                if self.timer != nil && self.timer!.isValid {
+                    self.timer!.invalidate()
+                    self.timer = nil
+                }
+                self.timer = Timer(timeInterval: 1, repeats: true, block: {
+                    [weak self] _ in
+                    guard let self = self else { return }
+                    let time = Date().timeIntervalSince(self.recordStartDate)
+                    if self.visiableTime >= CGFloat(time) {
+                        self.visiableTime += 1
+                    } else {
+                        self.visiableTime = CGFloat(time)
+                    }
+                    self.timerLabel.text = String.stringFromTime(self.visiableTime)
+                    self.view.layoutNow()
+                })
+                RunLoop.current.add(self.timer!, forMode: .default)
             } else {
                 self.manager.stopRecord()
                 if !self.manager.isRecording {
                     button.setTitle("Start Recording", for: .normal)
+                }
+                let vc = DetailViewController(path: self.manager.file_path!/*"/Users/apple/Downloads/Lemon_米津玄師.wav"*/, name: "New Recording", dateString: "2020-02-22")
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true, completion: nil)
+                self.timerLabel.isHidden = true
+                self.label.isHidden = false
+                if self.timer != nil && self.timer!.isValid {
+                    self.timer!.invalidate()
+                    self.timer = nil
                 }
             }
         }
@@ -97,6 +148,8 @@ class RecordViewController: AnaLargeTitleViewController {
         let size = label.sizeThatFits(CGSize(width: 229, height: CGFloat.greatestFiniteMagnitude))
         label.bounds = CGRect(origin: .zero, size: size)
         label.center = CGPoint(x: mainView.halfWidth(), y: heartImageView.maxY() + 28 + label.halfHeight())
+        timerLabel.sizeToFit()
+        timerLabel.center = CGPoint(x: mainView.halfWidth(), y: heartImageView.maxY() + 36 + label.halfHeight())
         buttonBackgroundView.bounds = CGRect(origin: .zero, size: CGSize(width: 175, height: 48))
         buttonBackgroundView.center = CGPoint(x: view.halfWidth(), y: mainView.maxY() + 127 + buttonBackgroundView.halfHeight())
         buttonGradient.frame = buttonBackgroundView.bounds

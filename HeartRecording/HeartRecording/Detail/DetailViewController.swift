@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import ReactiveCocoa
+import ReactiveSwift
 
 
-class DetailViewController: UIViewController {
+class DetailViewController: UIViewController, UITextFieldDelegate {
     var gradientLayer:      CAGradientLayer!
     var closeButton:        UIButton!
     var likeButton:         UIButton!
@@ -29,14 +31,34 @@ class DetailViewController: UIViewController {
     var progressTimeLabel:  UILabel!
     var totalTimeLabel:     UILabel!
     
+    var path: String!
+    var name: String!
+    var dateString: String!
+    var totalTime: CGFloat = 0
+    var currectTime: CGFloat = 0
+    var progress: CGFloat = 0
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        configure()
+    
+    convenience init(path: String, name: String, dateString: String) {
+        self.init()
+        self.path = path
+        self.name = name
+        self.dateString = dateString
     }
     
     
-    func configure() {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureSubViews()
+    }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        play()
+    }
+    
+    
+    func configureSubViews() {
         gradientLayer = CAGradientLayer()
         gradientLayer.colors = [UIColor.color(hexString: "#FBFCFF").cgColor, UIColor.color(hexString: "#FFF0F0").cgColor]
         gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
@@ -45,6 +67,11 @@ class DetailViewController: UIViewController {
         
         closeButton = UIButton()
         closeButton.setImage(UIImage(named: "Detail_Close"), for: .normal)
+        closeButton.reactive.controlEvents(.touchUpInside).observeValues {
+            [weak self] _ in
+            guard let self = self else { return }
+            self.dismiss(animated: true, completion: nil)
+        }
         view.addSubview(closeButton)
         
         likeButton = UIButton()
@@ -64,25 +91,33 @@ class DetailViewController: UIViewController {
         view.addSubview(mainView)
         
         heartImageView = UIImageView()
-        heartImageView.backgroundColor = .white
+        heartImageView.image = UIImage(named: "Record_Heart")
         mainView.addSubview(heartImageView)
         
         nameTextField = UITextField()
+        nameTextField.text = name
         nameTextField.isEnabled = false
-        nameTextField.text = "New Recording"
         nameTextField.textColor = .white
         nameTextField.font = .systemFont(ofSize: 28)
         nameTextField.returnKeyType = .done
+        nameTextField.textAlignment = .center
+        nameTextField.delegate = self
         mainView.addSubview(nameTextField)
         
         dateLabel = UILabel()
-        dateLabel.text = "2020-02-22"
+        dateLabel.text = dateString
         dateLabel.textColor = .white
         dateLabel.font = .systemFont(ofSize: 14)
         mainView.addSubview(dateLabel)
         
         editButton = UIButton()
         editButton.setImage(UIImage(named: "Detail_Edit"), for: .normal)
+        editButton.reactive.controlEvents(.touchUpInside).observeValues {
+            [weak self] _ in
+            guard let self = self else { return }
+            self.nameTextField.isEnabled = true
+            self.nameTextField.becomeFirstResponder()
+        }
         mainView.addSubview(editButton)
         
         leftButton = UIButton()
@@ -90,8 +125,24 @@ class DetailViewController: UIViewController {
         view.addSubview(leftButton)
         
         playButton = UIButton()
+        playButton.setImage(UIImage(named: "Detail_Play"), for: .normal)
         playButton.layer.cornerRadius = 44
         playButton.backgroundColor = .color(hexString: "#FF8282")
+        playButton.reactive.controlEvents(.touchUpInside).observeValues {
+            [weak self] button in
+            guard let self = self else { return }
+            if !PlayerManager.shared.isPlaying {
+                if self.progress == 0 {
+                    self.play()
+                } else {
+                    PlayerManager.shared.resume()
+                    button.setImage(UIImage(named: "Detail_Pause"), for: .normal)
+                }
+            } else {
+                PlayerManager.shared.pause()
+                button.setImage(UIImage(named: "Detail_Play"), for: .normal)
+            }
+        }
         view.addSubview(playButton)
         
         rightButton = UIButton()
@@ -115,13 +166,13 @@ class DetailViewController: UIViewController {
         progressBackView.addSubview(progressImageView)
         
         progressTimeLabel = UILabel()
-        progressTimeLabel.text = "01:30"
+        progressTimeLabel.text = "00:00"
         progressTimeLabel.textColor = .color(hexString: "#3F414E")
         progressTimeLabel.font = .systemFont(ofSize: 16)
         view.addSubview(progressTimeLabel)
         
         totalTimeLabel = UILabel()
-        totalTimeLabel.text = "45:00"
+        totalTimeLabel.text = "00:00"
         totalTimeLabel.textColor = .color(hexString: "#3F414E")
         totalTimeLabel.font = .systemFont(ofSize: 16)
         view.addSubview(totalTimeLabel)
@@ -140,10 +191,10 @@ class DetailViewController: UIViewController {
         mainView.bounds = CGRect(origin: .zero, size: CGSize(width: 268, height: 268))
         mainView.center = CGPoint(x: view.halfWidth(), y: closeButton.maxY() + 114 + mainView.halfHeight())
         animationView.frame = mainView.frame
-        heartImageView.bounds = CGRect(origin: .zero, size: CGSize(width: 43, height: 40))
+        heartImageView.sizeToFit()
         heartImageView.center = CGPoint(x: mainView.halfWidth(), y: 65 + heartImageView.halfHeight())
         nameTextField.sizeToFit()
-        nameTextField.bounds = CGRect(origin: .zero, size: CGSize(width: min(nameTextField.width(), 264), height: nameTextField.height()))
+        nameTextField.bounds = CGRect(origin: .zero, size: CGSize(width: 264, height: nameTextField.height()))
         nameTextField.center = CGPoint(x: mainView.halfWidth(), y: heartImageView.maxY() + 29 + nameTextField.halfHeight())
         dateLabel.sizeToFit()
         dateLabel.center = CGPoint(x: mainView.halfWidth(), y: nameTextField.maxY() - 3 + dateLabel.halfHeight())
@@ -159,11 +210,42 @@ class DetailViewController: UIViewController {
         progressBackView.frame = CGRect(x: 40, y: playButton.maxY() + 61, width: view.width() - 80, height: progressImageView.height())
         progressBackLine.bounds = CGRect(origin: .zero, size: CGSize(width: progressBackView.width(), height: 3))
         progressBackLine.center = CGPoint(x: progressBackView.halfWidth(), y: progressBackView.halfHeight())
-        progressLine.frame = CGRect(x: 0, y: progressBackLine.minY(), width: 30, height: 3)
+        progressLine.frame = CGRect(x: 0, y: progressBackLine.minY(), width: progress * progressBackView.width(), height: 3)
         progressImageView.center = CGPoint(x: progressLine.maxX(), y: progressBackView.halfHeight())
         progressTimeLabel.sizeToFit()
         progressTimeLabel.center = CGPoint(x: progressBackView.minX(), y: progressBackView.maxY() + 4 + progressTimeLabel.halfHeight())
         totalTimeLabel.sizeToFit()
         totalTimeLabel.center = CGPoint(x: progressBackView.maxX(), y: progressTimeLabel.centerY())
+    }
+    
+    
+    func play() {
+        PlayerManager.shared.play(path: path) {
+            [weak self] time in
+            guard let self = self else { return }
+            self.totalTime = floor(time)
+            self.totalTimeLabel.text = String.stringFromTime(self.totalTime)
+            self.playButton.setImage(UIImage(named: "Detail_Pause"), for: .normal)
+            self.view.layoutNow()
+        } progressAction: {
+            time in
+            self.currectTime = floor(time)
+            self.progressTimeLabel.text = String.stringFromTime(self.currectTime)
+            self.progress = time / self.totalTime
+            self.view.layoutNow()
+        } endAction: {
+            self.progress = 0
+            self.playButton.setImage(UIImage(named: "Detail_Play"), for: .normal)
+            self.progressTimeLabel.text = "00:00"
+            self.view.layoutNow()
+        }
+    }
+    
+    
+    // MARK: - UITextFieldDelegate
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        textField.isEnabled = false
+        return false
     }
 }

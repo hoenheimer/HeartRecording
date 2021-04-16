@@ -57,7 +57,7 @@
 	</array>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Poppins-SemiBold.tff</string>
+		<string>Poppins-SemiBold.ttf</string>
 		<string>Poppins-Light.ttf</string>
 		<string>iconfont.ttf</string>
 	</array>
