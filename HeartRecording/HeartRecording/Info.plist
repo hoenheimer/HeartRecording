@@ -57,8 +57,12 @@
 	</array>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Poppins-SemiBold.tff</string>
+		<string>Poppins-Light.ttf</string>
 		<string>iconfont.ttf</string>
 	</array>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>APP needs access to microphone</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

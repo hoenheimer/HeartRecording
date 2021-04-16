@@ -21,6 +21,9 @@
 		1825C8A1262860C0001C0FB3 /* FeedbackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C8A0262860C0001C0FB3 /* FeedbackManager.swift */; };
 		1825C8A726286158001C0FB3 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C8A626286158001C0FB3 /* RecordViewController.swift */; };
 		1825C8AF26286E09001C0FB3 /* RippleAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C8AE26286E09001C0FB3 /* RippleAnimationView.swift */; };
+		1825C8B42628D431001C0FB3 /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1825C8B32628D431001C0FB3 /* Poppins-Light.ttf */; };
+		1825C8B92628D9ED001C0FB3 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1825C8B82628D9ED001C0FB3 /* Poppins-SemiBold.ttf */; };
+		1825C8BE2628DB90001C0FB3 /* RecordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C8BD2628DB90001C0FB3 /* RecordManager.swift */; };
 		2AA03A87C31471ABCF75F182 /* Pods_HeartRecording.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10A0A03456011A891D4C9651 /* Pods_HeartRecording.framework */; };
 		6CD6CA13262771330099F063 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6CA12262771330099F063 /* AppDelegate.swift */; };
 		6CD6CA15262771330099F063 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6CA14262771330099F063 /* SceneDelegate.swift */; };
@@ -64,6 +67,9 @@
 		1825C8A0262860C0001C0FB3 /* FeedbackManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackManager.swift; sourceTree = "<group>"; };
 		1825C8A626286158001C0FB3 /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		1825C8AE26286E09001C0FB3 /* RippleAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RippleAnimationView.swift; sourceTree = "<group>"; };
+		1825C8B32628D431001C0FB3 /* Poppins-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Light.ttf"; sourceTree = "<group>"; };
+		1825C8B82628D9ED001C0FB3 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
+		1825C8BD2628DB90001C0FB3 /* RecordManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordManager.swift; sourceTree = "<group>"; };
 		4F0ADFA14A26D0B9EF8D696B /* Pods-HeartRecording.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HeartRecording.release.xcconfig"; path = "Target Support Files/Pods-HeartRecording/Pods-HeartRecording.release.xcconfig"; sourceTree = "<group>"; };
 		6CD6CA0F262771330099F063 /* HeartRecording.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HeartRecording.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CD6CA12262771330099F063 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -135,6 +141,7 @@
 			children = (
 				1825C88726285C33001C0FB3 /* Iconfont.swift */,
 				1825C8A0262860C0001C0FB3 /* FeedbackManager.swift */,
+				1825C8BD2628DB90001C0FB3 /* RecordManager.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -143,6 +150,8 @@
 			isa = PBXGroup;
 			children = (
 				1825C88D26285C5B001C0FB3 /* iconfont.ttf */,
+				1825C8B32628D431001C0FB3 /* Poppins-Light.ttf */,
+				1825C8B82628D9ED001C0FB3 /* Poppins-SemiBold.ttf */,
 			);
 			path = "Support Files";
 			sourceTree = "<group>";
@@ -337,7 +346,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				1825C88E26285C5B001C0FB3 /* iconfont.ttf in Resources */,
+				1825C8B42628D431001C0FB3 /* Poppins-Light.ttf in Resources */,
 				6CD6CA1F262771350099F063 /* LaunchScreen.storyboard in Resources */,
+				1825C8B92628D9ED001C0FB3 /* Poppins-SemiBold.ttf in Resources */,
 				6CD6CA1C262771350099F063 /* Assets.xcassets in Resources */,
 				6CD6CA1A262771330099F063 /* Main.storyboard in Resources */,
 			);
@@ -414,6 +425,7 @@
 				1825C87626285BD1001C0FB3 /* AnaNavigationController.swift in Sources */,
 				1825C88026285C05001C0FB3 /* UIView+Addition.swift in Sources */,
 				1825C88826285C33001C0FB3 /* Iconfont.swift in Sources */,
+				1825C8BE2628DB90001C0FB3 /* RecordManager.swift in Sources */,
 				1825C89B26285D32001C0FB3 /* AnaTabBarController.swift in Sources */,
 				6CD6CA13262771330099F063 /* AppDelegate.swift in Sources */,
 				1825C88226285C05001C0FB3 /* UIColor+Addition.swift in Sources */,

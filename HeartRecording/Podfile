@@ -10,6 +10,7 @@ target 'HeartRecording' do
   pod 'DeviceKit', '4.2.1'
 	pod 'SwiftyStoreKit', '0.16.1'
 	pod 'SnapKit'
+
 end
 
 post_install do |pi|
