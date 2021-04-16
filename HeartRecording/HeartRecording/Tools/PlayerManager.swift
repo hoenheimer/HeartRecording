@@ -55,6 +55,13 @@ class PlayerManager: NSObject, DFPlayerDelegate, DFPlayerDataSource {
     }
     
     
+    func seekToProgress(_ progress: CGFloat) {
+        player.df_seek(toTime: progress) {
+            print("seek success")
+        }
+    }
+    
+    
     // MARK: - DFPlayerDelegate & DFPlayerDataSource
     func df_audioData(for player: DFPlayer!) -> [DFPlayerModel]! {
         let model = DFPlayerModel()

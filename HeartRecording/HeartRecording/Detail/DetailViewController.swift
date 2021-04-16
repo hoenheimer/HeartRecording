@@ -37,6 +37,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     var totalTime: CGFloat = 0
     var currectTime: CGFloat = 0
     var progress: CGFloat = 0
+    var shouldSeek = false
     
     
     convenience init(path: String, name: String, dateString: String) {
@@ -122,6 +123,21 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         
         leftButton = UIButton()
         leftButton.setImage(UIImage(named: "Detail_Left"), for: .normal)
+        leftButton.reactive.controlEvents(.touchUpInside).observeValues {
+            [weak self] _ in
+            guard let self = self else { return }
+            if self.currectTime == 0 {
+                return
+            }
+            self.currectTime = max(0, self.currectTime - 5)
+            self.progress = self.currectTime / self.totalTime
+            self.view.layoutNow()
+            if PlayerManager.shared.isPlaying {
+                PlayerManager.shared.seekToProgress(self.progress)
+            } else {
+                self.shouldSeek = true
+            }
+        }
         view.addSubview(leftButton)
         
         playButton = UIButton()
@@ -147,6 +163,21 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         
         rightButton = UIButton()
         rightButton.setImage(UIImage(named: "Detail_Right"), for: .normal)
+        rightButton.reactive.controlEvents(.touchUpInside).observeValues {
+            [weak self] _ in
+            guard let self = self else { return }
+            if self.currectTime + 5 >= self.totalTime {
+                return
+            }
+            self.currectTime += 5
+            self.progress = self.currectTime / self.totalTime
+            self.view.layoutNow()
+            if PlayerManager.shared.isPlaying {
+                PlayerManager.shared.seekToProgress(self.progress)
+            } else {
+                self.shouldSeek = true
+            }
+        }
         view.addSubview(rightButton)
         
         progressBackView = UIView()
@@ -223,21 +254,30 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         PlayerManager.shared.play(path: path) {
             [weak self] time in
             guard let self = self else { return }
-            self.totalTime = floor(time)
-            self.totalTimeLabel.text = String.stringFromTime(self.totalTime)
+            if !time.isNaN {
+                self.totalTime = floor(time)
+                self.totalTimeLabel.text = String.stringFromTime(self.totalTime)
+            }
             self.playButton.setImage(UIImage(named: "Detail_Pause"), for: .normal)
             self.view.layoutNow()
         } progressAction: {
             time in
             self.currectTime = floor(time)
             self.progressTimeLabel.text = String.stringFromTime(self.currectTime)
-            self.progress = time / self.totalTime
             self.view.layoutNow()
+            self.progress = self.currectTime / self.totalTime
+            self.view.setNeedsLayout()
+            UIView.animate(withDuration: 1, delay: 0, options: .curveLinear, animations: {
+                self.view.layoutIfNeeded()
+            }, completion: nil)
         } endAction: {
-            self.progress = 0
             self.playButton.setImage(UIImage(named: "Detail_Play"), for: .normal)
             self.progressTimeLabel.text = "00:00"
             self.view.layoutNow()
+            self.progress = 0
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+                self.view.layoutNow()
+            }
         }
     }
     
