@@ -36,7 +36,7 @@ class RecordViewController: AnaLargeTitleViewController {
         contentView.addSubview(mainView)
         
         heartImageView = UIImageView()
-        heartImageView.backgroundColor = .white
+        heartImageView.image = UIImage(named: "Record_Heart")
         mainView.addSubview(heartImageView)
         
         label = UILabel()
@@ -70,6 +70,8 @@ class RecordViewController: AnaLargeTitleViewController {
         button.reactive.controlEvents(.touchUpInside).observeValues {
             [weak self] button in
             guard let self = self else { return }
+            let vc = DetailViewController()
+            vc.modalPresentationStyle = .fullScreen
             if !self.manager.isRecording {
                 self.manager.beginRecord()
                 if self.manager.isRecording {
@@ -90,7 +92,7 @@ class RecordViewController: AnaLargeTitleViewController {
         mainView.bounds = CGRect(origin: .zero, size: CGSize(width: 268, height: 268))
         mainView.center = CGPoint(x: view.halfWidth(), y: 98 + mainView.halfHeight())
         animationView.frame = mainView.frame
-        heartImageView.bounds = CGRect(origin: .zero, size: CGSize(width: 43, height: 40))
+        heartImageView.sizeToFit()
         heartImageView.center = CGPoint(x: mainView.halfWidth(), y: 65 + heartImageView.halfHeight())
         let size = label.sizeThatFits(CGSize(width: 229, height: CGFloat.greatestFiniteMagnitude))
         label.bounds = CGRect(origin: .zero, size: size)

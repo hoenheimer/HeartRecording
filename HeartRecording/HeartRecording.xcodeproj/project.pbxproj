@@ -24,6 +24,7 @@
 		1825C8B42628D431001C0FB3 /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1825C8B32628D431001C0FB3 /* Poppins-Light.ttf */; };
 		1825C8B92628D9ED001C0FB3 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1825C8B82628D9ED001C0FB3 /* Poppins-SemiBold.ttf */; };
 		1825C8BE2628DB90001C0FB3 /* RecordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C8BD2628DB90001C0FB3 /* RecordManager.swift */; };
+		1825C8C8262994A1001C0FB3 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C8C7262994A1001C0FB3 /* DetailViewController.swift */; };
 		2AA03A87C31471ABCF75F182 /* Pods_HeartRecording.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10A0A03456011A891D4C9651 /* Pods_HeartRecording.framework */; };
 		6CD6CA13262771330099F063 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6CA12262771330099F063 /* AppDelegate.swift */; };
 		6CD6CA15262771330099F063 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6CA14262771330099F063 /* SceneDelegate.swift */; };
@@ -70,6 +71,7 @@
 		1825C8B32628D431001C0FB3 /* Poppins-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Light.ttf"; sourceTree = "<group>"; };
 		1825C8B82628D9ED001C0FB3 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		1825C8BD2628DB90001C0FB3 /* RecordManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordManager.swift; sourceTree = "<group>"; };
+		1825C8C7262994A1001C0FB3 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		4F0ADFA14A26D0B9EF8D696B /* Pods-HeartRecording.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HeartRecording.release.xcconfig"; path = "Target Support Files/Pods-HeartRecording/Pods-HeartRecording.release.xcconfig"; sourceTree = "<group>"; };
 		6CD6CA0F262771330099F063 /* HeartRecording.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HeartRecording.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CD6CA12262771330099F063 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				1825C89526285D32001C0FB3 /* AnaLargeTitleViewController.swift */,
 				1825C89626285D32001C0FB3 /* AnaTabBar.swift */,
 				1825C89726285D32001C0FB3 /* AnaTabBarController.swift */,
+				1825C8AE26286E09001C0FB3 /* RippleAnimationView.swift */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -160,9 +163,16 @@
 			isa = PBXGroup;
 			children = (
 				1825C8A626286158001C0FB3 /* RecordViewController.swift */,
-				1825C8AE26286E09001C0FB3 /* RippleAnimationView.swift */,
 			);
 			path = Record;
+			sourceTree = "<group>";
+		};
+		1825C8C626299485001C0FB3 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				1825C8C7262994A1001C0FB3 /* DetailViewController.swift */,
+			);
+			path = Detail;
 			sourceTree = "<group>";
 		};
 		3A6626D646AC353EC3BEE451 /* Pods */ = {
@@ -207,6 +217,7 @@
 				6CD6CA20262771350099F063 /* Info.plist */,
 				1825C87426285BB8001C0FB3 /* Global */,
 				1825C8A526286145001C0FB3 /* Record */,
+				1825C8C626299485001C0FB3 /* Detail */,
 				1825C87A26285BE9001C0FB3 /* Extensions */,
 				1825C88626285C1C001C0FB3 /* Tools */,
 				1825C88C26285C3A001C0FB3 /* Support Files */,
@@ -418,6 +429,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1825C89A26285D32001C0FB3 /* AnaTabBar.swift in Sources */,
+				1825C8C8262994A1001C0FB3 /* DetailViewController.swift in Sources */,
 				1825C89926285D32001C0FB3 /* AnaLargeTitleViewController.swift in Sources */,
 				1825C8AF26286E09001C0FB3 /* RippleAnimationView.swift in Sources */,
 				1825C87F26285C05001C0FB3 /* UIViewController+Addition.swift in Sources */,

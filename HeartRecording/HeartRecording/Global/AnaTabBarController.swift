@@ -26,18 +26,18 @@ class AnaTabBarController: UITabBarController {
         func navigationVC(rootVC: UIViewController, imageName: String, title: String) -> AnaNavigationController {
 			let navigationController = AnaNavigationController(rootViewController: rootVC)
 			navigationController.tabBarItem = UITabBarItem(title: title, image: nil, selectedImage: nil)
-			let image = UIImage(named: imageName)?.reSizeImage(reSize: CGSize(width: 22, height: 22))
+			let image = UIImage(named: imageName)
             navigationController.tabBarItem.title = title
 			navigationController.tabBarItem.image = image?.withRenderingMode(.alwaysTemplate)
-			navigationController.tabBarItem.selectedImage = image?.withTintColor(.color(hexString: "#6D5FFE"), renderingMode: .alwaysOriginal)
+			navigationController.tabBarItem.selectedImage = image?.withTintColor(.color(hexString: "#EB5757"), renderingMode: .alwaysOriginal)
 			navigationController.tabBarItem.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
 			return navigationController
 		}
 			
 		viewControllers = [
-			navigationVC(rootVC: RecordViewController(), imageName: "TabBar_Home", title: "Record Now"),
-            navigationVC(rootVC: UIViewController(), imageName: "TabBar_Home", title: "Recording"),
-            navigationVC(rootVC: UIViewController(), imageName: "TabBar_Home", title: "Setting")
+			navigationVC(rootVC: RecordViewController(), imageName: "TabBar_Record", title: "Record Now"),
+            navigationVC(rootVC: UIViewController(), imageName: "TabBar_Recording", title: "Recording"),
+            navigationVC(rootVC: UIViewController(), imageName: "TabBar_Setting", title: "Setting")
 		]
 	}
     

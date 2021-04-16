@@ -13,7 +13,7 @@ import ReactiveCocoa
 
 class RecordManager {
     var recorder: AVAudioRecorder?
-    let file_path: String? = "/Users/apple/Desktop/test.wav"//NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first?.appending("/record.wav")
+    let file_path: String? = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first?.appending("/record.wav")
     var isRecording = false
     let needPermissionPipe = Signal<Int, Never>.pipe()
     
