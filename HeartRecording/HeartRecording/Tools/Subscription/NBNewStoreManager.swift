@@ -61,8 +61,8 @@ class NBNewStoreManager: NSObject,SKPaymentTransactionObserver{
         case restoreFailed      //恢复失败
     }
 
-    let weekProductId = "com.ziheng.highlightCover.weeekly"
-    let yearProductId = "com.ziheng.highlightCover.yearly"
+//    let weekProductId = "com.ziheng.highlightCover.weeekly"
+    let yearProductId = "com.ziheng.heartRecording.yearly"
 //	let onceProductId = "com.ziheng.totowallet.onetimepurchase"
     let sharedSecret = "e08e44d7fad54df1afc98e3dbaf10f63"
     
@@ -120,7 +120,7 @@ class NBNewStoreManager: NSObject,SKPaymentTransactionObserver{
     
     
     func allProuductIds() -> [String] {
-        return [weekProductId, yearProductId]
+        return [yearProductId]
     }
     
     /**获取所有产品信息*/
@@ -237,9 +237,9 @@ class NBNewStoreManager: NSObject,SKPaymentTransactionObserver{
                 if let yearProductId = weakSelf?.yearProductId {
                     productIds.append(yearProductId)
                 }
-                if let weekProductId = weakSelf?.weekProductId {
-                    productIds.append(weekProductId)
-                }
+//                if let weekProductId = weakSelf?.weekProductId {
+//                    productIds.append(weekProductId)
+//                }
                 if productIds.count > 0 {
                     let subscriptionGroupId = Set(productIds)
                     let purchaseResult = SwiftyStoreKit.verifySubscriptions(productIds: subscriptionGroupId, inReceipt: receipt)

@@ -8,6 +8,7 @@
 import UIKit
 import ReactiveCocoa
 import ReactiveSwift
+import StoreKit
 
 
 class SubscriptionViewController: UIViewController {
@@ -27,15 +28,19 @@ class SubscriptionViewController: UIViewController {
     var buttonGradientView:     UIView!
     var buttonGradientLayer:    CAGradientLayer!
     var button:                 UIButton!
+    var activityView:           UIActivityIndicatorView!
     var buttonBottomLabel:      UILabel!
     var restoreButton:          UIButton!
     var termsButton:            UIButton!
     var privacyButton:          UIButton!
     var bottomLabel:            UILabel!
     
+    var product: SKProduct?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        requestProducts()
         configure()
     }
     
@@ -130,6 +135,10 @@ class SubscriptionViewController: UIViewController {
         button.titleLabel?.font = UIFont(name: "Poppins-SemiBold", size: 16)
         scrollView.addSubview(button)
         
+        activityView = UIActivityIndicatorView()
+        activityView.color = .color(hexString: "#FCFCFC")
+        button.addSubview(activityView)
+        
         buttonBottomLabel = UILabel()
         buttonBottomLabel.text = "Auto renewable, Cancel anytime"
         buttonBottomLabel.textColor = .color(hexString: "#979797")
@@ -199,6 +208,8 @@ class SubscriptionViewController: UIViewController {
         buttonGradientView.frame = buttonShadowView.frame
         buttonGradientLayer.frame = buttonGradientView.bounds
         button.frame = buttonGradientView.frame
+        activityView.sizeToFit()
+        activityView.center = CGPoint(x: button.halfWidth(), y: button.halfHeight())
         buttonBottomLabel.sizeToFit()
         buttonBottomLabel.center = CGPoint(x: scrollView.halfWidth(), y: button.maxY() + 7 + buttonBottomLabel.halfHeight())
         restoreButton.sizeToFit()
@@ -210,5 +221,88 @@ class SubscriptionViewController: UIViewController {
         let size = bottomLabel.sizeThatFits(CGSize(width: scrollView.width() - 84, height: .greatestFiniteMagnitude))
         bottomLabel.frame = CGRect(x: 42, y: restoreButton.maxY() + 3, width: size.width, height: size.height)
         scrollView.contentSize = CGSize(width: scrollView.width(), height: bottomLabel.maxY())
+    }
+    
+    
+    func requestSuccess() {
+        activityView.stopAnimating()
+        if let product = product {
+            var string = ""
+            if product.freeDays > 0 {
+                string.append("\(product.freeDays) Days Free Trial,then ")
+            }
+            string.append("\(product.priceLocale)/Year")
+            button.setTitle(string, for: .normal)
+        }
+    }
+    
+    
+    func requestFailed() {
+        activityView.stopAnimating()
+    }
+}
+
+
+extension SubscriptionViewController: NBInAppPurchaseProtocol {
+    
+    /**获取订阅产品成功*/
+    func subscriptionProductsDidReciveSuccess(products: [SKProduct]) {
+        product = products.filter({$0.productIdentifier == NBNewStoreManager.shard.yearProductId}).first
+        requestSuccess()
+    }
+    /**获取订阅产品失败*/
+    func subscriptionProductsDidReciveFailure() {
+        showAlert(content: "The network connection is unavailable. Please try again later.")
+        requestFailed()
+    }
+    
+    /**购买成功回调*/
+    func purchasedSuccess(_ needUnsubscribe: Bool) {
+        showPurchaseSuccessAlert(needUnsubscribe)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    /**购买失败*/
+    func purchasedFailure() {
+        showAlert(content: "buy failed")
+    }
+    
+    /**恢复购买成功*/
+    func restorePurchaseSuccess() {
+        showAlert(content: "restore success") {
+            [weak self] in
+            guard let self = self else { return }
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    /**回复购买失败*/
+    func restorePurchaseFailure() {
+        showAlert(content: "restore failed")
+    }
+    
+    /**
+     * 订阅成功弹窗
+     */
+    func showPurchaseSuccessAlert(_ needUnsubscribe: Bool = false) {
+        showAlert(content: "buy success") {
+            [weak self] in
+            guard let self = self else { return }
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    
+    func showAlert(content: String, handler: ( () -> Void)? = nil) {
+        let vc = UIAlertController(title: nil, message: content, preferredStyle: .alert)
+        vc.addAction(UIAlertAction(title: "I know", style: .default, handler: {
+            [weak vc] _ in
+            guard let vc = vc else { return }
+            vc.dismiss(animated: true, completion: nil)
+            if handler != nil {
+                handler!()
+            }
+        }))
+        self.present(vc, animated: true, completion: nil)
     }
 }

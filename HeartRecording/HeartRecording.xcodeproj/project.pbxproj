@@ -42,6 +42,7 @@
 		1825C952262DE771001C0FB3 /* NBNewStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C94D262DE771001C0FB3 /* NBNewStoreManager.swift */; };
 		1825C953262DE771001C0FB3 /* NBUserVipStatusManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C94E262DE771001C0FB3 /* NBUserVipStatusManager.swift */; };
 		1825C959262DE7AF001C0FB3 /* SubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C958262DE7AF001C0FB3 /* SubscriptionViewController.swift */; };
+		1825C976262DFAD5001C0FB3 /* Configuration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 1825C975262DFAD5001C0FB3 /* Configuration.storekit */; };
 		2AA03A87C31471ABCF75F182 /* Pods_HeartRecording.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10A0A03456011A891D4C9651 /* Pods_HeartRecording.framework */; };
 		6CD6CA13262771330099F063 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6CA12262771330099F063 /* AppDelegate.swift */; };
 		6CD6CA15262771330099F063 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6CA14262771330099F063 /* SceneDelegate.swift */; };
@@ -107,6 +108,7 @@
 		1825C94D262DE771001C0FB3 /* NBNewStoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NBNewStoreManager.swift; sourceTree = "<group>"; };
 		1825C94E262DE771001C0FB3 /* NBUserVipStatusManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NBUserVipStatusManager.swift; sourceTree = "<group>"; };
 		1825C958262DE7AF001C0FB3 /* SubscriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewController.swift; sourceTree = "<group>"; };
+		1825C975262DFAD5001C0FB3 /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
 		4F0ADFA14A26D0B9EF8D696B /* Pods-HeartRecording.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HeartRecording.release.xcconfig"; path = "Target Support Files/Pods-HeartRecording/Pods-HeartRecording.release.xcconfig"; sourceTree = "<group>"; };
 		6CD6CA0F262771330099F063 /* HeartRecording.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HeartRecording.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CD6CA12262771330099F063 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 				1825C94C262DE771001C0FB3 /* NBLoadingBox.swift */,
 				1825C94D262DE771001C0FB3 /* NBNewStoreManager.swift */,
 				1825C94E262DE771001C0FB3 /* NBUserVipStatusManager.swift */,
+				1825C975262DFAD5001C0FB3 /* Configuration.storekit */,
 			);
 			path = Subscription;
 			sourceTree = "<group>";
@@ -459,6 +462,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1825C88E26285C5B001C0FB3 /* iconfont.ttf in Resources */,
+				1825C976262DFAD5001C0FB3 /* Configuration.storekit in Resources */,
 				1825C8B42628D431001C0FB3 /* Poppins-Light.ttf in Resources */,
 				6CD6CA1F262771350099F063 /* LaunchScreen.storyboard in Resources */,
 				1825C8B92628D9ED001C0FB3 /* Poppins-SemiBold.ttf in Resources */,
