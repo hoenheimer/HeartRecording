@@ -35,6 +35,7 @@
 		1825C931262D970A001C0FB3 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C930262D970A001C0FB3 /* NotificationName.swift */; };
 		1825C937262DA106001C0FB3 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C936262DA106001C0FB3 /* SettingViewController.swift */; };
 		1825C93C262DA1BE001C0FB3 /* SettingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C93B262DA1BE001C0FB3 /* SettingItemView.swift */; };
+		1825C942262DE452001C0FB3 /* NameEditAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C941262DE452001C0FB3 /* NameEditAlert.swift */; };
 		2AA03A87C31471ABCF75F182 /* Pods_HeartRecording.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10A0A03456011A891D4C9651 /* Pods_HeartRecording.framework */; };
 		6CD6CA13262771330099F063 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6CA12262771330099F063 /* AppDelegate.swift */; };
 		6CD6CA15262771330099F063 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6CA14262771330099F063 /* SceneDelegate.swift */; };
@@ -93,6 +94,7 @@
 		1825C930262D970A001C0FB3 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		1825C936262DA106001C0FB3 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		1825C93B262DA1BE001C0FB3 /* SettingItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingItemView.swift; sourceTree = "<group>"; };
+		1825C941262DE452001C0FB3 /* NameEditAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameEditAlert.swift; sourceTree = "<group>"; };
 		4F0ADFA14A26D0B9EF8D696B /* Pods-HeartRecording.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HeartRecording.release.xcconfig"; path = "Target Support Files/Pods-HeartRecording/Pods-HeartRecording.release.xcconfig"; sourceTree = "<group>"; };
 		6CD6CA0F262771330099F063 /* HeartRecording.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HeartRecording.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CD6CA12262771330099F063 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				1825C8C7262994A1001C0FB3 /* DetailViewController.swift */,
+				1825C941262DE452001C0FB3 /* NameEditAlert.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -519,6 +522,7 @@
 				1825C89C26285D32001C0FB3 /* AnaLargeTitleTableViewController.swift in Sources */,
 				6CD6CA15262771330099F063 /* SceneDelegate.swift in Sources */,
 				1825C88126285C05001C0FB3 /* UIImage+Additon.swift in Sources */,
+				1825C942262DE452001C0FB3 /* NameEditAlert.swift in Sources */,
 				1825C8A1262860C0001C0FB3 /* FeedbackManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

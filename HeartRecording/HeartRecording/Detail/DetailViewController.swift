@@ -36,7 +36,6 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     var currectTime: CGFloat = 0
     var progress: CGFloat = 0
     var shouldSeek = false
-    var editWhenAppear = false
     
     
     convenience init(model: DbModel) {
@@ -52,13 +51,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     
     
     override func viewDidAppear(_ animated: Bool) {
-        if editWhenAppear {
-            nameTextField.isEnabled = true
-            nameTextField.becomeFirstResponder()
-            editWhenAppear = false
-        } else {
-            play()
-        }
+        play()
     }
     
     
@@ -124,8 +117,11 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         editButton.reactive.controlEvents(.touchUpInside).observeValues {
             [weak self] _ in
             guard let self = self else { return }
-            self.nameTextField.isEnabled = true
-            self.nameTextField.becomeFirstResponder()
+            NameEditAlert.show(name: self.model.name, id: self.model.id!, vc: self) {
+                [weak self] newName in
+                guard let self = self else { return }
+                self.nameTextField.text = newName
+            }
         }
         mainView.addSubview(editButton)
         

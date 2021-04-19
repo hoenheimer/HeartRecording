@@ -96,10 +96,7 @@ class RecordingListViewController: AnaLargeTitleTableViewController, SwipeTableV
                 [weak self] (_, indexPath) in
                 guard let self = self else { return }
                 let model = DbManager.manager.models[indexPath.row]
-                let vc = DetailViewController(model: model)
-                vc.modalPresentationStyle = .fullScreen
-                vc.editWhenAppear = true
-                self.present(vc, animated: true, completion: nil)
+                NameEditAlert.show(name: model.name, id: model.id!, vc: self, success: nil)
             }
             edit.backgroundColor = .clear
             edit.image = UIImage(named: "RecordingList_Edit")
@@ -109,9 +106,11 @@ class RecordingListViewController: AnaLargeTitleTableViewController, SwipeTableV
                 guard let self = self else { return }
                 let vc = UIAlertController(title: nil, message: "Are you sure you want to delete this recording file?", preferredStyle: .alert)
                 let yes = UIAlertAction(title: "YES", style: .destructive) {
-                    [indexPath] (_) in
+                    [indexPath, weak vc] (_) in
+                    guard let vc = vc else { return }
                     let model = DbManager.manager.models[indexPath.row]
                     DbManager.manager.deleteModel(model)
+                    vc.dismiss(animated: true, completion: nil)
                 }
                 vc.addAction(yes)
                 let no = UIAlertAction(title: "NO", style: .cancel) {
