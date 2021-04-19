@@ -7,10 +7,11 @@ target 'HeartRecording' do
 
 	pod 'ReactiveCocoa', '11.1.0'
 	pod 'FFPopup', '1.1.4'
-  pod 'DeviceKit', '4.2.1'
+  	pod 'DeviceKit', '4.2.1'
 	pod 'SwiftyStoreKit', '0.16.1'
 	pod 'SnapKit'
-  pod 'DFPlayer', '2.0.3'
+  	pod 'DFPlayer', '2.0.3'
+	pod 'WCDB.swift'
 
 end
 

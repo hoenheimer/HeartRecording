@@ -13,13 +13,14 @@ import ReactiveCocoa
 
 class RecordManager {
     var recorder: AVAudioRecorder?
-    let file_path: String? = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first?.appending("/record.wav")
+    var file_path: String?
     var isRecording = false
     let needPermissionPipe = Signal<Int, Never>.pipe()
     
     
     //开始录音
     func beginRecord() {
+        file_path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first?.appending("/" + DbManager.manager.dateFormatter.string(from: Date()) + ".wav")
         let session = AVAudioSession.sharedInstance()
         //设置session类型
         do {

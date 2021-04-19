@@ -31,20 +31,16 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     var progressTimeLabel:  UILabel!
     var totalTimeLabel:     UILabel!
     
-    var path: String!
-    var name: String!
-    var dateString: String!
+    var model: DbModel!
     var totalTime: CGFloat = 0
     var currectTime: CGFloat = 0
     var progress: CGFloat = 0
     var shouldSeek = false
     
     
-    convenience init(path: String, name: String, dateString: String) {
+    convenience init(model: DbModel) {
         self.init()
-        self.path = path
-        self.name = name
-        self.dateString = dateString
+        self.model = model
     }
     
     
@@ -96,7 +92,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         mainView.addSubview(heartImageView)
         
         nameTextField = UITextField()
-        nameTextField.text = name
+        nameTextField.text = model.name
         nameTextField.isEnabled = false
         nameTextField.textColor = .white
         nameTextField.font = .systemFont(ofSize: 28)
@@ -104,6 +100,11 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         nameTextField.textAlignment = .center
         nameTextField.delegate = self
         mainView.addSubview(nameTextField)
+        
+        let date = DbManager.manager.dateFormatter.date(from: String(model.id!))!
+        let dateforMatter = DateFormatter()
+        dateforMatter.dateFormat = "yyyy-MM-dd"
+        let dateString = dateforMatter.string(from: date)
         
         dateLabel = UILabel()
         dateLabel.text = dateString
@@ -251,18 +252,20 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     
     
     func play() {
-        PlayerManager.shared.play(path: path) {
+        PlayerManager.shared.play(path: model.path!) {
             [weak self] time in
             guard let self = self else { return }
             if !time.isNaN {
                 self.totalTime = floor(time)
-                self.totalTimeLabel.text = String.stringFromTime(self.totalTime)
             }
+            self.totalTimeLabel.text = String.stringFromTime(self.totalTime)
             self.playButton.setImage(UIImage(named: "Detail_Pause"), for: .normal)
             self.view.layoutNow()
         } progressAction: {
             time in
-            self.currectTime = floor(time)
+            if !time.isNaN {
+                self.currectTime = floor(time)
+            }
             self.progressTimeLabel.text = String.stringFromTime(self.currectTime)
             self.view.layoutNow()
             self.progress = self.currectTime / self.totalTime
@@ -287,5 +290,14 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         textField.resignFirstResponder()
         textField.isEnabled = false
         return false
+    }
+    
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField.text == nil || textField.text!.count == 0 {
+            textField.text = model.name
+        } else {
+            DbManager.manager.updateName(textField.text!, id: model.id!)
+        }
     }
 }

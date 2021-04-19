@@ -6,7 +6,13 @@ PODS:
     - ReactiveSwift (~> 6.2)
   - ReactiveSwift (6.6.0)
   - SnapKit (5.0.1)
+  - SQLiteRepairKit (1.2.2):
+    - WCDBOptimizedSQLCipher (~> 1.2.0)
   - SwiftyStoreKit (0.16.1)
+  - WCDB.swift (1.0.8.2):
+    - SQLiteRepairKit (~> 1.2.0)
+    - WCDBOptimizedSQLCipher (~> 1.2.0)
+  - WCDBOptimizedSQLCipher (1.2.1)
 
 DEPENDENCIES:
   - DeviceKit (= 4.2.1)
@@ -15,6 +21,7 @@ DEPENDENCIES:
   - ReactiveCocoa (= 11.1.0)
   - SnapKit
   - SwiftyStoreKit (= 0.16.1)
+  - WCDB.swift
 
 SPEC REPOS:
   trunk:
@@ -24,7 +31,10 @@ SPEC REPOS:
     - ReactiveCocoa
     - ReactiveSwift
     - SnapKit
+    - SQLiteRepairKit
     - SwiftyStoreKit
+    - WCDB.swift
+    - WCDBOptimizedSQLCipher
 
 SPEC CHECKSUMS:
   DeviceKit: cadb5ff25d45fe186778bf2d0fd2ea4750542189
@@ -33,8 +43,11 @@ SPEC CHECKSUMS:
   ReactiveCocoa: 7bc87ad2d361b9de141278b1950edd7fe91b15b1
   ReactiveSwift: be9407e2aaf8a11e53a5229255693cffd9a63ccf
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  SQLiteRepairKit: 35aaae5a8838adb85f5b1eb4d796055be6060a4b
   SwiftyStoreKit: 6b9c08810269f030586dac1fae8e75871a82e84a
+  WCDB.swift: 05d509d7a0e60fb6e11c34eb7e4027c0fab5849f
+  WCDBOptimizedSQLCipher: baf44493b0c7a3d49e97bc5b64a3856f6428ddd1
 
-PODFILE CHECKSUM: 355cbe0537cef4d48c685ebad86274301078590f
+PODFILE CHECKSUM: 1347387380765ecc4ba42749052fc40c1c19e639
 
 COCOAPODS: 1.10.1

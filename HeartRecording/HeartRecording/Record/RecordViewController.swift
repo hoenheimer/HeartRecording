@@ -124,7 +124,8 @@ class RecordViewController: AnaLargeTitleViewController {
                 if !self.manager.isRecording {
                     button.setTitle("Start Recording", for: .normal)
                 }
-                let vc = DetailViewController(path: self.manager.file_path!/*"/Users/apple/Downloads/Lemon_米津玄師.wav"*/, name: "New Recording", dateString: "2020-02-22")
+                let model = DbManager.manager.addRecording(path: self.manager.file_path!)
+                let vc = DetailViewController(model: model)
                 vc.modalPresentationStyle = .fullScreen
                 self.present(vc, animated: true, completion: nil)
                 self.timerLabel.isHidden = true
