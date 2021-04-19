@@ -10,11 +10,12 @@ import UIKit
 
 
 class AnaLargeTitleTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
+    var gradientView: UIView!
+    var gradient: CAGradientLayer!
 	public var tableView: LargeTitleTableView!
 	var titleBackView: UIView!
 	var titleLabel: UILabel!
 	var subTitleLabel: UILabel!
-	var titleBottomLine: UIView!
 	
 	public var titleText: String?
 	public var titleColor: UIColor?
@@ -36,6 +37,15 @@ class AnaLargeTitleTableViewController: UIViewController, UITableViewDelegate, U
 	
 	func configure() {
 		view.backgroundColor = .systemBackground
+        
+        gradientView = UIView()
+        view.addSubview(gradientView)
+        
+        gradient = CAGradientLayer()
+        gradient.colors = [UIColor.color(hexString: "#FBFCFF").cgColor, UIColor.color(hexString: "#FFF0F0").cgColor]
+        gradient.startPoint = CGPoint(x: 0.5, y: 0)
+        gradient.endPoint = CGPoint(x: 0.5, y: 1)
+        gradientView.layer.addSublayer(gradient)
 		
 		tableView = LargeTitleTableView(frame: .zero, style: .grouped)
 		tableView.separatorStyle = .none
@@ -62,12 +72,6 @@ class AnaLargeTitleTableViewController: UIViewController, UITableViewDelegate, U
 		subTitleLabel.font = UIFont(name: "PingFangSC-Semibold", size: 14)
 		titleBackView.addSubview(subTitleLabel)
 		
-		
-		titleBottomLine = UIView()
-		titleBottomLine.layer.cornerRadius = 1.5
-		titleBottomLine.backgroundColor = .color(hexString: "#FF6E66")
-		titleBackView.addSubview(titleBottomLine)
-		
 		if titleText != nil {
 			setTitle(title: titleText!)
 		}
@@ -77,6 +81,8 @@ class AnaLargeTitleTableViewController: UIViewController, UITableViewDelegate, U
 	override func viewWillLayoutSubviews() {
 		super.viewWillLayoutSubviews()
 		
+        gradientView.frame = view.bounds
+        gradient.frame = gradientView.bounds
 		tableView.frame = CGRect(x: 0, y: topSpacing(), width: view.bounds.width, height: view.bounds.height - topSpacing())
 	}
 	
@@ -110,17 +116,16 @@ class AnaLargeTitleTableViewController: UIViewController, UITableViewDelegate, U
 		backView.addSubview(titleBackView)
 		titleLabel.sizeToFit()
 		subTitleLabel.sizeToFit()
-		titleBackView.bounds = CGRect(x: 0, y: 0, width: tableView.bounds.width, height: titleLabel.bounds.height + 11)
+		titleBackView.bounds = CGRect(x: 0, y: 0, width: tableView.bounds.width, height: titleLabel.bounds.height)
 		titleLabel.center = CGPoint(x: AnaNavigationController.margin, y: titleLabel.bounds.height + 3.5)
 		subTitleLabel.center = CGPoint(x: titleLabel.maxX() + 8 + subTitleLabel.halfWidth(), y: titleLabel.maxY() - subTitleLabel.halfHeight())
-		titleBottomLine.frame = CGRect(x: AnaNavigationController.margin, y: titleBackView.height() - 3, width: 28, height: 3)
 		titleBackView.center = CGPoint(x: titleBackView.halfWidth(), y: titleBackView.halfHeight())
 		if let headerView = headerView {
 			backView.addSubview(headerView)
 			headerView.center = CGPoint(x: headerView.halfWidth(), y: titleBackView.maxY() + 16 + headerView.halfHeight())
 			backView.bounds = CGRect(x: 0, y: 0, width: view.width(), height: headerView.maxY())
 		} else {
-			backView.bounds = CGRect(x: 0, y: 0, width: view.width(), height: titleBackView.maxY() + 16)
+			backView.bounds = CGRect(x: 0, y: 0, width: view.width(), height: titleBackView.maxY() + 56)
 		}
 		tableView.tableHeaderView = backView
         tableView.sendSubviewToBack(backView)

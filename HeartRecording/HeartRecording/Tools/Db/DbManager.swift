@@ -13,6 +13,7 @@ class DbManager: NSObject {
     static let manager = DbManager()
     private var db: Database!
     let tableName = "Item"
+    var models: [DbModel]!
     
     var _dateFormatter: DateFormatter? = nil
     var dateFormatter: DateFormatter {
@@ -35,6 +36,8 @@ class DbManager: NSObject {
         } catch let error {
             print(error.localizedDescription)
         }
+        
+        loadModels()
     }
     
     
@@ -46,6 +49,7 @@ class DbManager: NSObject {
         model.name = "New Recording" + (model.order! == 1 ? "" : "\(model.order!)")
         do {
             try db.insert(objects: model, intoTable: tableName)
+            loadModels()
         } catch let error {
             print(error.localizedDescription)
         }
@@ -67,6 +71,16 @@ class DbManager: NSObject {
     func updateName(_ name: String, id: Int) {
         do {
             try db.update(table: tableName, on: [DbModel.Properties.name], with: [name], where: DbModel.Properties.id == id)
+            loadModels()
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+    
+    
+    func loadModels() {
+        do {
+            models = try db.getObjects(on: DbModel.Properties.all, fromTable: tableName)
         } catch let error {
             print(error.localizedDescription)
         }

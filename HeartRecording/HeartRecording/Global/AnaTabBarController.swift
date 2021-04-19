@@ -36,7 +36,7 @@ class AnaTabBarController: UITabBarController {
 			
 		viewControllers = [
 			navigationVC(rootVC: RecordViewController(), imageName: "TabBar_Record", title: "Record Now"),
-            navigationVC(rootVC: UIViewController(), imageName: "TabBar_Recording", title: "Recording"),
+            navigationVC(rootVC: RecordingListViewController(), imageName: "TabBar_Recording", title: "Recording"),
             navigationVC(rootVC: UIViewController(), imageName: "TabBar_Setting", title: "Setting")
 		]
 	}
