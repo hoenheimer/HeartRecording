@@ -38,14 +38,11 @@ class AnaLargeTitleTableViewController: UIViewController, UITableViewDelegate, U
 	func configure() {
 		view.backgroundColor = .systemBackground
         
-        gradientView = UIView()
-        view.addSubview(gradientView)
-        
         gradient = CAGradientLayer()
         gradient.colors = [UIColor.color(hexString: "#FBFCFF").cgColor, UIColor.color(hexString: "#FFF0F0").cgColor]
         gradient.startPoint = CGPoint(x: 0.5, y: 0)
         gradient.endPoint = CGPoint(x: 0.5, y: 1)
-        gradientView.layer.addSublayer(gradient)
+        view.layer.addSublayer(gradient)
 		
 		tableView = LargeTitleTableView(frame: .zero, style: .grouped)
 		tableView.separatorStyle = .none
@@ -81,8 +78,7 @@ class AnaLargeTitleTableViewController: UIViewController, UITableViewDelegate, U
 	override func viewWillLayoutSubviews() {
 		super.viewWillLayoutSubviews()
 		
-        gradientView.frame = view.bounds
-        gradient.frame = gradientView.bounds
+        gradient.frame = view.bounds
 		tableView.frame = CGRect(x: 0, y: topSpacing(), width: view.bounds.width, height: view.bounds.height - topSpacing())
 	}
 	

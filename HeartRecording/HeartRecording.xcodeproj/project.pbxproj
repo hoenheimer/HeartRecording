@@ -33,6 +33,8 @@
 		1825C917262D882B001C0FB3 /* RecordingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C916262D882B001C0FB3 /* RecordingTableViewCell.swift */; };
 		1825C91D262D8D55001C0FB3 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1825C91C262D8D55001C0FB3 /* Inter-Regular.ttf */; };
 		1825C931262D970A001C0FB3 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C930262D970A001C0FB3 /* NotificationName.swift */; };
+		1825C937262DA106001C0FB3 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C936262DA106001C0FB3 /* SettingViewController.swift */; };
+		1825C93C262DA1BE001C0FB3 /* SettingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C93B262DA1BE001C0FB3 /* SettingItemView.swift */; };
 		2AA03A87C31471ABCF75F182 /* Pods_HeartRecording.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10A0A03456011A891D4C9651 /* Pods_HeartRecording.framework */; };
 		6CD6CA13262771330099F063 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6CA12262771330099F063 /* AppDelegate.swift */; };
 		6CD6CA15262771330099F063 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6CA14262771330099F063 /* SceneDelegate.swift */; };
@@ -89,6 +91,8 @@
 		1825C916262D882B001C0FB3 /* RecordingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingTableViewCell.swift; sourceTree = "<group>"; };
 		1825C91C262D8D55001C0FB3 /* Inter-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Regular.ttf"; sourceTree = "<group>"; };
 		1825C930262D970A001C0FB3 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
+		1825C936262DA106001C0FB3 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		1825C93B262DA1BE001C0FB3 /* SettingItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingItemView.swift; sourceTree = "<group>"; };
 		4F0ADFA14A26D0B9EF8D696B /* Pods-HeartRecording.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HeartRecording.release.xcconfig"; path = "Target Support Files/Pods-HeartRecording/Pods-HeartRecording.release.xcconfig"; sourceTree = "<group>"; };
 		6CD6CA0F262771330099F063 /* HeartRecording.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HeartRecording.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CD6CA12262771330099F063 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -224,6 +228,15 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		1825C935262DA0E2001C0FB3 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				1825C936262DA106001C0FB3 /* SettingViewController.swift */,
+				1825C93B262DA1BE001C0FB3 /* SettingItemView.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
 		3A6626D646AC353EC3BEE451 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -268,6 +281,7 @@
 				1825C8A526286145001C0FB3 /* Record */,
 				1825C8C626299485001C0FB3 /* Detail */,
 				1825C910262D86CE001C0FB3 /* RecordingList */,
+				1825C935262DA0E2001C0FB3 /* Setting */,
 				1825C87A26285BE9001C0FB3 /* Extensions */,
 				1825C88626285C1C001C0FB3 /* Tools */,
 				1825C88C26285C3A001C0FB3 /* Support Files */,
@@ -480,6 +494,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1825C93C262DA1BE001C0FB3 /* SettingItemView.swift in Sources */,
 				1825C89A26285D32001C0FB3 /* AnaTabBar.swift in Sources */,
 				1825C931262D970A001C0FB3 /* NotificationName.swift in Sources */,
 				1825C8C8262994A1001C0FB3 /* DetailViewController.swift in Sources */,
@@ -490,6 +505,7 @@
 				1825C8A726286158001C0FB3 /* RecordViewController.swift in Sources */,
 				1825C87626285BD1001C0FB3 /* AnaNavigationController.swift in Sources */,
 				1825C8E82629C0A8001C0FB3 /* PlayerManager.swift in Sources */,
+				1825C937262DA106001C0FB3 /* SettingViewController.swift in Sources */,
 				1825C88026285C05001C0FB3 /* UIView+Addition.swift in Sources */,
 				1825C8F02629D09B001C0FB3 /* String+Addition.swift in Sources */,
 				1825C88826285C33001C0FB3 /* Iconfont.swift in Sources */,

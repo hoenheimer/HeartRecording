@@ -35,19 +35,20 @@ class AnaLargeTitleViewController: UIViewController, UIScrollViewDelegate {
 	
 	func configure() {
 		view.backgroundColor = .systemBackground
-		
-		scrollView = LargeTitleScrollView()
-		scrollView.delegate = self
-		view.addSubview(scrollView)
         
         gradient = CAGradientLayer()
         gradient.colors = [UIColor.color(hexString: "#FBFCFF").cgColor, UIColor.color(hexString: "#FFF0F0").cgColor]
         gradient.startPoint = CGPoint(x: 0.5, y: 0)
         gradient.endPoint = CGPoint(x: 0.5, y: 1)
-        scrollView.layer.addSublayer(gradient)
+        view.layer.addSublayer(gradient)
+		
+		scrollView = LargeTitleScrollView()
+        scrollView.backgroundColor = .clear
+		scrollView.delegate = self
+		view.addSubview(scrollView)
 		
 		titleBackView = UIView()
-		titleBackView.backgroundColor = .systemBackground
+		titleBackView.backgroundColor = .clear
 		scrollView.addSubview(titleBackView)
 		
 		titleLabel = UILabel()
@@ -65,9 +66,9 @@ class AnaLargeTitleViewController: UIViewController, UIScrollViewDelegate {
 	
 	override func viewWillLayoutSubviews() {
 		super.viewWillLayoutSubviews()
-		
+        
+        gradient.frame = view.bounds
 		scrollView.frame = CGRect(x: 0, y: topSpacing(), width: view.bounds.width, height: view.bounds.height - topSpacing())
-        gradient.frame = scrollView.bounds
 		titleLabel.sizeToFit()
 		titleBackView.frame = CGRect(x: 0, y: 0, width: scrollView.bounds.width, height: titleLabel.bounds.height)
 		titleLabel.center = CGPoint(x: AnaNavigationController.margin, y: titleLabel.bounds.height + 3.5)
