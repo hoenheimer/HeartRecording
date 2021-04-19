@@ -105,9 +105,22 @@ class RecordingListViewController: AnaLargeTitleTableViewController, SwipeTableV
             edit.image = UIImage(named: "RecordingList_Edit")
             
             let delete = SwipeAction(style: .default, title: nil) {
-                (_, indexPath) in
-                let model = DbManager.manager.models[indexPath.row]
-                DbManager.manager.deleteModel(model)
+                [weak self] (_, indexPath) in
+                guard let self = self else { return }
+                let vc = UIAlertController(title: nil, message: "Are you sure you want to delete this recording file?", preferredStyle: .alert)
+                let yes = UIAlertAction(title: "YES", style: .destructive) {
+                    [indexPath] (_) in
+                    let model = DbManager.manager.models[indexPath.row]
+                    DbManager.manager.deleteModel(model)
+                }
+                vc.addAction(yes)
+                let no = UIAlertAction(title: "NO", style: .cancel) {
+                    [weak vc] _ in
+                    guard let vc = vc else { return }
+                    vc.dismiss(animated: true, completion: nil)
+                }
+                vc.addAction(no)
+                self.present(vc, animated: true, completion: nil)
             }
             delete.backgroundColor = .clear
             delete.image = UIImage(named: "RecordingList_Delete")
