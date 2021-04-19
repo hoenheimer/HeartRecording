@@ -83,6 +83,10 @@ class SettingViewController: AnaLargeTitleViewController {
     
     func itemDidTouched(key: String) {
         print(key)
+        
+        let vc = SubscriptionViewController()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
     }
     
     
