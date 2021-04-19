@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import SwipeCellKit
 
 
-class RecordingTableViewCell: UITableViewCell {
+class RecordingTableViewCell: SwipeTableViewCell {
     var backView: UIView!
     var gradientView: UIView!
     var gradientLayer: CAGradientLayer!

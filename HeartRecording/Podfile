@@ -12,6 +12,7 @@ target 'HeartRecording' do
 	pod 'SnapKit'
   	pod 'DFPlayer', '2.0.3'
 	pod 'WCDB.swift'
+	pod 'SwipeCellKit', '2.7.1'
 
 end
 

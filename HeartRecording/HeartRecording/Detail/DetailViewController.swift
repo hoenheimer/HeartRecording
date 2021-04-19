@@ -36,6 +36,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     var currectTime: CGFloat = 0
     var progress: CGFloat = 0
     var shouldSeek = false
+    var editWhenAppear = false
     
     
     convenience init(model: DbModel) {
@@ -51,7 +52,13 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     
     
     override func viewDidAppear(_ animated: Bool) {
-        play()
+        if editWhenAppear {
+            nameTextField.isEnabled = true
+            nameTextField.becomeFirstResponder()
+            editWhenAppear = false
+        } else {
+            play()
+        }
     }
     
     

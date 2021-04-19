@@ -9,6 +9,7 @@ PODS:
   - SQLiteRepairKit (1.2.2):
     - WCDBOptimizedSQLCipher (~> 1.2.0)
   - SwiftyStoreKit (0.16.1)
+  - SwipeCellKit (2.7.1)
   - WCDB.swift (1.0.8.2):
     - SQLiteRepairKit (~> 1.2.0)
     - WCDBOptimizedSQLCipher (~> 1.2.0)
@@ -21,6 +22,7 @@ DEPENDENCIES:
   - ReactiveCocoa (= 11.1.0)
   - SnapKit
   - SwiftyStoreKit (= 0.16.1)
+  - SwipeCellKit (= 2.7.1)
   - WCDB.swift
 
 SPEC REPOS:
@@ -33,6 +35,7 @@ SPEC REPOS:
     - SnapKit
     - SQLiteRepairKit
     - SwiftyStoreKit
+    - SwipeCellKit
     - WCDB.swift
     - WCDBOptimizedSQLCipher
 
@@ -45,9 +48,10 @@ SPEC CHECKSUMS:
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SQLiteRepairKit: 35aaae5a8838adb85f5b1eb4d796055be6060a4b
   SwiftyStoreKit: 6b9c08810269f030586dac1fae8e75871a82e84a
+  SwipeCellKit: 3972254a826da74609926daf59b08d6c72e619ea
   WCDB.swift: 05d509d7a0e60fb6e11c34eb7e4027c0fab5849f
   WCDBOptimizedSQLCipher: baf44493b0c7a3d49e97bc5b64a3856f6428ddd1
 
-PODFILE CHECKSUM: 1347387380765ecc4ba42749052fc40c1c19e639
+PODFILE CHECKSUM: 5c3e1b0fb75aa9b1f8d3539761693fbfd09d033d
 
 COCOAPODS: 1.10.1

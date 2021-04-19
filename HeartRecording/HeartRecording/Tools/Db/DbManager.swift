@@ -81,6 +81,17 @@ class DbManager: NSObject {
     func loadModels() {
         do {
             models = try db.getObjects(on: DbModel.Properties.all, fromTable: tableName)
+            NotificationCenter.default.post(name: NotificationName.DbChange, object: nil)
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+    
+    
+    func deleteModel(_ model: DbModel) {
+        do {
+            try db.delete(fromTable: tableName, where: DbModel.Properties.id == model.id!)
+            loadModels()
         } catch let error {
             print(error.localizedDescription)
         }
