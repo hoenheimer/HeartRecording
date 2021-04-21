@@ -142,7 +142,7 @@ class RecordViewController: AnaLargeTitleViewController {
     
     override func layoutContentView() -> CGFloat {
         mainView.bounds = CGRect(origin: .zero, size: CGSize(width: 268, height: 268))
-        mainView.center = CGPoint(x: view.halfWidth(), y: 98 + mainView.halfHeight())
+        mainView.center = CGPoint(x: view.halfWidth(), y: scrollView.height() * 0.3)
         animationView.frame = mainView.frame
         heartImageView.sizeToFit()
         heartImageView.center = CGPoint(x: mainView.halfWidth(), y: 65 + heartImageView.halfHeight())
@@ -152,7 +152,7 @@ class RecordViewController: AnaLargeTitleViewController {
         timerLabel.sizeToFit()
         timerLabel.center = CGPoint(x: mainView.halfWidth(), y: heartImageView.maxY() + 36 + label.halfHeight())
         buttonBackgroundView.bounds = CGRect(origin: .zero, size: CGSize(width: 175, height: 48))
-        buttonBackgroundView.center = CGPoint(x: view.halfWidth(), y: mainView.maxY() + 127 + buttonBackgroundView.halfHeight())
+        buttonBackgroundView.center = CGPoint(x: view.halfWidth(), y: scrollView.height() * 0.7)
         buttonGradient.frame = buttonBackgroundView.bounds
         button.frame = buttonBackgroundView.bounds
         return buttonBackgroundView.maxY()
