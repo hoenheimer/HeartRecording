@@ -90,6 +90,16 @@ class SettingViewController: AnaLargeTitleViewController {
             present(vc, animated: true, completion: nil)
         case "Favorites":
             navigationController?.pushViewController(FavoriteViewController(), animated: true)
+        case "Privacy":
+            let webView = BaseWebController()
+            webView.urlStr = "https://sites.google.com/view/angelheartbeat/home"
+            webView.modalPresentationStyle = .fullScreen
+            present(webView, animated: true, completion: nil)
+        case "Terms":
+            let webView = BaseWebController()
+            webView.urlStr = "https://sites.google.com/view/angelheart/home"
+            webView.modalPresentationStyle = .fullScreen
+            present(webView, animated: true, completion: nil)
         default:
             return
         }

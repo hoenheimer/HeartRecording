@@ -158,6 +158,14 @@ class SubscriptionViewController: UIViewController {
                                                                        NSAttributedString.Key.underlineStyle : NSUnderlineStyle.single.rawValue,
                                                                        NSAttributedString.Key.underlineColor : UIColor.color(hexString: "#979797").cgColor]),
                                        for: .normal)
+        termsButton.reactive.controlEvents(.touchUpInside).observeValues {
+            [weak self] _ in
+            guard let self = self else { return }
+            let webView = BaseWebController()
+            webView.urlStr = "https://sites.google.com/view/angelheart/home"
+            webView.modalPresentationStyle = .fullScreen
+            self.present(webView, animated: true, completion: nil)
+        }
         scrollView.addSubview(termsButton)
         
         privacyButton = UIButton()
@@ -167,6 +175,14 @@ class SubscriptionViewController: UIViewController {
                                                                        NSAttributedString.Key.underlineStyle : NSUnderlineStyle.single.rawValue,
                                                                        NSAttributedString.Key.underlineColor : UIColor.color(hexString: "#979797").cgColor]),
                                        for: .normal)
+        privacyButton.reactive.controlEvents(.touchUpInside).observeValues {
+            [weak self] _ in
+            guard let self = self else { return }
+            let webView = BaseWebController()
+            webView.urlStr = "https://sites.google.com/view/angelheartbeat/home"
+            webView.modalPresentationStyle = .fullScreen
+            self.present(webView, animated: true, completion: nil)
+        }
         scrollView.addSubview(privacyButton)
         
         bottomLabel = UILabel()
