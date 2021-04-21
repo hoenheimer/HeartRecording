@@ -14,6 +14,7 @@ class DbManager: NSObject {
     private var db: Database!
     let tableName = "Item"
     var models: [DbModel]!
+    var favoriteModels: [DbModel]!
     
     var _dateFormatter: DateFormatter? = nil
     var dateFormatter: DateFormatter {
@@ -81,6 +82,12 @@ class DbManager: NSObject {
     func loadModels() {
         do {
             models = try db.getObjects(on: DbModel.Properties.all, fromTable: tableName)
+            favoriteModels = [DbModel]()
+            for model in models {
+                if model.favorite ?? false {
+                    favoriteModels.append(model)
+                }
+            }
             NotificationCenter.default.post(name: NotificationName.DbChange, object: nil)
         } catch let error {
             print(error.localizedDescription)
@@ -94,6 +101,16 @@ class DbManager: NSObject {
                 try FileManager.default.removeItem(atPath: path)
             }
             try db.delete(fromTable: tableName, where: DbModel.Properties.id == model.id!)
+            loadModels()
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+    
+    
+    func changeFavoriteModel(_ model: DbModel) {
+        do {
+            try db.update(table: tableName, on: [DbModel.Properties.favorite], with: [!(model.favorite ?? false)], where: DbModel.Properties.id == model.id!)
             loadModels()
         } catch let error {
             print(error.localizedDescription)

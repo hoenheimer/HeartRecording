@@ -72,11 +72,29 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         view.addSubview(closeButton)
         
         likeButton = UIButton()
-        likeButton.setImage(UIImage(named: "Detail_Like"), for: .normal)
+        likeButton.setImage(UIImage(named: "Detail_" + ((model.favorite ?? false) ? "Favorite" : "Like")), for: .normal)
+        likeButton.setImage(UIImage(named: "Detail_" + ((model.favorite ?? false) ? "Favorite" : "Like")), for: .highlighted)
+        likeButton.reactive.controlEvents(.touchUpInside).observeValues {
+            [weak self] button in
+            guard let self = self else { return }
+            DbManager.manager.changeFavoriteModel(self.model)
+            self.model.favorite = !(self.model.favorite ?? false)
+            button.setImage(UIImage(named: "Detail_" + ((self.model.favorite ?? false) ? "Favorite" : "Like")), for: .normal)
+            button.setImage(UIImage(named: "Detail_" + ((self.model.favorite ?? false) ? "Favorite" : "Like")), for: .highlighted)
+        }
         view.addSubview(likeButton)
         
         shareButton = UIButton()
         shareButton.setImage(UIImage(named: "Detail_Share"), for: .normal)
+        shareButton.setImage(UIImage(named: "Detail_Share"), for: .highlighted)
+        shareButton.reactive.controlEvents(.touchUpInside).observeValues {
+            [weak self] _ in
+            guard let self = self else { return }
+            if let path = self.model.path {
+                let vc = UIActivityViewController.init(activityItems: [URL(fileURLWithPath: path)], applicationActivities: nil)
+                self.present(vc, animated: true, completion: nil)
+            }
+        }
         view.addSubview(shareButton)
         
         animationView = RippleAnimationView(bgColor: .color(hexString: "#FF8282"))

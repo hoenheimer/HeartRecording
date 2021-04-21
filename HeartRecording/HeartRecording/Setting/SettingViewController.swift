@@ -83,15 +83,22 @@ class SettingViewController: AnaLargeTitleViewController {
     
     func itemDidTouched(key: String) {
         print(key)
-        
-        let vc = SubscriptionViewController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+        switch key {
+        case "Pro":
+            let vc = SubscriptionViewController()
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true, completion: nil)
+        case "Favorites":
+            navigationController?.pushViewController(FavoriteViewController(), animated: true)
+        default:
+            return
+        }
     }
     
     
     static func itemModels() -> [SettingItemModel] {
         var models = [SettingItemModel]()
+        models.append(SettingItemModel(image: UIImage(named: "Setting_Pro"), title: "Angel Premium-Unlock All Features", key: "Pro"))
         models.append(SettingItemModel(image: UIImage(named: "Setting_Favorite"), title: "Favorites", key: "Favorites"))
         models.append(SettingItemModel(image: UIImage(named: "Setting_Feedback"), title: "Feedback", key: "Feedback"))
         models.append(SettingItemModel(image: UIImage(named: "Setting_Share"), title: "Share with friends", key: "Share"))

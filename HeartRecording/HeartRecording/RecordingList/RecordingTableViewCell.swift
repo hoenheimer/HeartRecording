@@ -19,6 +19,8 @@ class RecordingTableViewCell: SwipeTableViewCell {
     var dateLabel: UILabel!
     var likeButton: UIButton!
     
+    var model: DbModel!
+    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -75,7 +77,11 @@ class RecordingTableViewCell: SwipeTableViewCell {
         labelsBackView.addSubview(dateLabel)
         
         likeButton = UIButton()
-        likeButton.setImage(UIImage(named: "RecordingList_Like"), for: .normal)
+        likeButton.reactive.controlEvents(.touchUpInside).observeValues {
+            [weak self] _ in
+            guard let self = self else { return }
+            DbManager.manager.changeFavoriteModel(self.model)
+        }
         backView.addSubview(likeButton)
     }
     
@@ -100,12 +106,14 @@ class RecordingTableViewCell: SwipeTableViewCell {
     
     
     func setModel(_ model: DbModel) {
+        self.model = model
         nameLabel.text = model.name
         let date = DbManager.manager.dateFormatter.date(from: String(model.id!))!
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM dd,yyyy at h:mm a"
         let dateString = dateFormatter.string(from: date)
         dateLabel.text = dateString
+        likeButton.setImage(UIImage(named: "RecordingList_" + ((model.favorite ?? false) ? "Favorite" : "Like")), for: .normal)
         layoutNow()
     }
 }

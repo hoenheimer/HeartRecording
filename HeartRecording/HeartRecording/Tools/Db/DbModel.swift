@@ -14,6 +14,7 @@ class DbModel: TableCodable {
     var name: String?
     var path: String?
     var order: Int?
+    var favorite: Bool?
     
     
     enum CodingKeys: String, CodingTableKey {
@@ -23,6 +24,7 @@ class DbModel: TableCodable {
         case name
         case path
         case order = "_order"
+        case favorite
         
         static var columnConstraintBindings: [CodingKeys: ColumnConstraintBinding]? {
             return [
