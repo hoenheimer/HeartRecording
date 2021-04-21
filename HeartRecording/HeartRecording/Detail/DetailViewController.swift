@@ -73,14 +73,12 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         
         likeButton = UIButton()
         likeButton.setImage(UIImage(named: "Detail_" + ((model.favorite ?? false) ? "Favorite" : "Like")), for: .normal)
-        likeButton.setImage(UIImage(named: "Detail_" + ((model.favorite ?? false) ? "Favorite" : "Like")), for: .highlighted)
         likeButton.reactive.controlEvents(.touchUpInside).observeValues {
             [weak self] button in
             guard let self = self else { return }
             DbManager.manager.changeFavoriteModel(self.model)
             self.model.favorite = !(self.model.favorite ?? false)
             button.setImage(UIImage(named: "Detail_" + ((self.model.favorite ?? false) ? "Favorite" : "Like")), for: .normal)
-            button.setImage(UIImage(named: "Detail_" + ((self.model.favorite ?? false) ? "Favorite" : "Like")), for: .highlighted)
         }
         view.addSubview(likeButton)
         
