@@ -90,6 +90,9 @@ class DbManager: NSObject {
     
     func deleteModel(_ model: DbModel) {
         do {
+            if let path = model.path {
+                try FileManager.default.removeItem(atPath: path)
+            }
             try db.delete(fromTable: tableName, where: DbModel.Properties.id == model.id!)
             loadModels()
         } catch let error {
