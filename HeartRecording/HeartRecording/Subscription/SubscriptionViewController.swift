@@ -259,16 +259,20 @@ class SubscriptionViewController: UIViewController {
             if product.freeDays > 0 {
                 string.append("\(product.freeDays) Days Free Trial,then ")
             }
-            string.append("\(product.regularPrice)/Year")
+            string.append("\(product.regularPrice)/Month")
             button.setTitle(string, for: .normal)
             
 //            let animation = CABasicAnimation(keyPath: "transform.rotation.z")
-//            animation.fromValue = -0.5
-//            animation.toValue = 0.5
-//            animation.repeatCount = .greatestFiniteMagnitude
+//            animation.fromValue = -0.25
+//            animation.toValue = 0.25
 //            animation.autoreverses = true
-//            animation.duration = 1
-//            button.layer.add(animation, forKey: nil)
+//            animation.duration = 0.5
+//            
+//            let animationGroup = CAAnimationGroup()
+//            animationGroup.animations = [animation]
+//            animationGroup.duration = 1.5
+//            animationGroup.repeatCount = .greatestFiniteMagnitude
+//            button.layer.add(animationGroup, forKey: nil)
         }
     }
     
