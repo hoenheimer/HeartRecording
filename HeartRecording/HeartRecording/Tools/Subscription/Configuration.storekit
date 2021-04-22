@@ -33,7 +33,7 @@
               "locale" : "en_US"
             }
           ],
-          "productID" : "com.ziheng.heartRecording.yearly",
+          "productID" : "com.babycare.angelweekly",
           "recurringSubscriptionPeriod" : "P1Y",
           "referenceName" : null,
           "subscriptionGroupID" : "A5BA8A75",

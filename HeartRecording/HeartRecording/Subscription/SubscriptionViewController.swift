@@ -130,13 +130,20 @@ class SubscriptionViewController: UIViewController {
         
         button = UIButton()
         button.backgroundColor = .clear
-        button.setTitle("3 Days Free Trial,then $19.99/Year", for: .normal)
         button.setTitleColor(.color(hexString: "#FCFCFC"), for: .normal)
         button.titleLabel?.font = UIFont(name: "Poppins-SemiBold", size: 16)
+        button.reactive.controlEvents(.touchUpInside).observeValues {
+            [weak self] button in
+            guard let self = self else { return }
+            if let product = self.product {
+                self.purchase(product: product)
+            }
+        }
         scrollView.addSubview(button)
         
         activityView = UIActivityIndicatorView()
         activityView.color = .color(hexString: "#FCFCFC")
+        activityView.startAnimating()
         button.addSubview(activityView)
         
         buttonBottomLabel = UILabel()
@@ -149,6 +156,11 @@ class SubscriptionViewController: UIViewController {
         restoreButton.setTitle("RESTORE PURCHASE", for: .normal)
         restoreButton.setTitleColor(.color(hexString: "#979797"), for: .normal)
         restoreButton.titleLabel?.font = .systemFont(ofSize: 10, weight: .semibold)
+        restoreButton.reactive.controlEvents(.touchUpInside).observeValues {
+            [weak self] _ in
+            guard let self = self else { return }
+            self.restorePurchaseData()
+        }
         scrollView.addSubview(restoreButton)
         
         termsButton = UIButton()
@@ -247,8 +259,16 @@ class SubscriptionViewController: UIViewController {
             if product.freeDays > 0 {
                 string.append("\(product.freeDays) Days Free Trial,then ")
             }
-            string.append("\(product.priceLocale)/Year")
+            string.append("\(product.regularPrice)/Year")
             button.setTitle(string, for: .normal)
+            
+//            let animation = CABasicAnimation(keyPath: "transform.rotation.z")
+//            animation.fromValue = -0.5
+//            animation.toValue = 0.5
+//            animation.repeatCount = .greatestFiniteMagnitude
+//            animation.autoreverses = true
+//            animation.duration = 1
+//            button.layer.add(animation, forKey: nil)
         }
     }
     

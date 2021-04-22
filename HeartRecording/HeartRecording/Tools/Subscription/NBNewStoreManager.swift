@@ -62,9 +62,9 @@ class NBNewStoreManager: NSObject,SKPaymentTransactionObserver{
     }
 
 //    let weekProductId = "com.ziheng.highlightCover.weeekly"
-    let yearProductId = "com.ziheng.heartRecording.yearly"
+    let yearProductId = "com.babycare.angelweekly"
 //	let onceProductId = "com.ziheng.totowallet.onetimepurchase"
-    let sharedSecret = "e08e44d7fad54df1afc98e3dbaf10f63"
+    let sharedSecret = "e1780bfd2eb24c31bce9fe2ace147443"
     
     private var products: [SKProduct]?
 
