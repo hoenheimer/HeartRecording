@@ -84,4 +84,17 @@ public extension UIViewController {
 		}
 		return base
 	}
+    
+    
+    func showSubscriptionIfNeeded(handle: (() -> Void)?) {
+        if NBUserVipStatusManager.shard.getVipStatus() {
+            if let handle = handle {
+                handle()
+            }
+        } else {
+            let vc = SubscriptionViewController(success: handle)
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true, completion: nil)
+        }
+    }
 }

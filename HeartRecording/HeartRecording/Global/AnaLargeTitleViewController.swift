@@ -49,6 +49,7 @@ class AnaLargeTitleViewController: UIViewController, UIScrollViewDelegate {
 		
 		titleBackView = UIView()
 		titleBackView.backgroundColor = .clear
+        titleBackView.layer.masksToBounds = false
 		scrollView.addSubview(titleBackView)
 		
 		titleLabel = UILabel()

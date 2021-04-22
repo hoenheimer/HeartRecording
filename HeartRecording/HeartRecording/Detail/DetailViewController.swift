@@ -51,7 +51,9 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     
     
     override func viewDidAppear(_ animated: Bool) {
-        play()
+        if NBUserVipStatusManager.shard.getVipStatus() {
+            play()
+        }
     }
     
     
@@ -88,9 +90,13 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         shareButton.reactive.controlEvents(.touchUpInside).observeValues {
             [weak self] _ in
             guard let self = self else { return }
-            if let path = self.model.path {
-                let vc = UIActivityViewController.init(activityItems: [URL(fileURLWithPath: path)], applicationActivities: nil)
-                self.present(vc, animated: true, completion: nil)
+            self.showSubscriptionIfNeeded {
+                [weak self] in
+                guard let self = self else { return }
+                if let path = self.model.path {
+                    let vc = UIActivityViewController.init(activityItems: [URL(fileURLWithPath: path)], applicationActivities: nil)
+                    self.present(vc, animated: true, completion: nil)
+                }
             }
         }
         view.addSubview(shareButton)
@@ -167,16 +173,20 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         playButton.reactive.controlEvents(.touchUpInside).observeValues {
             [weak self] button in
             guard let self = self else { return }
-            if !PlayerManager.shared.isPlaying {
-                if self.progress == 0 {
-                    self.play()
+            self.showSubscriptionIfNeeded {
+                [weak self] in
+                guard let self = self else { return }
+                if !PlayerManager.shared.isPlaying {
+                    if self.progress == 0 {
+                        self.play()
+                    } else {
+                        PlayerManager.shared.resume()
+                        button.setImage(UIImage(named: "Detail_Pause"), for: .normal)
+                    }
                 } else {
-                    PlayerManager.shared.resume()
-                    button.setImage(UIImage(named: "Detail_Pause"), for: .normal)
+                    PlayerManager.shared.pause()
+                    button.setImage(UIImage(named: "Detail_Play"), for: .normal)
                 }
-            } else {
-                PlayerManager.shared.pause()
-                button.setImage(UIImage(named: "Detail_Play"), for: .normal)
             }
         }
         view.addSubview(playButton)

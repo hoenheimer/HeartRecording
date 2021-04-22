@@ -24,6 +24,7 @@ class SubscriptionViewController: UIViewController {
     var featureLabel1:          UILabel!
     var featureLabel2:          UILabel!
     var featureLabel3:          UILabel!
+    var freeDayLabel:           UILabel!
     var buttonBackView:         UIView!
     var buttonShadowView:       UIView!
     var buttonGradientView:     UIView!
@@ -37,6 +38,13 @@ class SubscriptionViewController: UIViewController {
     var bottomLabel:            UILabel!
     
     var product: SKProduct?
+    var success: (() -> Void)? = nil
+    
+    
+    convenience init(success: (() -> Void)?) {
+        self.init()
+        self.success = success
+    }
     
     
     override func viewDidLoad() {
@@ -109,6 +117,11 @@ class SubscriptionViewController: UIViewController {
         featureLabel3.textColor = .black
         featureLabel3.font = .systemFont(ofSize: 14)
         featuresBackView.addSubview(featureLabel3)
+        
+        freeDayLabel = UILabel()
+        freeDayLabel.textColor = .color(hexString: "#EB5757")
+        freeDayLabel.font = .systemFont(ofSize: 16, weight: .semibold)
+        scrollView.addSubview(freeDayLabel)
         
         buttonBackView = UIView()
         buttonBackView.backgroundColor = .clear
@@ -237,7 +250,9 @@ class SubscriptionViewController: UIViewController {
         featuresBackView.bounds = CGRect(origin: .zero, size: CGSize(width: max(featureLabel1.maxX(), featureLabel2.maxX(), featureLabel3.maxX()),
                                                                      height: iconImageView3.maxY()))
         featuresBackView.center = CGPoint(x: scrollView.halfWidth(), y: imageView.maxY() + 15 + featuresBackView.halfHeight())
+        freeDayLabel.sizeToFit()
         buttonBackView.frame = CGRect(x: 42, y: featuresBackView.maxY() + 72, width: scrollView.width() - 84, height: 48)
+        freeDayLabel.center = CGPoint(x: scrollView.halfWidth(), y: buttonBackView.minY() - 10 - freeDayLabel.halfHeight())
         buttonShadowView.frame = buttonBackView.bounds
         buttonGradientView.frame = buttonShadowView.frame
         buttonGradientLayer.frame = buttonGradientView.bounds
@@ -263,10 +278,12 @@ class SubscriptionViewController: UIViewController {
         if let product = product {
             var string = ""
             if product.freeDays > 0 {
-                string.append("\(product.freeDays) Days Free Trial,then ")
+                freeDayLabel.text = "\(product.freeDays) Days Free Trial"
+                string.append("Then ")
             }
-            string.append("\(product.regularPrice)/Month")
+            string.append("Only \(product.regularPrice)/Month")
             button.setTitle(string, for: .normal)
+            view.layoutNow()
             
             let animation = CABasicAnimation(keyPath: "transform.rotation.z")
             animation.fromValue = -0.15
@@ -335,6 +352,9 @@ extension SubscriptionViewController: NBInAppPurchaseProtocol {
             [weak self] in
             guard let self = self else { return }
             self.dismiss(animated: true, completion: nil)
+            if let success = self.success {
+                success()
+            }
         }
     }
     

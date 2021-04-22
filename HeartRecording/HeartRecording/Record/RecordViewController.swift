@@ -11,6 +11,7 @@ import ReactiveSwift
 
 
 class RecordViewController: AnaLargeTitleViewController {
+    var proButton: UIButton!
     var animationView: RippleAnimationView!
     var mainView: UIView!
     var heartImageView: UIImageView!
@@ -34,10 +35,30 @@ class RecordViewController: AnaLargeTitleViewController {
     }
     
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        proButton.isHidden = NBUserVipStatusManager.shard.getVipStatus()
+    }
+    
+    
     override func configure() {
         super.configure()
         
-        setTitle(title: "HeartRecording")
+        setTitle(title: "Angel")
+        
+        scrollView.layer.masksToBounds = false
+        
+        proButton = UIButton()
+        proButton.setImage(UIImage(named: "Record_Pro"), for: .normal)
+        proButton.setShadow(color: .color(hexString: "#146575a7"), offset: CGSize(width: 0, height: 8), radius: 32)
+        proButton.reactive.controlEvents(.touchUpInside).observeValues {
+            [weak self] _ in
+            guard let self = self else { return }
+            let vc = SubscriptionViewController()
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true, completion: nil)
+        }
+        titleBackView.addSubview(proButton)
         
         animationView = RippleAnimationView(bgColor: .color(hexString: "#FF8282"))
         contentView.addSubview(animationView)
@@ -141,6 +162,8 @@ class RecordViewController: AnaLargeTitleViewController {
     
     
     override func layoutContentView() -> CGFloat {
+        proButton.sizeToFit()
+        proButton.center = CGPoint(x: view.width() - proButton.halfWidth(), y: titleLabel.centerY() - 10)
         mainView.bounds = CGRect(origin: .zero, size: CGSize(width: 268, height: 268))
         mainView.center = CGPoint(x: view.halfWidth(), y: scrollView.height() * 0.3)
         animationView.frame = mainView.frame
