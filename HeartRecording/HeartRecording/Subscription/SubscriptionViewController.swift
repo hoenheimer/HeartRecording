@@ -24,6 +24,7 @@ class SubscriptionViewController: UIViewController {
     var featureLabel1:          UILabel!
     var featureLabel2:          UILabel!
     var featureLabel3:          UILabel!
+    var buttonBackView:         UIView!
     var buttonShadowView:       UIView!
     var buttonGradientView:     UIView!
     var buttonGradientLayer:    CAGradientLayer!
@@ -66,7 +67,7 @@ class SubscriptionViewController: UIViewController {
         view.addSubview(closeButton)
         
         titleLabel = UILabel()
-        titleLabel.text = "Angle  Premium"
+        titleLabel.text = "Angel  Premium"
         titleLabel.textColor = .black
         titleLabel.font = UIFont(name: "Poppins-SemiBold", size: 26)
         scrollView.addSubview(titleLabel)
@@ -109,9 +110,13 @@ class SubscriptionViewController: UIViewController {
         featureLabel3.font = .systemFont(ofSize: 14)
         featuresBackView.addSubview(featureLabel3)
         
+        buttonBackView = UIView()
+        buttonBackView.backgroundColor = .clear
+        scrollView.addSubview(buttonBackView)
+        
         buttonGradientView = UIView()
         buttonGradientView.backgroundColor = .clear
-        scrollView.addSubview(buttonGradientView)
+        buttonBackView.addSubview(buttonGradientView)
         
         buttonShadowView = UIView()
         buttonShadowView.layer.cornerRadius = 24
@@ -119,7 +124,7 @@ class SubscriptionViewController: UIViewController {
         buttonShadowView.layer.borderColor = UIColor.color(hexString: "#80FCFCFC").cgColor
         buttonShadowView.backgroundColor = .color(hexString: "#FF5E5E")
         buttonShadowView.setShadow(color: .color(hexString: "#28a0a3bd"), offset: CGSize(width: 0, height: 16), radius: 24)
-        scrollView.addSubview(buttonShadowView)
+        buttonBackView.addSubview(buttonShadowView)
         
         buttonGradientLayer = CAGradientLayer()
         buttonGradientLayer.cornerRadius = 24
@@ -139,7 +144,7 @@ class SubscriptionViewController: UIViewController {
                 self.purchase(product: product)
             }
         }
-        scrollView.addSubview(button)
+        buttonBackView.addSubview(button)
         
         activityView = UIActivityIndicatorView()
         activityView.color = .color(hexString: "#FCFCFC")
@@ -232,14 +237,15 @@ class SubscriptionViewController: UIViewController {
         featuresBackView.bounds = CGRect(origin: .zero, size: CGSize(width: max(featureLabel1.maxX(), featureLabel2.maxX(), featureLabel3.maxX()),
                                                                      height: iconImageView3.maxY()))
         featuresBackView.center = CGPoint(x: scrollView.halfWidth(), y: imageView.maxY() + 15 + featuresBackView.halfHeight())
-        buttonShadowView.frame = CGRect(x: 42, y: featuresBackView.maxY() + 72, width: scrollView.width() - 84, height: 48)
+        buttonBackView.frame = CGRect(x: 42, y: featuresBackView.maxY() + 72, width: scrollView.width() - 84, height: 48)
+        buttonShadowView.frame = buttonBackView.bounds
         buttonGradientView.frame = buttonShadowView.frame
         buttonGradientLayer.frame = buttonGradientView.bounds
         button.frame = buttonGradientView.frame
         activityView.sizeToFit()
         activityView.center = CGPoint(x: button.halfWidth(), y: button.halfHeight())
         buttonBottomLabel.sizeToFit()
-        buttonBottomLabel.center = CGPoint(x: scrollView.halfWidth(), y: button.maxY() + 7 + buttonBottomLabel.halfHeight())
+        buttonBottomLabel.center = CGPoint(x: scrollView.halfWidth(), y: buttonBackView.maxY() + 7 + buttonBottomLabel.halfHeight())
         restoreButton.sizeToFit()
         restoreButton.setOrigin(x: 42, y: buttonBottomLabel.maxY() + 29)
         privacyButton.sizeToFit()
@@ -262,17 +268,17 @@ class SubscriptionViewController: UIViewController {
             string.append("\(product.regularPrice)/Month")
             button.setTitle(string, for: .normal)
             
-//            let animation = CABasicAnimation(keyPath: "transform.rotation.z")
-//            animation.fromValue = -0.25
-//            animation.toValue = 0.25
-//            animation.autoreverses = true
-//            animation.duration = 0.5
-//            
-//            let animationGroup = CAAnimationGroup()
-//            animationGroup.animations = [animation]
-//            animationGroup.duration = 1.5
-//            animationGroup.repeatCount = .greatestFiniteMagnitude
-//            button.layer.add(animationGroup, forKey: nil)
+            let animation = CABasicAnimation(keyPath: "transform.rotation.z")
+            animation.fromValue = -0.15
+            animation.toValue = 0.15
+            animation.autoreverses = true
+            animation.duration = 0.15
+
+            let animationGroup = CAAnimationGroup()
+            animationGroup.animations = [animation]
+            animationGroup.duration = 2.15
+            animationGroup.repeatCount = .greatestFiniteMagnitude
+            buttonBackView.layer.add(animationGroup, forKey: nil)
         }
     }
     
