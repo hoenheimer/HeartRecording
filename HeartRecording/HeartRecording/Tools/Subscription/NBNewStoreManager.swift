@@ -62,7 +62,7 @@ class NBNewStoreManager: NSObject,SKPaymentTransactionObserver{
     }
 
 //    let weekProductId = "com.ziheng.highlightCover.weeekly"
-    let yearProductId = "com.babycare.angelweekly"
+    let monthProductId = "com.babycare.angelweekly"
 //	let onceProductId = "com.ziheng.totowallet.onetimepurchase"
     let sharedSecret = "e1780bfd2eb24c31bce9fe2ace147443"
     
@@ -120,7 +120,7 @@ class NBNewStoreManager: NSObject,SKPaymentTransactionObserver{
     
     
     func allProuductIds() -> [String] {
-        return [yearProductId]
+        return [monthProductId]
     }
     
     /**获取所有产品信息*/
@@ -234,7 +234,7 @@ class NBNewStoreManager: NSObject,SKPaymentTransactionObserver{
 //				}
 				 
 				var productIds = [String]()
-                if let yearProductId = weakSelf?.yearProductId {
+                if let yearProductId = weakSelf?.monthProductId {
                     productIds.append(yearProductId)
                 }
 //                if let weekProductId = weakSelf?.weekProductId {

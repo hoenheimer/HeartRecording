@@ -14,6 +14,16 @@ class SettingViewController: AnaLargeTitleViewController {
     var itemViews = [SettingItemView]()
     var versionLabel: UILabel!
     
+    var proItemView: SettingItemView?
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let proItemView = proItemView {
+            proItemView.label.text = NBUserVipStatusManager.shard.getVipStatus() ? "You are pro!" : "Angel Premium-Unlock All Features"
+        }
+    }
+    
     
     override func configure() {
         super.configure()
@@ -39,12 +49,15 @@ class SettingViewController: AnaLargeTitleViewController {
         gradientLayer.colors = [UIColor.color(hexString: "#E6FFFFFF").cgColor, UIColor.color(hexString: "#B3FFFFFF").cgColor]
         gradientView.layer.addSublayer(gradientLayer)
         
-        for model in SettingViewController.itemModels() {
+        for model in itemModels() {
             let itemView = SettingItemView(image: model.image, title: model.title, key: model.key)
             itemView.pipe.output.observeValues {
                 [weak self] key in
                 guard let self = self else { return }
                 self.itemDidTouched(key: key)
+            }
+            if model.key == "Pro" {
+                proItemView = itemView
             }
             backView.addSubview(itemView)
             itemViews.append(itemView)
@@ -85,9 +98,11 @@ class SettingViewController: AnaLargeTitleViewController {
         print(key)
         switch key {
         case "Pro":
-            let vc = SubscriptionViewController()
-            vc.modalPresentationStyle = .fullScreen
-            present(vc, animated: true, completion: nil)
+            if !NBUserVipStatusManager.shard.getVipStatus() {
+                let vc = SubscriptionViewController(isReviewVersion: NBRemoteConfigTool.shard.isReviewVersion(), success: nil)
+                vc.modalPresentationStyle = .fullScreen
+                present(vc, animated: true, completion: nil)
+            }
         case "Favorites":
             navigationController?.pushViewController(FavoriteViewController(), animated: true)
         case "Privacy":
@@ -106,9 +121,13 @@ class SettingViewController: AnaLargeTitleViewController {
     }
     
     
-    static func itemModels() -> [SettingItemModel] {
+    func itemModels() -> [SettingItemModel] {
         var models = [SettingItemModel]()
-        models.append(SettingItemModel(image: UIImage(named: "Setting_Pro"), title: "Angel Premium-Unlock All Features", key: "Pro"))
+        if NBUserVipStatusManager.shard.getVipStatus() {
+            models.append(SettingItemModel(image: UIImage(named: "Setting_Pro"), title: "You are pro!", key: "Pro"))
+        } else {
+            models.append(SettingItemModel(image: UIImage(named: "Setting_Pro"), title: "Angel Premium-Unlock All Features", key: "Pro"))
+        }
         models.append(SettingItemModel(image: UIImage(named: "Setting_Favorite"), title: "Favorites", key: "Favorites"))
         models.append(SettingItemModel(image: UIImage(named: "Setting_Feedback"), title: "Feedback", key: "Feedback"))
         models.append(SettingItemModel(image: UIImage(named: "Setting_Share"), title: "Share with friends", key: "Share"))

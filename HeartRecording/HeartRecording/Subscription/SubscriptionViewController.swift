@@ -31,18 +31,20 @@ class SubscriptionViewController: UIViewController {
     var buttonGradientLayer:    CAGradientLayer!
     var button:                 UIButton!
     var activityView:           UIActivityIndicatorView!
-    var buttonBottomLabel:      UILabel!
+    var buttonBottomButton:     UIButton!
     var restoreButton:          UIButton!
     var termsButton:            UIButton!
     var privacyButton:          UIButton!
     var bottomLabel:            UILabel!
     
     var product: SKProduct?
+    var isReviewVersion = true
     var success: (() -> Void)? = nil
     
     
-    convenience init(success: (() -> Void)?) {
+    convenience init(isReviewVersion: Bool, success: (() -> Void)?) {
         self.init()
+        self.isReviewVersion = isReviewVersion
         self.success = success
     }
     
@@ -72,6 +74,7 @@ class SubscriptionViewController: UIViewController {
             guard let self = self else { return }
             self.dismiss(animated: true, completion: nil)
         }
+        closeButton.isHidden = !isReviewVersion
         view.addSubview(closeButton)
         
         titleLabel = UILabel()
@@ -164,11 +167,17 @@ class SubscriptionViewController: UIViewController {
         activityView.startAnimating()
         button.addSubview(activityView)
         
-        buttonBottomLabel = UILabel()
-        buttonBottomLabel.text = "Auto renewable, Cancel anytime"
-        buttonBottomLabel.textColor = .color(hexString: "#979797")
-        buttonBottomLabel.font = .systemFont(ofSize: 13)
-        scrollView.addSubview(buttonBottomLabel)
+        buttonBottomButton = UIButton()
+        buttonBottomButton.setTitle(isReviewVersion ? "Auto renewable, Cancel anytime" : "No Thanks", for: .normal)
+        buttonBottomButton.setTitleColor(.color(hexString: "#979797"), for: .normal)
+        buttonBottomButton.titleLabel?.font = .systemFont(ofSize: 13)
+        buttonBottomButton.reactive.controlEvents(.touchUpInside).observeValues {
+            [weak self] _ in
+            guard let self = self else { return }
+            self.dismiss(animated: true, completion: nil)
+        }
+        buttonBottomButton.isEnabled = !isReviewVersion
+        scrollView.addSubview(buttonBottomButton)
         
         restoreButton = UIButton()
         restoreButton.setTitle("RESTORE PURCHASE", for: .normal)
@@ -217,7 +226,7 @@ class SubscriptionViewController: UIViewController {
         
         bottomLabel = UILabel()
         bottomLabel.numberOfLines = 0
-        bottomLabel.text = "HighlightCovers Premium offers weekly purchase subscription. You can subscribe to a weekly plan ($3.99 billed once a week ). You can manage or turn off auto-renew in your Apple ID account settings at any time. Subscriptions will automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Any unused portion of a free trial period will be forfeited when you purchase a subscription. Our app is functional without purchasing an Auto-Renewable subscription, and you can use all the unlocked content after the subscription expires."
+        bottomLabel.text = "Angel Premium offers weekly purchase subscription. You can subscribe to a monthly plan. You can manage or turn off auto-renew in your Apple ID account settings at any time. Subscriptions will automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Any unused portion of a free trial period will be forfeited when you purchase a subscription. Our app is functional without purchasing an Auto-Renewable subscription, and you can use all the unlocked content after the subscription expires."
         bottomLabel.textColor = .color(hexString: "#979797")
         bottomLabel.font  = .systemFont(ofSize: 10, weight: .semibold)
         scrollView.addSubview(bottomLabel)
@@ -259,10 +268,10 @@ class SubscriptionViewController: UIViewController {
         button.frame = buttonGradientView.frame
         activityView.sizeToFit()
         activityView.center = CGPoint(x: button.halfWidth(), y: button.halfHeight())
-        buttonBottomLabel.sizeToFit()
-        buttonBottomLabel.center = CGPoint(x: scrollView.halfWidth(), y: buttonBackView.maxY() + 7 + buttonBottomLabel.halfHeight())
+        buttonBottomButton.sizeToFit()
+        buttonBottomButton.center = CGPoint(x: scrollView.halfWidth(), y: buttonBackView.maxY() + 7 + buttonBottomButton.halfHeight())
         restoreButton.sizeToFit()
-        restoreButton.setOrigin(x: 42, y: buttonBottomLabel.maxY() + 29)
+        restoreButton.setOrigin(x: 42, y: buttonBottomButton.maxY() + 29)
         privacyButton.sizeToFit()
         privacyButton.center = CGPoint(x: scrollView.width() - 42 - privacyButton.halfWidth(), y: restoreButton.centerY())
         termsButton.sizeToFit()
@@ -277,12 +286,21 @@ class SubscriptionViewController: UIViewController {
         activityView.stopAnimating()
         if let product = product {
             var string = ""
-            if product.freeDays > 0 {
-                freeDayLabel.text = "\(product.freeDays) Days Free Trial"
-                string.append("Then ")
+            if isReviewVersion {
+                if product.freeDays > 0 {
+                    freeDayLabel.text = "\(product.freeDays) Days Free Trial"
+                    string.append("Then ")
+                }
+                string.append("Only \(product.regularPrice)/Month")
+            } else {
+                if product.freeDays > 0 {
+                    string = "\(product.freeDays) Days Free Trial"
+                }
             }
-            string.append("Only \(product.regularPrice)/Month")
             button.setTitle(string, for: .normal)
+            
+            bottomLabel.text = "Angel Premium offers weekly purchase subscription. You can subscribe to a monthly plan(\(product.regularPrice) per month). You can manage or turn off auto-renew in your Apple ID account settings at any time. Subscriptions will automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Any unused portion of a free trial period will be forfeited when you purchase a subscription. Our app is functional without purchasing an Auto-Renewable subscription, and you can use all the unlocked content after the subscription expires."
+            
             view.layoutNow()
             
             let animation = CABasicAnimation(keyPath: "transform.rotation.z")
@@ -310,7 +328,7 @@ extension SubscriptionViewController: NBInAppPurchaseProtocol {
     
     /**获取订阅产品成功*/
     func subscriptionProductsDidReciveSuccess(products: [SKProduct]) {
-        product = products.filter({$0.productIdentifier == NBNewStoreManager.shard.yearProductId}).first
+        product = products.filter({$0.productIdentifier == NBNewStoreManager.shard.monthProductId}).first
         requestSuccess()
     }
     /**获取订阅产品失败*/

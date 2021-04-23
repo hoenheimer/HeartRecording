@@ -13,6 +13,13 @@ target 'HeartRecording' do
   	pod 'DFPlayer', '2.0.3'
 	pod 'WCDB.swift'
 	pod 'SwipeCellKit', '2.7.1'
+	pod 'Firebase/Core', '7.0.0'
+  	pod 'Firebase/RemoteConfig', '7.0.0'
+  	pod 'Firebase/Crashlytics', '7.0.0'
+  	pod 'Firebase/Messaging', '7.0.0'
+
+  	pod 'FBSDKCoreKit', '8.0.0'
+  	pod 'FBSDKShareKit', '8.0.0'
 
 end
 
