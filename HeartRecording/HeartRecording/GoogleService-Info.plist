@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>494625607099-m0ert4nhkmm9vd5a13f55juqv1vo51ep.apps.googleusercontent.com</string>
+	<string>797092251936-569c94roftmtissv32sv8govcg72paqk.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.494625607099-m0ert4nhkmm9vd5a13f55juqv1vo51ep</string>
+	<string>com.googleusercontent.apps.797092251936-569c94roftmtissv32sv8govcg72paqk</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCC7oRd-OEj0p012mNpsISTKNsGkILB4XU</string>
+	<string>AIzaSyB7BkxGJtJH5vqois63DiODqxai7uc68Pk</string>
 	<key>GCM_SENDER_ID</key>
-	<string>494625607099</string>
+	<string>797092251936</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>pubjoy.HeartRecording</string>
+	<string>com.heartbeat.angle</string>
 	<key>PROJECT_ID</key>
-	<string>test-d3575</string>
+	<string>heartrecording</string>
 	<key>STORAGE_BUCKET</key>
-	<string>test-d3575.appspot.com</string>
+	<string>heartrecording.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:494625607099:ios:ec68c366f1f0f0271b089e</string>
+	<string>1:797092251936:ios:22e8e565bb1d508a67af45</string>
 </dict>
 </plist>
