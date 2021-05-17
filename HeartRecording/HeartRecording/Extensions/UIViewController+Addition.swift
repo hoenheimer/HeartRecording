@@ -92,7 +92,7 @@ public extension UIViewController {
                 handle()
             }
         } else {
-            let vc = SubscriptionViewController(isReviewVersion: NBRemoteConfigTool.shard.isReviewVersion(), success: handle)
+            let vc = SubscriptionViewController(isReviewVersion: true, success: handle)
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true, completion: nil)
         }

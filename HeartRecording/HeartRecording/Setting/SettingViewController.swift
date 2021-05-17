@@ -99,7 +99,7 @@ class SettingViewController: AnaLargeTitleViewController {
         switch key {
         case "Pro":
             if !NBUserVipStatusManager.shard.getVipStatus() {
-                let vc = SubscriptionViewController(isReviewVersion: NBRemoteConfigTool.shard.isReviewVersion(), success: nil)
+                let vc = SubscriptionViewController(isReviewVersion: true, success: nil)
                 vc.modalPresentationStyle = .fullScreen
                 present(vc, animated: true, completion: nil)
             }
