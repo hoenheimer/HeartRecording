@@ -116,6 +116,7 @@ class AddKickCounterViewController: UIViewController {
 		startButton.reactive.controlEvents(.touchUpInside).observeValues {
 			[weak self] _ in
 			guard let self = self else { return }
+			FeedbackManager.feedback(type: .light)
 			self.originView.isHidden = true
 			self.countingView.isHidden = false
 			self.timerStartDate = Date()
@@ -172,6 +173,7 @@ class AddKickCounterViewController: UIViewController {
 		kickButton.reactive.controlEvents(.touchUpInside).observeValues {
 			[weak self] _ in
 			guard let self  = self else { return }
+			FeedbackManager.feedback(type: .light)
 			self.kicks += 1
 			self.kicksValueLabel.text = "\(self.kicks)"
 			self.view.layoutNow()
@@ -207,6 +209,7 @@ class AddKickCounterViewController: UIViewController {
 		doneButton.reactive.controlEvents(.touchUpInside).observeValues {
 			[weak self] _ in
 			guard let self  = self else { return }
+			FeedbackManager.feedback(type: .light)
 			var duration: TimeInterval = 0
 			if let startDate = self.timerStartDate {
 				duration = Date().timeIntervalSince(startDate)

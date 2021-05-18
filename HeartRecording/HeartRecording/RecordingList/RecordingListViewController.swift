@@ -82,6 +82,7 @@ class RecordingListViewController: AnaLargeTitleTableViewController, SwipeTableV
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		FeedbackManager.feedback(type: .light)
         let model = DbManager.manager.models[indexPath.row]
         let vc = DetailViewController(model: model)
         vc.modalPresentationStyle = .fullScreen

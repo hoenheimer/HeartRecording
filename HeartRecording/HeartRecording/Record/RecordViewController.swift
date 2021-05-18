@@ -109,6 +109,7 @@ class RecordViewController: AnaLargeTitleViewController {
         button.reactive.controlEvents(.touchUpInside).observeValues {
             [weak self] button in
             guard let self = self else { return }
+			FeedbackManager.feedback(type: .light)
             let vc = DetailViewController()
             vc.modalPresentationStyle = .fullScreen
             if !self.manager.isRecording {

@@ -80,6 +80,7 @@ class RecordingTableViewCell: SwipeTableViewCell {
         likeButton.reactive.controlEvents(.touchUpInside).observeValues {
             [weak self] _ in
             guard let self = self else { return }
+			FeedbackManager.feedback(type: .light)
             DbManager.manager.changeFavoriteModel(self.model)
         }
         backView.addSubview(likeButton)

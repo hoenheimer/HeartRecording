@@ -58,6 +58,7 @@ class KickCounterViewController: AnaLargeTitleTableViewController {
 		button.reactive.controlEvents(.touchUpInside).observeValues {
 			[weak self] _ in
 			guard let self = self else { return }
+			FeedbackManager.feedback(type: .light)
 			let vc = AddKickCounterViewController()
 			vc.modalPresentationStyle = .fullScreen
 			self.present(vc, animated: true, completion: nil)

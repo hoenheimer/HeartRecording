@@ -78,6 +78,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         likeButton.reactive.controlEvents(.touchUpInside).observeValues {
             [weak self] button in
             guard let self = self else { return }
+			FeedbackManager.feedback(type: .light)
             DbManager.manager.changeFavoriteModel(self.model)
             self.model.favorite = !(self.model.favorite ?? false)
             button.setImage(UIImage(named: "Detail_" + ((self.model.favorite ?? false) ? "Favorite" : "Like")), for: .normal)
@@ -90,6 +91,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         shareButton.reactive.controlEvents(.touchUpInside).observeValues {
             [weak self] _ in
             guard let self = self else { return }
+			FeedbackManager.feedback(type: .light)
             self.showSubscriptionIfNeeded {
                 [weak self] in
                 guard let self = self else { return }
@@ -152,6 +154,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         leftButton.reactive.controlEvents(.touchUpInside).observeValues {
             [weak self] _ in
             guard let self = self else { return }
+			FeedbackManager.feedback(type: .light)
             if self.currectTime == 0 {
                 return
             }
@@ -173,6 +176,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         playButton.reactive.controlEvents(.touchUpInside).observeValues {
             [weak self] button in
             guard let self = self else { return }
+			FeedbackManager.feedback(type: .light)
             self.showSubscriptionIfNeeded {
                 [weak self] in
                 guard let self = self else { return }
@@ -196,6 +200,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         rightButton.reactive.controlEvents(.touchUpInside).observeValues {
             [weak self] _ in
             guard let self = self else { return }
+			FeedbackManager.feedback(type: .light)
             if self.currectTime + 5 >= self.totalTime {
                 return
             }
