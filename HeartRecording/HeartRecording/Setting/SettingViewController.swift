@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import MessageUI
+import DeviceKit
 
-class SettingViewController: AnaLargeTitleViewController {
+
+class SettingViewController: AnaLargeTitleViewController, MFMailComposeViewControllerDelegate {
     var backView: UIView!
     var gradientView: UIView!
     var gradientLayer: CAGradientLayer!
@@ -115,6 +118,33 @@ class SettingViewController: AnaLargeTitleViewController {
             webView.urlStr = "https://sites.google.com/view/angelheart/home"
             webView.modalPresentationStyle = .fullScreen
             present(webView, animated: true, completion: nil)
+		case "Feedback":
+			let mailAddress = "taolanetwork@163.com"
+			if MFMailComposeViewController.canSendMail() {
+				let name = Bundle.main.infoDictionary!["CFBundleName"] as! String
+				let currentVersionStr = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
+				let deviceInfo = String(format: "(%@ %@ on %@ running with %@ %@,device %@)", name, currentVersionStr, Device.current.description, Device.current.systemName ?? "",Device.current.systemVersion ?? "" , Device.identifier)
+
+				let bodyHtml = String(format: "<br><br><br><div style=\"color: gray;font-size: 12;\">%@</div><br><br><br>", arguments: [deviceInfo])
+					
+				let mailVC = MFMailComposeViewController()
+				mailVC.mailComposeDelegate = self
+				mailVC.setToRecipients([mailAddress])
+				mailVC.setSubject("HeartRecording Feedback")
+				mailVC.setMessageBody(bodyHtml, isHTML: true)
+				self.navigationController!.present(mailVC, animated: true, completion: nil)
+			} else {
+				let mailStr = "mailto:" + mailAddress
+				UIApplication.shared.open(URL(string: mailStr)!, options: [:], completionHandler: nil)
+			}
+		case "Share":
+			let content = "Use this app to record your baby’s heart beat https://itunes.apple.com/app/1564099404"
+			NBSharedTool.shard(to: .systemShared, shardContent: content, shardImage: nil, linkUrl: nil,fromVC: self, .zero, nil)
+		case "Rate":
+			let commentLink = "itms-apps://itunes.apple.com/app/id1564099404?action=write-review"
+			if let commentUrl = URL(string: commentLink){
+				UIApplication.shared.open(commentUrl, options: [:], completionHandler: nil)
+			}
         default:
             return
         }
@@ -136,6 +166,12 @@ class SettingViewController: AnaLargeTitleViewController {
         models.append(SettingItemModel(image: UIImage(named: "Setting_Terms"), title: "Terms of use", key: "Terms"))
         return models
     }
+	
+	
+	// MARK: - MFMailComposeViewControllerDelegate
+	func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+		controller.dismiss(animated: true, completion: nil)
+	}
 }
 
 
