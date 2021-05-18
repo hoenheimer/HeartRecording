@@ -19,7 +19,7 @@ class RecordingTableViewCell: SwipeTableViewCell {
     var dateLabel: UILabel!
     var likeButton: UIButton!
     
-    var model: DbModel!
+    var model: DbRecordModel!
     
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -105,7 +105,7 @@ class RecordingTableViewCell: SwipeTableViewCell {
     }
     
     
-    func setModel(_ model: DbModel) {
+    func setModel(_ model: DbRecordModel) {
         self.model = model
         nameLabel.text = model.name
         let date = DbManager.manager.dateFormatter.date(from: String(model.id!))!

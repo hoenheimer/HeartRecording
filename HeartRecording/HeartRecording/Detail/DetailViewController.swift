@@ -31,14 +31,14 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     var progressTimeLabel:  UILabel!
     var totalTimeLabel:     UILabel!
     
-    var model: DbModel!
+    var model: DbRecordModel!
     var totalTime: CGFloat = 0
     var currectTime: CGFloat = 0
     var progress: CGFloat = 0
     var shouldSeek = false
     
     
-    convenience init(model: DbModel) {
+    convenience init(model: DbRecordModel) {
         self.init()
         self.model = model
     }

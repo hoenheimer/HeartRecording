@@ -9,7 +9,7 @@ import Foundation
 import WCDBSwift
 
 
-class DbModel: TableCodable {
+class DbRecordModel: TableCodable {
     var id: Int?
     var name: String?
     var path: String?
@@ -18,7 +18,7 @@ class DbModel: TableCodable {
     
     
     enum CodingKeys: String, CodingTableKey {
-        typealias Root = DbModel
+        typealias Root = DbRecordModel
         static let objectRelationalMapping = TableBinding(CodingKeys.self)
         case id = "_id"
         case name

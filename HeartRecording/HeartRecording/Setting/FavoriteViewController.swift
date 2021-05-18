@@ -23,7 +23,7 @@ class FavoriteViewController: AnaLargeTitleTableViewController, SwipeTableViewCe
     override func configure() {
         super.configure()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(dbDidChanged), name: NotificationName.DbChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(dbDidChanged), name: NotificationName.DbRecordChange, object: nil)
         
         setTitle(title: "Favorite")
         setHeaderView(headerView: nil)

@@ -9,5 +9,6 @@ import Foundation
 
 
 struct NotificationName {
-    static let DbChange = Notification.Name("notification_DbChange")
+    static let DbRecordChange = Notification.Name("notification_DbRecordChange")
+	static let DbKicksChange = Notification.Name("notification_DbKicksChange")
 }
