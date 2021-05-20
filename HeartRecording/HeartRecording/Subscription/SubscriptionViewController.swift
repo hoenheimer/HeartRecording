@@ -38,13 +38,11 @@ class SubscriptionViewController: UIViewController {
     var bottomLabel:            UILabel!
     
     var product: SKProduct?
-    var isReviewVersion = true
     var success: (() -> Void)? = nil
     
     
-    convenience init(isReviewVersion: Bool, success: (() -> Void)?) {
+    convenience init(success: (() -> Void)?) {
         self.init()
-        self.isReviewVersion = isReviewVersion
         self.success = success
     }
     
@@ -74,7 +72,6 @@ class SubscriptionViewController: UIViewController {
             guard let self = self else { return }
             self.dismiss(animated: true, completion: nil)
         }
-        closeButton.isHidden = !isReviewVersion
         view.addSubview(closeButton)
         
         titleLabel = UILabel()
@@ -168,7 +165,7 @@ class SubscriptionViewController: UIViewController {
         button.addSubview(activityView)
         
         buttonBottomButton = UIButton()
-        buttonBottomButton.setTitle(isReviewVersion ? "Auto renewable, Cancel anytime" : "No Thanks", for: .normal)
+        buttonBottomButton.setTitle("Auto renewable, Cancel anytime", for: .normal)
         buttonBottomButton.setTitleColor(.color(hexString: "#979797"), for: .normal)
         buttonBottomButton.titleLabel?.font = .systemFont(ofSize: 13)
         buttonBottomButton.reactive.controlEvents(.touchUpInside).observeValues {
@@ -176,7 +173,7 @@ class SubscriptionViewController: UIViewController {
             guard let self = self else { return }
             self.dismiss(animated: true, completion: nil)
         }
-        buttonBottomButton.isEnabled = !isReviewVersion
+        buttonBottomButton.isEnabled = false
         scrollView.addSubview(buttonBottomButton)
         
         restoreButton = UIButton()
@@ -286,17 +283,11 @@ class SubscriptionViewController: UIViewController {
         activityView.stopAnimating()
         if let product = product {
             var string = ""
-            if isReviewVersion {
-                if product.freeDays > 0 {
-                    freeDayLabel.text = "\(product.freeDays) Days Free Trial"
-                    string.append("Then ")
-                }
-                string.append("Only \(product.regularPrice)/Month")
-            } else {
-                if product.freeDays > 0 {
-                    string = "\(product.freeDays) Days Free Trial"
-                }
-            }
+			if product.freeDays > 0 {
+				freeDayLabel.text = "\(product.freeDays) Days Free Trial"
+				string.append("Then ")
+			}
+			string.append("Only \(product.regularPrice)/Month")
             button.setTitle(string, for: .normal)
             
             bottomLabel.text = "Angel Premium offers weekly purchase subscription. You can subscribe to a monthly plan(\(product.regularPrice) per month). You can manage or turn off auto-renew in your Apple ID account settings at any time. Subscriptions will automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Any unused portion of a free trial period will be forfeited when you purchase a subscription. Our app is functional without purchasing an Auto-Renewable subscription, and you can use all the unlocked content after the subscription expires."

@@ -102,7 +102,7 @@ class SettingViewController: AnaLargeTitleViewController, MFMailComposeViewContr
         switch key {
         case "Pro":
             if !NBUserVipStatusManager.shard.getVipStatus() {
-                let vc = SubscriptionViewController(isReviewVersion: true, success: nil)
+                let vc = SubscriptionViewController(success: nil)
                 vc.modalPresentationStyle = .fullScreen
                 present(vc, animated: true, completion: nil)
             }

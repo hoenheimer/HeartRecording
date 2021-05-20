@@ -54,7 +54,7 @@ class RecordViewController: AnaLargeTitleViewController {
         proButton.reactive.controlEvents(.touchUpInside).observeValues {
             [weak self] _ in
             guard let self = self else { return }
-            let vc = SubscriptionViewController(isReviewVersion: true, success: nil)
+            let vc = SubscriptionViewController(success: nil)
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true, completion: nil)
         }
