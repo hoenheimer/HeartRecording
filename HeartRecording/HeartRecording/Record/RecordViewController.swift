@@ -8,6 +8,7 @@
 import UIKit
 import ReactiveCocoa
 import ReactiveSwift
+import StoreKit
 
 
 class RecordViewController: AnaLargeTitleViewController {
@@ -156,6 +157,10 @@ class RecordViewController: AnaLargeTitleViewController {
                     self.timer!.invalidate()
                     self.timer = nil
                 }
+				if !UserDefaults.standard.bool(forKey: "Has_Request_View") {
+					SKStoreReviewController.requestReview()
+					UserDefaults.standard.setValue(true, forKey: "Has_Request_View")
+				}
             }
         }
         buttonBackgroundView.addSubview(button)
