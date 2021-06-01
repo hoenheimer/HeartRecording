@@ -60,7 +60,7 @@ class GuideViewController: UIViewController {
 		
 		titleLabel = UILabel()
 		titleLabel.layer.zPosition = 2
-		titleLabel.text = "Welcome to Angel!"
+		titleLabel.text = index == 1 ? "Welcome to Angel!" : "Share your joy :)"
 		titleLabel.textColor = .color(hexString: "#263238")
 		titleLabel.font = UIFont(name: "Poppins-SemiBold", size: 26)
 		view.addSubview(titleLabel)
@@ -73,7 +73,7 @@ class GuideViewController: UIViewController {
 		contentLabel = UILabel()
 		contentLabel.layer.zPosition = 2
 		contentLabel.numberOfLines = 0
-		let string = "Use your phone to record your baby's heartbeat"
+		let string = index == 1 ? "Use your phone to record your baby's heartbeat" : "Share the magic sounds with your family"
 		let pStyle = NSMutableParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
 		pStyle.alignment = .center
 		pStyle.lineSpacing = 10
@@ -135,13 +135,14 @@ class GuideViewController: UIViewController {
 		
 		gradient.frame = view.bounds
 		titleLabel.sizeToFit()
-		titleLabel.center = CGPoint(x: view.halfWidth(), y: 125)
-		imageView.sizeToFit()
-		imageView.center = CGPoint(x: view.halfWidth(), y: titleLabel.maxY() + 21 + imageView.halfHeight())
+		titleLabel.center = CGPoint(x: view.halfWidth(), y: view.height() * 0.16)
+		let imageWidth = min(385, view.width() - 29)
+		imageView.bounds = CGRect(origin: .zero, size: CGSize(width: imageWidth, height: imageWidth))
+		imageView.center = CGPoint(x: view.halfWidth(), y: view.height() * 0.43)
 		let size = contentLabel.sizeThatFits(CGSize(width: view.width() - 40, height: .greatestFiniteMagnitude))
 		contentLabel.bounds = CGRect(origin: .zero, size: size)
-		contentLabel.center = CGPoint(x: view.halfWidth(), y: imageView.maxY() + 62 + contentLabel.halfHeight())
-		buttonBackView.frame = CGRect(x: 42, y: contentLabel.maxY() + 61, width: view.width() - 84, height: 48)
+		contentLabel.center = CGPoint(x: view.halfWidth(), y: view.height() * 0.74)
+		buttonBackView.frame = CGRect(x: 42, y: view.height() * 0.86 - 24, width: view.width() - 84, height: 48)
 		buttonShadowView.frame = buttonBackView.bounds
 		buttonGradientView.frame = buttonShadowView.frame
 		buttonGradientLayer.frame = buttonGradientView.bounds
