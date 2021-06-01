@@ -33,9 +33,10 @@ class AnaTabBarController: UITabBarController {
 			navigationController.tabBarItem.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
 			return navigationController
 		}
-			
+		
+		let firstTime = !UserDefaults.standard.bool(forKey: "Have_Start_Once")
 		viewControllers = [
-			navigationVC(rootVC: RecordViewController(), imageName: "TabBar_Record", title: "Record Now"),
+			navigationVC(rootVC: firstTime ? GuideViewController(index: 1) : RecordViewController(), imageName: "TabBar_Record", title: "Record Now"),
             navigationVC(rootVC: RecordingListViewController(), imageName: "TabBar_Recording", title: "Recording"),
 			navigationVC(rootVC: KickCounterViewController(), imageName: "TabBar_Kicks", title: "Kick Counter"),
             navigationVC(rootVC: SettingViewController(), imageName: "TabBar_Setting", title: "Setting")

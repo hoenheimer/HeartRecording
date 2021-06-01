@@ -110,58 +110,70 @@ class RecordViewController: AnaLargeTitleViewController {
         button.reactive.controlEvents(.touchUpInside).observeValues {
             [weak self] button in
             guard let self = self else { return }
-			FeedbackManager.feedback(type: .light)
-            let vc = DetailViewController()
-            vc.modalPresentationStyle = .fullScreen
-            if !self.manager.isRecording {
-                self.manager.beginRecord()
-                if self.manager.isRecording {
-                    button.setTitle("Done", for: .normal)
-                }
-                
-                self.timerLabel.text = "00:00"
-                self.view.layoutNow()
-                self.timerLabel.isHidden = false
-                self.label.isHidden = true
-                self.recordStartDate = Date()
-                self.visiableTime = 0
-                if self.timer != nil && self.timer!.isValid {
-                    self.timer!.invalidate()
-                    self.timer = nil
-                }
-                self.timer = Timer(timeInterval: 1, repeats: true, block: {
-                    [weak self] _ in
-                    guard let self = self else { return }
-                    let time = Date().timeIntervalSince(self.recordStartDate)
-                    if self.visiableTime >= CGFloat(time) {
-                        self.visiableTime += 1
-                    } else {
-                        self.visiableTime = CGFloat(time)
-                    }
-                    self.timerLabel.text = String.stringFromTime(self.visiableTime)
-                    self.view.layoutNow()
-                })
-                RunLoop.current.add(self.timer!, forMode: .default)
-            } else {
-                self.manager.stopRecord()
-                if !self.manager.isRecording {
-                    button.setTitle("Start Recording", for: .normal)
-                }
-                let model = DbManager.manager.addRecording(path: self.manager.file_path!)
-                let vc = DetailViewController(model: model)
-                vc.modalPresentationStyle = .fullScreen
-                self.present(vc, animated: true, completion: nil)
-                self.timerLabel.isHidden = true
-                self.label.isHidden = false
-                if self.timer != nil && self.timer!.isValid {
-                    self.timer!.invalidate()
-                    self.timer = nil
-                }
-				if !UserDefaults.standard.bool(forKey: "Has_Request_View") {
-					SKStoreReviewController.requestReview()
-					UserDefaults.standard.setValue(true, forKey: "Has_Request_View")
+			let action = {
+				FeedbackManager.feedback(type: .light)
+				let vc = DetailViewController()
+				vc.modalPresentationStyle = .fullScreen
+				if !self.manager.isRecording {
+					self.manager.beginRecord()
+					if self.manager.isRecording {
+						button.setTitle("Done", for: .normal)
+					}
+					
+					self.timerLabel.text = "00:00"
+					self.view.layoutNow()
+					self.timerLabel.isHidden = false
+					self.label.isHidden = true
+					self.recordStartDate = Date()
+					self.visiableTime = 0
+					if self.timer != nil && self.timer!.isValid {
+						self.timer!.invalidate()
+						self.timer = nil
+					}
+					self.timer = Timer(timeInterval: 1, repeats: true, block: {
+						[weak self] _ in
+						guard let self = self else { return }
+						let time = Date().timeIntervalSince(self.recordStartDate)
+						if self.visiableTime >= CGFloat(time) {
+							self.visiableTime += 1
+						} else {
+							self.visiableTime = CGFloat(time)
+						}
+						self.timerLabel.text = String.stringFromTime(self.visiableTime)
+						self.view.layoutNow()
+					})
+					RunLoop.current.add(self.timer!, forMode: .default)
+				} else {
+					self.manager.stopRecord()
+					if !self.manager.isRecording {
+						button.setTitle("Start Recording", for: .normal)
+					}
+					let model = DbManager.manager.addRecording(path: self.manager.file_path!)
+					let vc = DetailViewController(model: model)
+					vc.modalPresentationStyle = .fullScreen
+					self.present(vc, animated: true, completion: nil)
+					self.timerLabel.isHidden = true
+					self.label.isHidden = false
+					if self.timer != nil && self.timer!.isValid {
+						self.timer!.invalidate()
+						self.timer = nil
+					}
+					if !UserDefaults.standard.bool(forKey: "Has_Request_View") {
+						SKStoreReviewController.requestReview()
+						UserDefaults.standard.setValue(true, forKey: "Has_Request_View")
+					}
 				}
-            }
+			}
+			if !UserDefaults.standard.bool(forKey: "Have_Show_Subscribe_Once") {
+				let vc = SubscriptionViewController()
+				vc.success = action
+				vc.dismiss = action
+				vc.modalPresentationStyle = .fullScreen
+				self.present(vc, animated: true, completion: nil)
+				UserDefaults.standard.setValue(true, forKey: "Have_Show_Subscribe_Once")
+			} else {
+				action()
+			}
         }
         buttonBackgroundView.addSubview(button)
     }

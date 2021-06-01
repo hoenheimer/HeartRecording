@@ -1,4 +1,8 @@
 {
+  "identifier" : "931409F9",
+  "nonRenewingSubscriptions" : [
+
+  ],
   "products" : [
 
   ],
@@ -17,7 +21,7 @@
           "adHocOffers" : [
 
           ],
-          "displayPrice" : "6.99",
+          "displayPrice" : "19.99",
           "familyShareable" : false,
           "groupNumber" : 1,
           "internalID" : "4D81E763",
@@ -34,7 +38,7 @@
             }
           ],
           "productID" : "com.babycare.angelweekly",
-          "recurringSubscriptionPeriod" : "P1M",
+          "recurringSubscriptionPeriod" : "P1Y",
           "referenceName" : null,
           "subscriptionGroupID" : "A5BA8A75",
           "type" : "RecurringSubscription"
@@ -44,6 +48,6 @@
   ],
   "version" : {
     "major" : 1,
-    "minor" : 0
+    "minor" : 1
   }
 }

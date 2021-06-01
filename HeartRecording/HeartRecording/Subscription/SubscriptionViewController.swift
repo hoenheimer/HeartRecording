@@ -39,6 +39,7 @@ class SubscriptionViewController: UIViewController {
     
     var product: SKProduct?
     var success: (() -> Void)? = nil
+	var dismiss: (() -> Void)? = nil
     
     
     convenience init(success: (() -> Void)?) {
@@ -70,7 +71,7 @@ class SubscriptionViewController: UIViewController {
         closeButton.reactive.controlEvents(.touchUpInside).observeValues {
             [weak self] _ in
             guard let self = self else { return }
-            self.dismiss(animated: true, completion: nil)
+			self.dismiss(animated: true, completion: self.dismiss)
         }
         view.addSubview(closeButton)
         
@@ -148,6 +149,7 @@ class SubscriptionViewController: UIViewController {
         
         button = UIButton()
         button.backgroundColor = .clear
+		button.setTitle("Continue", for: .normal)
         button.setTitleColor(.color(hexString: "#FCFCFC"), for: .normal)
         button.titleLabel?.font = UIFont(name: "Poppins-SemiBold", size: 16)
         button.reactive.controlEvents(.touchUpInside).observeValues {
@@ -223,7 +225,7 @@ class SubscriptionViewController: UIViewController {
         
         bottomLabel = UILabel()
         bottomLabel.numberOfLines = 0
-        bottomLabel.text = "Angel Premium offers weekly purchase subscription. You can subscribe to a monthly plan. You can manage or turn off auto-renew in your Apple ID account settings at any time. Subscriptions will automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Any unused portion of a free trial period will be forfeited when you purchase a subscription. Our app is functional without purchasing an Auto-Renewable subscription, and you can use all the unlocked content after the subscription expires."
+        bottomLabel.text = "Angel Premium offers weekly purchase subscription. You can subscribe to a yearly plan. You can manage or turn off auto-renew in your Apple ID account settings at any time. Subscriptions will automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Any unused portion of a free trial period will be forfeited when you purchase a subscription. Our app is functional without purchasing an Auto-Renewable subscription, and you can use all the unlocked content after the subscription expires."
         bottomLabel.textColor = .color(hexString: "#979797")
         bottomLabel.font  = .systemFont(ofSize: 10, weight: .semibold)
         scrollView.addSubview(bottomLabel)
@@ -284,13 +286,14 @@ class SubscriptionViewController: UIViewController {
         if let product = product {
             var string = ""
 			if product.freeDays > 0 {
-				freeDayLabel.text = "\(product.freeDays) Days Free Trial"
-				string.append("Then ")
+				string.append("\(product.freeDays) Days Free Trial, Then ")
 			}
-			string.append("Only \(product.regularPrice)/Month")
-            button.setTitle(string, for: .normal)
+			let timeString = product.subscriptionPeriod?.unit == .month ? "Month" : "Year"
+			string.append("Only \(product.regularPrice)/\(timeString)")
+			freeDayLabel.text = string
             
-            bottomLabel.text = "Angel Premium offers weekly purchase subscription. You can subscribe to a monthly plan(\(product.regularPrice) per month). You can manage or turn off auto-renew in your Apple ID account settings at any time. Subscriptions will automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Any unused portion of a free trial period will be forfeited when you purchase a subscription. Our app is functional without purchasing an Auto-Renewable subscription, and you can use all the unlocked content after the subscription expires."
+			let littleTimeString = product.subscriptionPeriod?.unit == .month ? "month" : "year"
+            bottomLabel.text = "Angel Premium offers weekly purchase subscription. You can subscribe to a monthly plan(\(product.regularPrice) per \(littleTimeString). You can manage or turn off auto-renew in your Apple ID account settings at any time. Subscriptions will automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Any unused portion of a free trial period will be forfeited when you purchase a subscription. Our app is functional without purchasing an Auto-Renewable subscription, and you can use all the unlocked content after the subscription expires."
             
             view.layoutNow()
             
