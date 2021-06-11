@@ -795,6 +795,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = 98F99FS382;
 				INFOPLIST_FILE = HeartRecording/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -819,6 +820,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = 98F99FS382;
 				INFOPLIST_FILE = HeartRecording/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

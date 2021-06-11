@@ -95,9 +95,11 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
             self.showSubscriptionIfNeeded {
                 [weak self] in
                 guard let self = self else { return }
-                if let path = self.model.path {
-                    let vc = UIActivityViewController.init(activityItems: [URL(fileURLWithPath: path)], applicationActivities: nil)
-                    self.present(vc, animated: true, completion: nil)
+                if let fileName = self.model.path {
+					if let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first?.appending("/" + fileName) {
+						let vc = UIActivityViewController.init(activityItems: [URL(fileURLWithPath: path)], applicationActivities: nil)
+						self.present(vc, animated: true, completion: nil)
+					}
                 }
             }
         }
@@ -296,13 +298,17 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
             self.playButton.setImage(UIImage(named: "Detail_Pause"), for: .normal)
             self.view.layoutNow()
         } progressAction: {
-            time in
+            time, totalTime in
             if !time.isNaN {
                 self.currectTime = floor(time)
             }
             self.progressTimeLabel.text = String.stringFromTime(self.currectTime)
             self.view.layoutNow()
-            self.progress = self.currectTime / self.totalTime
+			if !totalTime.isNaN && totalTime != 0 {
+				self.totalTime = totalTime
+				self.progress = self.currectTime / self.totalTime
+				self.totalTimeLabel.text = String.stringFromTime(self.totalTime)
+			}
             self.view.setNeedsLayout()
             UIView.animate(withDuration: 1, delay: 0, options: .curveLinear, animations: {
                 self.view.layoutIfNeeded()

@@ -148,7 +148,7 @@ class RecordViewController: AnaLargeTitleViewController {
 					if !self.manager.isRecording {
 						button.setTitle("Start Recording", for: .normal)
 					}
-					let model = DbManager.manager.addRecording(path: self.manager.file_path!)
+					let model = DbManager.manager.addRecording(path: self.manager.file_name!)
 					let vc = DetailViewController(model: model)
 					vc.modalPresentationStyle = .fullScreen
 					self.present(vc, animated: true, completion: nil)
@@ -164,7 +164,7 @@ class RecordViewController: AnaLargeTitleViewController {
 					}
 				}
 			}
-			if !UserDefaults.standard.bool(forKey: "Have_Show_Subscribe_Once") {
+			if !NBUserVipStatusManager.shard.getVipStatus() {
 				let vc = SubscriptionViewController()
 				vc.success = action
 				vc.dismiss = action

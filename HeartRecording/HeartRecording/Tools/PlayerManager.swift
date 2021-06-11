@@ -15,7 +15,7 @@ class PlayerManager: NSObject, DFPlayerDelegate, DFPlayerDataSource {
     var isPlaying = false
     
     var readyAction: ((CGFloat) -> Void)? = nil
-    var progressAction: ((CGFloat) -> Void)? = nil
+    var progressAction: ((CGFloat, CGFloat) -> Void)? = nil
     var endAction: (() -> Void)? = nil
     
     
@@ -33,8 +33,10 @@ class PlayerManager: NSObject, DFPlayerDelegate, DFPlayerDataSource {
     }
     
     
-    func play(path: String, readyAction: ((CGFloat) -> Void)?, progressAction: ((CGFloat) -> Void)?, endAction: (() -> Void)?) {
-        self.path = path
+    func play(path: String, readyAction: ((CGFloat) -> Void)?, progressAction: ((CGFloat, CGFloat) -> Void)?, endAction: (() -> Void)?) {
+		if let fullPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first?.appending("/" + path) {
+			self.path = fullPath
+		}
         self.readyAction = readyAction
         self.progressAction = progressAction
         self.endAction = endAction
@@ -81,7 +83,7 @@ class PlayerManager: NSObject, DFPlayerDelegate, DFPlayerDataSource {
     
     func df_player(_ player: DFPlayer!, progress: CGFloat, currentTime: CGFloat) {
         if let progressAction = progressAction {
-            progressAction(currentTime)
+			progressAction(currentTime, player.totalTime)
         }
     }
     

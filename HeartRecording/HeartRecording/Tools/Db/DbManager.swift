@@ -100,9 +100,11 @@ class DbManager: NSObject {
     
     func deleteModel(_ model: DbRecordModel) {
         do {
-            if let path = model.path {
-                try FileManager.default.removeItem(atPath: path)
-            }
+			if let fileName = model.path {
+				if let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first?.appending("/" + fileName) {
+					try FileManager.default.removeItem(atPath: path)
+				}
+			}
             try db.delete(fromTable: recordTableName, where: DbRecordModel.Properties.id == model.id!)
             loadModels()
         } catch let error {
