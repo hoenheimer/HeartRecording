@@ -334,9 +334,6 @@ extension SubscriptionViewController: NBInAppPurchaseProtocol {
     /**购买成功回调*/
     func purchasedSuccess(_ needUnsubscribe: Bool) {
         showPurchaseSuccessAlert(needUnsubscribe)
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
-            self.dismiss(animated: true, completion: nil)
-        }
     }
     /**购买失败*/
     func purchasedFailure() {

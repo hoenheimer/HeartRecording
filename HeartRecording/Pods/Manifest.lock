@@ -1,4 +1,5 @@
 PODS:
+  - Bugly (2.5.71)
   - DeviceKit (4.2.1)
   - DFPlayer (2.0.3)
   - FFPopup (1.1.4)
@@ -16,6 +17,7 @@ PODS:
   - WCDBOptimizedSQLCipher (1.2.1)
 
 DEPENDENCIES:
+  - Bugly
   - DeviceKit (= 4.2.1)
   - DFPlayer (= 2.0.3)
   - FFPopup (= 1.1.4)
@@ -27,6 +29,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - Bugly
     - DeviceKit
     - DFPlayer
     - FFPopup
@@ -40,6 +43,7 @@ SPEC REPOS:
     - WCDBOptimizedSQLCipher
 
 SPEC CHECKSUMS:
+  Bugly: fd066c75c4a0eca1440f9b6a84bd37d51bfc85ac
   DeviceKit: cadb5ff25d45fe186778bf2d0fd2ea4750542189
   DFPlayer: 3d10b0b39ab12b94afdd82555b74c96fec81ac0a
   FFPopup: 3bec8070665b892d8f54f2acaca447fdccc7f30b
@@ -52,6 +56,6 @@ SPEC CHECKSUMS:
   WCDB.swift: 05d509d7a0e60fb6e11c34eb7e4027c0fab5849f
   WCDBOptimizedSQLCipher: baf44493b0c7a3d49e97bc5b64a3856f6428ddd1
 
-PODFILE CHECKSUM: 5c3e1b0fb75aa9b1f8d3539761693fbfd09d033d
+PODFILE CHECKSUM: 95c4fbdbde10382d24053c4c0e2e8611c24593e6
 
 COCOAPODS: 1.10.1
