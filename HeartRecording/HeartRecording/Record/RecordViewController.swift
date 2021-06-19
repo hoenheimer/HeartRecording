@@ -168,9 +168,9 @@ class RecordViewController: AnaLargeTitleViewController {
 				let vc = SubscriptionViewController()
 				vc.success = action
 				vc.dismiss = action
+				vc.scene = .record
 				vc.modalPresentationStyle = .fullScreen
 				self.present(vc, animated: true, completion: nil)
-				UserDefaults.standard.setValue(true, forKey: "Have_Show_Subscribe_Once")
 			} else {
 				action()
 			}

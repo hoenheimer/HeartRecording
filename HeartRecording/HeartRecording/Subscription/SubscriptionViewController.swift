@@ -11,6 +11,15 @@ import ReactiveSwift
 import StoreKit
 
 
+enum SubscriptionScene: String {
+	case normal = "normal"
+	case guide = "guide"
+	case record = "record"
+	case play = "play"
+	case share = "share"
+}
+
+
 class SubscriptionViewController: UIViewController {
     var gradientLayer:          CAGradientLayer!
     var scrollView:             UIScrollView!
@@ -36,6 +45,8 @@ class SubscriptionViewController: UIViewController {
     var termsButton:            UIButton!
     var privacyButton:          UIButton!
     var bottomLabel:            UILabel!
+	
+	var scene: SubscriptionScene = .normal
     
     var product: SKProduct?
     var success: (() -> Void)? = nil
@@ -53,6 +64,14 @@ class SubscriptionViewController: UIViewController {
         requestProducts()
         configure()
     }
+	
+	
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		
+		EventManager.log(name: "Subscription_Show_\(scene)")
+		EventManager.log(name: "Subscription_Show")
+	}
     
     
     func configure() {
@@ -72,6 +91,8 @@ class SubscriptionViewController: UIViewController {
             [weak self] _ in
             guard let self = self else { return }
 			self.dismiss(animated: true, completion: self.dismiss)
+			EventManager.log(name: "Subscription_cancel_\(self.scene)")
+			EventManager.log(name: "Subscription_cancel")
         }
         view.addSubview(closeButton)
         
@@ -158,6 +179,8 @@ class SubscriptionViewController: UIViewController {
             if let product = self.product {
                 self.purchase(product: product)
             }
+			EventManager.log(name: "Subscription_buttontapped_\(self.scene)")
+			EventManager.log(name: "Subscription_buttontapped")
         }
         buttonBackView.addSubview(button)
         
@@ -282,6 +305,8 @@ class SubscriptionViewController: UIViewController {
     
     
     func requestSuccess() {
+		EventManager.log(name: "Subscription_success_\(scene)")
+		EventManager.log(name: "Subscription_success")
         activityView.stopAnimating()
         if let product = product {
             var string = ""

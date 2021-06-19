@@ -14,6 +14,7 @@ target 'HeartRecording' do
 	pod 'WCDB.swift'
 	pod 'SwipeCellKit', '2.7.1'
 	pod 'Bugly'
+	pod 'Beta-AppsFlyerFramework'
 
 end
 

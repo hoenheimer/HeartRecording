@@ -6,10 +6,11 @@
 //
 
 import UIKit
+import AppsFlyerLib
 
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, AppsFlyerLibDelegate {
 
 
 
@@ -17,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		Thread.sleep(forTimeInterval: 0.5)
         NBNewStoreManager.shard.completeTransactions()
 		configureBugly()
+		configureAF()
         return true
     }
     
@@ -35,6 +37,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 	
+	
+	//MARK: -GCD
+	func onConversionDataSuccess(_ installData: [AnyHashable: Any]) {
+		print("onConversionDataSuccess data:")
+		for (key, value) in installData {
+			print(key, ":", value)
+		}
+		if let status = installData["af_status"] as? String {
+			if (status == "Non-organic") {
+				if let sourceID = installData["media_source"],
+				   let campaign = installData["campaign"] {
+					print("This is a Non-Organic install. Media source: \(sourceID)  Campaign: \(campaign)")
+				}
+			} else {
+				print("This is an organic install.")
+			}
+			if let is_first_launch = installData["is_first_launch"] as? Bool,
+			   is_first_launch {
+				print("First Launch")
+			} else {
+				print("Not First Launch")
+			}
+		}
+	}
+	
+	func onConversionDataFail(_ error: Error) {
+		print(error)
+	}
+			
+	func onAppOpenAttribution(_ attributionData: [AnyHashable : Any]) {
+		print("\(attributionData)")
+	}
+			
+	func onAppOpenAttributionFailure(_ error: Error) {
+		print(error)
+	}
+	
+	
 	func configureBugly() {
 		let config = BuglyConfig()
 		if let infoDictionary = Bundle.main.infoDictionary {
@@ -50,5 +90,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		config.reportLogLevel = .warn
 		Bugly.start(withAppId: "eba102d737", config: config)
 	}
+	
+	
+	func configureAF() {
+		AppsFlyerLib.shared().appsFlyerDevKey = "b22easoNpiqr3mDqFyvshB"
+		AppsFlyerLib.shared().appleAppID = "1564099404"
+		AppsFlyerLib.shared().delegate = self
+		AppsFlyerLib.shared().isDebug = true
+		NotificationCenter.default.addObserver(self, selector: NSSelectorFromString("sendLaunch"), name: UIApplication.didBecomeActiveNotification, object: nil)
+	}
+	
+	
+	@objc func sendLaunch() {
+		AppsFlyerLib.shared().start()
+	}
 }
-

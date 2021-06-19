@@ -1,6 +1,10 @@
 # Acknowledgements
 This application makes use of the following third party libraries:
 
+## Beta-AppsFlyerFramework
+
+Copyright 2018 AppsFlyer Ltd. All rights reserved.
+
 ## Bugly
 
 Copyright (C) 2017 Tencent Bugly, Inc. All rights reserved.

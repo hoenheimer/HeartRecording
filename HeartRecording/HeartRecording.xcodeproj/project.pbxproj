@@ -46,6 +46,7 @@
 		1825C98626303E22001C0FB3 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C98526303E22001C0FB3 /* FavoriteViewController.swift */; };
 		1825C98E26304481001C0FB3 /* LSImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 1825C98D26304481001C0FB3 /* LSImage.png */; };
 		1825C99626305532001C0FB3 /* BaseWebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C99526305532001C0FB3 /* BaseWebController.swift */; };
+		18301023267E20DE006A54B0 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18301022267E20DE006A54B0 /* EventManager.swift */; };
 		1840ACDB26664B07006CC5FE /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840ACDA26664B07006CC5FE /* GuideViewController.swift */; };
 		18D3309D26526EB000DFFFFF /* KickCounterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D3309C26526EB000DFFFFF /* KickCounterViewController.swift */; };
 		18D330AB26527C7F00DFFFFF /* AddKickCounterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D330AA26527C7F00DFFFFF /* AddKickCounterViewController.swift */; };
@@ -120,6 +121,7 @@
 		1825C98526303E22001C0FB3 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 		1825C98D26304481001C0FB3 /* LSImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LSImage.png; sourceTree = "<group>"; };
 		1825C99526305532001C0FB3 /* BaseWebController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseWebController.swift; sourceTree = "<group>"; };
+		18301022267E20DE006A54B0 /* EventManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
 		1840ACDA26664B07006CC5FE /* GuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideViewController.swift; sourceTree = "<group>"; };
 		18D3309C26526EB000DFFFFF /* KickCounterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KickCounterViewController.swift; sourceTree = "<group>"; };
 		18D330AA26527C7F00DFFFFF /* AddKickCounterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddKickCounterViewController.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 				1825C8BD2628DB90001C0FB3 /* RecordManager.swift */,
 				1825C8E72629C0A8001C0FB3 /* PlayerManager.swift */,
 				18D330AE2653900000DFFFFF /* NBSharedTool.swift */,
+				18301022267E20DE006A54B0 /* EventManager.swift */,
 				1825C8F4262D7D5A001C0FB3 /* Db */,
 				1825C930262D970A001C0FB3 /* NotificationName.swift */,
 				1825C949262DE756001C0FB3 /* Subscription */,
@@ -595,6 +598,7 @@
 				1825C937262DA106001C0FB3 /* SettingViewController.swift in Sources */,
 				1825C88026285C05001C0FB3 /* UIView+Addition.swift in Sources */,
 				1825C8F02629D09B001C0FB3 /* String+Addition.swift in Sources */,
+				18301023267E20DE006A54B0 /* EventManager.swift in Sources */,
 				1825C88826285C33001C0FB3 /* Iconfont.swift in Sources */,
 				1825C912262D8758001C0FB3 /* RecordingListViewController.swift in Sources */,
 				1825C8BE2628DB90001C0FB3 /* RecordManager.swift in Sources */,

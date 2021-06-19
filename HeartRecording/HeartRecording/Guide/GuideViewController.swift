@@ -43,6 +43,12 @@ class GuideViewController: UIViewController {
 		
 		tabBarController?.tabBar.isHidden = false
 	}
+	
+	
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		EventManager.log(name: "GuideVC_\(index)_Show")
+	}
 
 	
     override func viewDidLoad() {
@@ -114,11 +120,13 @@ class GuideViewController: UIViewController {
 		button.reactive.controlEvents(.touchUpInside).observeValues {
 			[weak self] button in
 			guard let self = self else { return }
+			EventManager.log(name: "Guidebutton_\(self.index)_tapped")
 			if self.index == 1 {
 				self.navigationController?.pushViewController(GuideViewController(index: 2), animated: true)
 			} else {
 				let vc = SubscriptionViewController()
 				vc.modalPresentationStyle = .fullScreen
+				vc.scene = .guide
 				self.navigationController?.present(vc, animated: true, completion: {
 					self.navigationController?.navigationBar.isHidden = false
 					self.navigationController?.viewControllers = [RecordViewController()]

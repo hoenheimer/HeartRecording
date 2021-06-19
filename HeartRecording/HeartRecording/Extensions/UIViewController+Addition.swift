@@ -86,7 +86,7 @@ public extension UIViewController {
 	}
     
     
-    func showSubscriptionIfNeeded(handle: (() -> Void)?) {
+	func showSubscriptionIfNeeded(scene: SubscriptionScene = .normal, handle: (() -> Void)?) {
         if NBUserVipStatusManager.shard.getVipStatus() {
             if let handle = handle {
                 handle()
