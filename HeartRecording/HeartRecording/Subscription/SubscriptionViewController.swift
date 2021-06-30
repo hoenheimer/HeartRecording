@@ -11,7 +11,7 @@ import ReactiveSwift
 import StoreKit
 
 
-enum SubscriptionScene: String {
+public enum SubscriptionScene: String {
 	case normal = "normal"
 	case guide = "guide"
 	case record = "record"

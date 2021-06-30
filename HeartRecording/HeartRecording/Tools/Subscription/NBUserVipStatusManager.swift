@@ -45,7 +45,7 @@ class NBUserVipStatusManager: NSObject {
     
     @objc func getVipStatus() -> Bool{
 		#if DEBUG
-		return true
+		return false
 		#else
         var isAvailable = false
         if UserDefaults.standard.bool(forKey: UserDefaultsKey.OneTimePurchases){

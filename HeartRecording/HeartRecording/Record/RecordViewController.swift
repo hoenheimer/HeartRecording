@@ -110,11 +110,9 @@ class RecordViewController: AnaLargeTitleViewController {
         button.reactive.controlEvents(.touchUpInside).observeValues {
             [weak self] button in
             guard let self = self else { return }
-			let action = {
-				FeedbackManager.feedback(type: .light)
-				let vc = DetailViewController()
-				vc.modalPresentationStyle = .fullScreen
-				if !self.manager.isRecording {
+			if !self.manager.isRecording {
+				let action = {
+					FeedbackManager.feedback(type: .light)
 					self.manager.beginRecord()
 					if self.manager.isRecording {
 						button.setTitle("Done", for: .normal)
@@ -143,36 +141,37 @@ class RecordViewController: AnaLargeTitleViewController {
 						self.view.layoutNow()
 					})
 					RunLoop.current.add(self.timer!, forMode: .default)
-				} else {
-					self.manager.stopRecord()
-					if !self.manager.isRecording {
-						button.setTitle("Start Recording", for: .normal)
-					}
-					let model = DbManager.manager.addRecording(path: self.manager.file_name!)
-					let vc = DetailViewController(model: model)
+				}
+				if !NBUserVipStatusManager.shard.getVipStatus() {
+					let vc = SubscriptionViewController()
+					vc.success = action
+					vc.dismiss = action
+					vc.scene = .record
 					vc.modalPresentationStyle = .fullScreen
 					self.present(vc, animated: true, completion: nil)
-					self.timerLabel.isHidden = true
-					self.label.isHidden = false
-					if self.timer != nil && self.timer!.isValid {
-						self.timer!.invalidate()
-						self.timer = nil
-					}
-					if !UserDefaults.standard.bool(forKey: "Has_Request_View") {
-						SKStoreReviewController.requestReview()
-						UserDefaults.standard.setValue(true, forKey: "Has_Request_View")
-					}
+				} else {
+					action()
 				}
-			}
-			if !NBUserVipStatusManager.shard.getVipStatus() {
-				let vc = SubscriptionViewController()
-				vc.success = action
-				vc.dismiss = action
-				vc.scene = .record
+			} else {
+				FeedbackManager.feedback(type: .light)
+				self.manager.stopRecord()
+				if !self.manager.isRecording {
+					button.setTitle("Start Recording", for: .normal)
+				}
+				let model = DbManager.manager.addRecording(path: self.manager.file_name!)
+				let vc = DetailViewController(model: model)
 				vc.modalPresentationStyle = .fullScreen
 				self.present(vc, animated: true, completion: nil)
-			} else {
-				action()
+				self.timerLabel.isHidden = true
+				self.label.isHidden = false
+				if self.timer != nil && self.timer!.isValid {
+					self.timer!.invalidate()
+					self.timer = nil
+				}
+				if !UserDefaults.standard.bool(forKey: "Has_Request_View") {
+					SKStoreReviewController.requestReview()
+					UserDefaults.standard.setValue(true, forKey: "Has_Request_View")
+				}
 			}
         }
         buttonBackgroundView.addSubview(button)
