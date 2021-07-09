@@ -178,6 +178,7 @@ class SubscriptionViewController: UIViewController {
             guard let self = self else { return }
             if let product = self.product {
                 self.purchase(product: product)
+				EventManager.income(product: product, type: "test")
             }
 			EventManager.log(name: "Subscription_buttontapped_\(self.scene)")
 			EventManager.log(name: "Subscription_buttontapped")
@@ -305,8 +306,6 @@ class SubscriptionViewController: UIViewController {
     
     
     func requestSuccess() {
-		EventManager.log(name: "Subscription_success_\(scene)")
-		EventManager.log(name: "Subscription_success")
         activityView.stopAnimating()
         if let product = product {
             var string = ""
@@ -382,6 +381,8 @@ extension SubscriptionViewController: NBInAppPurchaseProtocol {
      * 订阅成功弹窗
      */
     func showPurchaseSuccessAlert(_ needUnsubscribe: Bool = false) {
+		EventManager.log(name: "Subscription_success_\(scene)")
+		EventManager.log(name: "Subscription_success")
         showAlert(content: "buy success") {
             [weak self] in
             guard let self = self else { return }

@@ -143,12 +143,20 @@ class RecordViewController: AnaLargeTitleViewController {
 					RunLoop.current.add(self.timer!, forMode: .default)
 				}
 				if !NBUserVipStatusManager.shard.getVipStatus() {
-					let vc = SubscriptionViewController()
-					vc.success = action
-					vc.dismiss = action
-					vc.scene = .record
-					vc.modalPresentationStyle = .fullScreen
-					self.present(vc, animated: true, completion: nil)
+					let dateFormatter = DateFormatter()
+					dateFormatter.dateFormat = "yyyyMMdd"
+					let todayString = dateFormatter.string(from: Date())
+					if UserDefaults.standard.string(forKey: "Home_Last_Show_SubscriptionVC") != todayString {
+						let vc = SubscriptionViewController()
+						vc.success = action
+						vc.dismiss = action
+						vc.scene = .record
+						vc.modalPresentationStyle = .fullScreen
+						self.present(vc, animated: true, completion: nil)
+						UserDefaults.standard.setValue(todayString, forKey: "Home_Last_Show_SubscriptionVC")
+					} else {
+						action()
+					}
 				} else {
 					action()
 				}

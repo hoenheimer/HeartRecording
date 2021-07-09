@@ -9,6 +9,8 @@
 import UIKit
 import StoreKit
 import SwiftyStoreKit
+import AppsFlyerLib
+
 
 extension SKProduct{
     var regularPrice: String {
@@ -166,6 +168,8 @@ class NBNewStoreManager: NSObject,SKPaymentTransactionObserver{
                     print("第一次购买" + origin_transaction_id)
                 }
                 status = .purchaseSuccess
+				
+				EventManager.income(product: purchase.product, type: "buy")
             case .error(let error):
                 status = .purchaseFailure
                 switch error.code {
