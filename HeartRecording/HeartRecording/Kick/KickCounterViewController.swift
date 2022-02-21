@@ -48,7 +48,7 @@ class KickCounterViewController: AnaLargeTitleTableViewController {
 		
 		tableView.backgroundColor = .clear
 		tableView.register(KickCounterTableViewCell.self, forCellReuseIdentifier: String(NSStringFromClass(KickCounterTableViewCell.self)))
-		tableView.rowHeight = 100
+		tableView.rowHeight = 134
 		
 		ana_emptyView = UIView()
 		ana_emptyView.backgroundColor = .clear
@@ -125,8 +125,8 @@ class KickCounterViewController: AnaLargeTitleTableViewController {
 
 class KickCounterTableViewCell: UITableViewCell {
 	var backView: UIView!
-	var gradientLayer: CAGradientLayer!
-	var backContentView: UIView!
+	var dateView: UIView!
+	var dateGradientLayer: CAGradientLayer!
 	var dateLabel: UILabel!
 	var timeTitleLabel: UILabel!
 	var timeValueLabel: UILabel!
@@ -150,44 +150,40 @@ class KickCounterTableViewCell: UITableViewCell {
 	
 	func configure() {
 		backView = UIView()
-		backView.layer.cornerRadius = 12
-		backView.layer.borderWidth = 1
-		backView.layer.borderColor = UIColor.color(hexString: "#80FFFFFF").cgColor
-		backView.backgroundColor = .color(hexString: "#CCFFFFFF")
-		backView.setShadow(color: .color(hexString: "#1e6e7191"), offset: CGSize(width: 0, height: 8), radius: 32, opacity: 1)
+		backView.layer.cornerRadius = 25
+		backView.backgroundColor = .white
+		backView.setShadow(color: .color(hexString: "#0f933c49"), offset: CGSize(width: 0, height: 8), radius: 25, opacity: 1)
 		addSubview(backView)
 		
-		gradientLayer = CAGradientLayer()
-		gradientLayer.colors = [UIColor.color(hexString: "#e6ffffff").cgColor, UIColor.color(hexString: "#b3ffffff").cgColor]
-		gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
-		gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
-		gradientLayer.cornerRadius = 12
-		backView.layer.addSublayer(gradientLayer)
+		dateView = UIView()
+		addSubview(dateView)
 		
-		backContentView = UIView()
-		backContentView.backgroundColor = .clear
-		backContentView.layer.zPosition = 2
-		backView.addSubview(backContentView)
+		dateGradientLayer = CAGradientLayer()
+		dateGradientLayer.colors = [UIColor.color(hexString: "#fff3ed").cgColor, UIColor.color(hexString: "#ffdde4").cgColor]
+		dateGradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
+		dateGradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
+		dateGradientLayer.cornerRadius = 14
+		dateView.layer.addSublayer(dateGradientLayer)
 		
 		dateLabel = UILabel()
-		dateLabel.textColor = .color(hexString: "#6e7191")
-		dateLabel.font = UIFont(name: "Inter-Regular", size: 13)
-		backContentView.addSubview(dateLabel)
+		dateLabel.textColor = .color(hexString: "#6a515e")
+		dateLabel.font = UIFont(name: "Poppins-Regular", size: 13)
+		dateView.addSubview(dateLabel)
 		
 		func newTitleLabel(title: String?) -> UILabel {
 			let label = UILabel()
 			label.text = title
-			label.textColor = .color(hexString: "#14142b")
+			label.textColor = .color(hexString: "#6a515e")
 			label.font = UIFont(name: "Poppins-SemiBold", size: 16)
-			backContentView.addSubview(label)
+			backView.addSubview(label)
 			return label
 		}
 		
 		func newValueLabel() -> UILabel {
 			let label = UILabel()
-			label.textColor = .color(hexString: "#6e7191")
+			label.textColor = UIColor.color(hexString: "#6a515e").withAlphaComponent(0.5)
 			label.font = UIFont(name: "Inter-Regular", size: 13)
-			backContentView.addSubview(label)
+			backView.addSubview(label)
 			return label
 		}
 		
@@ -203,23 +199,23 @@ class KickCounterTableViewCell: UITableViewCell {
 	override func layoutSubviews() {
 		let margin = AnaNavigationController.margin
 		
-		backView.frame = CGRect(x: margin, y: 0, width: contentView.width() - margin * 2, height: 85)
-		gradientLayer.frame = backView.bounds
-		backContentView.frame = backView.bounds
+		backView.frame = CGRect(x: margin, y: 14, width: contentView.width() - margin * 2, height: 90)
+		dateView.frame = CGRect(x: backView.minX() + 25, y: 0, width: 109, height: 28)
+		dateGradientLayer.frame = dateView.bounds
 		dateLabel.sizeToFit()
-		dateLabel.setOrigin(x: 24, y: 8)
+		dateLabel.center = CGPoint(x: dateView.halfWidth(), y: dateView.halfHeight())
 		timeTitleLabel.sizeToFit()
-		timeTitleLabel.setOrigin(x: 24, y: dateLabel.maxY() + 4)
+		timeTitleLabel.setOrigin(x: 25, y: 28)
 		timeValueLabel.sizeToFit()
-		timeValueLabel.center = CGPoint(x: max(24 + timeValueLabel.halfWidth(), timeTitleLabel.centerX()), y: timeTitleLabel.maxY() + 2 + timeValueLabel.halfHeight())
+		timeValueLabel.center = CGPoint(x: max(25 + timeValueLabel.halfWidth(), timeTitleLabel.centerX()), y: timeTitleLabel.maxY() + 8 + timeValueLabel.halfHeight())
 		durationTitleLabel.sizeToFit()
-		durationTitleLabel.center = CGPoint(x: backContentView.halfWidth(), y: timeTitleLabel.centerY())
+		durationTitleLabel.center = CGPoint(x: backView.halfWidth(), y: timeTitleLabel.centerY())
 		durationValueLabel.sizeToFit()
 		durationValueLabel.center = CGPoint(x: durationTitleLabel.centerX(), y: timeValueLabel.centerY())
 		kicksTitleLabel.sizeToFit()
-		kicksTitleLabel.setOrigin(x: backContentView.width() - 24 - kicksTitleLabel.width(), y: timeTitleLabel.minY())
+		kicksTitleLabel.setOrigin(x: backView.width() - 25 - kicksTitleLabel.width(), y: timeTitleLabel.minY())
 		kicksValueLabel.sizeToFit()
-		kicksValueLabel.center = CGPoint(x: min(backContentView.width() - 24 - kicksValueLabel.halfWidth(), kicksTitleLabel.centerX()), y: timeValueLabel.centerY())
+		kicksValueLabel.center = CGPoint(x: min(backView.width() - 25 - kicksValueLabel.halfWidth(), kicksTitleLabel.centerX()), y: timeValueLabel.centerY())
 	}
 	
 	

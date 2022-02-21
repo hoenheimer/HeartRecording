@@ -11,6 +11,8 @@
 		181B6E4D27C383D200E1F652 /* AnaTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181B6E4C27C383D200E1F652 /* AnaTabBarController.swift */; };
 		181B6E4F27C384CF00E1F652 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 181B6E4E27C384CF00E1F652 /* Poppins-Regular.ttf */; };
 		181B6E5127C38BDF00E1F652 /* Merriweather-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 181B6E5027C38BDF00E1F652 /* Merriweather-Regular.ttf */; };
+		181B6E5327C3A0F400E1F652 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 181B6E5227C3A0F400E1F652 /* Poppins-SemiBold.ttf */; };
+		181B6E5527C3A15A00E1F652 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 181B6E5427C3A15A00E1F652 /* Inter-Regular.ttf */; };
 		1825C87626285BD1001C0FB3 /* AnaNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C87526285BD1001C0FB3 /* AnaNavigationController.swift */; };
 		1825C87F26285C05001C0FB3 /* UIViewController+Addition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C87B26285C05001C0FB3 /* UIViewController+Addition.swift */; };
 		1825C88026285C05001C0FB3 /* UIView+Addition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C87C26285C05001C0FB3 /* UIView+Addition.swift */; };
@@ -83,6 +85,8 @@
 		181B6E4C27C383D200E1F652 /* AnaTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnaTabBarController.swift; sourceTree = "<group>"; };
 		181B6E4E27C384CF00E1F652 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		181B6E5027C38BDF00E1F652 /* Merriweather-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merriweather-Regular.ttf"; sourceTree = "<group>"; };
+		181B6E5227C3A0F400E1F652 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
+		181B6E5427C3A15A00E1F652 /* Inter-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Regular.ttf"; sourceTree = "<group>"; };
 		1825C87526285BD1001C0FB3 /* AnaNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnaNavigationController.swift; sourceTree = "<group>"; };
 		1825C87B26285C05001C0FB3 /* UIViewController+Addition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Addition.swift"; sourceTree = "<group>"; };
 		1825C87C26285C05001C0FB3 /* UIView+Addition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Addition.swift"; sourceTree = "<group>"; };
@@ -259,6 +263,8 @@
 				1825C88D26285C5B001C0FB3 /* iconfont.ttf */,
 				181B6E4E27C384CF00E1F652 /* Poppins-Regular.ttf */,
 				181B6E5027C38BDF00E1F652 /* Merriweather-Regular.ttf */,
+				181B6E5227C3A0F400E1F652 /* Poppins-SemiBold.ttf */,
+				181B6E5427C3A15A00E1F652 /* Inter-Regular.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -495,8 +501,10 @@
 				1825C976262DFAD5001C0FB3 /* Configuration.storekit in Resources */,
 				1825C98E26304481001C0FB3 /* LSImage.png in Resources */,
 				6CD6CA1F262771350099F063 /* LaunchScreen.storyboard in Resources */,
+				181B6E5327C3A0F400E1F652 /* Poppins-SemiBold.ttf in Resources */,
 				6CD6CA1C262771350099F063 /* Assets.xcassets in Resources */,
 				181B6E4F27C384CF00E1F652 /* Poppins-Regular.ttf in Resources */,
+				181B6E5527C3A15A00E1F652 /* Inter-Regular.ttf in Resources */,
 				181B6E5127C38BDF00E1F652 /* Merriweather-Regular.ttf in Resources */,
 				6CD6CA1A262771330099F063 /* Main.storyboard in Resources */,
 			);
