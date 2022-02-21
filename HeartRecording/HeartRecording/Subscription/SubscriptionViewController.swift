@@ -21,41 +21,41 @@ public enum SubscriptionScene: String {
 
 
 class SubscriptionViewController: UIViewController {
-    var gradientLayer:          CAGradientLayer!
-    var scrollView:             UIScrollView!
-    var closeButton:            UIButton!
-    var titleLabel:             UILabel!
-    var imageView:              UIImageView!
-    var featuresBackView:       UIView!
-    var iconImageView1:         UIImageView!
-    var iconImageView2:         UIImageView!
-    var iconImageView3:         UIImageView!
-    var featureLabel1:          UILabel!
-    var featureLabel2:          UILabel!
-    var featureLabel3:          UILabel!
-    var freeDayLabel:           UILabel!
-    var buttonBackView:         UIView!
-    var buttonShadowView:       UIView!
-    var buttonGradientView:     UIView!
-    var buttonGradientLayer:    CAGradientLayer!
-    var button:                 UIButton!
-    var activityView:           UIActivityIndicatorView!
-    var buttonBottomButton:     UIButton!
-    var restoreButton:          UIButton!
-    var termsButton:            UIButton!
-    var privacyButton:          UIButton!
-    var bottomLabel:            UILabel!
+    var ana_gradientLayer:          CAGradientLayer!
+    var ana_scrollView:             UIScrollView!
+    var ana_closeButton:            UIButton!
+    var ana_titleLabel:             UILabel!
+    var ana_imageView:              UIImageView!
+    var ana_featuresBackView:       UIView!
+    var ana_iconImageView1:         UIImageView!
+    var ana_iconImageView2:         UIImageView!
+    var ana_iconImageView3:         UIImageView!
+    var ana_featureLabel1:          UILabel!
+    var ana_featureLabel2:          UILabel!
+    var ana_featureLabel3:          UILabel!
+    var ana_freeDayLabel:           UILabel!
+    var ana_buttonBackView:         UIView!
+    var ana_buttonShadowView:       UIView!
+    var ana_buttonGradientView:     UIView!
+    var ana_buttonGradientLayer:    CAGradientLayer!
+    var ana_button:                 UIButton!
+    var ana_activityView:           UIActivityIndicatorView!
+    var ana_buttonBottomButton:     UIButton!
+    var ana_restoreButton:          UIButton!
+    var ana_termsButton:            UIButton!
+    var ana_privacyButton:          UIButton!
+    var ana_bottomLabel:            UILabel!
 	
-	var scene: SubscriptionScene = .normal
+	var ana_scene: SubscriptionScene = .normal
     
-    var product: SKProduct?
-    var success: (() -> Void)? = nil
-	var dismiss: (() -> Void)? = nil
+    var ana_product: SKProduct?
+    var ana_success: (() -> Void)? = nil
+	var ana_dismiss: (() -> Void)? = nil
     
     
     convenience init(success: (() -> Void)?) {
         self.init()
-        self.success = success
+        self.ana_success = success
     }
     
     
@@ -69,158 +69,158 @@ class SubscriptionViewController: UIViewController {
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 		
-		EventManager.log(name: "Subscription_Show_\(scene)")
+		EventManager.log(name: "Subscription_Show_\(ana_scene)")
 		EventManager.log(name: "Subscription_Show")
 	}
     
     
     func configure() {
-        gradientLayer = CAGradientLayer()
-        gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
-        gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
-        gradientLayer.colors = [UIColor.color(hexString: "#FBFCFF").cgColor, UIColor.color(hexString: "#FFF0F0").cgColor]
-        view.layer.addSublayer(gradientLayer)
+        ana_gradientLayer = CAGradientLayer()
+        ana_gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
+        ana_gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
+        ana_gradientLayer.colors = [UIColor.color(hexString: "#FBFCFF").cgColor, UIColor.color(hexString: "#FFF0F0").cgColor]
+        view.layer.addSublayer(ana_gradientLayer)
         
-        scrollView = UIScrollView()
-        scrollView.backgroundColor = .clear
-        view.addSubview(scrollView)
+        ana_scrollView = UIScrollView()
+        ana_scrollView.backgroundColor = .clear
+        view.addSubview(ana_scrollView)
         
-        closeButton = UIButton()
-        closeButton.setImage(UIImage(named: "Detail_Close"), for: .normal)
-        closeButton.reactive.controlEvents(.touchUpInside).observeValues {
+        ana_closeButton = UIButton()
+        ana_closeButton.setImage(UIImage(named: "Detail_Close"), for: .normal)
+        ana_closeButton.reactive.controlEvents(.touchUpInside).observeValues {
             [weak self] _ in
             guard let self = self else { return }
-			self.dismiss(animated: true, completion: self.dismiss)
-			EventManager.log(name: "Subscription_cancel_\(self.scene)")
+			self.dismiss(animated: true, completion: self.ana_dismiss)
+			EventManager.log(name: "Subscription_cancel_\(self.ana_scene)")
 			EventManager.log(name: "Subscription_cancel")
         }
-        view.addSubview(closeButton)
+        view.addSubview(ana_closeButton)
         
-        titleLabel = UILabel()
-        titleLabel.text = "Angel  Premium"
-        titleLabel.textColor = .black
-        titleLabel.font = UIFont(name: "Poppins-SemiBold", size: 26)
-        scrollView.addSubview(titleLabel)
+        ana_titleLabel = UILabel()
+        ana_titleLabel.text = "Angel  Premium"
+        ana_titleLabel.textColor = .black
+        ana_titleLabel.font = UIFont(name: "Poppins-SemiBold", size: 26)
+        ana_scrollView.addSubview(ana_titleLabel)
         
-        imageView = UIImageView()
-        imageView.image = UIImage(named: "Subscription_Image")
-        scrollView.addSubview(imageView)
+        ana_imageView = UIImageView()
+        ana_imageView.image = UIImage(named: "Subscription_Image")
+        ana_scrollView.addSubview(ana_imageView)
         
-        featuresBackView = UIView()
-        featuresBackView.backgroundColor = .clear
-        scrollView.addSubview(featuresBackView)
+        ana_featuresBackView = UIView()
+        ana_featuresBackView.backgroundColor = .clear
+        ana_scrollView.addSubview(ana_featuresBackView)
         
-        iconImageView1 = UIImageView()
-        iconImageView1.image = UIImage(named: "Subscription_Feature")
-        featuresBackView.addSubview(iconImageView1)
+        ana_iconImageView1 = UIImageView()
+        ana_iconImageView1.image = UIImage(named: "Subscription_Feature")
+        ana_featuresBackView.addSubview(ana_iconImageView1)
         
-        iconImageView2 = UIImageView()
-        iconImageView2.image = UIImage(named: "Subscription_Feature")
-        featuresBackView.addSubview(iconImageView2)
+        ana_iconImageView2 = UIImageView()
+        ana_iconImageView2.image = UIImage(named: "Subscription_Feature")
+        ana_featuresBackView.addSubview(ana_iconImageView2)
         
-        iconImageView3 = UIImageView()
-        iconImageView3.image = UIImage(named: "Subscription_Feature")
-        featuresBackView.addSubview(iconImageView3)
+        ana_iconImageView3 = UIImageView()
+        ana_iconImageView3.image = UIImage(named: "Subscription_Feature")
+        ana_featuresBackView.addSubview(ana_iconImageView3)
         
-        featureLabel1 = UILabel()
-        featureLabel1.text = "Unlock All Features"
-        featureLabel1.textColor = .black
-        featureLabel1.font = .systemFont(ofSize: 14)
-        featuresBackView.addSubview(featureLabel1)
+        ana_featureLabel1 = UILabel()
+        ana_featureLabel1.text = "Unlock All Features"
+        ana_featureLabel1.textColor = .black
+        ana_featureLabel1.font = .systemFont(ofSize: 14)
+        ana_featuresBackView.addSubview(ana_featureLabel1)
         
-        featureLabel2 = UILabel()
-        featureLabel2.text = "Share Recording With Others"
-        featureLabel2.textColor = .black
-        featureLabel2.font = .systemFont(ofSize: 14)
-        featuresBackView.addSubview(featureLabel2)
+        ana_featureLabel2 = UILabel()
+        ana_featureLabel2.text = "Share Recording With Others"
+        ana_featureLabel2.textColor = .black
+        ana_featureLabel2.font = .systemFont(ofSize: 14)
+        ana_featuresBackView.addSubview(ana_featureLabel2)
         
-        featureLabel3 = UILabel()
-        featureLabel3.text = "Remove Ads"
-        featureLabel3.textColor = .black
-        featureLabel3.font = .systemFont(ofSize: 14)
-        featuresBackView.addSubview(featureLabel3)
+        ana_featureLabel3 = UILabel()
+        ana_featureLabel3.text = "Remove Ads"
+        ana_featureLabel3.textColor = .black
+        ana_featureLabel3.font = .systemFont(ofSize: 14)
+        ana_featuresBackView.addSubview(ana_featureLabel3)
         
-        freeDayLabel = UILabel()
-        freeDayLabel.textColor = .color(hexString: "#EB5757")
-        freeDayLabel.font = .systemFont(ofSize: 16, weight: .semibold)
-        scrollView.addSubview(freeDayLabel)
+        ana_freeDayLabel = UILabel()
+        ana_freeDayLabel.textColor = .color(hexString: "#EB5757")
+        ana_freeDayLabel.font = .systemFont(ofSize: 16, weight: .semibold)
+        ana_scrollView.addSubview(ana_freeDayLabel)
         
-        buttonBackView = UIView()
-        buttonBackView.backgroundColor = .clear
-        scrollView.addSubview(buttonBackView)
+        ana_buttonBackView = UIView()
+        ana_buttonBackView.backgroundColor = .clear
+        ana_scrollView.addSubview(ana_buttonBackView)
         
-        buttonGradientView = UIView()
-        buttonGradientView.backgroundColor = .clear
-        buttonBackView.addSubview(buttonGradientView)
+        ana_buttonGradientView = UIView()
+        ana_buttonGradientView.backgroundColor = .clear
+        ana_buttonBackView.addSubview(ana_buttonGradientView)
         
-        buttonShadowView = UIView()
-        buttonShadowView.layer.cornerRadius = 24
-        buttonShadowView.layer.borderWidth = 1
-        buttonShadowView.layer.borderColor = UIColor.color(hexString: "#80FCFCFC").cgColor
-        buttonShadowView.backgroundColor = .color(hexString: "#FF5E5E")
-        buttonShadowView.setShadow(color: .color(hexString: "#28a0a3bd"), offset: CGSize(width: 0, height: 16), radius: 24)
-        buttonBackView.addSubview(buttonShadowView)
+        ana_buttonShadowView = UIView()
+        ana_buttonShadowView.layer.cornerRadius = 24
+        ana_buttonShadowView.layer.borderWidth = 1
+        ana_buttonShadowView.layer.borderColor = UIColor.color(hexString: "#80FCFCFC").cgColor
+        ana_buttonShadowView.backgroundColor = .color(hexString: "#FF5E5E")
+        ana_buttonShadowView.setShadow(color: .color(hexString: "#28a0a3bd"), offset: CGSize(width: 0, height: 16), radius: 24)
+        ana_buttonBackView.addSubview(ana_buttonShadowView)
         
-        buttonGradientLayer = CAGradientLayer()
-        buttonGradientLayer.cornerRadius = 24
-        buttonGradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
-        buttonGradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
-        buttonGradientLayer.colors = [UIColor.color(hexString: "#FF7474").cgColor, UIColor.color(hexString: "#FF474747").cgColor]
-        buttonGradientView.layer.addSublayer(buttonGradientLayer)
+        ana_buttonGradientLayer = CAGradientLayer()
+        ana_buttonGradientLayer.cornerRadius = 24
+        ana_buttonGradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
+        ana_buttonGradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
+        ana_buttonGradientLayer.colors = [UIColor.color(hexString: "#FF7474").cgColor, UIColor.color(hexString: "#FF474747").cgColor]
+        ana_buttonGradientView.layer.addSublayer(ana_buttonGradientLayer)
         
-        button = UIButton()
-        button.backgroundColor = .clear
-		button.setTitle("Continue", for: .normal)
-        button.setTitleColor(.color(hexString: "#FCFCFC"), for: .normal)
-        button.titleLabel?.font = UIFont(name: "Poppins-SemiBold", size: 16)
-        button.reactive.controlEvents(.touchUpInside).observeValues {
+        ana_button = UIButton()
+        ana_button.backgroundColor = .clear
+		ana_button.setTitle("Continue", for: .normal)
+        ana_button.setTitleColor(.color(hexString: "#FCFCFC"), for: .normal)
+        ana_button.titleLabel?.font = UIFont(name: "Poppins-SemiBold", size: 16)
+        ana_button.reactive.controlEvents(.touchUpInside).observeValues {
             [weak self] button in
             guard let self = self else { return }
-            if let product = self.product {
+            if let product = self.ana_product {
                 self.purchase(product: product)
 				EventManager.income(product: product, type: "test")
             }
-			EventManager.log(name: "Subscription_buttontapped_\(self.scene)")
+			EventManager.log(name: "Subscription_buttontapped_\(self.ana_scene)")
 			EventManager.log(name: "Subscription_buttontapped")
         }
-        buttonBackView.addSubview(button)
+        ana_buttonBackView.addSubview(ana_button)
         
-        activityView = UIActivityIndicatorView()
-        activityView.color = .color(hexString: "#FCFCFC")
-        activityView.startAnimating()
-        button.addSubview(activityView)
+        ana_activityView = UIActivityIndicatorView()
+        ana_activityView.color = .color(hexString: "#FCFCFC")
+        ana_activityView.startAnimating()
+        ana_button.addSubview(ana_activityView)
         
-        buttonBottomButton = UIButton()
-        buttonBottomButton.setTitle("Auto renewable, Cancel anytime", for: .normal)
-        buttonBottomButton.setTitleColor(.color(hexString: "#979797"), for: .normal)
-        buttonBottomButton.titleLabel?.font = .systemFont(ofSize: 13)
-        buttonBottomButton.reactive.controlEvents(.touchUpInside).observeValues {
+        ana_buttonBottomButton = UIButton()
+        ana_buttonBottomButton.setTitle("Auto renewable, Cancel anytime", for: .normal)
+        ana_buttonBottomButton.setTitleColor(.color(hexString: "#979797"), for: .normal)
+        ana_buttonBottomButton.titleLabel?.font = .systemFont(ofSize: 13)
+        ana_buttonBottomButton.reactive.controlEvents(.touchUpInside).observeValues {
             [weak self] _ in
             guard let self = self else { return }
             self.dismiss(animated: true, completion: nil)
         }
-        buttonBottomButton.isEnabled = false
-        scrollView.addSubview(buttonBottomButton)
+        ana_buttonBottomButton.isEnabled = false
+        ana_scrollView.addSubview(ana_buttonBottomButton)
         
-        restoreButton = UIButton()
-        restoreButton.setTitle("RESTORE PURCHASE", for: .normal)
-        restoreButton.setTitleColor(.color(hexString: "#979797"), for: .normal)
-        restoreButton.titleLabel?.font = .systemFont(ofSize: 10, weight: .semibold)
-        restoreButton.reactive.controlEvents(.touchUpInside).observeValues {
+        ana_restoreButton = UIButton()
+        ana_restoreButton.setTitle("RESTORE PURCHASE", for: .normal)
+        ana_restoreButton.setTitleColor(.color(hexString: "#979797"), for: .normal)
+        ana_restoreButton.titleLabel?.font = .systemFont(ofSize: 10, weight: .semibold)
+        ana_restoreButton.reactive.controlEvents(.touchUpInside).observeValues {
             [weak self] _ in
             guard let self = self else { return }
             self.restorePurchaseData()
         }
-        scrollView.addSubview(restoreButton)
+        ana_scrollView.addSubview(ana_restoreButton)
         
-        termsButton = UIButton()
-        termsButton.setAttributedTitle(NSAttributedString(string: "Terms of Service",
+        ana_termsButton = UIButton()
+        ana_termsButton.setAttributedTitle(NSAttributedString(string: "Terms of Service",
                                                           attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 10),
                                                                        NSAttributedString.Key.foregroundColor : UIColor.color(hexString: "#979797"),
                                                                        NSAttributedString.Key.underlineStyle : NSUnderlineStyle.single.rawValue,
                                                                        NSAttributedString.Key.underlineColor : UIColor.color(hexString: "#979797").cgColor]),
                                        for: .normal)
-        termsButton.reactive.controlEvents(.touchUpInside).observeValues {
+        ana_termsButton.reactive.controlEvents(.touchUpInside).observeValues {
             [weak self] _ in
             guard let self = self else { return }
             let webView = BaseWebController()
@@ -228,16 +228,16 @@ class SubscriptionViewController: UIViewController {
             webView.modalPresentationStyle = .fullScreen
             self.present(webView, animated: true, completion: nil)
         }
-        scrollView.addSubview(termsButton)
+        ana_scrollView.addSubview(ana_termsButton)
         
-        privacyButton = UIButton()
-        privacyButton.setAttributedTitle(NSAttributedString(string: "Privacy Policy",
+        ana_privacyButton = UIButton()
+        ana_privacyButton.setAttributedTitle(NSAttributedString(string: "Privacy Policy",
                                                           attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 10),
                                                                        NSAttributedString.Key.foregroundColor : UIColor.color(hexString: "#979797"),
                                                                        NSAttributedString.Key.underlineStyle : NSUnderlineStyle.single.rawValue,
                                                                        NSAttributedString.Key.underlineColor : UIColor.color(hexString: "#979797").cgColor]),
                                        for: .normal)
-        privacyButton.reactive.controlEvents(.touchUpInside).observeValues {
+        ana_privacyButton.reactive.controlEvents(.touchUpInside).observeValues {
             [weak self] _ in
             guard let self = self else { return }
             let webView = BaseWebController()
@@ -245,79 +245,79 @@ class SubscriptionViewController: UIViewController {
             webView.modalPresentationStyle = .fullScreen
             self.present(webView, animated: true, completion: nil)
         }
-        scrollView.addSubview(privacyButton)
+        ana_scrollView.addSubview(ana_privacyButton)
         
-        bottomLabel = UILabel()
-        bottomLabel.numberOfLines = 0
-        bottomLabel.text = "Angel Premium offers weekly purchase subscription. You can subscribe to a yearly plan. You can manage or turn off auto-renew in your Apple ID account settings at any time. Subscriptions will automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Any unused portion of a free trial period will be forfeited when you purchase a subscription. Our app is functional without purchasing an Auto-Renewable subscription, and you can use all the unlocked content after the subscription expires."
-        bottomLabel.textColor = .color(hexString: "#979797")
-        bottomLabel.font  = .systemFont(ofSize: 10, weight: .semibold)
-        scrollView.addSubview(bottomLabel)
+        ana_bottomLabel = UILabel()
+        ana_bottomLabel.numberOfLines = 0
+        ana_bottomLabel.text = "Angel Premium offers weekly purchase subscription. You can subscribe to a yearly plan. You can manage or turn off auto-renew in your Apple ID account settings at any time. Subscriptions will automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Any unused portion of a free trial period will be forfeited when you purchase a subscription. Our app is functional without purchasing an Auto-Renewable subscription, and you can use all the unlocked content after the subscription expires."
+        ana_bottomLabel.textColor = .color(hexString: "#979797")
+        ana_bottomLabel.font  = .systemFont(ofSize: 10, weight: .semibold)
+        ana_scrollView.addSubview(ana_bottomLabel)
     }
     
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
-        gradientLayer.frame = view.bounds
-        scrollView.frame = view.bounds
-        closeButton.sizeToFit()
-        closeButton.setOrigin(x: 20, y: 74)
-        titleLabel.sizeToFit()
-        titleLabel.center = CGPoint(x: scrollView.halfWidth(), y: 136 + titleLabel.halfHeight())
-        imageView.sizeToFit()
-        imageView.center = CGPoint(x: scrollView.halfWidth(), y: titleLabel.maxY() + 22 + imageView.halfHeight())
-        iconImageView1.sizeToFit()
-        iconImageView1.setOrigin(x: 0, y: 0)
-        iconImageView2.sizeToFit()
-        iconImageView2.setOrigin(x: 0, y: iconImageView1.maxY() + 22)
-        iconImageView3.sizeToFit()
-        iconImageView3.setOrigin(x: 0, y: iconImageView2.maxY() + 22)
-        featureLabel1.sizeToFit()
-        featureLabel1.center = CGPoint(x: iconImageView1.maxX() + 23 + featureLabel1.halfWidth(), y: iconImageView1.centerY())
-        featureLabel2.sizeToFit()
-        featureLabel2.center = CGPoint(x: iconImageView2.maxX() + 23 + featureLabel2.halfWidth(), y: iconImageView2.centerY())
-        featureLabel3.sizeToFit()
-        featureLabel3.center = CGPoint(x: iconImageView3.maxX() + 23 + featureLabel3.halfWidth(), y: iconImageView3.centerY())
-        featuresBackView.bounds = CGRect(origin: .zero, size: CGSize(width: max(featureLabel1.maxX(), featureLabel2.maxX(), featureLabel3.maxX()),
-                                                                     height: iconImageView3.maxY()))
-        featuresBackView.center = CGPoint(x: scrollView.halfWidth(), y: imageView.maxY() + 15 + featuresBackView.halfHeight())
-        freeDayLabel.sizeToFit()
-        buttonBackView.frame = CGRect(x: 42, y: featuresBackView.maxY() + 72, width: scrollView.width() - 84, height: 48)
-        freeDayLabel.center = CGPoint(x: scrollView.halfWidth(), y: buttonBackView.minY() - 10 - freeDayLabel.halfHeight())
-        buttonShadowView.frame = buttonBackView.bounds
-        buttonGradientView.frame = buttonShadowView.frame
-        buttonGradientLayer.frame = buttonGradientView.bounds
-        button.frame = buttonGradientView.frame
-        activityView.sizeToFit()
-        activityView.center = CGPoint(x: button.halfWidth(), y: button.halfHeight())
-        buttonBottomButton.sizeToFit()
-        buttonBottomButton.center = CGPoint(x: scrollView.halfWidth(), y: buttonBackView.maxY() + 7 + buttonBottomButton.halfHeight())
-        restoreButton.sizeToFit()
-        restoreButton.setOrigin(x: 42, y: buttonBottomButton.maxY() + 29)
-        privacyButton.sizeToFit()
-        privacyButton.center = CGPoint(x: scrollView.width() - 42 - privacyButton.halfWidth(), y: restoreButton.centerY())
-        termsButton.sizeToFit()
-        termsButton.center = CGPoint(x: privacyButton.minX() - 27 - termsButton.halfWidth(), y: privacyButton.centerY())
-        let size = bottomLabel.sizeThatFits(CGSize(width: scrollView.width() - 84, height: .greatestFiniteMagnitude))
-        bottomLabel.frame = CGRect(x: 42, y: restoreButton.maxY() + 3, width: size.width, height: size.height)
-        scrollView.contentSize = CGSize(width: scrollView.width(), height: bottomLabel.maxY())
+        ana_gradientLayer.frame = view.bounds
+        ana_scrollView.frame = view.bounds
+        ana_closeButton.sizeToFit()
+        ana_closeButton.setOrigin(x: 20, y: 74)
+        ana_titleLabel.sizeToFit()
+        ana_titleLabel.center = CGPoint(x: ana_scrollView.halfWidth(), y: 136 + ana_titleLabel.halfHeight())
+        ana_imageView.sizeToFit()
+        ana_imageView.center = CGPoint(x: ana_scrollView.halfWidth(), y: ana_titleLabel.maxY() + 22 + ana_imageView.halfHeight())
+        ana_iconImageView1.sizeToFit()
+        ana_iconImageView1.setOrigin(x: 0, y: 0)
+        ana_iconImageView2.sizeToFit()
+        ana_iconImageView2.setOrigin(x: 0, y: ana_iconImageView1.maxY() + 22)
+        ana_iconImageView3.sizeToFit()
+        ana_iconImageView3.setOrigin(x: 0, y: ana_iconImageView2.maxY() + 22)
+        ana_featureLabel1.sizeToFit()
+        ana_featureLabel1.center = CGPoint(x: ana_iconImageView1.maxX() + 23 + ana_featureLabel1.halfWidth(), y: ana_iconImageView1.centerY())
+        ana_featureLabel2.sizeToFit()
+        ana_featureLabel2.center = CGPoint(x: ana_iconImageView2.maxX() + 23 + ana_featureLabel2.halfWidth(), y: ana_iconImageView2.centerY())
+        ana_featureLabel3.sizeToFit()
+        ana_featureLabel3.center = CGPoint(x: ana_iconImageView3.maxX() + 23 + ana_featureLabel3.halfWidth(), y: ana_iconImageView3.centerY())
+        ana_featuresBackView.bounds = CGRect(origin: .zero, size: CGSize(width: max(ana_featureLabel1.maxX(), ana_featureLabel2.maxX(), ana_featureLabel3.maxX()),
+                                                                     height: ana_iconImageView3.maxY()))
+        ana_featuresBackView.center = CGPoint(x: ana_scrollView.halfWidth(), y: ana_imageView.maxY() + 15 + ana_featuresBackView.halfHeight())
+        ana_freeDayLabel.sizeToFit()
+        ana_buttonBackView.frame = CGRect(x: 42, y: ana_featuresBackView.maxY() + 72, width: ana_scrollView.width() - 84, height: 48)
+        ana_freeDayLabel.center = CGPoint(x: ana_scrollView.halfWidth(), y: ana_buttonBackView.minY() - 10 - ana_freeDayLabel.halfHeight())
+        ana_buttonShadowView.frame = ana_buttonBackView.bounds
+        ana_buttonGradientView.frame = ana_buttonShadowView.frame
+        ana_buttonGradientLayer.frame = ana_buttonGradientView.bounds
+        ana_button.frame = ana_buttonGradientView.frame
+        ana_activityView.sizeToFit()
+        ana_activityView.center = CGPoint(x: ana_button.halfWidth(), y: ana_button.halfHeight())
+        ana_buttonBottomButton.sizeToFit()
+        ana_buttonBottomButton.center = CGPoint(x: ana_scrollView.halfWidth(), y: ana_buttonBackView.maxY() + 7 + ana_buttonBottomButton.halfHeight())
+        ana_restoreButton.sizeToFit()
+        ana_restoreButton.setOrigin(x: 42, y: ana_buttonBottomButton.maxY() + 29)
+        ana_privacyButton.sizeToFit()
+        ana_privacyButton.center = CGPoint(x: ana_scrollView.width() - 42 - ana_privacyButton.halfWidth(), y: ana_restoreButton.centerY())
+        ana_termsButton.sizeToFit()
+        ana_termsButton.center = CGPoint(x: ana_privacyButton.minX() - 27 - ana_termsButton.halfWidth(), y: ana_privacyButton.centerY())
+        let size = ana_bottomLabel.sizeThatFits(CGSize(width: ana_scrollView.width() - 84, height: .greatestFiniteMagnitude))
+        ana_bottomLabel.frame = CGRect(x: 42, y: ana_restoreButton.maxY() + 3, width: size.width, height: size.height)
+        ana_scrollView.contentSize = CGSize(width: ana_scrollView.width(), height: ana_bottomLabel.maxY())
     }
     
     
     func requestSuccess() {
-        activityView.stopAnimating()
-        if let product = product {
+        ana_activityView.stopAnimating()
+        if let product = ana_product {
             var string = ""
 			if product.freeDays > 0 {
 				string.append("\(product.freeDays) Days Free Trial, Then ")
 			}
 			let timeString = product.subscriptionPeriod?.unit == .month ? "Month" : "Year"
 			string.append("Only \(product.regularPrice)/\(timeString)")
-			freeDayLabel.text = string
+			ana_freeDayLabel.text = string
             
 			let littleTimeString = product.subscriptionPeriod?.unit == .month ? "month" : "year"
-            bottomLabel.text = "Angel Premium offers weekly purchase subscription. You can subscribe to a monthly plan(\(product.regularPrice) per \(littleTimeString). You can manage or turn off auto-renew in your Apple ID account settings at any time. Subscriptions will automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Any unused portion of a free trial period will be forfeited when you purchase a subscription. Our app is functional without purchasing an Auto-Renewable subscription, and you can use all the unlocked content after the subscription expires."
+            ana_bottomLabel.text = "Angel Premium offers weekly purchase subscription. You can subscribe to a monthly plan(\(product.regularPrice) per \(littleTimeString). You can manage or turn off auto-renew in your Apple ID account settings at any time. Subscriptions will automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Any unused portion of a free trial period will be forfeited when you purchase a subscription. Our app is functional without purchasing an Auto-Renewable subscription, and you can use all the unlocked content after the subscription expires."
             
             view.layoutNow()
             
@@ -331,13 +331,13 @@ class SubscriptionViewController: UIViewController {
             animationGroup.animations = [animation]
             animationGroup.duration = 2.15
             animationGroup.repeatCount = .greatestFiniteMagnitude
-            buttonBackView.layer.add(animationGroup, forKey: nil)
+            ana_buttonBackView.layer.add(animationGroup, forKey: nil)
         }
     }
     
     
     func requestFailed() {
-        activityView.stopAnimating()
+        ana_activityView.stopAnimating()
     }
 }
 
@@ -346,7 +346,7 @@ extension SubscriptionViewController: NBInAppPurchaseProtocol {
     
     /**获取订阅产品成功*/
     func subscriptionProductsDidReciveSuccess(products: [SKProduct]) {
-        product = products.filter({$0.productIdentifier == NBNewStoreManager.shard.monthProductId}).first
+        ana_product = products.filter({$0.productIdentifier == NBNewStoreManager.shard.monthProductId}).first
         requestSuccess()
     }
     /**获取订阅产品失败*/
@@ -381,13 +381,13 @@ extension SubscriptionViewController: NBInAppPurchaseProtocol {
      * 订阅成功弹窗
      */
     func showPurchaseSuccessAlert(_ needUnsubscribe: Bool = false) {
-		EventManager.log(name: "Subscription_success_\(scene)")
+		EventManager.log(name: "Subscription_success_\(ana_scene)")
 		EventManager.log(name: "Subscription_success")
         showAlert(content: "buy success") {
             [weak self] in
             guard let self = self else { return }
             self.dismiss(animated: true, completion: nil)
-            if let success = self.success {
+            if let success = self.ana_success {
                 success()
             }
         }

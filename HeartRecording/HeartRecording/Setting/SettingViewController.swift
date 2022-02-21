@@ -11,19 +11,19 @@ import DeviceKit
 
 
 class SettingViewController: AnaLargeTitleViewController, MFMailComposeViewControllerDelegate {
-    var backView: UIView!
-    var gradientView: UIView!
-    var gradientLayer: CAGradientLayer!
-    var itemViews = [SettingItemView]()
-    var versionLabel: UILabel!
+    var ana_backView: UIView!
+    var ana_gradientView: UIView!
+    var ana_gradientLayer: CAGradientLayer!
+    var ana_itemViews = [SettingItemView]()
+    var ana_versionLabel: UILabel!
     
-    var proItemView: SettingItemView?
+    var ana_proItemView: SettingItemView?
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let proItemView = proItemView {
-            proItemView.label.text = NBUserVipStatusManager.shard.getVipStatus() ? "You are pro!" : "Angel Premium-Unlock All Features"
+        if let proItemView = ana_proItemView {
+            proItemView.ana_label.text = NBUserVipStatusManager.shard.getVipStatus() ? "You are pro!" : "Angel Premium-Unlock All Features"
         }
     }
     
@@ -33,67 +33,67 @@ class SettingViewController: AnaLargeTitleViewController, MFMailComposeViewContr
         
         setTitle(title: "Setting")
         
-        backView = UIView()
-        backView.layer.cornerRadius = 12
-        backView.layer.borderWidth = 1
-        backView.layer.borderColor = UIColor.color(hexString: "#80FFFFFF").cgColor
-        backView.backgroundColor = .color(hexString: "#CDFFFFFF")
-        backView.setShadow(color: .color(hexString: "#1e6e7191"), offset: CGSize(width: 0, height: 8), radius: 32)
-        contentView.addSubview(backView)
+        ana_backView = UIView()
+        ana_backView.layer.cornerRadius = 12
+        ana_backView.layer.borderWidth = 1
+        ana_backView.layer.borderColor = UIColor.color(hexString: "#80FFFFFF").cgColor
+        ana_backView.backgroundColor = .color(hexString: "#CDFFFFFF")
+        ana_backView.setShadow(color: .color(hexString: "#1e6e7191"), offset: CGSize(width: 0, height: 8), radius: 32)
+        contentView.addSubview(ana_backView)
         
-        gradientView = UIView()
-        gradientView.layer.cornerRadius = 12
-        backView.addSubview(gradientView)
+        ana_gradientView = UIView()
+        ana_gradientView.layer.cornerRadius = 12
+        ana_backView.addSubview(ana_gradientView)
         
-        gradientLayer = CAGradientLayer()
-        gradientLayer.cornerRadius = 12
-        gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
-        gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
-        gradientLayer.colors = [UIColor.color(hexString: "#E6FFFFFF").cgColor, UIColor.color(hexString: "#B3FFFFFF").cgColor]
-        gradientView.layer.addSublayer(gradientLayer)
+        ana_gradientLayer = CAGradientLayer()
+        ana_gradientLayer.cornerRadius = 12
+        ana_gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
+        ana_gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
+        ana_gradientLayer.colors = [UIColor.color(hexString: "#E6FFFFFF").cgColor, UIColor.color(hexString: "#B3FFFFFF").cgColor]
+        ana_gradientView.layer.addSublayer(ana_gradientLayer)
         
         for model in itemModels() {
             let itemView = SettingItemView(image: model.image, title: model.title, key: model.key)
-            itemView.pipe.output.observeValues {
+            itemView.ana_pipe.output.observeValues {
                 [weak self] key in
                 guard let self = self else { return }
                 self.itemDidTouched(key: key)
             }
             if model.key == "Pro" {
-                proItemView = itemView
+                ana_proItemView = itemView
             }
-            backView.addSubview(itemView)
-            itemViews.append(itemView)
+            ana_backView.addSubview(itemView)
+            ana_itemViews.append(itemView)
         }
         
-        versionLabel = UILabel()
+        ana_versionLabel = UILabel()
         let infoDictionary = Bundle.main.infoDictionary!
         let version = infoDictionary["CFBundleShortVersionString"] as! String
         var versionString = "App version V" + version
         if let build = infoDictionary["CFBundleVersion"] as? String {
             versionString = versionString + "(\(build))"
         }
-        versionLabel.text = versionString
-        versionLabel.textColor = .color(hexString: "#6e7191")
-        versionLabel.font = UIFont(name: "Inter-Regular", size: 13)
-        backView.addSubview(versionLabel)
+        ana_versionLabel.text = versionString
+        ana_versionLabel.textColor = .color(hexString: "#6e7191")
+        ana_versionLabel.font = UIFont(name: "Inter-Regular", size: 13)
+        ana_backView.addSubview(ana_versionLabel)
     }
     
     
     override func layoutContentView() -> CGFloat {
         let backViewWidth = view.width() - 48
         var y: CGFloat = 6
-        for i in itemViews.indices {
-            let itemView = itemViews[i]
+        for i in ana_itemViews.indices {
+            let itemView = ana_itemViews[i]
             itemView.frame = CGRect(x: 0, y: y, width: backViewWidth, height: 62)
             y = itemView.maxY()
         }
-        versionLabel.sizeToFit()
-        versionLabel.setOrigin(x: 16, y: y + 8)
-        backView.frame = CGRect(x: 24, y: 34, width: backViewWidth, height: versionLabel.maxY() + 16)
-        gradientView.frame = backView.bounds
-        gradientLayer.frame = gradientView.bounds
-        return backView.maxY()
+        ana_versionLabel.sizeToFit()
+        ana_versionLabel.setOrigin(x: 16, y: y + 8)
+        ana_backView.frame = CGRect(x: 24, y: 34, width: backViewWidth, height: ana_versionLabel.maxY() + 16)
+        ana_gradientView.frame = ana_backView.bounds
+        ana_gradientLayer.frame = ana_gradientView.bounds
+        return ana_backView.maxY()
     }
     
     

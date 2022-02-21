@@ -12,33 +12,33 @@ import StoreKit
 
 
 class RecordViewController: AnaLargeTitleViewController {
-    var proButton: UIButton!
-    var animationView: RippleAnimationView!
-    var mainView: UIView!
-    var heartImageView: UIImageView!
-    var label: UILabel!
-    var timerLabel: UILabel!
-    var buttonBackgroundView: UIView!
-    var buttonGradient: CAGradientLayer!
-    var button: UIButton!
+    var ana_proButton: UIButton!
+    var ana_animationView: RippleAnimationView!
+    var ana_mainView: UIView!
+    var ana_heartImageView: UIImageView!
+    var ana_label: UILabel!
+    var ana_timerLabel: UILabel!
+    var ana_buttonBackgroundView: UIView!
+    var ana_buttonGradient: CAGradientLayer!
+    var ana_button: UIButton!
     
-    let manager = RecordManager()
-    var recordStartDate = Date()
-    var timer: Timer?
-    var visiableTime: CGFloat = 0
+    let ana_manager = RecordManager()
+    var ana_recordStartDate = Date()
+    var ana_timer: Timer?
+    var ana_visiableTime: CGFloat = 0
     
     
     deinit {
-        if timer != nil && timer!.isValid {
-            timer!.invalidate()
-            timer = nil
+        if ana_timer != nil && ana_timer!.isValid {
+            ana_timer!.invalidate()
+            ana_timer = nil
         }
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        proButton.isHidden = NBUserVipStatusManager.shard.getVipStatus()
+        ana_proButton.isHidden = NBUserVipStatusManager.shard.getVipStatus()
     }
     
     
@@ -49,98 +49,98 @@ class RecordViewController: AnaLargeTitleViewController {
         
         scrollView.layer.masksToBounds = false
         
-        proButton = UIButton()
-        proButton.setImage(UIImage(named: "Record_Pro"), for: .normal)
-        proButton.setShadow(color: .color(hexString: "#146575a7"), offset: CGSize(width: 0, height: 8), radius: 32)
-        proButton.reactive.controlEvents(.touchUpInside).observeValues {
+        ana_proButton = UIButton()
+        ana_proButton.setImage(UIImage(named: "Record_Pro"), for: .normal)
+        ana_proButton.setShadow(color: .color(hexString: "#146575a7"), offset: CGSize(width: 0, height: 8), radius: 32)
+        ana_proButton.reactive.controlEvents(.touchUpInside).observeValues {
             [weak self] _ in
             guard let self = self else { return }
             let vc = SubscriptionViewController(success: nil)
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true, completion: nil)
         }
-        titleBackView.addSubview(proButton)
+        titleBackView.addSubview(ana_proButton)
         
-        animationView = RippleAnimationView(bgColor: .color(hexString: "#FF8282"))
-        contentView.addSubview(animationView)
+        ana_animationView = RippleAnimationView(bgColor: .color(hexString: "#FF8282"))
+        contentView.addSubview(ana_animationView)
         
-        mainView = UIView()
-        mainView.layer.cornerRadius = 134
-        mainView.backgroundColor = .color(hexString: "#FF8282")
-        contentView.addSubview(mainView)
+        ana_mainView = UIView()
+        ana_mainView.layer.cornerRadius = 134
+        ana_mainView.backgroundColor = .color(hexString: "#FF8282")
+        contentView.addSubview(ana_mainView)
         
-        heartImageView = UIImageView()
-        heartImageView.image = UIImage(named: "Record_Heart")
-        mainView.addSubview(heartImageView)
+        ana_heartImageView = UIImageView()
+        ana_heartImageView.image = UIImage(named: "Record_Heart")
+        ana_mainView.addSubview(ana_heartImageView)
         
-        label = UILabel()
-        label.numberOfLines = 0
-        label.textAlignment = .center
-        label.text = "When you have found your baby‘s heartbeat, tap the button to record now"
-        label.textColor = .white
-        label.font = UIFont(name: "Poppins-Light", size: 14)
-        mainView.addSubview(label)
+        ana_label = UILabel()
+        ana_label.numberOfLines = 0
+        ana_label.textAlignment = .center
+        ana_label.text = "When you have found your baby‘s heartbeat, tap the button to record now"
+        ana_label.textColor = .white
+        ana_label.font = UIFont(name: "Poppins-Light", size: 14)
+        ana_mainView.addSubview(ana_label)
         
-        timerLabel = UILabel()
-        timerLabel.textColor = .white
-        timerLabel.font = UIFont(name: "Poppins-SemiBold", size: 44)
-        timerLabel.isHidden = true
-        mainView.addSubview(timerLabel)
+        ana_timerLabel = UILabel()
+        ana_timerLabel.textColor = .white
+        ana_timerLabel.font = UIFont(name: "Poppins-SemiBold", size: 44)
+        ana_timerLabel.isHidden = true
+        ana_mainView.addSubview(ana_timerLabel)
         
-        buttonBackgroundView = UIView()
-        buttonBackgroundView.backgroundColor = .clear
-        buttonBackgroundView.layer.cornerRadius = 24
-        buttonBackgroundView.layer.borderWidth = 1
-        buttonBackgroundView.layer.borderColor = UIColor.color(hexString: "#80FCFCFC").cgColor
-        contentView.addSubview(buttonBackgroundView)
+        ana_buttonBackgroundView = UIView()
+        ana_buttonBackgroundView.backgroundColor = .clear
+        ana_buttonBackgroundView.layer.cornerRadius = 24
+        ana_buttonBackgroundView.layer.borderWidth = 1
+        ana_buttonBackgroundView.layer.borderColor = UIColor.color(hexString: "#80FCFCFC").cgColor
+        contentView.addSubview(ana_buttonBackgroundView)
         
-        buttonGradient = CAGradientLayer()
-        buttonGradient.colors = [UIColor.color(hexString: "#FF7474").cgColor, UIColor.color(hexString: "#FF4747").cgColor]
-        buttonGradient.startPoint = CGPoint(x: 0.5, y: 0)
-        buttonGradient.endPoint = CGPoint(x: 0.5, y: 1)
-        buttonGradient.cornerRadius = 24
-        buttonBackgroundView.layer.addSublayer(buttonGradient)
+        ana_buttonGradient = CAGradientLayer()
+        ana_buttonGradient.colors = [UIColor.color(hexString: "#FF7474").cgColor, UIColor.color(hexString: "#FF4747").cgColor]
+        ana_buttonGradient.startPoint = CGPoint(x: 0.5, y: 0)
+        ana_buttonGradient.endPoint = CGPoint(x: 0.5, y: 1)
+        ana_buttonGradient.cornerRadius = 24
+        ana_buttonBackgroundView.layer.addSublayer(ana_buttonGradient)
         
-        buttonBackgroundView.setShadow(color: .color(hexString: "#28A0A3BD"), offset: CGSize(width: 0, height: 16), radius: 24)
+        ana_buttonBackgroundView.setShadow(color: .color(hexString: "#28A0A3BD"), offset: CGSize(width: 0, height: 16), radius: 24)
         
-        button = UIButton()
-        button.setTitle("Start Recording", for: .normal)
-        button.setTitleColor(.color(hexString: "#FCFCFC"), for: .normal)
-        button.titleLabel?.font = UIFont(name: "Poppins-SemiBold", size: 16)
-        button.reactive.controlEvents(.touchUpInside).observeValues {
+        ana_button = UIButton()
+        ana_button.setTitle("Start Recording", for: .normal)
+        ana_button.setTitleColor(.color(hexString: "#FCFCFC"), for: .normal)
+        ana_button.titleLabel?.font = UIFont(name: "Poppins-SemiBold", size: 16)
+        ana_button.reactive.controlEvents(.touchUpInside).observeValues {
             [weak self] button in
             guard let self = self else { return }
-			if !self.manager.isRecording {
+			if !self.ana_manager.isRecording {
 				let action = {
 					FeedbackManager.feedback(type: .light)
-					self.manager.beginRecord()
-					if self.manager.isRecording {
+					self.ana_manager.beginRecord()
+					if self.ana_manager.isRecording {
 						button.setTitle("Done", for: .normal)
 					}
 					
-					self.timerLabel.text = "00:00"
+					self.ana_timerLabel.text = "00:00"
 					self.view.layoutNow()
-					self.timerLabel.isHidden = false
-					self.label.isHidden = true
-					self.recordStartDate = Date()
-					self.visiableTime = 0
-					if self.timer != nil && self.timer!.isValid {
-						self.timer!.invalidate()
-						self.timer = nil
+					self.ana_timerLabel.isHidden = false
+					self.ana_label.isHidden = true
+					self.ana_recordStartDate = Date()
+					self.ana_visiableTime = 0
+					if self.ana_timer != nil && self.ana_timer!.isValid {
+						self.ana_timer!.invalidate()
+						self.ana_timer = nil
 					}
-					self.timer = Timer(timeInterval: 1, repeats: true, block: {
+					self.ana_timer = Timer(timeInterval: 1, repeats: true, block: {
 						[weak self] _ in
 						guard let self = self else { return }
-						let time = Date().timeIntervalSince(self.recordStartDate)
-						if self.visiableTime >= CGFloat(time) {
-							self.visiableTime += 1
+						let time = Date().timeIntervalSince(self.ana_recordStartDate)
+						if self.ana_visiableTime >= CGFloat(time) {
+							self.ana_visiableTime += 1
 						} else {
-							self.visiableTime = CGFloat(time)
+							self.ana_visiableTime = CGFloat(time)
 						}
-						self.timerLabel.text = String.stringFromTime(self.visiableTime)
+						self.ana_timerLabel.text = String.stringFromTime(self.ana_visiableTime)
 						self.view.layoutNow()
 					})
-					RunLoop.current.add(self.timer!, forMode: .default)
+					RunLoop.current.add(self.ana_timer!, forMode: .default)
 				}
 				if !NBUserVipStatusManager.shard.getVipStatus() {
 					let dateFormatter = DateFormatter()
@@ -148,9 +148,9 @@ class RecordViewController: AnaLargeTitleViewController {
 					let todayString = dateFormatter.string(from: Date())
 					if UserDefaults.standard.string(forKey: "Home_Last_Show_SubscriptionVC") != todayString {
 						let vc = SubscriptionViewController()
-						vc.success = action
-						vc.dismiss = action
-						vc.scene = .record
+						vc.ana_success = action
+						vc.ana_dismiss = action
+						vc.ana_scene = .record
 						vc.modalPresentationStyle = .fullScreen
 						self.present(vc, animated: true, completion: nil)
 						UserDefaults.standard.setValue(todayString, forKey: "Home_Last_Show_SubscriptionVC")
@@ -162,19 +162,19 @@ class RecordViewController: AnaLargeTitleViewController {
 				}
 			} else {
 				FeedbackManager.feedback(type: .light)
-				self.manager.stopRecord()
-				if !self.manager.isRecording {
+				self.ana_manager.stopRecord()
+				if !self.ana_manager.isRecording {
 					button.setTitle("Start Recording", for: .normal)
 				}
-				let model = DbManager.manager.addRecording(path: self.manager.file_name!)
+				let model = DbManager.manager.addRecording(path: self.ana_manager.file_name!)
 				let vc = DetailViewController(model: model)
 				vc.modalPresentationStyle = .fullScreen
 				self.present(vc, animated: true, completion: nil)
-				self.timerLabel.isHidden = true
-				self.label.isHidden = false
-				if self.timer != nil && self.timer!.isValid {
-					self.timer!.invalidate()
-					self.timer = nil
+				self.ana_timerLabel.isHidden = true
+				self.ana_label.isHidden = false
+				if self.ana_timer != nil && self.ana_timer!.isValid {
+					self.ana_timer!.invalidate()
+					self.ana_timer = nil
 				}
 				if !UserDefaults.standard.bool(forKey: "Has_Request_View") {
 					SKStoreReviewController.requestReview()
@@ -182,27 +182,27 @@ class RecordViewController: AnaLargeTitleViewController {
 				}
 			}
         }
-        buttonBackgroundView.addSubview(button)
+        ana_buttonBackgroundView.addSubview(ana_button)
     }
     
     
     override func layoutContentView() -> CGFloat {
-        proButton.sizeToFit()
-        proButton.center = CGPoint(x: view.width() - proButton.halfWidth(), y: titleLabel.centerY() - 10)
-        mainView.bounds = CGRect(origin: .zero, size: CGSize(width: 268, height: 268))
-        mainView.center = CGPoint(x: view.halfWidth(), y: scrollView.height() * 0.3)
-        animationView.frame = mainView.frame
-        heartImageView.sizeToFit()
-        heartImageView.center = CGPoint(x: mainView.halfWidth(), y: 65 + heartImageView.halfHeight())
-        let size = label.sizeThatFits(CGSize(width: 229, height: CGFloat.greatestFiniteMagnitude))
-        label.bounds = CGRect(origin: .zero, size: size)
-        label.center = CGPoint(x: mainView.halfWidth(), y: heartImageView.maxY() + 28 + label.halfHeight())
-        timerLabel.sizeToFit()
-        timerLabel.center = CGPoint(x: mainView.halfWidth(), y: heartImageView.maxY() + 36 + label.halfHeight())
-        buttonBackgroundView.bounds = CGRect(origin: .zero, size: CGSize(width: 175, height: 48))
-        buttonBackgroundView.center = CGPoint(x: view.halfWidth(), y: scrollView.height() * 0.7)
-        buttonGradient.frame = buttonBackgroundView.bounds
-        button.frame = buttonBackgroundView.bounds
-        return buttonBackgroundView.maxY()
+        ana_proButton.sizeToFit()
+        ana_proButton.center = CGPoint(x: view.width() - ana_proButton.halfWidth(), y: titleLabel.centerY() - 10)
+        ana_mainView.bounds = CGRect(origin: .zero, size: CGSize(width: 268, height: 268))
+        ana_mainView.center = CGPoint(x: view.halfWidth(), y: scrollView.height() * 0.3)
+        ana_animationView.frame = ana_mainView.frame
+        ana_heartImageView.sizeToFit()
+        ana_heartImageView.center = CGPoint(x: ana_mainView.halfWidth(), y: 65 + ana_heartImageView.halfHeight())
+        let size = ana_label.sizeThatFits(CGSize(width: 229, height: CGFloat.greatestFiniteMagnitude))
+        ana_label.bounds = CGRect(origin: .zero, size: size)
+        ana_label.center = CGPoint(x: ana_mainView.halfWidth(), y: ana_heartImageView.maxY() + 28 + ana_label.halfHeight())
+        ana_timerLabel.sizeToFit()
+        ana_timerLabel.center = CGPoint(x: ana_mainView.halfWidth(), y: ana_heartImageView.maxY() + 36 + ana_label.halfHeight())
+        ana_buttonBackgroundView.bounds = CGRect(origin: .zero, size: CGSize(width: 175, height: 48))
+        ana_buttonBackgroundView.center = CGPoint(x: view.halfWidth(), y: scrollView.height() * 0.7)
+        ana_buttonGradient.frame = ana_buttonBackgroundView.bounds
+        ana_button.frame = ana_buttonBackgroundView.bounds
+        return ana_buttonBackgroundView.maxY()
     }
 }

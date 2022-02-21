@@ -11,58 +11,58 @@ import ReactiveSwift
 
 
 class SettingItemView: UIView {
-    var button: UIButton!
-    var imageView: UIImageView!
-    var label: UILabel!
-    var arrowImageView: UIImageView!
+    var ana_button: UIButton!
+    var ana_imageView: UIImageView!
+    var ana_label: UILabel!
+    var ana_arrowImageView: UIImageView!
     
-    var key: String!
-    let pipe = Signal<String, Never>.pipe()
+    var ana_key: String!
+    let ana_pipe = Signal<String, Never>.pipe()
     
     
     convenience init(image: UIImage?, title: String?, key: String) {
         self.init()
         configure()
-        imageView.image = image
-        label.text = title
-        self.key = key
+        ana_imageView.image = image
+        ana_label.text = title
+        self.ana_key = key
     }
     
     
     func configure() {
         backgroundColor = .clear
         
-        button = UIButton()
-        button.backgroundColor = .clear
-        button.reactive.controlEvents(.touchUpInside).observeValues {
+        ana_button = UIButton()
+        ana_button.backgroundColor = .clear
+        ana_button.reactive.controlEvents(.touchUpInside).observeValues {
             [weak self] _ in
             guard let self = self else { return }
-            self.pipe.input.send(value: self.key)
+            self.ana_pipe.input.send(value: self.ana_key)
         }
-        addSubview(button)
+        addSubview(ana_button)
         
-        imageView = UIImageView()
-        addSubview(imageView)
+        ana_imageView = UIImageView()
+        addSubview(ana_imageView)
         
-        label = UILabel()
-        label.textColor = .color(hexString: "#14142B")
-        label.font = UIFont(name: "Inter-Regular", size: 14)
-        addSubview(label)
+        ana_label = UILabel()
+        ana_label.textColor = .color(hexString: "#14142B")
+        ana_label.font = UIFont(name: "Inter-Regular", size: 14)
+        addSubview(ana_label)
         
-        arrowImageView = UIImageView()
-        arrowImageView.image = UIImage(named: "Setting_Arrow")
-        addSubview(arrowImageView)
+        ana_arrowImageView = UIImageView()
+        ana_arrowImageView.image = UIImage(named: "Setting_Arrow")
+        addSubview(ana_arrowImageView)
     }
     
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        button.frame = bounds
-        imageView.sizeToFit()
-        imageView.center = CGPoint(x: 18 + imageView.halfWidth(), y: halfHeight())
-        label.sizeToFit()
-        label.center = CGPoint(x: imageView.maxX() + 14 + label.halfWidth(), y: halfHeight())
-        arrowImageView.sizeToFit()
-        arrowImageView.center = CGPoint(x: width() - 16 - imageView.halfWidth(), y: halfHeight())
+        ana_button.frame = bounds
+        ana_imageView.sizeToFit()
+        ana_imageView.center = CGPoint(x: 18 + ana_imageView.halfWidth(), y: halfHeight())
+        ana_label.sizeToFit()
+        ana_label.center = CGPoint(x: ana_imageView.maxX() + 14 + ana_label.halfWidth(), y: halfHeight())
+        ana_arrowImageView.sizeToFit()
+        ana_arrowImageView.center = CGPoint(x: width() - 16 - ana_imageView.halfWidth(), y: halfHeight())
     }
 }

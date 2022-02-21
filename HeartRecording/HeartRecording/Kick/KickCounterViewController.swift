@@ -11,11 +11,11 @@ import ReactiveSwift
 
 
 class KickCounterViewController: AnaLargeTitleTableViewController {
-	var emptyView: UIView!
-	var emptyImageView: UIImageView!
-	var emptyLabel: UILabel!
+	var ana_emptyView: UIView!
+	var ana_emptyImageView: UIImageView!
+	var ana_emptyLabel: UILabel!
 	
-	var models: [DbKicksModel]!
+	var ana_models: [DbKicksModel]!
 	
 	
 	deinit {
@@ -28,7 +28,7 @@ class KickCounterViewController: AnaLargeTitleTableViewController {
 		
 		NotificationCenter.default.addObserver(self, selector: #selector(dbDidChanged), name: NotificationName.DbKicksChange, object: nil)
 		
-		models = DbManager.manager.kickModels()
+		ana_models = DbManager.manager.kickModels()
 		
 		setTitle(title: "Kick Counter")
 		setHeaderView(headerView: nil)
@@ -37,20 +37,20 @@ class KickCounterViewController: AnaLargeTitleTableViewController {
 		tableView.register(KickCounterTableViewCell.self, forCellReuseIdentifier: String(NSStringFromClass(KickCounterTableViewCell.self)))
 		tableView.rowHeight = 100
 		
-		emptyView = UIView()
-		emptyView.backgroundColor = .clear
-		emptyView.isHidden = models.count > 0
-		tableView.addSubview(emptyView)
+		ana_emptyView = UIView()
+		ana_emptyView.backgroundColor = .clear
+		ana_emptyView.isHidden = ana_models.count > 0
+		tableView.addSubview(ana_emptyView)
 		
-		emptyImageView = UIImageView()
-		emptyImageView.image = UIImage(named: "Kick_Empty")
-		emptyView.addSubview(emptyImageView)
+		ana_emptyImageView = UIImageView()
+		ana_emptyImageView.image = UIImage(named: "Kick_Empty")
+		ana_emptyView.addSubview(ana_emptyImageView)
 		
-		emptyLabel = UILabel()
-		emptyLabel.text = "No Data！"
-		emptyLabel.textColor = .black
-		emptyLabel.font = .systemFont(ofSize: 16)
-		emptyView.addSubview(emptyLabel)
+		ana_emptyLabel = UILabel()
+		ana_emptyLabel.text = "No Data！"
+		ana_emptyLabel.textColor = .black
+		ana_emptyLabel.font = .systemFont(ofSize: 16)
+		ana_emptyView.addSubview(ana_emptyLabel)
 		
 		let button = UIButton()
 		button.setImage(UIImage(named: "Kick_Add"), for: .normal)
@@ -70,31 +70,31 @@ class KickCounterViewController: AnaLargeTitleTableViewController {
 	override func viewWillLayoutSubviews() {
 		super.viewWillLayoutSubviews()
 		
-		emptyImageView.sizeToFit()
-		emptyImageView.setOrigin(x: 0, y: 0)
-		emptyLabel.sizeToFit()
-		emptyLabel.center = CGPoint(x: emptyImageView.halfWidth(), y: emptyImageView.maxY() - 2 + emptyLabel.halfHeight())
-		emptyView.bounds = CGRect(origin: .zero, size: CGSize(width: emptyImageView.width(), height: emptyLabel.maxY()))
-		emptyView.center = CGPoint(x: tableView.halfWidth(), y: 265)
+		ana_emptyImageView.sizeToFit()
+		ana_emptyImageView.setOrigin(x: 0, y: 0)
+		ana_emptyLabel.sizeToFit()
+		ana_emptyLabel.center = CGPoint(x: ana_emptyImageView.halfWidth(), y: ana_emptyImageView.maxY() - 2 + ana_emptyLabel.halfHeight())
+		ana_emptyView.bounds = CGRect(origin: .zero, size: CGSize(width: ana_emptyImageView.width(), height: ana_emptyLabel.maxY()))
+		ana_emptyView.center = CGPoint(x: tableView.halfWidth(), y: 265)
 	}
 	
 	
 	@objc func dbDidChanged() {
-		models = DbManager.manager.kickModels()
+		ana_models = DbManager.manager.kickModels()
 		tableView.reloadData()
-		emptyView.isHidden = models.count > 0
+		ana_emptyView.isHidden = ana_models.count > 0
 	}
 	
 	
 	// MARK: - UITableViewDelegate & UITableViewDataSource
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return models.count
+		return ana_models.count
 	}
 	
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: String(NSStringFromClass(KickCounterTableViewCell.self)), for: indexPath) as! KickCounterTableViewCell
-		let model = models[indexPath.row]
+		let model = ana_models[indexPath.row]
 		if let date = DbManager.manager.dateFormatter.date(from: model.date!) {
 			let dateFormatter = DateFormatter()
 			dateFormatter.dateFormat = "dd MMM yyyy"

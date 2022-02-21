@@ -10,9 +10,9 @@ import SwipeCellKit
 
 
 class RecordingListViewController: AnaLargeTitleTableViewController, SwipeTableViewCellDelegate {
-    var emptyView: UIView!
-    var emptyImageView: UIImageView!
-    var emptyLabel: UILabel!
+    var ana_emptyView: UIView!
+    var ana_emptyImageView: UIImageView!
+    var ana_emptyLabel: UILabel!
     
     
     deinit {
@@ -32,38 +32,38 @@ class RecordingListViewController: AnaLargeTitleTableViewController, SwipeTableV
         tableView.register(RecordingTableViewCell.self, forCellReuseIdentifier: String(NSStringFromClass(RecordingTableViewCell.self)))
         tableView.rowHeight = 119
         
-        emptyView = UIView()
-        emptyView.backgroundColor = .clear
-        emptyView.isHidden = DbManager.manager.models.count > 0
-        tableView.addSubview(emptyView)
+        ana_emptyView = UIView()
+        ana_emptyView.backgroundColor = .clear
+        ana_emptyView.isHidden = DbManager.manager.models.count > 0
+        tableView.addSubview(ana_emptyView)
         
-        emptyImageView = UIImageView()
-        emptyImageView.image = UIImage(named: "RecordingList_Empty")
-        emptyView.addSubview(emptyImageView)
+        ana_emptyImageView = UIImageView()
+        ana_emptyImageView.image = UIImage(named: "RecordingList_Empty")
+        ana_emptyView.addSubview(ana_emptyImageView)
         
-        emptyLabel = UILabel()
-        emptyLabel.text = "No Data！"
-        emptyLabel.textColor = .black
-        emptyLabel.font = .systemFont(ofSize: 16)
-        emptyView.addSubview(emptyLabel)
+        ana_emptyLabel = UILabel()
+        ana_emptyLabel.text = "No Data！"
+        ana_emptyLabel.textColor = .black
+        ana_emptyLabel.font = .systemFont(ofSize: 16)
+        ana_emptyView.addSubview(ana_emptyLabel)
     }
     
     
     @objc func dbDidChanged() {
         tableView.reloadData()
-        emptyView.isHidden = DbManager.manager.models.count > 0
+        ana_emptyView.isHidden = DbManager.manager.models.count > 0
     }
     
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        emptyImageView.sizeToFit()
-        emptyImageView.setOrigin(x: 0, y: 0)
-        emptyLabel.sizeToFit()
-        emptyLabel.center = CGPoint(x: emptyImageView.halfWidth(), y: emptyImageView.maxY() - 2 + emptyLabel.halfHeight())
-        emptyView.bounds = CGRect(origin: .zero, size: CGSize(width: emptyImageView.width(), height: emptyLabel.maxY()))
-        emptyView.center = CGPoint(x: tableView.halfWidth(), y: 265)
+        ana_emptyImageView.sizeToFit()
+        ana_emptyImageView.setOrigin(x: 0, y: 0)
+        ana_emptyLabel.sizeToFit()
+        ana_emptyLabel.center = CGPoint(x: ana_emptyImageView.halfWidth(), y: ana_emptyImageView.maxY() - 2 + ana_emptyLabel.halfHeight())
+        ana_emptyView.bounds = CGRect(origin: .zero, size: CGSize(width: ana_emptyImageView.width(), height: ana_emptyLabel.maxY()))
+        ana_emptyView.center = CGPoint(x: tableView.halfWidth(), y: 265)
     }
     
     
