@@ -1,0 +1,913 @@
+./Kick/AddKickCounterViewController.swift:14:	var ana_gradientView: UIView!
+./Kick/AddKickCounterViewController.swift:15:	var ana_gradientLayer: CAGradientLayer!
+./Kick/AddKickCounterViewController.swift:16:	var ana_closeButton: UIButton!
+./Kick/AddKickCounterViewController.swift:18:	var ana_originView: UIView!
+./Kick/AddKickCounterViewController.swift:19:	var ana_imageView: UIImageView!
+./Kick/AddKickCounterViewController.swift:20:	var ana_originLabel: UILabel!
+./Kick/AddKickCounterViewController.swift:21:	var ana_originArrowLabel: UILabel!
+./Kick/AddKickCounterViewController.swift:22:	var ana_startButtonBackView: UIView!
+./Kick/AddKickCounterViewController.swift:23:	var ana_startButtonGradientLayer: CAGradientLayer!
+./Kick/AddKickCounterViewController.swift:24:	var ana_startButton: UIButton!
+./Kick/AddKickCounterViewController.swift:26:	var ana_countingView: UIView!
+./Kick/AddKickCounterViewController.swift:27:	var ana_kicksLabelsBackView: UIView!
+./Kick/AddKickCounterViewController.swift:28:	var ana_kicksTitleLabel: UILabel!
+./Kick/AddKickCounterViewController.swift:29:	var ana_kicksValueLabel: UILabel!
+./Kick/AddKickCounterViewController.swift:30:	var ana_kickButton: UIButton!
+./Kick/AddKickCounterViewController.swift:31:	var ana_timerLabel: UILabel!
+./Kick/AddKickCounterViewController.swift:32:	var ana_doneButtonBackView: UIView!
+./Kick/AddKickCounterViewController.swift:33:	var ana_doneButtonGradientLayer: CAGradientLayer!
+./Kick/AddKickCounterViewController.swift:34:	var ana_doneButton: UIButton!
+./Kick/AddKickCounterViewController.swift:36:	var ana_kicks = 0
+./Kick/AddKickCounterViewController.swift:37:	var ana_timer: Timer?
+./Kick/AddKickCounterViewController.swift:38:	var ana_timerStartDate: Date?
+./Kick/AddKickCounterViewController.swift:42:		if ana_timer?.isValid == true {
+./Kick/AddKickCounterViewController.swift:43:			ana_timer?.invalidate()
+./Kick/AddKickCounterViewController.swift:44:			ana_timer = nil
+./Kick/AddKickCounterViewController.swift:58:		ana_gradientView = UIView()
+./Kick/AddKickCounterViewController.swift:59:		view.addSubview(ana_gradientView)
+./Kick/AddKickCounterViewController.swift:61:		ana_gradientLayer = CAGradientLayer()
+./Kick/AddKickCounterViewController.swift:62:		ana_gradientLayer.colors = [UIColor.color(hexString: "#FBFCFF").cgColor, UIColor.color(hexString: "#FFF0F0").cgColor]
+./Kick/AddKickCounterViewController.swift:63:		ana_gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
+./Kick/AddKickCounterViewController.swift:64:		ana_gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
+./Kick/AddKickCounterViewController.swift:65:		ana_gradientView.layer.addSublayer(ana_gradientLayer)
+./Kick/AddKickCounterViewController.swift:67:		ana_closeButton = UIButton()
+./Kick/AddKickCounterViewController.swift:68:		ana_closeButton.setImage(UIImage(named: "Kick_Close"), for: .normal)
+./Kick/AddKickCounterViewController.swift:69:		ana_closeButton.reactive.controlEvents(.touchUpInside).observeValues {
+./Kick/AddKickCounterViewController.swift:74:		view.addSubview(ana_closeButton)
+./Kick/AddKickCounterViewController.swift:76:		ana_originView = UIView()
+./Kick/AddKickCounterViewController.swift:77:		ana_originView.backgroundColor = .clear
+./Kick/AddKickCounterViewController.swift:78:		view.addSubview(ana_originView)
+./Kick/AddKickCounterViewController.swift:80:		ana_imageView = UIImageView()
+./Kick/AddKickCounterViewController.swift:81:		ana_imageView.image = UIImage(named: "Kick_Image")
+./Kick/AddKickCounterViewController.swift:82:		ana_originView.addSubview(ana_imageView)
+./Kick/AddKickCounterViewController.swift:84:		ana_originLabel = UILabel()
+./Kick/AddKickCounterViewController.swift:85:		ana_originLabel.text = "Tap to begin recording kicks"
+./Kick/AddKickCounterViewController.swift:86:		ana_originLabel.textColor = .black
+./Kick/AddKickCounterViewController.swift:87:		ana_originLabel.font = UIFont(name: "Poppins-SemiBold", size: 18)
+./Kick/AddKickCounterViewController.swift:88:		ana_originView.addSubview(ana_originLabel)
+./Kick/AddKickCounterViewController.swift:90:		ana_originArrowLabel = UILabel()
+./Kick/AddKickCounterViewController.swift:91:		ana_originArrowLabel.text = "↓"
+./Kick/AddKickCounterViewController.swift:92:		ana_originArrowLabel.textColor = .black
+./Kick/AddKickCounterViewController.swift:93:		ana_originArrowLabel.font = UIFont(name: "Poppins-SemiBold", size: 18)
+./Kick/AddKickCounterViewController.swift:94:		ana_originView.addSubview(ana_originArrowLabel)
+./Kick/AddKickCounterViewController.swift:96:		ana_startButtonBackView = UIView()
+./Kick/AddKickCounterViewController.swift:97:		ana_startButtonBackView.layer.cornerRadius = 24
+./Kick/AddKickCounterViewController.swift:98:		ana_startButtonBackView.layer.borderWidth = 1
+./Kick/AddKickCounterViewController.swift:99:		ana_startButtonBackView.layer.borderColor = UIColor.color(hexString: "#80FCFCFC").cgColor
+./Kick/AddKickCounterViewController.swift:100:		ana_startButtonBackView.backgroundColor = .color(hexString: "#FF5D5D")
+./Kick/AddKickCounterViewController.swift:101:		ana_startButtonBackView.setShadow(color: .color(hexString: "#28a0a3bd"), offset: CGSize(width: 0, height: 16), radius: 24, opacity: 1)
+./Kick/AddKickCounterViewController.swift:102:		ana_originView.addSubview(ana_startButtonBackView)
+./Kick/AddKickCounterViewController.swift:104:		ana_startButtonGradientLayer = CAGradientLayer()
+./Kick/AddKickCounterViewController.swift:105:		ana_startButtonGradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
+./Kick/AddKickCounterViewController.swift:106:		ana_startButtonGradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
+./Kick/AddKickCounterViewController.swift:107:		ana_startButtonGradientLayer.colors = [UIColor.color(hexString: "#FF7474").cgColor, UIColor.color(hexString: "#FF4747").cgColor]
+./Kick/AddKickCounterViewController.swift:108:		ana_startButtonGradientLayer.cornerRadius = 24
+./Kick/AddKickCounterViewController.swift:109:		ana_startButtonBackView.layer.addSublayer(ana_startButtonGradientLayer)
+./Kick/AddKickCounterViewController.swift:111:		ana_startButton = UIButton()
+./Kick/AddKickCounterViewController.swift:112:		ana_startButton.backgroundColor = .clear
+./Kick/AddKickCounterViewController.swift:113:		ana_startButton.setTitle("Start", for: .normal)
+./Kick/AddKickCounterViewController.swift:114:		ana_startButton.setTitleColor(.color(hexString: "#FCFCFC"), for: .normal)
+./Kick/AddKickCounterViewController.swift:115:		ana_startButton.titleLabel?.font = UIFont(name: "Poppins-SemiBold", size: 18)
+./Kick/AddKickCounterViewController.swift:116:		ana_startButton.reactive.controlEvents(.touchUpInside).observeValues {
+./Kick/AddKickCounterViewController.swift:120:			self.ana_originView.isHidden = true
+./Kick/AddKickCounterViewController.swift:121:			self.ana_countingView.isHidden = false
+./Kick/AddKickCounterViewController.swift:122:			self.ana_timerStartDate = Date()
+./Kick/AddKickCounterViewController.swift:123:			if self.ana_timer?.isValid == true {
+./Kick/AddKickCounterViewController.swift:124:				self.ana_timer?.invalidate()
+./Kick/AddKickCounterViewController.swift:125:				self.ana_timer = nil
+./Kick/AddKickCounterViewController.swift:127:			self.ana_timer = Timer(timeInterval: 1, repeats: true, block: {
+./Kick/AddKickCounterViewController.swift:130:				if let startDate = self.ana_timerStartDate {
+./Kick/AddKickCounterViewController.swift:133:						self.ana_timerLabel.text = "99:59"
+./Kick/AddKickCounterViewController.swift:141:						self.ana_timerLabel.text = String(format: "%02d:%02d", minute, seconds)
+./Kick/AddKickCounterViewController.swift:146:			RunLoop.current.add(self.ana_timer!, forMode: .default)
+./Kick/AddKickCounterViewController.swift:148:		ana_originView.addSubview(ana_startButton)
+./Kick/AddKickCounterViewController.swift:150:		ana_countingView = UIView()
+./Kick/AddKickCounterViewController.swift:151:		ana_countingView.backgroundColor = .clear
+./Kick/AddKickCounterViewController.swift:152:		ana_countingView.isHidden = true
+./Kick/AddKickCounterViewController.swift:153:		view.addSubview(ana_countingView)
+./Kick/AddKickCounterViewController.swift:155:		ana_kicksLabelsBackView = UIView()
+./Kick/AddKickCounterViewController.swift:156:		ana_kicksLabelsBackView.backgroundColor = .clear
+./Kick/AddKickCounterViewController.swift:157:		ana_countingView.addSubview(ana_kicksLabelsBackView)
+./Kick/AddKickCounterViewController.swift:159:		ana_kicksTitleLabel = UILabel()
+./Kick/AddKickCounterViewController.swift:160:		ana_kicksTitleLabel.text = "Kicks"
+./Kick/AddKickCounterViewController.swift:161:		ana_kicksTitleLabel.textColor = .color(hexString: "#14142B")
+./Kick/AddKickCounterViewController.swift:162:		ana_kicksTitleLabel.font = UIFont(name: "Poppins-SemiBold", size: 18)
+./Kick/AddKickCounterViewController.swift:163:		ana_kicksLabelsBackView.addSubview(ana_kicksTitleLabel)
+./Kick/AddKickCounterViewController.swift:165:		ana_kicksValueLabel = UILabel()
+./Kick/AddKickCounterViewController.swift:166:		ana_kicksValueLabel.text = "0"
+./Kick/AddKickCounterViewController.swift:167:		ana_kicksValueLabel.textColor = .black
+./Kick/AddKickCounterViewController.swift:168:		ana_kicksValueLabel.font = UIFont(name: "Poppins-SemiBold", size: 100)
+./Kick/AddKickCounterViewController.swift:169:		ana_kicksLabelsBackView.addSubview(ana_kicksValueLabel)
+./Kick/AddKickCounterViewController.swift:171:		ana_kickButton = UIButton()
+./Kick/AddKickCounterViewController.swift:172:		ana_kickButton.setImage(UIImage(named: "Kick_Button"), for: .normal)
+./Kick/AddKickCounterViewController.swift:173:		ana_kickButton.reactive.controlEvents(.touchUpInside).observeValues {
+./Kick/AddKickCounterViewController.swift:177:			self.ana_kicks += 1
+./Kick/AddKickCounterViewController.swift:178:			self.ana_kicksValueLabel.text = "\(self.ana_kicks)"
+./Kick/AddKickCounterViewController.swift:181:		ana_countingView.addSubview(ana_kickButton)
+./Kick/AddKickCounterViewController.swift:183:		ana_timerLabel = UILabel()
+./Kick/AddKickCounterViewController.swift:184:		ana_timerLabel.text = "00:00"
+./Kick/AddKickCounterViewController.swift:185:		ana_timerLabel.textColor = .black
+./Kick/AddKickCounterViewController.swift:186:		ana_timerLabel.font = UIFont(name: "Poppins-SemiBold", size: 44)
+./Kick/AddKickCounterViewController.swift:187:		ana_countingView.addSubview(ana_timerLabel)
+./Kick/AddKickCounterViewController.swift:189:		ana_doneButtonBackView = UIView()
+./Kick/AddKickCounterViewController.swift:190:		ana_doneButtonBackView.layer.cornerRadius = 24
+./Kick/AddKickCounterViewController.swift:191:		ana_doneButtonBackView.layer.borderWidth = 1
+./Kick/AddKickCounterViewController.swift:192:		ana_doneButtonBackView.layer.borderColor = UIColor.color(hexString: "#80FCFCFC").cgColor
+./Kick/AddKickCounterViewController.swift:193:		ana_doneButtonBackView.backgroundColor = .color(hexString: "#FF5D5D")
+./Kick/AddKickCounterViewController.swift:194:		ana_doneButtonBackView.setShadow(color: .color(hexString: "#28a0a3bd"), offset: CGSize(width: 0, height: 16), radius: 24, opacity: 1)
+./Kick/AddKickCounterViewController.swift:195:		ana_countingView.addSubview(ana_doneButtonBackView)
+./Kick/AddKickCounterViewController.swift:197:		ana_doneButtonGradientLayer = CAGradientLayer()
+./Kick/AddKickCounterViewController.swift:198:		ana_doneButtonGradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
+./Kick/AddKickCounterViewController.swift:199:		ana_doneButtonGradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
+./Kick/AddKickCounterViewController.swift:200:		ana_doneButtonGradientLayer.colors = [UIColor.color(hexString: "#FF7474").cgColor, UIColor.color(hexString: "#FF4747").cgColor]
+./Kick/AddKickCounterViewController.swift:201:		ana_doneButtonGradientLayer.cornerRadius = 24
+./Kick/AddKickCounterViewController.swift:202:		ana_doneButtonBackView.layer.addSublayer(ana_doneButtonGradientLayer)
+./Kick/AddKickCounterViewController.swift:204:		ana_doneButton = UIButton()
+./Kick/AddKickCounterViewController.swift:205:		ana_doneButton.backgroundColor = .clear
+./Kick/AddKickCounterViewController.swift:206:		ana_doneButton.setTitle("Done", for: .normal)
+./Kick/AddKickCounterViewController.swift:207:		ana_doneButton.setTitleColor(.color(hexString: "#FCFCFC"), for: .normal)
+./Kick/AddKickCounterViewController.swift:208:		ana_doneButton.titleLabel?.font = UIFont(name: "Poppins-SemiBold", size: 18)
+./Kick/AddKickCounterViewController.swift:209:		ana_doneButton.reactive.controlEvents(.touchUpInside).observeValues {
+./Kick/AddKickCounterViewController.swift:214:			if let startDate = self.ana_timerStartDate {
+./Kick/AddKickCounterViewController.swift:217:			DbManager.manager.insertKicks(duration: min(Int(duration), 6000), kicks: self.ana_kicks)
+./Kick/AddKickCounterViewController.swift:220:		ana_countingView.addSubview(ana_doneButton)
+./Kick/AddKickCounterViewController.swift:222:		view.bringSubviewToFront(ana_closeButton)
+./Kick/AddKickCounterViewController.swift:229:		ana_gradientView.frame = view.bounds
+./Kick/AddKickCounterViewController.swift:230:		ana_gradientLayer.frame = ana_gradientView.bounds
+./Kick/AddKickCounterViewController.swift:231:		ana_closeButton.sizeToFit()
+./Kick/AddKickCounterViewController.swift:232:		ana_closeButton.setOrigin(x: 20, y: topSpacing() + 27)
+./Kick/AddKickCounterViewController.swift:234:		ana_originView.frame = view.bounds
+./Kick/AddKickCounterViewController.swift:235:		ana_imageView.sizeToFit()
+./Kick/AddKickCounterViewController.swift:236:		ana_imageView.center = CGPoint(x: ana_originView.halfWidth(), y: ana_closeButton.maxY() + 52 + ana_imageView.halfHeight())
+./Kick/AddKickCounterViewController.swift:237:		ana_startButtonBackView.bounds = CGRect(origin: .zero, size: CGSize(width: 240, height: 48))
+./Kick/AddKickCounterViewController.swift:238:		ana_startButtonBackView.center = CGPoint(x: ana_originView.halfWidth(), y: ana_originView.height() * 0.83)
+./Kick/AddKickCounterViewController.swift:239:		ana_startButtonGradientLayer.frame = ana_startButtonBackView.bounds
+./Kick/AddKickCounterViewController.swift:240:		ana_startButton.frame = ana_startButtonBackView.frame
+./Kick/AddKickCounterViewController.swift:241:		ana_originArrowLabel.sizeToFit()
+./Kick/AddKickCounterViewController.swift:242:		ana_originArrowLabel.center = CGPoint(x: ana_originView.halfWidth(), y: ana_startButton.minY() - 17 - ana_originArrowLabel.halfHeight())
+./Kick/AddKickCounterViewController.swift:243:		ana_originLabel.sizeToFit()
+./Kick/AddKickCounterViewController.swift:244:		ana_originLabel.center = CGPoint(x: ana_originView.halfWidth(), y: ana_originArrowLabel.minY() - 9 - ana_originLabel.halfHeight())
+./Kick/AddKickCounterViewController.swift:246:		ana_countingView.frame = view.bounds
+./Kick/AddKickCounterViewController.swift:247:		ana_kicksTitleLabel.sizeToFit()
+./Kick/AddKickCounterViewController.swift:248:		ana_kicksValueLabel.sizeToFit()
+./Kick/AddKickCounterViewController.swift:249:		ana_kicksLabelsBackView.bounds = CGRect(origin: .zero, size: CGSize(width: max(ana_kicksTitleLabel.width(), ana_kicksValueLabel.width()),
+./Kick/AddKickCounterViewController.swift:250:																		height: ana_kicksTitleLabel.height() + ana_kicksValueLabel.height()))
+./Kick/AddKickCounterViewController.swift:251:		ana_kicksTitleLabel.center = CGPoint(x: ana_kicksLabelsBackView.halfWidth(), y: ana_kicksTitleLabel.halfHeight())
+./Kick/AddKickCounterViewController.swift:252:		ana_kicksValueLabel.center = CGPoint(x: ana_kicksLabelsBackView.halfWidth(), y: ana_kicksTitleLabel.maxY() + ana_kicksValueLabel.halfHeight())
+./Kick/AddKickCounterViewController.swift:253:		ana_kicksLabelsBackView.center = CGPoint(x: ana_countingView.halfWidth(), y: ana_countingView.height() * 0.3)
+./Kick/AddKickCounterViewController.swift:254:		ana_kickButton.sizeToFit()
+./Kick/AddKickCounterViewController.swift:255:		ana_kickButton.center = CGPoint(x: ana_countingView.halfWidth(), y: ana_countingView.height() * 0.55)
+./Kick/AddKickCounterViewController.swift:256:		ana_timerLabel.sizeToFit()
+./Kick/AddKickCounterViewController.swift:257:		ana_timerLabel.center = CGPoint(x: ana_countingView.halfWidth(), y: ana_countingView.height() * 0.735)
+./Kick/AddKickCounterViewController.swift:258:		ana_doneButtonBackView.frame = ana_startButton.frame
+./Kick/AddKickCounterViewController.swift:259:		ana_doneButtonGradientLayer.frame = ana_doneButtonBackView.bounds
+./Kick/AddKickCounterViewController.swift:260:		ana_doneButton.frame = ana_doneButtonBackView.frame
+./Kick/KickCounterViewController.swift:14:	var ana_emptyView: UIView!
+./Kick/KickCounterViewController.swift:15:	var ana_emptyImageView: UIImageView!
+./Kick/KickCounterViewController.swift:16:	var ana_emptyLabel: UILabel!
+./Kick/KickCounterViewController.swift:18:	var ana_models: [DbKicksModel]!
+./Kick/KickCounterViewController.swift:31:		ana_models = DbManager.manager.kickModels()
+./Kick/KickCounterViewController.swift:40:		ana_emptyView = UIView()
+./Kick/KickCounterViewController.swift:41:		ana_emptyView.backgroundColor = .clear
+./Kick/KickCounterViewController.swift:42:		ana_emptyView.isHidden = ana_models.count > 0
+./Kick/KickCounterViewController.swift:43:		tableView.addSubview(ana_emptyView)
+./Kick/KickCounterViewController.swift:45:		ana_emptyImageView = UIImageView()
+./Kick/KickCounterViewController.swift:46:		ana_emptyImageView.image = UIImage(named: "Kick_Empty")
+./Kick/KickCounterViewController.swift:47:		ana_emptyView.addSubview(ana_emptyImageView)
+./Kick/KickCounterViewController.swift:49:		ana_emptyLabel = UILabel()
+./Kick/KickCounterViewController.swift:50:		ana_emptyLabel.text = "No Data！"
+./Kick/KickCounterViewController.swift:51:		ana_emptyLabel.textColor = .black
+./Kick/KickCounterViewController.swift:52:		ana_emptyLabel.font = .systemFont(ofSize: 16)
+./Kick/KickCounterViewController.swift:53:		ana_emptyView.addSubview(ana_emptyLabel)
+./Kick/KickCounterViewController.swift:73:		ana_emptyImageView.sizeToFit()
+./Kick/KickCounterViewController.swift:74:		ana_emptyImageView.setOrigin(x: 0, y: 0)
+./Kick/KickCounterViewController.swift:75:		ana_emptyLabel.sizeToFit()
+./Kick/KickCounterViewController.swift:76:		ana_emptyLabel.center = CGPoint(x: ana_emptyImageView.halfWidth(), y: ana_emptyImageView.maxY() - 2 + ana_emptyLabel.halfHeight())
+./Kick/KickCounterViewController.swift:77:		ana_emptyView.bounds = CGRect(origin: .zero, size: CGSize(width: ana_emptyImageView.width(), height: ana_emptyLabel.maxY()))
+./Kick/KickCounterViewController.swift:78:		ana_emptyView.center = CGPoint(x: tableView.halfWidth(), y: 265)
+./Kick/KickCounterViewController.swift:83:		ana_models = DbManager.manager.kickModels()
+./Kick/KickCounterViewController.swift:85:		ana_emptyView.isHidden = ana_models.count > 0
+./Kick/KickCounterViewController.swift:91:		return ana_models.count
+./Kick/KickCounterViewController.swift:97:		let model = ana_models[indexPath.row]
+./Guide/GuideViewController.swift:14:	var ana_gradient: 				CAGradientLayer!
+./Guide/GuideViewController.swift:15:	var ana_titleLabel: 			UILabel!
+./Guide/GuideViewController.swift:16:	var ana_imageView: 				UIImageView!
+./Guide/GuideViewController.swift:17:	var ana_contentLabel: 			UILabel!
+./Guide/GuideViewController.swift:18:	var ana_buttonBackView:         UIView!
+./Guide/GuideViewController.swift:19:	var ana_buttonShadowView:       UIView!
+./Guide/GuideViewController.swift:20:	var ana_buttonGradientView:		UIView!
+./Guide/GuideViewController.swift:21:	var ana_buttonGradientLayer: 	CAGradientLayer!
+./Guide/GuideViewController.swift:22:	var ana_button:                 UIButton!
+./Guide/GuideViewController.swift:24:	var ana_index = 1
+./Guide/GuideViewController.swift:29:		self.ana_index = index
+./Guide/GuideViewController.swift:50:		EventManager.log(name: "GuideVC_\(ana_index)_Show")
+./Guide/GuideViewController.swift:61:		ana_gradient = CAGradientLayer()
+./Guide/GuideViewController.swift:62:		ana_gradient.colors = [UIColor.color(hexString: "#FBFCFF").cgColor, UIColor.color(hexString: "#FFF0F0").cgColor]
+./Guide/GuideViewController.swift:63:		ana_gradient.startPoint = CGPoint(x: 0.5, y: 0)
+./Guide/GuideViewController.swift:64:		ana_gradient.endPoint = CGPoint(x: 0.5, y: 1)
+./Guide/GuideViewController.swift:65:		view.layer.addSublayer(ana_gradient)
+./Guide/GuideViewController.swift:67:		ana_titleLabel = UILabel()
+./Guide/GuideViewController.swift:68:		ana_titleLabel.layer.zPosition = 2
+./Guide/GuideViewController.swift:69:		ana_titleLabel.text = ana_index == 1 ? "Welcome to Angel!" : "Share your joy :)"
+./Guide/GuideViewController.swift:70:		ana_titleLabel.textColor = .color(hexString: "#263238")
+./Guide/GuideViewController.swift:71:		ana_titleLabel.font = UIFont(name: "Poppins-SemiBold", size: 26)
+./Guide/GuideViewController.swift:72:		view.addSubview(ana_titleLabel)
+./Guide/GuideViewController.swift:74:		ana_imageView = UIImageView()
+./Guide/GuideViewController.swift:75:		ana_imageView.layer.zPosition = 2
+./Guide/GuideViewController.swift:76:		ana_imageView.image = UIImage(named: "Guide_Image\(ana_index)")
+./Guide/GuideViewController.swift:77:		view.addSubview(ana_imageView)
+./Guide/GuideViewController.swift:79:		ana_contentLabel = UILabel()
+./Guide/GuideViewController.swift:80:		ana_contentLabel.layer.zPosition = 2
+./Guide/GuideViewController.swift:81:		ana_contentLabel.numberOfLines = 0
+./Guide/GuideViewController.swift:82:		let string = ana_index == 1 ? "Use your phone to record your baby's heartbeat" : "Share the magic sounds with your family"
+./Guide/GuideViewController.swift:86:		ana_contentLabel.attributedText = NSAttributedString(string: string,
+./Guide/GuideViewController.swift:90:		view.addSubview(ana_contentLabel)
+./Guide/GuideViewController.swift:92:		ana_buttonBackView = UIView()
+./Guide/GuideViewController.swift:93:		ana_buttonBackView.backgroundColor = .clear
+./Guide/GuideViewController.swift:94:		view.addSubview(ana_buttonBackView)
+./Guide/GuideViewController.swift:96:		ana_buttonGradientView = UIView()
+./Guide/GuideViewController.swift:97:		ana_buttonGradientView.backgroundColor = .clear
+./Guide/GuideViewController.swift:98:		ana_buttonBackView.addSubview(ana_buttonGradientView)
+./Guide/GuideViewController.swift:100:		ana_buttonShadowView = UIView()
+./Guide/GuideViewController.swift:101:		ana_buttonShadowView.layer.cornerRadius = 24
+./Guide/GuideViewController.swift:102:		ana_buttonShadowView.layer.borderWidth = 1
+./Guide/GuideViewController.swift:103:		ana_buttonShadowView.layer.borderColor = UIColor.color(hexString: "#80FCFCFC").cgColor
+./Guide/GuideViewController.swift:104:		ana_buttonShadowView.backgroundColor = .color(hexString: "#FF5E5E")
+./Guide/GuideViewController.swift:105:		ana_buttonShadowView.setShadow(color: .color(hexString: "#28a0a3bd"), offset: CGSize(width: 0, height: 16), radius: 24)
+./Guide/GuideViewController.swift:106:		ana_buttonBackView.addSubview(ana_buttonShadowView)
+./Guide/GuideViewController.swift:108:		ana_buttonGradientLayer = CAGradientLayer()
+./Guide/GuideViewController.swift:109:		ana_buttonGradientLayer.cornerRadius = 24
+./Guide/GuideViewController.swift:110:		ana_buttonGradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
+./Guide/GuideViewController.swift:111:		ana_buttonGradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
+./Guide/GuideViewController.swift:112:		ana_buttonGradientLayer.colors = [UIColor.color(hexString: "#FF7474").cgColor, UIColor.color(hexString: "#FF474747").cgColor]
+./Guide/GuideViewController.swift:113:		ana_buttonGradientView.layer.addSublayer(ana_buttonGradientLayer)
+./Guide/GuideViewController.swift:115:		ana_button = UIButton()
+./Guide/GuideViewController.swift:116:		ana_button.backgroundColor = .clear
+./Guide/GuideViewController.swift:117:		ana_button.setTitle("Continue", for: .normal)
+./Guide/GuideViewController.swift:118:		ana_button.setTitleColor(.color(hexString: "#FCFCFC"), for: .normal)
+./Guide/GuideViewController.swift:119:		ana_button.titleLabel?.font = UIFont(name: "Poppins-SemiBold", size: 16)
+./Guide/GuideViewController.swift:120:		ana_button.reactive.controlEvents(.touchUpInside).observeValues {
+./Guide/GuideViewController.swift:123:			EventManager.log(name: "Guidebutton_\(self.ana_index)_tapped")
+./Guide/GuideViewController.swift:124:			if self.ana_index == 1 {
+./Guide/GuideViewController.swift:129:				vc.ana_scene = .guide
+./Guide/GuideViewController.swift:137:		ana_buttonBackView.addSubview(ana_button)
+./Guide/GuideViewController.swift:144:		ana_gradient.frame = view.bounds
+./Guide/GuideViewController.swift:145:		ana_titleLabel.sizeToFit()
+./Guide/GuideViewController.swift:146:		ana_titleLabel.center = CGPoint(x: view.halfWidth(), y: view.height() * 0.16)
+./Guide/GuideViewController.swift:148:		ana_imageView.bounds = CGRect(origin: .zero, size: CGSize(width: imageWidth, height: imageWidth))
+./Guide/GuideViewController.swift:149:		ana_imageView.center = CGPoint(x: view.halfWidth(), y: view.height() * 0.43)
+./Guide/GuideViewController.swift:150:		let size = ana_contentLabel.sizeThatFits(CGSize(width: view.width() - 40, height: .greatestFiniteMagnitude))
+./Guide/GuideViewController.swift:151:		ana_contentLabel.bounds = CGRect(origin: .zero, size: size)
+./Guide/GuideViewController.swift:152:		ana_contentLabel.center = CGPoint(x: view.halfWidth(), y: view.height() * 0.74)
+./Guide/GuideViewController.swift:153:		ana_buttonBackView.frame = CGRect(x: 42, y: view.height() * 0.86 - 24, width: view.width() - 84, height: 48)
+./Guide/GuideViewController.swift:154:		ana_buttonShadowView.frame = ana_buttonBackView.bounds
+./Guide/GuideViewController.swift:155:		ana_buttonGradientView.frame = ana_buttonShadowView.frame
+./Guide/GuideViewController.swift:156:		ana_buttonGradientLayer.frame = ana_buttonGradientView.bounds
+./Guide/GuideViewController.swift:157:		ana_button.frame = ana_buttonGradientView.frame
+./Record/RecordViewController.swift:15:    var ana_proButton: UIButton!
+./Record/RecordViewController.swift:16:    var ana_animationView: RippleAnimationView!
+./Record/RecordViewController.swift:17:    var ana_mainView: UIView!
+./Record/RecordViewController.swift:18:    var ana_heartImageView: UIImageView!
+./Record/RecordViewController.swift:19:    var ana_label: UILabel!
+./Record/RecordViewController.swift:20:    var ana_timerLabel: UILabel!
+./Record/RecordViewController.swift:21:    var ana_buttonBackgroundView: UIView!
+./Record/RecordViewController.swift:22:    var ana_buttonGradient: CAGradientLayer!
+./Record/RecordViewController.swift:23:    var ana_button: UIButton!
+./Record/RecordViewController.swift:25:    let ana_manager = RecordManager()
+./Record/RecordViewController.swift:26:    var ana_recordStartDate = Date()
+./Record/RecordViewController.swift:27:    var ana_timer: Timer?
+./Record/RecordViewController.swift:28:    var ana_visiableTime: CGFloat = 0
+./Record/RecordViewController.swift:32:        if ana_timer != nil && ana_timer!.isValid {
+./Record/RecordViewController.swift:33:            ana_timer!.invalidate()
+./Record/RecordViewController.swift:34:            ana_timer = nil
+./Record/RecordViewController.swift:41:        ana_proButton.isHidden = NBUserVipStatusManager.shard.getVipStatus()
+./Record/RecordViewController.swift:52:        ana_proButton = UIButton()
+./Record/RecordViewController.swift:53:        ana_proButton.setImage(UIImage(named: "Record_Pro"), for: .normal)
+./Record/RecordViewController.swift:54:        ana_proButton.setShadow(color: .color(hexString: "#146575a7"), offset: CGSize(width: 0, height: 8), radius: 32)
+./Record/RecordViewController.swift:55:        ana_proButton.reactive.controlEvents(.touchUpInside).observeValues {
+./Record/RecordViewController.swift:62:        titleBackView.addSubview(ana_proButton)
+./Record/RecordViewController.swift:64:        ana_animationView = RippleAnimationView(bgColor: .color(hexString: "#FF8282"))
+./Record/RecordViewController.swift:65:        contentView.addSubview(ana_animationView)
+./Record/RecordViewController.swift:67:        ana_mainView = UIView()
+./Record/RecordViewController.swift:68:        ana_mainView.layer.cornerRadius = 134
+./Record/RecordViewController.swift:69:        ana_mainView.backgroundColor = .color(hexString: "#FF8282")
+./Record/RecordViewController.swift:70:        contentView.addSubview(ana_mainView)
+./Record/RecordViewController.swift:72:        ana_heartImageView = UIImageView()
+./Record/RecordViewController.swift:73:        ana_heartImageView.image = UIImage(named: "Record_Heart")
+./Record/RecordViewController.swift:74:        ana_mainView.addSubview(ana_heartImageView)
+./Record/RecordViewController.swift:76:        ana_label = UILabel()
+./Record/RecordViewController.swift:77:        ana_label.numberOfLines = 0
+./Record/RecordViewController.swift:78:        ana_label.textAlignment = .center
+./Record/RecordViewController.swift:79:        ana_label.text = "When you have found your baby‘s heartbeat, tap the button to record now"
+./Record/RecordViewController.swift:80:        ana_label.textColor = .white
+./Record/RecordViewController.swift:81:        ana_label.font = UIFont(name: "Poppins-Light", size: 14)
+./Record/RecordViewController.swift:82:        ana_mainView.addSubview(ana_label)
+./Record/RecordViewController.swift:84:        ana_timerLabel = UILabel()
+./Record/RecordViewController.swift:85:        ana_timerLabel.textColor = .white
+./Record/RecordViewController.swift:86:        ana_timerLabel.font = UIFont(name: "Poppins-SemiBold", size: 44)
+./Record/RecordViewController.swift:87:        ana_timerLabel.isHidden = true
+./Record/RecordViewController.swift:88:        ana_mainView.addSubview(ana_timerLabel)
+./Record/RecordViewController.swift:90:        ana_buttonBackgroundView = UIView()
+./Record/RecordViewController.swift:91:        ana_buttonBackgroundView.backgroundColor = .clear
+./Record/RecordViewController.swift:92:        ana_buttonBackgroundView.layer.cornerRadius = 24
+./Record/RecordViewController.swift:93:        ana_buttonBackgroundView.layer.borderWidth = 1
+./Record/RecordViewController.swift:94:        ana_buttonBackgroundView.layer.borderColor = UIColor.color(hexString: "#80FCFCFC").cgColor
+./Record/RecordViewController.swift:95:        contentView.addSubview(ana_buttonBackgroundView)
+./Record/RecordViewController.swift:97:        ana_buttonGradient = CAGradientLayer()
+./Record/RecordViewController.swift:98:        ana_buttonGradient.colors = [UIColor.color(hexString: "#FF7474").cgColor, UIColor.color(hexString: "#FF4747").cgColor]
+./Record/RecordViewController.swift:99:        ana_buttonGradient.startPoint = CGPoint(x: 0.5, y: 0)
+./Record/RecordViewController.swift:100:        ana_buttonGradient.endPoint = CGPoint(x: 0.5, y: 1)
+./Record/RecordViewController.swift:101:        ana_buttonGradient.cornerRadius = 24
+./Record/RecordViewController.swift:102:        ana_buttonBackgroundView.layer.addSublayer(ana_buttonGradient)
+./Record/RecordViewController.swift:104:        ana_buttonBackgroundView.setShadow(color: .color(hexString: "#28A0A3BD"), offset: CGSize(width: 0, height: 16), radius: 24)
+./Record/RecordViewController.swift:106:        ana_button = UIButton()
+./Record/RecordViewController.swift:107:        ana_button.setTitle("Start Recording", for: .normal)
+./Record/RecordViewController.swift:108:        ana_button.setTitleColor(.color(hexString: "#FCFCFC"), for: .normal)
+./Record/RecordViewController.swift:109:        ana_button.titleLabel?.font = UIFont(name: "Poppins-SemiBold", size: 16)
+./Record/RecordViewController.swift:110:        ana_button.reactive.controlEvents(.touchUpInside).observeValues {
+./Record/RecordViewController.swift:113:			if !self.ana_manager.isRecording {
+./Record/RecordViewController.swift:116:					self.ana_manager.beginRecord()
+./Record/RecordViewController.swift:117:					if self.ana_manager.isRecording {
+./Record/RecordViewController.swift:121:					self.ana_timerLabel.text = "00:00"
+./Record/RecordViewController.swift:123:					self.ana_timerLabel.isHidden = false
+./Record/RecordViewController.swift:124:					self.ana_label.isHidden = true
+./Record/RecordViewController.swift:125:					self.ana_recordStartDate = Date()
+./Record/RecordViewController.swift:126:					self.ana_visiableTime = 0
+./Record/RecordViewController.swift:127:					if self.ana_timer != nil && self.ana_timer!.isValid {
+./Record/RecordViewController.swift:128:						self.ana_timer!.invalidate()
+./Record/RecordViewController.swift:129:						self.ana_timer = nil
+./Record/RecordViewController.swift:131:					self.ana_timer = Timer(timeInterval: 1, repeats: true, block: {
+./Record/RecordViewController.swift:134:						let time = Date().timeIntervalSince(self.ana_recordStartDate)
+./Record/RecordViewController.swift:135:						if self.ana_visiableTime >= CGFloat(time) {
+./Record/RecordViewController.swift:136:							self.ana_visiableTime += 1
+./Record/RecordViewController.swift:138:							self.ana_visiableTime = CGFloat(time)
+./Record/RecordViewController.swift:140:						self.ana_timerLabel.text = String.stringFromTime(self.ana_visiableTime)
+./Record/RecordViewController.swift:143:					RunLoop.current.add(self.ana_timer!, forMode: .default)
+./Record/RecordViewController.swift:151:						vc.ana_success = action
+./Record/RecordViewController.swift:152:						vc.ana_dismiss = action
+./Record/RecordViewController.swift:153:						vc.ana_scene = .record
+./Record/RecordViewController.swift:165:				self.ana_manager.stopRecord()
+./Record/RecordViewController.swift:166:				if !self.ana_manager.isRecording {
+./Record/RecordViewController.swift:169:				let model = DbManager.manager.addRecording(path: self.ana_manager.file_name!)
+./Record/RecordViewController.swift:173:				self.ana_timerLabel.isHidden = true
+./Record/RecordViewController.swift:174:				self.ana_label.isHidden = false
+./Record/RecordViewController.swift:175:				if self.ana_timer != nil && self.ana_timer!.isValid {
+./Record/RecordViewController.swift:176:					self.ana_timer!.invalidate()
+./Record/RecordViewController.swift:177:					self.ana_timer = nil
+./Record/RecordViewController.swift:185:        ana_buttonBackgroundView.addSubview(ana_button)
+./Record/RecordViewController.swift:190:        ana_proButton.sizeToFit()
+./Record/RecordViewController.swift:191:        ana_proButton.center = CGPoint(x: view.width() - ana_proButton.halfWidth(), y: titleLabel.centerY() - 10)
+./Record/RecordViewController.swift:192:        ana_mainView.bounds = CGRect(origin: .zero, size: CGSize(width: 268, height: 268))
+./Record/RecordViewController.swift:193:        ana_mainView.center = CGPoint(x: view.halfWidth(), y: scrollView.height() * 0.3)
+./Record/RecordViewController.swift:194:        ana_animationView.frame = ana_mainView.frame
+./Record/RecordViewController.swift:195:        ana_heartImageView.sizeToFit()
+./Record/RecordViewController.swift:196:        ana_heartImageView.center = CGPoint(x: ana_mainView.halfWidth(), y: 65 + ana_heartImageView.halfHeight())
+./Record/RecordViewController.swift:197:        let size = ana_label.sizeThatFits(CGSize(width: 229, height: CGFloat.greatestFiniteMagnitude))
+./Record/RecordViewController.swift:198:        ana_label.bounds = CGRect(origin: .zero, size: size)
+./Record/RecordViewController.swift:199:        ana_label.center = CGPoint(x: ana_mainView.halfWidth(), y: ana_heartImageView.maxY() + 28 + ana_label.halfHeight())
+./Record/RecordViewController.swift:200:        ana_timerLabel.sizeToFit()
+./Record/RecordViewController.swift:201:        ana_timerLabel.center = CGPoint(x: ana_mainView.halfWidth(), y: ana_heartImageView.maxY() + 36 + ana_label.halfHeight())
+./Record/RecordViewController.swift:202:        ana_buttonBackgroundView.bounds = CGRect(origin: .zero, size: CGSize(width: 175, height: 48))
+./Record/RecordViewController.swift:203:        ana_buttonBackgroundView.center = CGPoint(x: view.halfWidth(), y: scrollView.height() * 0.7)
+./Record/RecordViewController.swift:204:        ana_buttonGradient.frame = ana_buttonBackgroundView.bounds
+./Record/RecordViewController.swift:205:        ana_button.frame = ana_buttonBackgroundView.bounds
+./Record/RecordViewController.swift:206:        return ana_buttonBackgroundView.maxY()
+./Subscription/SubscriptionViewController.swift:24:    var ana_gradientLayer:          CAGradientLayer!
+./Subscription/SubscriptionViewController.swift:25:    var ana_scrollView:             UIScrollView!
+./Subscription/SubscriptionViewController.swift:26:    var ana_closeButton:            UIButton!
+./Subscription/SubscriptionViewController.swift:27:    var ana_titleLabel:             UILabel!
+./Subscription/SubscriptionViewController.swift:28:    var ana_imageView:              UIImageView!
+./Subscription/SubscriptionViewController.swift:29:    var ana_featuresBackView:       UIView!
+./Subscription/SubscriptionViewController.swift:30:    var ana_iconImageView1:         UIImageView!
+./Subscription/SubscriptionViewController.swift:31:    var ana_iconImageView2:         UIImageView!
+./Subscription/SubscriptionViewController.swift:32:    var ana_iconImageView3:         UIImageView!
+./Subscription/SubscriptionViewController.swift:33:    var ana_featureLabel1:          UILabel!
+./Subscription/SubscriptionViewController.swift:34:    var ana_featureLabel2:          UILabel!
+./Subscription/SubscriptionViewController.swift:35:    var ana_featureLabel3:          UILabel!
+./Subscription/SubscriptionViewController.swift:36:    var ana_freeDayLabel:           UILabel!
+./Subscription/SubscriptionViewController.swift:37:    var ana_buttonBackView:         UIView!
+./Subscription/SubscriptionViewController.swift:38:    var ana_buttonShadowView:       UIView!
+./Subscription/SubscriptionViewController.swift:39:    var ana_buttonGradientView:     UIView!
+./Subscription/SubscriptionViewController.swift:40:    var ana_buttonGradientLayer:    CAGradientLayer!
+./Subscription/SubscriptionViewController.swift:41:    var ana_button:                 UIButton!
+./Subscription/SubscriptionViewController.swift:42:    var ana_activityView:           UIActivityIndicatorView!
+./Subscription/SubscriptionViewController.swift:43:    var ana_buttonBottomButton:     UIButton!
+./Subscription/SubscriptionViewController.swift:44:    var ana_restoreButton:          UIButton!
+./Subscription/SubscriptionViewController.swift:45:    var ana_termsButton:            UIButton!
+./Subscription/SubscriptionViewController.swift:46:    var ana_privacyButton:          UIButton!
+./Subscription/SubscriptionViewController.swift:47:    var ana_bottomLabel:            UILabel!
+./Subscription/SubscriptionViewController.swift:49:	var ana_scene: SubscriptionScene = .normal
+./Subscription/SubscriptionViewController.swift:51:    var ana_product: SKProduct?
+./Subscription/SubscriptionViewController.swift:52:    var ana_success: (() -> Void)? = nil
+./Subscription/SubscriptionViewController.swift:53:	var ana_dismiss: (() -> Void)? = nil
+./Subscription/SubscriptionViewController.swift:58:        self.ana_success = success
+./Subscription/SubscriptionViewController.swift:72:		EventManager.log(name: "Subscription_Show_\(ana_scene)")
+./Subscription/SubscriptionViewController.swift:78:        ana_gradientLayer = CAGradientLayer()
+./Subscription/SubscriptionViewController.swift:79:        ana_gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
+./Subscription/SubscriptionViewController.swift:80:        ana_gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
+./Subscription/SubscriptionViewController.swift:81:        ana_gradientLayer.colors = [UIColor.color(hexString: "#FBFCFF").cgColor, UIColor.color(hexString: "#FFF0F0").cgColor]
+./Subscription/SubscriptionViewController.swift:82:        view.layer.addSublayer(ana_gradientLayer)
+./Subscription/SubscriptionViewController.swift:84:        ana_scrollView = UIScrollView()
+./Subscription/SubscriptionViewController.swift:85:        ana_scrollView.backgroundColor = .clear
+./Subscription/SubscriptionViewController.swift:86:        view.addSubview(ana_scrollView)
+./Subscription/SubscriptionViewController.swift:88:        ana_closeButton = UIButton()
+./Subscription/SubscriptionViewController.swift:89:        ana_closeButton.setImage(UIImage(named: "Detail_Close"), for: .normal)
+./Subscription/SubscriptionViewController.swift:90:        ana_closeButton.reactive.controlEvents(.touchUpInside).observeValues {
+./Subscription/SubscriptionViewController.swift:93:			self.dismiss(animated: true, completion: self.ana_dismiss)
+./Subscription/SubscriptionViewController.swift:94:			EventManager.log(name: "Subscription_cancel_\(self.ana_scene)")
+./Subscription/SubscriptionViewController.swift:97:        view.addSubview(ana_closeButton)
+./Subscription/SubscriptionViewController.swift:99:        ana_titleLabel = UILabel()
+./Subscription/SubscriptionViewController.swift:100:        ana_titleLabel.text = "Angel  Premium"
+./Subscription/SubscriptionViewController.swift:101:        ana_titleLabel.textColor = .black
+./Subscription/SubscriptionViewController.swift:102:        ana_titleLabel.font = UIFont(name: "Poppins-SemiBold", size: 26)
+./Subscription/SubscriptionViewController.swift:103:        ana_scrollView.addSubview(ana_titleLabel)
+./Subscription/SubscriptionViewController.swift:105:        ana_imageView = UIImageView()
+./Subscription/SubscriptionViewController.swift:106:        ana_imageView.image = UIImage(named: "Subscription_Image")
+./Subscription/SubscriptionViewController.swift:107:        ana_scrollView.addSubview(ana_imageView)
+./Subscription/SubscriptionViewController.swift:109:        ana_featuresBackView = UIView()
+./Subscription/SubscriptionViewController.swift:110:        ana_featuresBackView.backgroundColor = .clear
+./Subscription/SubscriptionViewController.swift:111:        ana_scrollView.addSubview(ana_featuresBackView)
+./Subscription/SubscriptionViewController.swift:113:        ana_iconImageView1 = UIImageView()
+./Subscription/SubscriptionViewController.swift:114:        ana_iconImageView1.image = UIImage(named: "Subscription_Feature")
+./Subscription/SubscriptionViewController.swift:115:        ana_featuresBackView.addSubview(ana_iconImageView1)
+./Subscription/SubscriptionViewController.swift:117:        ana_iconImageView2 = UIImageView()
+./Subscription/SubscriptionViewController.swift:118:        ana_iconImageView2.image = UIImage(named: "Subscription_Feature")
+./Subscription/SubscriptionViewController.swift:119:        ana_featuresBackView.addSubview(ana_iconImageView2)
+./Subscription/SubscriptionViewController.swift:121:        ana_iconImageView3 = UIImageView()
+./Subscription/SubscriptionViewController.swift:122:        ana_iconImageView3.image = UIImage(named: "Subscription_Feature")
+./Subscription/SubscriptionViewController.swift:123:        ana_featuresBackView.addSubview(ana_iconImageView3)
+./Subscription/SubscriptionViewController.swift:125:        ana_featureLabel1 = UILabel()
+./Subscription/SubscriptionViewController.swift:126:        ana_featureLabel1.text = "Unlock All Features"
+./Subscription/SubscriptionViewController.swift:127:        ana_featureLabel1.textColor = .black
+./Subscription/SubscriptionViewController.swift:128:        ana_featureLabel1.font = .systemFont(ofSize: 14)
+./Subscription/SubscriptionViewController.swift:129:        ana_featuresBackView.addSubview(ana_featureLabel1)
+./Subscription/SubscriptionViewController.swift:131:        ana_featureLabel2 = UILabel()
+./Subscription/SubscriptionViewController.swift:132:        ana_featureLabel2.text = "Share Recording With Others"
+./Subscription/SubscriptionViewController.swift:133:        ana_featureLabel2.textColor = .black
+./Subscription/SubscriptionViewController.swift:134:        ana_featureLabel2.font = .systemFont(ofSize: 14)
+./Subscription/SubscriptionViewController.swift:135:        ana_featuresBackView.addSubview(ana_featureLabel2)
+./Subscription/SubscriptionViewController.swift:137:        ana_featureLabel3 = UILabel()
+./Subscription/SubscriptionViewController.swift:138:        ana_featureLabel3.text = "Remove Ads"
+./Subscription/SubscriptionViewController.swift:139:        ana_featureLabel3.textColor = .black
+./Subscription/SubscriptionViewController.swift:140:        ana_featureLabel3.font = .systemFont(ofSize: 14)
+./Subscription/SubscriptionViewController.swift:141:        ana_featuresBackView.addSubview(ana_featureLabel3)
+./Subscription/SubscriptionViewController.swift:143:        ana_freeDayLabel = UILabel()
+./Subscription/SubscriptionViewController.swift:144:        ana_freeDayLabel.textColor = .color(hexString: "#EB5757")
+./Subscription/SubscriptionViewController.swift:145:        ana_freeDayLabel.font = .systemFont(ofSize: 16, weight: .semibold)
+./Subscription/SubscriptionViewController.swift:146:        ana_scrollView.addSubview(ana_freeDayLabel)
+./Subscription/SubscriptionViewController.swift:148:        ana_buttonBackView = UIView()
+./Subscription/SubscriptionViewController.swift:149:        ana_buttonBackView.backgroundColor = .clear
+./Subscription/SubscriptionViewController.swift:150:        ana_scrollView.addSubview(ana_buttonBackView)
+./Subscription/SubscriptionViewController.swift:152:        ana_buttonGradientView = UIView()
+./Subscription/SubscriptionViewController.swift:153:        ana_buttonGradientView.backgroundColor = .clear
+./Subscription/SubscriptionViewController.swift:154:        ana_buttonBackView.addSubview(ana_buttonGradientView)
+./Subscription/SubscriptionViewController.swift:156:        ana_buttonShadowView = UIView()
+./Subscription/SubscriptionViewController.swift:157:        ana_buttonShadowView.layer.cornerRadius = 24
+./Subscription/SubscriptionViewController.swift:158:        ana_buttonShadowView.layer.borderWidth = 1
+./Subscription/SubscriptionViewController.swift:159:        ana_buttonShadowView.layer.borderColor = UIColor.color(hexString: "#80FCFCFC").cgColor
+./Subscription/SubscriptionViewController.swift:160:        ana_buttonShadowView.backgroundColor = .color(hexString: "#FF5E5E")
+./Subscription/SubscriptionViewController.swift:161:        ana_buttonShadowView.setShadow(color: .color(hexString: "#28a0a3bd"), offset: CGSize(width: 0, height: 16), radius: 24)
+./Subscription/SubscriptionViewController.swift:162:        ana_buttonBackView.addSubview(ana_buttonShadowView)
+./Subscription/SubscriptionViewController.swift:164:        ana_buttonGradientLayer = CAGradientLayer()
+./Subscription/SubscriptionViewController.swift:165:        ana_buttonGradientLayer.cornerRadius = 24
+./Subscription/SubscriptionViewController.swift:166:        ana_buttonGradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
+./Subscription/SubscriptionViewController.swift:167:        ana_buttonGradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
+./Subscription/SubscriptionViewController.swift:168:        ana_buttonGradientLayer.colors = [UIColor.color(hexString: "#FF7474").cgColor, UIColor.color(hexString: "#FF474747").cgColor]
+./Subscription/SubscriptionViewController.swift:169:        ana_buttonGradientView.layer.addSublayer(ana_buttonGradientLayer)
+./Subscription/SubscriptionViewController.swift:171:        ana_button = UIButton()
+./Subscription/SubscriptionViewController.swift:172:        ana_button.backgroundColor = .clear
+./Subscription/SubscriptionViewController.swift:173:		ana_button.setTitle("Continue", for: .normal)
+./Subscription/SubscriptionViewController.swift:174:        ana_button.setTitleColor(.color(hexString: "#FCFCFC"), for: .normal)
+./Subscription/SubscriptionViewController.swift:175:        ana_button.titleLabel?.font = UIFont(name: "Poppins-SemiBold", size: 16)
+./Subscription/SubscriptionViewController.swift:176:        ana_button.reactive.controlEvents(.touchUpInside).observeValues {
+./Subscription/SubscriptionViewController.swift:179:            if let product = self.ana_product {
+./Subscription/SubscriptionViewController.swift:183:			EventManager.log(name: "Subscription_buttontapped_\(self.ana_scene)")
+./Subscription/SubscriptionViewController.swift:186:        ana_buttonBackView.addSubview(ana_button)
+./Subscription/SubscriptionViewController.swift:188:        ana_activityView = UIActivityIndicatorView()
+./Subscription/SubscriptionViewController.swift:189:        ana_activityView.color = .color(hexString: "#FCFCFC")
+./Subscription/SubscriptionViewController.swift:190:        ana_activityView.startAnimating()
+./Subscription/SubscriptionViewController.swift:191:        ana_button.addSubview(ana_activityView)
+./Subscription/SubscriptionViewController.swift:193:        ana_buttonBottomButton = UIButton()
+./Subscription/SubscriptionViewController.swift:194:        ana_buttonBottomButton.setTitle("Auto renewable, Cancel anytime", for: .normal)
+./Subscription/SubscriptionViewController.swift:195:        ana_buttonBottomButton.setTitleColor(.color(hexString: "#979797"), for: .normal)
+./Subscription/SubscriptionViewController.swift:196:        ana_buttonBottomButton.titleLabel?.font = .systemFont(ofSize: 13)
+./Subscription/SubscriptionViewController.swift:197:        ana_buttonBottomButton.reactive.controlEvents(.touchUpInside).observeValues {
+./Subscription/SubscriptionViewController.swift:202:        ana_buttonBottomButton.isEnabled = false
+./Subscription/SubscriptionViewController.swift:203:        ana_scrollView.addSubview(ana_buttonBottomButton)
+./Subscription/SubscriptionViewController.swift:205:        ana_restoreButton = UIButton()
+./Subscription/SubscriptionViewController.swift:206:        ana_restoreButton.setTitle("RESTORE PURCHASE", for: .normal)
+./Subscription/SubscriptionViewController.swift:207:        ana_restoreButton.setTitleColor(.color(hexString: "#979797"), for: .normal)
+./Subscription/SubscriptionViewController.swift:208:        ana_restoreButton.titleLabel?.font = .systemFont(ofSize: 10, weight: .semibold)
+./Subscription/SubscriptionViewController.swift:209:        ana_restoreButton.reactive.controlEvents(.touchUpInside).observeValues {
+./Subscription/SubscriptionViewController.swift:214:        ana_scrollView.addSubview(ana_restoreButton)
+./Subscription/SubscriptionViewController.swift:216:        ana_termsButton = UIButton()
+./Subscription/SubscriptionViewController.swift:217:        ana_termsButton.setAttributedTitle(NSAttributedString(string: "Terms of Service",
+./Subscription/SubscriptionViewController.swift:223:        ana_termsButton.reactive.controlEvents(.touchUpInside).observeValues {
+./Subscription/SubscriptionViewController.swift:231:        ana_scrollView.addSubview(ana_termsButton)
+./Subscription/SubscriptionViewController.swift:233:        ana_privacyButton = UIButton()
+./Subscription/SubscriptionViewController.swift:234:        ana_privacyButton.setAttributedTitle(NSAttributedString(string: "Privacy Policy",
+./Subscription/SubscriptionViewController.swift:240:        ana_privacyButton.reactive.controlEvents(.touchUpInside).observeValues {
+./Subscription/SubscriptionViewController.swift:248:        ana_scrollView.addSubview(ana_privacyButton)
+./Subscription/SubscriptionViewController.swift:250:        ana_bottomLabel = UILabel()
+./Subscription/SubscriptionViewController.swift:251:        ana_bottomLabel.numberOfLines = 0
+./Subscription/SubscriptionViewController.swift:252:        ana_bottomLabel.text = "Angel Premium offers weekly purchase subscription. You can subscribe to a yearly plan. You can manage or turn off auto-renew in your Apple ID account settings at any time. Subscriptions will automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Any unused portion of a free trial period will be forfeited when you purchase a subscription. Our app is functional without purchasing an Auto-Renewable subscription, and you can use all the unlocked content after the subscription expires."
+./Subscription/SubscriptionViewController.swift:253:        ana_bottomLabel.textColor = .color(hexString: "#979797")
+./Subscription/SubscriptionViewController.swift:254:        ana_bottomLabel.font  = .systemFont(ofSize: 10, weight: .semibold)
+./Subscription/SubscriptionViewController.swift:255:        ana_scrollView.addSubview(ana_bottomLabel)
+./Subscription/SubscriptionViewController.swift:262:        ana_gradientLayer.frame = view.bounds
+./Subscription/SubscriptionViewController.swift:263:        ana_scrollView.frame = view.bounds
+./Subscription/SubscriptionViewController.swift:264:        ana_closeButton.sizeToFit()
+./Subscription/SubscriptionViewController.swift:265:        ana_closeButton.setOrigin(x: 20, y: 74)
+./Subscription/SubscriptionViewController.swift:266:        ana_titleLabel.sizeToFit()
+./Subscription/SubscriptionViewController.swift:267:        ana_titleLabel.center = CGPoint(x: ana_scrollView.halfWidth(), y: 136 + ana_titleLabel.halfHeight())
+./Subscription/SubscriptionViewController.swift:268:        ana_imageView.sizeToFit()
+./Subscription/SubscriptionViewController.swift:269:        ana_imageView.center = CGPoint(x: ana_scrollView.halfWidth(), y: ana_titleLabel.maxY() + 22 + ana_imageView.halfHeight())
+./Subscription/SubscriptionViewController.swift:270:        ana_iconImageView1.sizeToFit()
+./Subscription/SubscriptionViewController.swift:271:        ana_iconImageView1.setOrigin(x: 0, y: 0)
+./Subscription/SubscriptionViewController.swift:272:        ana_iconImageView2.sizeToFit()
+./Subscription/SubscriptionViewController.swift:273:        ana_iconImageView2.setOrigin(x: 0, y: ana_iconImageView1.maxY() + 22)
+./Subscription/SubscriptionViewController.swift:274:        ana_iconImageView3.sizeToFit()
+./Subscription/SubscriptionViewController.swift:275:        ana_iconImageView3.setOrigin(x: 0, y: ana_iconImageView2.maxY() + 22)
+./Subscription/SubscriptionViewController.swift:276:        ana_featureLabel1.sizeToFit()
+./Subscription/SubscriptionViewController.swift:277:        ana_featureLabel1.center = CGPoint(x: ana_iconImageView1.maxX() + 23 + ana_featureLabel1.halfWidth(), y: ana_iconImageView1.centerY())
+./Subscription/SubscriptionViewController.swift:278:        ana_featureLabel2.sizeToFit()
+./Subscription/SubscriptionViewController.swift:279:        ana_featureLabel2.center = CGPoint(x: ana_iconImageView2.maxX() + 23 + ana_featureLabel2.halfWidth(), y: ana_iconImageView2.centerY())
+./Subscription/SubscriptionViewController.swift:280:        ana_featureLabel3.sizeToFit()
+./Subscription/SubscriptionViewController.swift:281:        ana_featureLabel3.center = CGPoint(x: ana_iconImageView3.maxX() + 23 + ana_featureLabel3.halfWidth(), y: ana_iconImageView3.centerY())
+./Subscription/SubscriptionViewController.swift:282:        ana_featuresBackView.bounds = CGRect(origin: .zero, size: CGSize(width: max(ana_featureLabel1.maxX(), ana_featureLabel2.maxX(), ana_featureLabel3.maxX()),
+./Subscription/SubscriptionViewController.swift:283:                                                                     height: ana_iconImageView3.maxY()))
+./Subscription/SubscriptionViewController.swift:284:        ana_featuresBackView.center = CGPoint(x: ana_scrollView.halfWidth(), y: ana_imageView.maxY() + 15 + ana_featuresBackView.halfHeight())
+./Subscription/SubscriptionViewController.swift:285:        ana_freeDayLabel.sizeToFit()
+./Subscription/SubscriptionViewController.swift:286:        ana_buttonBackView.frame = CGRect(x: 42, y: ana_featuresBackView.maxY() + 72, width: ana_scrollView.width() - 84, height: 48)
+./Subscription/SubscriptionViewController.swift:287:        ana_freeDayLabel.center = CGPoint(x: ana_scrollView.halfWidth(), y: ana_buttonBackView.minY() - 10 - ana_freeDayLabel.halfHeight())
+./Subscription/SubscriptionViewController.swift:288:        ana_buttonShadowView.frame = ana_buttonBackView.bounds
+./Subscription/SubscriptionViewController.swift:289:        ana_buttonGradientView.frame = ana_buttonShadowView.frame
+./Subscription/SubscriptionViewController.swift:290:        ana_buttonGradientLayer.frame = ana_buttonGradientView.bounds
+./Subscription/SubscriptionViewController.swift:291:        ana_button.frame = ana_buttonGradientView.frame
+./Subscription/SubscriptionViewController.swift:292:        ana_activityView.sizeToFit()
+./Subscription/SubscriptionViewController.swift:293:        ana_activityView.center = CGPoint(x: ana_button.halfWidth(), y: ana_button.halfHeight())
+./Subscription/SubscriptionViewController.swift:294:        ana_buttonBottomButton.sizeToFit()
+./Subscription/SubscriptionViewController.swift:295:        ana_buttonBottomButton.center = CGPoint(x: ana_scrollView.halfWidth(), y: ana_buttonBackView.maxY() + 7 + ana_buttonBottomButton.halfHeight())
+./Subscription/SubscriptionViewController.swift:296:        ana_restoreButton.sizeToFit()
+./Subscription/SubscriptionViewController.swift:297:        ana_restoreButton.setOrigin(x: 42, y: ana_buttonBottomButton.maxY() + 29)
+./Subscription/SubscriptionViewController.swift:298:        ana_privacyButton.sizeToFit()
+./Subscription/SubscriptionViewController.swift:299:        ana_privacyButton.center = CGPoint(x: ana_scrollView.width() - 42 - ana_privacyButton.halfWidth(), y: ana_restoreButton.centerY())
+./Subscription/SubscriptionViewController.swift:300:        ana_termsButton.sizeToFit()
+./Subscription/SubscriptionViewController.swift:301:        ana_termsButton.center = CGPoint(x: ana_privacyButton.minX() - 27 - ana_termsButton.halfWidth(), y: ana_privacyButton.centerY())
+./Subscription/SubscriptionViewController.swift:302:        let size = ana_bottomLabel.sizeThatFits(CGSize(width: ana_scrollView.width() - 84, height: .greatestFiniteMagnitude))
+./Subscription/SubscriptionViewController.swift:303:        ana_bottomLabel.frame = CGRect(x: 42, y: ana_restoreButton.maxY() + 3, width: size.width, height: size.height)
+./Subscription/SubscriptionViewController.swift:304:        ana_scrollView.contentSize = CGSize(width: ana_scrollView.width(), height: ana_bottomLabel.maxY())
+./Subscription/SubscriptionViewController.swift:309:        ana_activityView.stopAnimating()
+./Subscription/SubscriptionViewController.swift:310:        if let product = ana_product {
+./Subscription/SubscriptionViewController.swift:317:			ana_freeDayLabel.text = string
+./Subscription/SubscriptionViewController.swift:320:            ana_bottomLabel.text = "Angel Premium offers weekly purchase subscription. You can subscribe to a monthly plan(\(product.regularPrice) per \(littleTimeString). You can manage or turn off auto-renew in your Apple ID account settings at any time. Subscriptions will automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Any unused portion of a free trial period will be forfeited when you purchase a subscription. Our app is functional without purchasing an Auto-Renewable subscription, and you can use all the unlocked content after the subscription expires."
+./Subscription/SubscriptionViewController.swift:334:            ana_buttonBackView.layer.add(animationGroup, forKey: nil)
+./Subscription/SubscriptionViewController.swift:340:        ana_activityView.stopAnimating()
+./Subscription/SubscriptionViewController.swift:349:        ana_product = products.filter({$0.productIdentifier == NBNewStoreManager.shard.monthProductId}).first
+./Subscription/SubscriptionViewController.swift:384:		EventManager.log(name: "Subscription_success_\(ana_scene)")
+./Subscription/SubscriptionViewController.swift:390:            if let success = self.ana_success {
+./Detail/DetailViewController.swift:14:    var ana_gradientLayer:      CAGradientLayer!
+./Detail/DetailViewController.swift:15:    var ana_closeButton:        UIButton!
+./Detail/DetailViewController.swift:16:    var ana_likeButton:         UIButton!
+./Detail/DetailViewController.swift:17:    var ana_shareButton:        UIButton!
+./Detail/DetailViewController.swift:18:    var ana_animationView:      RippleAnimationView!
+./Detail/DetailViewController.swift:19:    var ana_mainView:           UIView!
+./Detail/DetailViewController.swift:20:    var ana_heartImageView:     UIImageView!
+./Detail/DetailViewController.swift:21:    var ana_nameTextField:      UITextField!
+./Detail/DetailViewController.swift:22:    var ana_dateLabel:          UILabel!
+./Detail/DetailViewController.swift:23:    var ana_editButton:         UIButton!
+./Detail/DetailViewController.swift:24:    var ana_leftButton:         UIButton!
+./Detail/DetailViewController.swift:25:    var ana_playButton:         UIButton!
+./Detail/DetailViewController.swift:26:    var ana_rightButton:        UIButton!
+./Detail/DetailViewController.swift:27:    var ana_progressBackView:   UIView!
+./Detail/DetailViewController.swift:28:    var ana_progressBackLine:   UIView!
+./Detail/DetailViewController.swift:29:    var ana_progressLine:       UIView!
+./Detail/DetailViewController.swift:30:    var ana_progressImageView:  UIImageView!
+./Detail/DetailViewController.swift:31:    var ana_progressTimeLabel:  UILabel!
+./Detail/DetailViewController.swift:32:    var ana_totalTimeLabel:     UILabel!
+./Detail/DetailViewController.swift:34:    var ana_model: DbRecordModel!
+./Detail/DetailViewController.swift:35:    var ana_totalTime: CGFloat = 0
+./Detail/DetailViewController.swift:36:    var ana_currectTime: CGFloat = 0
+./Detail/DetailViewController.swift:37:    var ana_progress: CGFloat = 0
+./Detail/DetailViewController.swift:38:    var ana_shouldSeek = false
+./Detail/DetailViewController.swift:43:        self.ana_model = model
+./Detail/DetailViewController.swift:61:        ana_gradientLayer = CAGradientLayer()
+./Detail/DetailViewController.swift:62:        ana_gradientLayer.colors = [UIColor.color(hexString: "#FBFCFF").cgColor, UIColor.color(hexString: "#FFF0F0").cgColor]
+./Detail/DetailViewController.swift:63:        ana_gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
+./Detail/DetailViewController.swift:64:        ana_gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
+./Detail/DetailViewController.swift:65:        view.layer.addSublayer(ana_gradientLayer)
+./Detail/DetailViewController.swift:67:        ana_closeButton = UIButton()
+./Detail/DetailViewController.swift:68:        ana_closeButton.setImage(UIImage(named: "Detail_Close"), for: .normal)
+./Detail/DetailViewController.swift:69:        ana_closeButton.reactive.controlEvents(.touchUpInside).observeValues {
+./Detail/DetailViewController.swift:74:        view.addSubview(ana_closeButton)
+./Detail/DetailViewController.swift:76:        ana_likeButton = UIButton()
+./Detail/DetailViewController.swift:77:        ana_likeButton.setImage(UIImage(named: "Detail_" + ((ana_model.favorite ?? false) ? "Favorite" : "Like")), for: .normal)
+./Detail/DetailViewController.swift:78:        ana_likeButton.reactive.controlEvents(.touchUpInside).observeValues {
+./Detail/DetailViewController.swift:82:            DbManager.manager.changeFavoriteModel(self.ana_model)
+./Detail/DetailViewController.swift:83:            self.ana_model.favorite = !(self.ana_model.favorite ?? false)
+./Detail/DetailViewController.swift:84:            button.setImage(UIImage(named: "Detail_" + ((self.ana_model.favorite ?? false) ? "Favorite" : "Like")), for: .normal)
+./Detail/DetailViewController.swift:86:        view.addSubview(ana_likeButton)
+./Detail/DetailViewController.swift:88:        ana_shareButton = UIButton()
+./Detail/DetailViewController.swift:89:        ana_shareButton.setImage(UIImage(named: "Detail_Share"), for: .normal)
+./Detail/DetailViewController.swift:90:        ana_shareButton.setImage(UIImage(named: "Detail_Share"), for: .highlighted)
+./Detail/DetailViewController.swift:91:        ana_shareButton.reactive.controlEvents(.touchUpInside).observeValues {
+./Detail/DetailViewController.swift:98:                if let fileName = self.ana_model.path {
+./Detail/DetailViewController.swift:106:        view.addSubview(ana_shareButton)
+./Detail/DetailViewController.swift:108:        ana_animationView = RippleAnimationView(bgColor: .color(hexString: "#FF8282"))
+./Detail/DetailViewController.swift:109:        view.addSubview(ana_animationView)
+./Detail/DetailViewController.swift:111:        ana_mainView = UIView()
+./Detail/DetailViewController.swift:112:        ana_mainView.layer.cornerRadius = 134
+./Detail/DetailViewController.swift:113:        ana_mainView.backgroundColor = .color(hexString: "#FF8282")
+./Detail/DetailViewController.swift:114:        view.addSubview(ana_mainView)
+./Detail/DetailViewController.swift:116:        ana_heartImageView = UIImageView()
+./Detail/DetailViewController.swift:117:        ana_heartImageView.image = UIImage(named: "Record_Heart")
+./Detail/DetailViewController.swift:118:        ana_mainView.addSubview(ana_heartImageView)
+./Detail/DetailViewController.swift:120:        ana_nameTextField = UITextField()
+./Detail/DetailViewController.swift:121:        ana_nameTextField.text = ana_model.name
+./Detail/DetailViewController.swift:122:        ana_nameTextField.isEnabled = false
+./Detail/DetailViewController.swift:123:        ana_nameTextField.textColor = .white
+./Detail/DetailViewController.swift:124:        ana_nameTextField.font = .systemFont(ofSize: 28)
+./Detail/DetailViewController.swift:125:        ana_nameTextField.returnKeyType = .done
+./Detail/DetailViewController.swift:126:        ana_nameTextField.textAlignment = .center
+./Detail/DetailViewController.swift:127:        ana_nameTextField.delegate = self
+./Detail/DetailViewController.swift:128:        ana_mainView.addSubview(ana_nameTextField)
+./Detail/DetailViewController.swift:130:        let date = DbManager.manager.dateFormatter.date(from: String(ana_model.id!))!
+./Detail/DetailViewController.swift:135:        ana_dateLabel = UILabel()
+./Detail/DetailViewController.swift:136:        ana_dateLabel.text = dateString
+./Detail/DetailViewController.swift:137:        ana_dateLabel.textColor = .white
+./Detail/DetailViewController.swift:138:        ana_dateLabel.font = .systemFont(ofSize: 14)
+./Detail/DetailViewController.swift:139:        ana_mainView.addSubview(ana_dateLabel)
+./Detail/DetailViewController.swift:141:        ana_editButton = UIButton()
+./Detail/DetailViewController.swift:142:        ana_editButton.setImage(UIImage(named: "Detail_Edit"), for: .normal)
+./Detail/DetailViewController.swift:143:        ana_editButton.reactive.controlEvents(.touchUpInside).observeValues {
+./Detail/DetailViewController.swift:146:            NameEditAlert.show(name: self.ana_model.name, id: self.ana_model.id!, vc: self) {
+./Detail/DetailViewController.swift:149:                self.ana_nameTextField.text = newName
+./Detail/DetailViewController.swift:152:        ana_mainView.addSubview(ana_editButton)
+./Detail/DetailViewController.swift:154:        ana_leftButton = UIButton()
+./Detail/DetailViewController.swift:155:        ana_leftButton.setImage(UIImage(named: "Detail_Left"), for: .normal)
+./Detail/DetailViewController.swift:156:        ana_leftButton.reactive.controlEvents(.touchUpInside).observeValues {
+./Detail/DetailViewController.swift:160:            if self.ana_currectTime == 0 {
+./Detail/DetailViewController.swift:163:            self.ana_currectTime = max(0, self.ana_currectTime - 5)
+./Detail/DetailViewController.swift:164:            self.ana_progress = self.ana_currectTime / self.ana_totalTime
+./Detail/DetailViewController.swift:167:                PlayerManager.shared.seekToProgress(self.ana_progress)
+./Detail/DetailViewController.swift:169:                self.ana_shouldSeek = true
+./Detail/DetailViewController.swift:172:        view.addSubview(ana_leftButton)
+./Detail/DetailViewController.swift:174:        ana_playButton = UIButton()
+./Detail/DetailViewController.swift:175:        ana_playButton.setImage(UIImage(named: "Detail_Play"), for: .normal)
+./Detail/DetailViewController.swift:176:        ana_playButton.layer.cornerRadius = 44
+./Detail/DetailViewController.swift:177:        ana_playButton.backgroundColor = .color(hexString: "#FF8282")
+./Detail/DetailViewController.swift:178:        ana_playButton.reactive.controlEvents(.touchUpInside).observeValues {
+./Detail/DetailViewController.swift:186:					if self.ana_progress == 0 {
+./Detail/DetailViewController.swift:198:        view.addSubview(ana_playButton)
+./Detail/DetailViewController.swift:200:        ana_rightButton = UIButton()
+./Detail/DetailViewController.swift:201:        ana_rightButton.setImage(UIImage(named: "Detail_Right"), for: .normal)
+./Detail/DetailViewController.swift:202:        ana_rightButton.reactive.controlEvents(.touchUpInside).observeValues {
+./Detail/DetailViewController.swift:206:            if self.ana_currectTime + 5 >= self.ana_totalTime {
+./Detail/DetailViewController.swift:209:            self.ana_currectTime += 5
+./Detail/DetailViewController.swift:210:            self.ana_progress = self.ana_currectTime / self.ana_totalTime
+./Detail/DetailViewController.swift:213:                PlayerManager.shared.seekToProgress(self.ana_progress)
+./Detail/DetailViewController.swift:215:                self.ana_shouldSeek = true
+./Detail/DetailViewController.swift:218:        view.addSubview(ana_rightButton)
+./Detail/DetailViewController.swift:220:        ana_progressBackView = UIView()
+./Detail/DetailViewController.swift:221:        ana_progressBackView.backgroundColor = .clear
+./Detail/DetailViewController.swift:222:        view.addSubview(ana_progressBackView)
+./Detail/DetailViewController.swift:224:        ana_progressBackLine = UIView()
+./Detail/DetailViewController.swift:225:        ana_progressBackLine.backgroundColor = UIColor.color(hexString: "#A0A3B1").withAlphaComponent(0.5)
+./Detail/DetailViewController.swift:226:        ana_progressBackView.addSubview(ana_progressBackLine)
+./Detail/DetailViewController.swift:228:        ana_progressLine = UIView()
+./Detail/DetailViewController.swift:229:        ana_progressLine.backgroundColor = .color(hexString: "#3F414E")
+./Detail/DetailViewController.swift:230:        ana_progressBackView.addSubview(ana_progressLine)
+./Detail/DetailViewController.swift:232:        ana_progressImageView = UIImageView()
+./Detail/DetailViewController.swift:233:        ana_progressImageView.image = UIImage(named: "Detail_Progress")
+./Detail/DetailViewController.swift:234:        ana_progressBackView.addSubview(ana_progressImageView)
+./Detail/DetailViewController.swift:236:        ana_progressTimeLabel = UILabel()
+./Detail/DetailViewController.swift:237:        ana_progressTimeLabel.text = "00:00"
+./Detail/DetailViewController.swift:238:        ana_progressTimeLabel.textColor = .color(hexString: "#3F414E")
+./Detail/DetailViewController.swift:239:        ana_progressTimeLabel.font = .systemFont(ofSize: 16)
+./Detail/DetailViewController.swift:240:        view.addSubview(ana_progressTimeLabel)
+./Detail/DetailViewController.swift:242:        ana_totalTimeLabel = UILabel()
+./Detail/DetailViewController.swift:243:        ana_totalTimeLabel.text = "00:00"
+./Detail/DetailViewController.swift:244:        ana_totalTimeLabel.textColor = .color(hexString: "#3F414E")
+./Detail/DetailViewController.swift:245:        ana_totalTimeLabel.font = .systemFont(ofSize: 16)
+./Detail/DetailViewController.swift:246:        view.addSubview(ana_totalTimeLabel)
+./Detail/DetailViewController.swift:252:        ana_gradientLayer.frame = view.bounds
+./Detail/DetailViewController.swift:253:        ana_closeButton.sizeToFit()
+./Detail/DetailViewController.swift:254:        ana_closeButton.setOrigin(x: 20, y: 50)
+./Detail/DetailViewController.swift:255:        ana_shareButton.sizeToFit()
+./Detail/DetailViewController.swift:256:        ana_shareButton.setOrigin(x: view.width() - 20 - ana_shareButton.width(), y: 50)
+./Detail/DetailViewController.swift:257:        ana_likeButton.sizeToFit()
+./Detail/DetailViewController.swift:258:        ana_likeButton.setOrigin(x: ana_shareButton.minX() - 15 - ana_likeButton.width(), y: 50)
+./Detail/DetailViewController.swift:259:        ana_mainView.bounds = CGRect(origin: .zero, size: CGSize(width: 268, height: 268))
+./Detail/DetailViewController.swift:260:        ana_mainView.center = CGPoint(x: view.halfWidth(), y: view.height() * 0.4)
+./Detail/DetailViewController.swift:261:        ana_animationView.frame = ana_mainView.frame
+./Detail/DetailViewController.swift:262:        ana_heartImageView.sizeToFit()
+./Detail/DetailViewController.swift:263:        ana_heartImageView.center = CGPoint(x: ana_mainView.halfWidth(), y: 65 + ana_heartImageView.halfHeight())
+./Detail/DetailViewController.swift:264:        ana_nameTextField.sizeToFit()
+./Detail/DetailViewController.swift:265:        ana_nameTextField.bounds = CGRect(origin: .zero, size: CGSize(width: 264, height: ana_nameTextField.height()))
+./Detail/DetailViewController.swift:266:        ana_nameTextField.center = CGPoint(x: ana_mainView.halfWidth(), y: ana_heartImageView.maxY() + 29 + ana_nameTextField.halfHeight())
+./Detail/DetailViewController.swift:267:        ana_dateLabel.sizeToFit()
+./Detail/DetailViewController.swift:268:        ana_dateLabel.center = CGPoint(x: ana_mainView.halfWidth(), y: ana_nameTextField.maxY() - 3 + ana_dateLabel.halfHeight())
+./Detail/DetailViewController.swift:269:        ana_editButton.sizeToFit()
+./Detail/DetailViewController.swift:270:        ana_editButton.center = CGPoint(x: ana_mainView.halfWidth(), y: ana_dateLabel.maxY() + 29 + ana_editButton.halfHeight())
+./Detail/DetailViewController.swift:271:        ana_playButton.bounds = CGRect(origin: .zero, size: CGSize(width: 88, height: 88))
+./Detail/DetailViewController.swift:272:        ana_playButton.center = CGPoint(x: view.halfWidth(), y: view.height() * 0.73)
+./Detail/DetailViewController.swift:273:        ana_leftButton.sizeToFit()
+./Detail/DetailViewController.swift:274:        ana_leftButton.center = CGPoint(x: ana_playButton.minX() - 61 - ana_leftButton.halfWidth(), y: ana_playButton.centerY())
+./Detail/DetailViewController.swift:275:        ana_rightButton.sizeToFit()
+./Detail/DetailViewController.swift:276:        ana_rightButton.center = CGPoint(x: ana_playButton.maxX() + 61 + ana_rightButton.halfWidth(), y: ana_playButton.centerY())
+./Detail/DetailViewController.swift:277:        ana_progressImageView.sizeToFit()
+./Detail/DetailViewController.swift:278:        ana_progressBackView.frame = CGRect(x: 40, y: view.height() * 0.86, width: view.width() - 80, height: ana_progressImageView.height())
+./Detail/DetailViewController.swift:279:        ana_progressBackLine.bounds = CGRect(origin: .zero, size: CGSize(width: ana_progressBackView.width(), height: 3))
+./Detail/DetailViewController.swift:280:        ana_progressBackLine.center = CGPoint(x: ana_progressBackView.halfWidth(), y: ana_progressBackView.halfHeight())
+./Detail/DetailViewController.swift:281:        ana_progressLine.frame = CGRect(x: 0, y: ana_progressBackLine.minY(), width: ana_progress * ana_progressBackView.width(), height: 3)
+./Detail/DetailViewController.swift:282:        ana_progressImageView.center = CGPoint(x: ana_progressLine.maxX(), y: ana_progressBackView.halfHeight())
+./Detail/DetailViewController.swift:283:        ana_progressTimeLabel.sizeToFit()
+./Detail/DetailViewController.swift:284:        ana_progressTimeLabel.center = CGPoint(x: ana_progressBackView.minX(), y: ana_progressBackView.maxY() + 4 + ana_progressTimeLabel.halfHeight())
+./Detail/DetailViewController.swift:285:        ana_totalTimeLabel.sizeToFit()
+./Detail/DetailViewController.swift:286:        ana_totalTimeLabel.center = CGPoint(x: ana_progressBackView.maxX(), y: ana_progressTimeLabel.centerY())
+./Detail/DetailViewController.swift:291:        PlayerManager.shared.play(path: ana_model.path!) {
+./Detail/DetailViewController.swift:295:                self.ana_totalTime = floor(time)
+./Detail/DetailViewController.swift:297:            self.ana_totalTimeLabel.text = String.stringFromTime(self.ana_totalTime)
+./Detail/DetailViewController.swift:298:            self.ana_playButton.setImage(UIImage(named: "Detail_Pause"), for: .normal)
+./Detail/DetailViewController.swift:303:                self.ana_currectTime = floor(time)
+./Detail/DetailViewController.swift:305:            self.ana_progressTimeLabel.text = String.stringFromTime(self.ana_currectTime)
+./Detail/DetailViewController.swift:308:				self.ana_totalTime = totalTime
+./Detail/DetailViewController.swift:309:				self.ana_progress = self.ana_currectTime / self.ana_totalTime
+./Detail/DetailViewController.swift:310:				self.ana_totalTimeLabel.text = String.stringFromTime(self.ana_totalTime)
+./Detail/DetailViewController.swift:317:            self.ana_playButton.setImage(UIImage(named: "Detail_Play"), for: .normal)
+./Detail/DetailViewController.swift:318:            self.ana_progressTimeLabel.text = "00:00"
+./Detail/DetailViewController.swift:320:            self.ana_progress = 0
+./Detail/DetailViewController.swift:338:            textField.text = ana_model.name
+./Detail/DetailViewController.swift:340:            DbManager.manager.updateName(textField.text!, id: ana_model.id!)
+./RecordingList/RecordingTableViewCell.swift:13:    var ana_backView: UIView!
+./RecordingList/RecordingTableViewCell.swift:14:    var ana_gradientView: UIView!
+./RecordingList/RecordingTableViewCell.swift:15:    var ana_gradientLayer: CAGradientLayer!
+./RecordingList/RecordingTableViewCell.swift:16:    var ana_startImageView: UIImageView!
+./RecordingList/RecordingTableViewCell.swift:17:    var ana_labelsBackView: UIView!
+./RecordingList/RecordingTableViewCell.swift:18:    var ana_nameLabel: UILabel!
+./RecordingList/RecordingTableViewCell.swift:19:    var ana_dateLabel: UILabel!
+./RecordingList/RecordingTableViewCell.swift:20:    var ana_likeButton: UIButton!
+./RecordingList/RecordingTableViewCell.swift:42:        ana_backView = UIView()
+./RecordingList/RecordingTableViewCell.swift:43:        ana_backView.layer.cornerRadius = 12
+./RecordingList/RecordingTableViewCell.swift:44:        ana_backView.layer.borderWidth = 1
+./RecordingList/RecordingTableViewCell.swift:45:        ana_backView.layer.borderColor = UIColor.color(hexString: "#80FFFFFF").cgColor
+./RecordingList/RecordingTableViewCell.swift:46:        ana_backView.backgroundColor = .color(hexString: "#CDFFFFFF")
+./RecordingList/RecordingTableViewCell.swift:47:        ana_backView.setShadow(color: .color(hexString: "#1E6E7191"), offset: CGSize(width: 0, height: 8), radius: 32)
+./RecordingList/RecordingTableViewCell.swift:48:        contentView.addSubview(ana_backView)
+./RecordingList/RecordingTableViewCell.swift:50:        ana_gradientView = UIView()
+./RecordingList/RecordingTableViewCell.swift:51:        ana_gradientView.layer.cornerRadius = 12
+./RecordingList/RecordingTableViewCell.swift:52:        ana_backView.addSubview(ana_gradientView)
+./RecordingList/RecordingTableViewCell.swift:54:        ana_gradientLayer = CAGradientLayer()
+./RecordingList/RecordingTableViewCell.swift:55:        ana_gradientLayer.cornerRadius = 12
+./RecordingList/RecordingTableViewCell.swift:56:        ana_gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
+./RecordingList/RecordingTableViewCell.swift:57:        ana_gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
+./RecordingList/RecordingTableViewCell.swift:58:        ana_gradientLayer.colors = [UIColor.color(hexString: "#E6FFFFFF").cgColor, UIColor.color(hexString: "#B3FFFFFF").cgColor]
+./RecordingList/RecordingTableViewCell.swift:59:        ana_gradientView.layer.addSublayer(ana_gradientLayer)
+./RecordingList/RecordingTableViewCell.swift:61:        ana_startImageView = UIImageView()
+./RecordingList/RecordingTableViewCell.swift:62:        ana_startImageView.image = UIImage(named: "RecordingList_Start")
+./RecordingList/RecordingTableViewCell.swift:63:        ana_backView.addSubview(ana_startImageView)
+./RecordingList/RecordingTableViewCell.swift:65:        ana_labelsBackView = UIView()
+./RecordingList/RecordingTableViewCell.swift:66:        ana_labelsBackView.backgroundColor = .clear
+./RecordingList/RecordingTableViewCell.swift:67:        ana_backView.addSubview(ana_labelsBackView)
+./RecordingList/RecordingTableViewCell.swift:69:        ana_nameLabel = UILabel()
+./RecordingList/RecordingTableViewCell.swift:70:        ana_nameLabel.textColor = .color(hexString: "#14142B")
+./RecordingList/RecordingTableViewCell.swift:71:        ana_nameLabel.font = UIFont(name: "Poppins-SemiBold", size: 16)
+./RecordingList/RecordingTableViewCell.swift:72:        ana_labelsBackView.addSubview(ana_nameLabel)
+./RecordingList/RecordingTableViewCell.swift:74:        ana_dateLabel = UILabel()
+./RecordingList/RecordingTableViewCell.swift:75:        ana_dateLabel.textColor = .color(hexString: "#6E7191")
+./RecordingList/RecordingTableViewCell.swift:76:        ana_dateLabel.font = UIFont(name: "Inter-Regular", size: 13)
+./RecordingList/RecordingTableViewCell.swift:77:        ana_labelsBackView.addSubview(ana_dateLabel)
+./RecordingList/RecordingTableViewCell.swift:79:        ana_likeButton = UIButton()
+./RecordingList/RecordingTableViewCell.swift:80:        ana_likeButton.reactive.controlEvents(.touchUpInside).observeValues {
+./RecordingList/RecordingTableViewCell.swift:86:        ana_backView.addSubview(ana_likeButton)
+./RecordingList/RecordingTableViewCell.swift:93:        ana_backView.frame = CGRect(x: 24, y: 0, width: contentView.width() - 48, height: 104)
+./RecordingList/RecordingTableViewCell.swift:94:        ana_gradientView.frame = ana_backView.bounds
+./RecordingList/RecordingTableViewCell.swift:95:        ana_gradientLayer.frame = ana_gradientView.bounds
+./RecordingList/RecordingTableViewCell.swift:96:        ana_startImageView.sizeToFit()
+./RecordingList/RecordingTableViewCell.swift:97:        ana_startImageView.setOrigin(x: 0, y: ana_backView.halfHeight() - 35)
+./RecordingList/RecordingTableViewCell.swift:98:        ana_nameLabel.sizeToFit()
+./RecordingList/RecordingTableViewCell.swift:99:        ana_nameLabel.setOrigin(x: 0, y: 0)
+./RecordingList/RecordingTableViewCell.swift:100:        ana_dateLabel.sizeToFit()
+./RecordingList/RecordingTableViewCell.swift:101:        ana_dateLabel.setOrigin(x: 0, y: ana_nameLabel.maxY() + 4)
+./RecordingList/RecordingTableViewCell.swift:102:        ana_labelsBackView.bounds = CGRect(origin: .zero, size: CGSize(width: max(ana_nameLabel.width(), ana_dateLabel.width()), height: ana_dateLabel.maxY()))
+./RecordingList/RecordingTableViewCell.swift:103:        ana_labelsBackView.center = CGPoint(x: ana_startImageView.maxX() + 7 + ana_labelsBackView.halfWidth(), y: ana_backView.halfHeight())
+./RecordingList/RecordingTableViewCell.swift:104:        ana_likeButton.sizeToFit()
+./RecordingList/RecordingTableViewCell.swift:105:        ana_likeButton.center = CGPoint(x: ana_backView.width() - 24 - ana_likeButton.halfWidth(), y: ana_backView.halfHeight())
+./RecordingList/RecordingTableViewCell.swift:111:        ana_nameLabel.text = model.name
+./RecordingList/RecordingTableViewCell.swift:116:        ana_dateLabel.text = dateString
+./RecordingList/RecordingTableViewCell.swift:117:        ana_likeButton.setImage(UIImage(named: "RecordingList_" + ((model.favorite ?? false) ? "Favorite" : "Like")), for: .normal)
+./RecordingList/RecordingListViewController.swift:13:    var ana_emptyView: UIView!
+./RecordingList/RecordingListViewController.swift:14:    var ana_emptyImageView: UIImageView!
+./RecordingList/RecordingListViewController.swift:15:    var ana_emptyLabel: UILabel!
+./RecordingList/RecordingListViewController.swift:35:        ana_emptyView = UIView()
+./RecordingList/RecordingListViewController.swift:36:        ana_emptyView.backgroundColor = .clear
+./RecordingList/RecordingListViewController.swift:37:        ana_emptyView.isHidden = DbManager.manager.models.count > 0
+./RecordingList/RecordingListViewController.swift:38:        tableView.addSubview(ana_emptyView)
+./RecordingList/RecordingListViewController.swift:40:        ana_emptyImageView = UIImageView()
+./RecordingList/RecordingListViewController.swift:41:        ana_emptyImageView.image = UIImage(named: "RecordingList_Empty")
+./RecordingList/RecordingListViewController.swift:42:        ana_emptyView.addSubview(ana_emptyImageView)
+./RecordingList/RecordingListViewController.swift:44:        ana_emptyLabel = UILabel()
+./RecordingList/RecordingListViewController.swift:45:        ana_emptyLabel.text = "No Data！"
+./RecordingList/RecordingListViewController.swift:46:        ana_emptyLabel.textColor = .black
+./RecordingList/RecordingListViewController.swift:47:        ana_emptyLabel.font = .systemFont(ofSize: 16)
+./RecordingList/RecordingListViewController.swift:48:        ana_emptyView.addSubview(ana_emptyLabel)
+./RecordingList/RecordingListViewController.swift:54:        ana_emptyView.isHidden = DbManager.manager.models.count > 0
+./RecordingList/RecordingListViewController.swift:61:        ana_emptyImageView.sizeToFit()
+./RecordingList/RecordingListViewController.swift:62:        ana_emptyImageView.setOrigin(x: 0, y: 0)
+./RecordingList/RecordingListViewController.swift:63:        ana_emptyLabel.sizeToFit()
+./RecordingList/RecordingListViewController.swift:64:        ana_emptyLabel.center = CGPoint(x: ana_emptyImageView.halfWidth(), y: ana_emptyImageView.maxY() - 2 + ana_emptyLabel.halfHeight())
+./RecordingList/RecordingListViewController.swift:65:        ana_emptyView.bounds = CGRect(origin: .zero, size: CGSize(width: ana_emptyImageView.width(), height: ana_emptyLabel.maxY()))
+./RecordingList/RecordingListViewController.swift:66:        ana_emptyView.center = CGPoint(x: tableView.halfWidth(), y: 265)
+./Setting/SettingViewController.swift:14:    var ana_backView: UIView!
+./Setting/SettingViewController.swift:15:    var ana_gradientView: UIView!
+./Setting/SettingViewController.swift:16:    var ana_gradientLayer: CAGradientLayer!
+./Setting/SettingViewController.swift:17:    var ana_itemViews = [SettingItemView]()
+./Setting/SettingViewController.swift:18:    var ana_versionLabel: UILabel!
+./Setting/SettingViewController.swift:20:    var ana_proItemView: SettingItemView?
+./Setting/SettingViewController.swift:25:        if let proItemView = ana_proItemView {
+./Setting/SettingViewController.swift:26:            proItemView.ana_label.text = NBUserVipStatusManager.shard.getVipStatus() ? "You are pro!" : "Angel Premium-Unlock All Features"
+./Setting/SettingViewController.swift:36:        ana_backView = UIView()
+./Setting/SettingViewController.swift:37:        ana_backView.layer.cornerRadius = 12
+./Setting/SettingViewController.swift:38:        ana_backView.layer.borderWidth = 1
+./Setting/SettingViewController.swift:39:        ana_backView.layer.borderColor = UIColor.color(hexString: "#80FFFFFF").cgColor
+./Setting/SettingViewController.swift:40:        ana_backView.backgroundColor = .color(hexString: "#CDFFFFFF")
+./Setting/SettingViewController.swift:41:        ana_backView.setShadow(color: .color(hexString: "#1e6e7191"), offset: CGSize(width: 0, height: 8), radius: 32)
+./Setting/SettingViewController.swift:42:        contentView.addSubview(ana_backView)
+./Setting/SettingViewController.swift:44:        ana_gradientView = UIView()
+./Setting/SettingViewController.swift:45:        ana_gradientView.layer.cornerRadius = 12
+./Setting/SettingViewController.swift:46:        ana_backView.addSubview(ana_gradientView)
+./Setting/SettingViewController.swift:48:        ana_gradientLayer = CAGradientLayer()
+./Setting/SettingViewController.swift:49:        ana_gradientLayer.cornerRadius = 12
+./Setting/SettingViewController.swift:50:        ana_gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
+./Setting/SettingViewController.swift:51:        ana_gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
+./Setting/SettingViewController.swift:52:        ana_gradientLayer.colors = [UIColor.color(hexString: "#E6FFFFFF").cgColor, UIColor.color(hexString: "#B3FFFFFF").cgColor]
+./Setting/SettingViewController.swift:53:        ana_gradientView.layer.addSublayer(ana_gradientLayer)
+./Setting/SettingViewController.swift:57:            itemView.ana_pipe.output.observeValues {
+./Setting/SettingViewController.swift:63:                ana_proItemView = itemView
+./Setting/SettingViewController.swift:65:            ana_backView.addSubview(itemView)
+./Setting/SettingViewController.swift:66:            ana_itemViews.append(itemView)
+./Setting/SettingViewController.swift:69:        ana_versionLabel = UILabel()
+./Setting/SettingViewController.swift:76:        ana_versionLabel.text = versionString
+./Setting/SettingViewController.swift:77:        ana_versionLabel.textColor = .color(hexString: "#6e7191")
+./Setting/SettingViewController.swift:78:        ana_versionLabel.font = UIFont(name: "Inter-Regular", size: 13)
+./Setting/SettingViewController.swift:79:        ana_backView.addSubview(ana_versionLabel)
+./Setting/SettingViewController.swift:86:        for i in ana_itemViews.indices {
+./Setting/SettingViewController.swift:87:            let itemView = ana_itemViews[i]
+./Setting/SettingViewController.swift:91:        ana_versionLabel.sizeToFit()
+./Setting/SettingViewController.swift:92:        ana_versionLabel.setOrigin(x: 16, y: y + 8)
+./Setting/SettingViewController.swift:93:        ana_backView.frame = CGRect(x: 24, y: 34, width: backViewWidth, height: ana_versionLabel.maxY() + 16)
+./Setting/SettingViewController.swift:94:        ana_gradientView.frame = ana_backView.bounds
+./Setting/SettingViewController.swift:95:        ana_gradientLayer.frame = ana_gradientView.bounds
+./Setting/SettingViewController.swift:96:        return ana_backView.maxY()
+./Setting/FavoriteViewController.swift:13:    var ana_emptyView: UIView!
+./Setting/FavoriteViewController.swift:14:    var ana_emptyImageView: UIImageView!
+./Setting/FavoriteViewController.swift:15:    var ana_emptyLabel: UILabel!
+./Setting/FavoriteViewController.swift:35:        ana_emptyView = UIView()
+./Setting/FavoriteViewController.swift:36:        ana_emptyView.backgroundColor = .clear
+./Setting/FavoriteViewController.swift:37:        ana_emptyView.isHidden = DbManager.manager.models.count > 0
+./Setting/FavoriteViewController.swift:38:        tableView.addSubview(ana_emptyView)
+./Setting/FavoriteViewController.swift:40:        ana_emptyImageView = UIImageView()
+./Setting/FavoriteViewController.swift:41:        ana_emptyImageView.image = UIImage(named: "RecordingList_Empty")
+./Setting/FavoriteViewController.swift:42:        ana_emptyView.addSubview(ana_emptyImageView)
+./Setting/FavoriteViewController.swift:44:        ana_emptyLabel = UILabel()
+./Setting/FavoriteViewController.swift:45:        ana_emptyLabel.text = "No Data！"
+./Setting/FavoriteViewController.swift:46:        ana_emptyLabel.textColor = .black
+./Setting/FavoriteViewController.swift:47:        ana_emptyLabel.font = .systemFont(ofSize: 16)
+./Setting/FavoriteViewController.swift:48:        ana_emptyView.addSubview(ana_emptyLabel)
+./Setting/FavoriteViewController.swift:54:        ana_emptyView.isHidden = DbManager.manager.models.count > 0
+./Setting/FavoriteViewController.swift:61:        ana_emptyImageView.sizeToFit()
+./Setting/FavoriteViewController.swift:62:        ana_emptyImageView.setOrigin(x: 0, y: 0)
+./Setting/FavoriteViewController.swift:63:        ana_emptyLabel.sizeToFit()
+./Setting/FavoriteViewController.swift:64:        ana_emptyLabel.center = CGPoint(x: ana_emptyImageView.halfWidth(), y: ana_emptyImageView.maxY() - 2 + ana_emptyLabel.halfHeight())
+./Setting/FavoriteViewController.swift:65:        ana_emptyView.bounds = CGRect(origin: .zero, size: CGSize(width: ana_emptyImageView.width(), height: ana_emptyLabel.maxY()))
+./Setting/FavoriteViewController.swift:66:        ana_emptyView.center = CGPoint(x: tableView.halfWidth(), y: 265)
+./Setting/SettingItemView.swift:14:    var ana_button: UIButton!
+./Setting/SettingItemView.swift:15:    var ana_imageView: UIImageView!
+./Setting/SettingItemView.swift:16:    var ana_label: UILabel!
+./Setting/SettingItemView.swift:17:    var ana_arrowImageView: UIImageView!
+./Setting/SettingItemView.swift:19:    var ana_key: String!
+./Setting/SettingItemView.swift:20:    let ana_pipe = Signal<String, Never>.pipe()
+./Setting/SettingItemView.swift:26:        ana_imageView.image = image
+./Setting/SettingItemView.swift:27:        ana_label.text = title
+./Setting/SettingItemView.swift:28:        self.ana_key = key
+./Setting/SettingItemView.swift:35:        ana_button = UIButton()
+./Setting/SettingItemView.swift:36:        ana_button.backgroundColor = .clear
+./Setting/SettingItemView.swift:37:        ana_button.reactive.controlEvents(.touchUpInside).observeValues {
+./Setting/SettingItemView.swift:40:            self.ana_pipe.input.send(value: self.ana_key)
+./Setting/SettingItemView.swift:42:        addSubview(ana_button)
+./Setting/SettingItemView.swift:44:        ana_imageView = UIImageView()
+./Setting/SettingItemView.swift:45:        addSubview(ana_imageView)
+./Setting/SettingItemView.swift:47:        ana_label = UILabel()
+./Setting/SettingItemView.swift:48:        ana_label.textColor = .color(hexString: "#14142B")
+./Setting/SettingItemView.swift:49:        ana_label.font = UIFont(name: "Inter-Regular", size: 14)
+./Setting/SettingItemView.swift:50:        addSubview(ana_label)
+./Setting/SettingItemView.swift:52:        ana_arrowImageView = UIImageView()
+./Setting/SettingItemView.swift:53:        ana_arrowImageView.image = UIImage(named: "Setting_Arrow")
+./Setting/SettingItemView.swift:54:        addSubview(ana_arrowImageView)
+./Setting/SettingItemView.swift:60:        ana_button.frame = bounds
+./Setting/SettingItemView.swift:61:        ana_imageView.sizeToFit()
+./Setting/SettingItemView.swift:62:        ana_imageView.center = CGPoint(x: 18 + ana_imageView.halfWidth(), y: halfHeight())
+./Setting/SettingItemView.swift:63:        ana_label.sizeToFit()
+./Setting/SettingItemView.swift:64:        ana_label.center = CGPoint(x: ana_imageView.maxX() + 14 + ana_label.halfWidth(), y: halfHeight())
+./Setting/SettingItemView.swift:65:        ana_arrowImageView.sizeToFit()
+./Setting/SettingItemView.swift:66:        ana_arrowImageView.center = CGPoint(x: width() - 16 - ana_imageView.halfWidth(), y: halfHeight())

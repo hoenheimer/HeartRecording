@@ -10,11 +10,14 @@ import UIKit
 
 
 class AnaLargeTitleTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
+	var rightBarButton: UIButton?
     var gradientView: UIView!
     var gradient: CAGradientLayer!
+	var hintShapeLayer: CAShapeLayer!
 	public var tableView: LargeTitleTableView!
 	var titleBackView: UIView!
 	var titleLabel: UILabel!
+	var titleRightBarButton: UIButton?
 	var subTitleLabel: UILabel!
 	
 	public var titleText: String?
@@ -39,10 +42,13 @@ class AnaLargeTitleTableViewController: UIViewController, UITableViewDelegate, U
 		view.backgroundColor = .systemBackground
         
         gradient = CAGradientLayer()
-        gradient.colors = [UIColor.color(hexString: "#FBFCFF").cgColor, UIColor.color(hexString: "#FFF0F0").cgColor]
-        gradient.startPoint = CGPoint(x: 0.5, y: 0)
-        gradient.endPoint = CGPoint(x: 0.5, y: 1)
+		gradient.colors = [UIColor.color(hexString: "#fff0f2").cgColor, UIColor.color(hexString: "#fff6f8").cgColor]
+        gradient.startPoint = CGPoint(x: 0, y: 0)
+        gradient.endPoint = CGPoint(x: 1, y: 1)
         view.layer.addSublayer(gradient)
+		
+		hintShapeLayer = CAShapeLayer()
+		gradient.mask = hintShapeLayer
 		
 		tableView = LargeTitleTableView(frame: .zero, style: .grouped)
 		tableView.separatorStyle = .none
@@ -54,12 +60,12 @@ class AnaLargeTitleTableViewController: UIViewController, UITableViewDelegate, U
 		tableView.estimatedSectionFooterHeight = 0
 		view.addSubview(tableView)
 		
-		titleBackView = UIView()
+		titleBackView = TestView()
 		titleBackView.backgroundColor = .clear
 		
 		titleLabel = UILabel()
-		titleLabel.font = .boldSystemFont(ofSize: 34)
-		titleLabel.textColor = .black
+		titleLabel.font = UIFont(name: "Merriweather-Regular", size: 28)
+		titleLabel.textColor = .color(hexString: "#6a515e")
 		titleLabel.text = "Title"
 		titleLabel.layer.anchorPoint = CGPoint(x: 0, y: 1)
 		titleBackView.addSubview(titleLabel)
@@ -79,7 +85,31 @@ class AnaLargeTitleTableViewController: UIViewController, UITableViewDelegate, U
 		super.viewWillLayoutSubviews()
 		
         gradient.frame = view.bounds
-		tableView.frame = CGRect(x: 0, y: topSpacing(), width: view.bounds.width, height: view.bounds.height - topSpacing())
+		hintShapeLayer.frame = view.bounds
+		hintShapeLayer.path = maskLayerPath()
+		tableView.frame = CGRect(x: 0, y: topSpacing(), width: view.bounds.width, height: (view.height() - 13 - bottomSpacing() - 92) - topSpacing())
+	}
+	
+	
+	func maskLayerPath() -> CGPath {
+		let path = UIBezierPath()
+		path.move(to: CGPoint(x: 0, y: view.height()))
+		let tabBarMinY = view.height() - 13 - bottomSpacing() - 82
+		path.addLine(to: CGPoint(x: 0, y: tabBarMinY))
+		path.addArc(withCenter: CGPoint(x: 80, y: tabBarMinY),
+					radius: 80,
+					startAngle: -1 * CGFloat.pi,
+					endAngle: -0.5 * CGFloat.pi,
+					clockwise: true)
+		path.addLine(to: CGPoint(x: view.width() - 80, y: tabBarMinY - 80))
+		path.addArc(withCenter: CGPoint(x: view.width() - 80, y: tabBarMinY - 160),
+					radius: 80,
+					startAngle: 0.5 * CGFloat.pi,
+					endAngle: 0,
+					clockwise: false)
+		path.addLine(to: CGPoint(x: view.width(), y: view.height()))
+		path.close()
+		return path.cgPath
 	}
 	
 	
@@ -87,6 +117,7 @@ class AnaLargeTitleTableViewController: UIViewController, UITableViewDelegate, U
 		let hidden = tableView.contentOffset.y < 52 - 7.5
 		let textAttributes = [NSAttributedString.Key.foregroundColor : hidden ? UIColor.clear : (titleColor ?? UIColor.black)]
 		titleBackView.isHidden = !hidden
+		rightBarButton?.isHidden = hidden
 		navigationController?.navigationBar.titleTextAttributes = textAttributes
 	}
 	
@@ -106,6 +137,30 @@ class AnaLargeTitleTableViewController: UIViewController, UITableViewDelegate, U
 	}
 	
 	
+	func setRightBarItem(image: UIImage?, action: @escaping () -> Void) {
+		rightBarButton = UIButton()
+		rightBarButton?.isHidden = true
+		rightBarButton!.setImage(image, for: .normal)
+		rightBarButton!.reactive.controlEvents(.touchUpInside).observeValues {
+			_ in
+			action()
+		}
+		rightBarButton?.sizeToFit()
+		navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightBarButton!)
+		
+		titleRightBarButton = UIButton()
+		titleRightBarButton?.layer.cornerRadius = 24
+		titleRightBarButton?.backgroundColor = .white
+		titleRightBarButton?.setShadow(color: .color(hexString: "#70f8e6e6"), offset: CGSize(width: 0, height: 5), radius: 25, opacity: 1)
+		titleRightBarButton!.setImage(image, for: .normal)
+		titleRightBarButton!.reactive.controlEvents(.touchUpInside).observeValues {
+			_ in
+			action()
+		}
+		titleBackView.addSubview(titleRightBarButton!)
+	}
+	
+	
 	func setHeaderView(headerView: UIView?) {
 		let backView = UIView()
 		backView.backgroundColor = .clear
@@ -114,6 +169,10 @@ class AnaLargeTitleTableViewController: UIViewController, UITableViewDelegate, U
 		subTitleLabel.sizeToFit()
 		titleBackView.bounds = CGRect(x: 0, y: 0, width: tableView.bounds.width, height: titleLabel.bounds.height)
 		titleLabel.center = CGPoint(x: AnaNavigationController.margin, y: titleLabel.bounds.height + 3.5)
+		if let titleRightBarButton = titleRightBarButton {
+			titleRightBarButton.bounds = CGRect(x: 0, y: 0, width: 48, height: 48)
+			titleRightBarButton.center = CGPoint(x: view.width() - 25 - titleRightBarButton.halfWidth(), y: titleLabel.maxY() - titleLabel.halfHeight())
+		}
 		subTitleLabel.center = CGPoint(x: titleLabel.maxX() + 8 + subTitleLabel.halfWidth(), y: titleLabel.maxY() - subTitleLabel.halfHeight())
 		titleBackView.center = CGPoint(x: titleBackView.halfWidth(), y: titleBackView.halfHeight())
 		if let headerView = headerView {
@@ -123,6 +182,7 @@ class AnaLargeTitleTableViewController: UIViewController, UITableViewDelegate, U
 		} else {
 			backView.bounds = CGRect(x: 0, y: 0, width: view.width(), height: titleBackView.maxY() + 56)
 		}
+		titleBackView.frame = CGRect(x: 0, y: 0, width: backView.width(), height: titleBackView.height())
 		tableView.tableHeaderView = backView
         tableView.sendSubviewToBack(backView)
 	}
@@ -160,4 +220,12 @@ class LargeTitleTableView: UITableView, UIGestureRecognizerDelegate {
 //	func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
 //		return true
 //	}
+}
+
+
+class TestView: UIView {
+	override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+		let result = super.hitTest(point, with: event)
+		return result
+	}
 }

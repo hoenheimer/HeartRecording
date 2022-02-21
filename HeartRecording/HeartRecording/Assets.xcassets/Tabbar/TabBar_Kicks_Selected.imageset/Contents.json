@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "fi_plus.png",
+      "filename" : "oval-love.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "fi_plus@2x.png",
+      "filename" : "oval-love@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "fi_plus@3x.png",
+      "filename" : "oval-love@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

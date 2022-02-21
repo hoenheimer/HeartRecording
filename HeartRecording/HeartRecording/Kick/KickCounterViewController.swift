@@ -11,6 +11,7 @@ import ReactiveSwift
 
 
 class KickCounterViewController: AnaLargeTitleTableViewController {
+	var hintImageView: UIImageView!
 	var ana_emptyView: UIView!
 	var ana_emptyImageView: UIImageView!
 	var ana_emptyLabel: UILabel!
@@ -31,7 +32,19 @@ class KickCounterViewController: AnaLargeTitleTableViewController {
 		ana_models = DbManager.manager.kickModels()
 		
 		setTitle(title: "Kick Counter")
+		setRightBarItem(image: UIImage(named: "Kick_Add")) {
+			[weak self] in
+			guard let self = self else { return }
+			FeedbackManager.feedback(type: .light)
+			let vc = AddKickCounterViewController()
+			vc.modalPresentationStyle = .fullScreen
+			self.present(vc, animated: true, completion: nil)
+		}
 		setHeaderView(headerView: nil)
+		
+		hintImageView = UIImageView(image: UIImage(named: "Kick_Hint"))
+		view.addSubview(hintImageView)
+		view.sendSubviewToBack(hintImageView)
 		
 		tableView.backgroundColor = .clear
 		tableView.register(KickCounterTableViewCell.self, forCellReuseIdentifier: String(NSStringFromClass(KickCounterTableViewCell.self)))
@@ -51,25 +64,14 @@ class KickCounterViewController: AnaLargeTitleTableViewController {
 		ana_emptyLabel.textColor = .black
 		ana_emptyLabel.font = .systemFont(ofSize: 16)
 		ana_emptyView.addSubview(ana_emptyLabel)
-		
-		let button = UIButton()
-		button.setImage(UIImage(named: "Kick_Add"), for: .normal)
-		button.sizeToFit()
-		button.reactive.controlEvents(.touchUpInside).observeValues {
-			[weak self] _ in
-			guard let self = self else { return }
-			FeedbackManager.feedback(type: .light)
-			let vc = AddKickCounterViewController()
-			vc.modalPresentationStyle = .fullScreen
-			self.present(vc, animated: true, completion: nil)
-		}
-		navigationItem.rightBarButtonItem = UIBarButtonItem(customView: button)
 	}
 	
 	
 	override func viewWillLayoutSubviews() {
 		super.viewWillLayoutSubviews()
 		
+		hintImageView.sizeToFit()
+		hintImageView.setOrigin(x: 0, y: 0)
 		ana_emptyImageView.sizeToFit()
 		ana_emptyImageView.setOrigin(x: 0, y: 0)
 		ana_emptyLabel.sizeToFit()

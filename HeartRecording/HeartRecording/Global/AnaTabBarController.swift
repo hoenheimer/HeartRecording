@@ -8,43 +8,107 @@
 import Foundation
 import UIKit
 import ReactiveSwift
+import ReactiveCocoa
 
 
 class AnaTabBarController: UITabBarController {
+	var simulationTabBar: UIView!
+	var button1: TabbarButton!
+	var button2: TabbarButton!
+	var button3: TabbarButton!
+	var button4: TabbarButton!
+	
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		let tabbar = AnaTabBar()
-		setValue(tabbar, forKey: "tabBar")
+		tabBar.isHidden = true
 		
-		let apperance = tabBar.standardAppearance.copy()
-		apperance.backgroundImage = UIImage()
-		apperance.shadowImage = UIImage()
-		apperance.configureWithTransparentBackground()
-		tabBar.standardAppearance = apperance
+		viewControllers = [
+			AnaNavigationController(rootViewController: KickCounterViewController()),
+			AnaNavigationController(rootViewController: RecordingListViewController()),
+			AnaNavigationController(rootViewController: RecordViewController()),
+			AnaNavigationController(rootViewController: SettingViewController())
+		]
 		
-        func navigationVC(rootVC: UIViewController, imageName: String, title: String) -> AnaNavigationController {
-			let navigationController = AnaNavigationController(rootViewController: rootVC)
-			navigationController.tabBarItem = UITabBarItem(title: title, image: nil, selectedImage: nil)
-			let image = UIImage(named: imageName)
-            navigationController.tabBarItem.title = title
-			navigationController.tabBarItem.image = image?.withRenderingMode(.alwaysTemplate)
-			navigationController.tabBarItem.selectedImage = image?.withTintColor(.color(hexString: "#EB5757"), renderingMode: .alwaysOriginal)
-			navigationController.tabBarItem.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
-			return navigationController
+		simulationTabBar = UIView()
+		simulationTabBar.layer.cornerRadius = 25
+		simulationTabBar.backgroundColor = .white
+		simulationTabBar.setShadow(color: .color(hexString: "#1ee46a7d"), offset: CGSize(width: 0, height: 19), radius: 50, opacity: 1)
+		view.addSubview(simulationTabBar)
+		
+		func newButton(index: Int, imageNameSuffix: String, title: String) -> TabbarButton {
+			let button = TabbarButton()
+			button.index = index
+			button.backgroundColor = .clear
+			let selected = index == 0
+			button.imageNameSuffix = imageNameSuffix
+			button.setImage(UIImage(named: imageNameSuffix + (selected ? "_Selected" : "_Unselected")), for: .normal)
+			button.setTitle(title, for: .normal)
+			button.setTitleColor(.color(hexString: (selected ? "#e46a7d" : "#f5d1d6")), for: .normal)
+			button.titleLabel?.font = UIFont(name: "Poppins-Regular", size: 12)
+			button.reactive.controlEvents(.touchUpInside).observeValues {
+				[weak self] touchButton in
+				guard let self = self else { return }
+				guard self.selectedIndex != index else { return }
+				FeedbackManager.feedback(type: .light)
+				self.selectedIndex = index
+				for button in [self.button1, self.button2, self.button3, self.button4] {
+					if let button = button {
+						let selected = button == touchButton
+						button.setImage(UIImage(named: button.imageNameSuffix + (selected ? "_Selected" : "_Unselected")), for: .normal)
+						button.setTitleColor(.color(hexString: (selected ? "#e46a7d" : "#f5d1d6")), for: .normal)
+					}
+				}
+			}
+			simulationTabBar.addSubview(button)
+			return button
 		}
 		
-		let firstTime = !UserDefaults.standard.bool(forKey: "Have_Start_Once")
-		viewControllers = [
-			navigationVC(rootVC: firstTime ? GuideViewController(index: 1) : RecordViewController(), imageName: "TabBar_Record", title: "Record Now"),
-            navigationVC(rootVC: RecordingListViewController(), imageName: "TabBar_Recording", title: "Recording"),
-			navigationVC(rootVC: KickCounterViewController(), imageName: "TabBar_Kicks", title: "Kick Counter"),
-            navigationVC(rootVC: SettingViewController(), imageName: "TabBar_Setting", title: "Setting")
-		]
+		button1 = newButton(index: 0, imageNameSuffix: "TabBar_Kicks", title: "Heartbeat")
+		button2 = newButton(index: 1, imageNameSuffix: "TabBar_List", title: "Audio")
+		button3 = newButton(index: 2, imageNameSuffix: "TabBar_Record", title: "Recording")
+		button4 = newButton(index: 3, imageNameSuffix: "TabBar_Setting", title: "Setting")
 	}
-    
-    
-    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        FeedbackManager.feedback(type: .light)
-    }
+	
+	
+	override func viewWillLayoutSubviews() {
+		super.viewWillLayoutSubviews()
+		let margin = AnaNavigationController.margin
+		simulationTabBar.frame = CGRect(x: margin, y: view.height() - 13 - bottomSpacing() - 82, width: view.width() - margin * 2, height: 82)
+		let buttonWidth = (simulationTabBar.width() - 44) / 4
+		var x: CGFloat = 13
+		for button in [self.button1, self.button2, self.button3, self.button4] {
+			if let button = button {
+				button.frame = CGRect(x: x, y: 15, width: buttonWidth, height: 56)
+				x = button.maxX() + 6
+			}
+		}
+	}
+}
+
+
+class TabbarButton: UIButton {
+	var index = 0
+	var imageNameSuffix: String!
+	
+	
+	override func imageRect(forContentRect contentRect: CGRect) -> CGRect {
+		let imageRect = super.imageRect(forContentRect: contentRect)
+		let titleRect = super.titleRect(forContentRect: contentRect)
+		return CGRect(x: (contentRect.width - imageRect.width) / 2,
+					  y: (contentRect.height - imageRect.height - 8 - titleRect.height) / 2,
+					  width: imageRect.width,
+					  height: imageRect.height)
+	}
+	
+	
+	override func titleRect(forContentRect contentRect: CGRect) -> CGRect {
+		let imageRect = super.imageRect(forContentRect: contentRect)
+		let titleRect = super.titleRect(forContentRect: contentRect)
+		return CGRect(x: (contentRect.width - titleRect.width) / 2,
+					  y: (contentRect.height - imageRect.height - 8 - titleRect.height) / 2 + imageRect.height + 8,
+					  width: titleRect.width,
+					  height: titleRect.height)
+	}
 }
