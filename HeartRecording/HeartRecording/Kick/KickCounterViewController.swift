@@ -124,16 +124,16 @@ class KickCounterViewController: AnaLargeTitleTableViewController {
 
 
 class KickCounterTableViewCell: UITableViewCell {
-	var backView: UIView!
-	var dateView: UIView!
-	var dateGradientLayer: CAGradientLayer!
-	var dateLabel: UILabel!
-	var timeTitleLabel: UILabel!
-	var timeValueLabel: UILabel!
-	var durationTitleLabel: UILabel!
-	var durationValueLabel: UILabel!
-	var kicksTitleLabel: UILabel!
-	var kicksValueLabel: UILabel!
+	var ana_backView: UIView!
+	var ana_dateView: UIView!
+	var ana_dateGradientLayer: CAGradientLayer!
+	var ana_dateLabel: UILabel!
+	var ana_timeTitleLabel: UILabel!
+	var ana_timeValueLabel: UILabel!
+	var ana_durationTitleLabel: UILabel!
+	var ana_durationValueLabel: UILabel!
+	var ana_kicksTitleLabel: UILabel!
+	var ana_kicksValueLabel: UILabel!
 	
 	
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -149,33 +149,33 @@ class KickCounterTableViewCell: UITableViewCell {
 	
 	
 	func configure() {
-		backView = UIView()
-		backView.layer.cornerRadius = 25
-		backView.backgroundColor = .white
-		backView.setShadow(color: .color(hexString: "#0f933c49"), offset: CGSize(width: 0, height: 8), radius: 25, opacity: 1)
-		addSubview(backView)
+		ana_backView = UIView()
+		ana_backView.layer.cornerRadius = 25
+		ana_backView.backgroundColor = .white
+		ana_backView.setShadow(color: .color(hexString: "#0f933c49"), offset: CGSize(width: 0, height: 8), radius: 25, opacity: 1)
+		addSubview(ana_backView)
 		
-		dateView = UIView()
-		addSubview(dateView)
+		ana_dateView = UIView()
+		addSubview(ana_dateView)
 		
-		dateGradientLayer = CAGradientLayer()
-		dateGradientLayer.colors = [UIColor.color(hexString: "#fff3ed").cgColor, UIColor.color(hexString: "#ffdde4").cgColor]
-		dateGradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
-		dateGradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
-		dateGradientLayer.cornerRadius = 14
-		dateView.layer.addSublayer(dateGradientLayer)
+		ana_dateGradientLayer = CAGradientLayer()
+		ana_dateGradientLayer.colors = [UIColor.color(hexString: "#fff3ed").cgColor, UIColor.color(hexString: "#ffdde4").cgColor]
+		ana_dateGradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
+		ana_dateGradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
+		ana_dateGradientLayer.cornerRadius = 14
+		ana_dateView.layer.addSublayer(ana_dateGradientLayer)
 		
-		dateLabel = UILabel()
-		dateLabel.textColor = .color(hexString: "#6a515e")
-		dateLabel.font = UIFont(name: "Poppins-Regular", size: 13)
-		dateView.addSubview(dateLabel)
+		ana_dateLabel = UILabel()
+		ana_dateLabel.textColor = .color(hexString: "#6a515e")
+		ana_dateLabel.font = UIFont(name: "Poppins-Regular", size: 13)
+		ana_dateView.addSubview(ana_dateLabel)
 		
 		func newTitleLabel(title: String?) -> UILabel {
 			let label = UILabel()
 			label.text = title
 			label.textColor = .color(hexString: "#6a515e")
 			label.font = UIFont(name: "Poppins-SemiBold", size: 16)
-			backView.addSubview(label)
+			ana_backView.addSubview(label)
 			return label
 		}
 		
@@ -183,47 +183,47 @@ class KickCounterTableViewCell: UITableViewCell {
 			let label = UILabel()
 			label.textColor = UIColor.color(hexString: "#6a515e").withAlphaComponent(0.5)
 			label.font = UIFont(name: "Inter-Regular", size: 13)
-			backView.addSubview(label)
+			ana_backView.addSubview(label)
 			return label
 		}
 		
-		timeTitleLabel = newTitleLabel(title: "Time")
-		durationTitleLabel = newTitleLabel(title: "Duration")
-		kicksTitleLabel = newTitleLabel(title: "Kicks")
-		timeValueLabel = newValueLabel()
-		durationValueLabel = newValueLabel()
-		kicksValueLabel = newValueLabel()
+		ana_timeTitleLabel = newTitleLabel(title: "Time")
+		ana_durationTitleLabel = newTitleLabel(title: "Duration")
+		ana_kicksTitleLabel = newTitleLabel(title: "Kicks")
+		ana_timeValueLabel = newValueLabel()
+		ana_durationValueLabel = newValueLabel()
+		ana_kicksValueLabel = newValueLabel()
 	}
 	
 	
 	override func layoutSubviews() {
 		let margin = AnaNavigationController.margin
 		
-		backView.frame = CGRect(x: margin, y: 14, width: contentView.width() - margin * 2, height: 90)
-		dateView.frame = CGRect(x: backView.minX() + 25, y: 0, width: 109, height: 28)
-		dateGradientLayer.frame = dateView.bounds
-		dateLabel.sizeToFit()
-		dateLabel.center = CGPoint(x: dateView.halfWidth(), y: dateView.halfHeight())
-		timeTitleLabel.sizeToFit()
-		timeTitleLabel.setOrigin(x: 25, y: 28)
-		timeValueLabel.sizeToFit()
-		timeValueLabel.center = CGPoint(x: max(25 + timeValueLabel.halfWidth(), timeTitleLabel.centerX()), y: timeTitleLabel.maxY() + 8 + timeValueLabel.halfHeight())
-		durationTitleLabel.sizeToFit()
-		durationTitleLabel.center = CGPoint(x: backView.halfWidth(), y: timeTitleLabel.centerY())
-		durationValueLabel.sizeToFit()
-		durationValueLabel.center = CGPoint(x: durationTitleLabel.centerX(), y: timeValueLabel.centerY())
-		kicksTitleLabel.sizeToFit()
-		kicksTitleLabel.setOrigin(x: backView.width() - 25 - kicksTitleLabel.width(), y: timeTitleLabel.minY())
-		kicksValueLabel.sizeToFit()
-		kicksValueLabel.center = CGPoint(x: min(backView.width() - 25 - kicksValueLabel.halfWidth(), kicksTitleLabel.centerX()), y: timeValueLabel.centerY())
+		ana_backView.frame = CGRect(x: margin, y: 14, width: contentView.width() - margin * 2, height: 90)
+		ana_dateView.frame = CGRect(x: ana_backView.minX() + 25, y: 0, width: 109, height: 28)
+		ana_dateGradientLayer.frame = ana_dateView.bounds
+		ana_dateLabel.sizeToFit()
+		ana_dateLabel.center = CGPoint(x: ana_dateView.halfWidth(), y: ana_dateView.halfHeight())
+		ana_timeTitleLabel.sizeToFit()
+		ana_timeTitleLabel.setOrigin(x: 25, y: 28)
+		ana_timeValueLabel.sizeToFit()
+		ana_timeValueLabel.center = CGPoint(x: max(25 + ana_timeValueLabel.halfWidth(), ana_timeTitleLabel.centerX()), y: ana_timeTitleLabel.maxY() + 8 + ana_timeValueLabel.halfHeight())
+		ana_durationTitleLabel.sizeToFit()
+		ana_durationTitleLabel.center = CGPoint(x: ana_backView.halfWidth(), y: ana_timeTitleLabel.centerY())
+		ana_durationValueLabel.sizeToFit()
+		ana_durationValueLabel.center = CGPoint(x: ana_durationTitleLabel.centerX(), y: ana_timeValueLabel.centerY())
+		ana_kicksTitleLabel.sizeToFit()
+		ana_kicksTitleLabel.setOrigin(x: ana_backView.width() - 25 - ana_kicksTitleLabel.width(), y: ana_timeTitleLabel.minY())
+		ana_kicksValueLabel.sizeToFit()
+		ana_kicksValueLabel.center = CGPoint(x: min(ana_backView.width() - 25 - ana_kicksValueLabel.halfWidth(), ana_kicksTitleLabel.centerX()), y: ana_timeValueLabel.centerY())
 	}
 	
 	
 	public func set(date: String, time: String, duration: String, kicks: String) {
-		dateLabel.text = date
-		timeValueLabel.text = time
-		durationValueLabel.text = duration
-		kicksValueLabel.text = kicks
+		ana_dateLabel.text = date
+		ana_timeValueLabel.text = time
+		ana_durationValueLabel.text = duration
+		ana_kicksValueLabel.text = kicks
 		layoutNow()
 	}
 }

@@ -87,7 +87,7 @@ class AnaLargeTitleTableViewController: UIViewController, UITableViewDelegate, U
         gradient.frame = view.bounds
 		hintShapeLayer.frame = view.bounds
 		hintShapeLayer.path = maskLayerPath()
-		tableView.frame = CGRect(x: 0, y: topSpacing(), width: view.bounds.width, height: (view.height() - 13 - bottomSpacing() - 92) - topSpacing())
+		tableView.frame = CGRect(x: 0, y: topSpacing(), width: view.bounds.width, height: (view.height() - 13 - bottomSpacing() - 82) - topSpacing())
 	}
 	
 	
