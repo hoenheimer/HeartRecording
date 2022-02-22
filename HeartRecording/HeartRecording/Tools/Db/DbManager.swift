@@ -141,7 +141,7 @@ class DbManager: NSObject {
 	func kickModels() -> [DbKicksModel] {
 		var result = [DbKicksModel]()
 		do {
-			result = try db.getObjects(on: DbKicksModel.Properties.all, fromTable: kicksTableName)
+			result = try db.getObjects(on: DbKicksModel.Properties.all, fromTable: kicksTableName, orderBy: [DbKicksModel.Properties.date.asOrder(by: .descending)])
 		} catch let error {
 			print(error.localizedDescription)
 		}

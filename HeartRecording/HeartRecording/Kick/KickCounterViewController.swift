@@ -36,9 +36,7 @@ class KickCounterViewController: AnaLargeTitleTableViewController {
 			[weak self] in
 			guard let self = self else { return }
 			FeedbackManager.feedback(type: .light)
-			let vc = AddKickCounterViewController()
-			vc.modalPresentationStyle = .fullScreen
-			self.present(vc, animated: true, completion: nil)
+			self.navigationController?.pushViewController(AddKickCounterViewController(), animated: true)
 		}
 		setHeaderView(headerView: nil)
 		
@@ -60,9 +58,9 @@ class KickCounterViewController: AnaLargeTitleTableViewController {
 		ana_emptyView.addSubview(ana_emptyImageView)
 		
 		ana_emptyLabel = UILabel()
-		ana_emptyLabel.text = "No Data！"
-		ana_emptyLabel.textColor = .black
-		ana_emptyLabel.font = .systemFont(ofSize: 16)
+		ana_emptyLabel.text = "No Data!"
+		ana_emptyLabel.textColor = .color(hexString: "#6a515e")
+		ana_emptyLabel.font = UIFont(name: "Merriweather-Regular", size: 18)
 		ana_emptyView.addSubview(ana_emptyLabel)
 	}
 	
@@ -75,9 +73,9 @@ class KickCounterViewController: AnaLargeTitleTableViewController {
 		ana_emptyImageView.sizeToFit()
 		ana_emptyImageView.setOrigin(x: 0, y: 0)
 		ana_emptyLabel.sizeToFit()
-		ana_emptyLabel.center = CGPoint(x: ana_emptyImageView.halfWidth(), y: ana_emptyImageView.maxY() - 2 + ana_emptyLabel.halfHeight())
+		ana_emptyLabel.center = CGPoint(x: ana_emptyImageView.halfWidth(), y: ana_emptyImageView.maxY() + 23 + ana_emptyLabel.halfHeight())
 		ana_emptyView.bounds = CGRect(origin: .zero, size: CGSize(width: ana_emptyImageView.width(), height: ana_emptyLabel.maxY()))
-		ana_emptyView.center = CGPoint(x: tableView.halfWidth(), y: 265)
+		ana_emptyView.center = CGPoint(x: tableView.halfWidth(), y: tableView.halfHeight())
 	}
 	
 	
@@ -119,6 +117,11 @@ class KickCounterViewController: AnaLargeTitleTableViewController {
 		
 		
 		return cell
+	}
+	
+	
+	func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+		return 0.1
 	}
 }
 
