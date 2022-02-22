@@ -40,11 +40,9 @@ class RecordingTableViewCell: SwipeTableViewCell {
         contentView.backgroundColor = .clear
         
         ana_backView = UIView()
-        ana_backView.layer.cornerRadius = 12
-        ana_backView.layer.borderWidth = 1
-        ana_backView.layer.borderColor = UIColor.color(hexString: "#80FFFFFF").cgColor
+        ana_backView.layer.cornerRadius = 25
         ana_backView.backgroundColor = .color(hexString: "#CDFFFFFF")
-        ana_backView.setShadow(color: .color(hexString: "#1E6E7191"), offset: CGSize(width: 0, height: 8), radius: 32)
+        ana_backView.setShadow(color: .color(hexString: "#0f933c49"), offset: CGSize(width: 0, height: 8), radius: 25)
         contentView.addSubview(ana_backView)
         
         ana_gradientView = UIView()
@@ -60,6 +58,7 @@ class RecordingTableViewCell: SwipeTableViewCell {
         
         ana_startImageView = UIImageView()
         ana_startImageView.image = UIImage(named: "RecordingList_Start")
+		ana_startImageView.setShadow(color: .color(hexString: "#35d74b61"), offset: CGSize(width: 0, height: 12), radius: 38, opacity: 1)
         ana_backView.addSubview(ana_startImageView)
         
         ana_labelsBackView = UIView()
@@ -67,12 +66,12 @@ class RecordingTableViewCell: SwipeTableViewCell {
         ana_backView.addSubview(ana_labelsBackView)
         
         ana_nameLabel = UILabel()
-        ana_nameLabel.textColor = .color(hexString: "#14142B")
+        ana_nameLabel.textColor = .color(hexString: "#6a515e")
         ana_nameLabel.font = UIFont(name: "Poppins-SemiBold", size: 16)
         ana_labelsBackView.addSubview(ana_nameLabel)
         
         ana_dateLabel = UILabel()
-        ana_dateLabel.textColor = .color(hexString: "#6E7191")
+		ana_dateLabel.textColor = UIColor.color(hexString: "#6a515e").withAlphaComponent(0.5)
         ana_dateLabel.font = UIFont(name: "Inter-Regular", size: 13)
         ana_labelsBackView.addSubview(ana_dateLabel)
         
@@ -90,19 +89,19 @@ class RecordingTableViewCell: SwipeTableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        ana_backView.frame = CGRect(x: 24, y: 0, width: contentView.width() - 48, height: 104)
+        ana_backView.frame = CGRect(x: 25, y: 0, width: contentView.width() - 50, height: 90)
         ana_gradientView.frame = ana_backView.bounds
         ana_gradientLayer.frame = ana_gradientView.bounds
         ana_startImageView.sizeToFit()
-        ana_startImageView.setOrigin(x: 0, y: ana_backView.halfHeight() - 35)
+		ana_startImageView.center = CGPoint(x: 20 + ana_startImageView.halfWidth(), y: ana_backView.halfHeight())
         ana_nameLabel.sizeToFit()
         ana_nameLabel.setOrigin(x: 0, y: 0)
         ana_dateLabel.sizeToFit()
-        ana_dateLabel.setOrigin(x: 0, y: ana_nameLabel.maxY() + 4)
+        ana_dateLabel.setOrigin(x: 0, y: ana_nameLabel.maxY() + 2)
         ana_labelsBackView.bounds = CGRect(origin: .zero, size: CGSize(width: max(ana_nameLabel.width(), ana_dateLabel.width()), height: ana_dateLabel.maxY()))
-        ana_labelsBackView.center = CGPoint(x: ana_startImageView.maxX() + 7 + ana_labelsBackView.halfWidth(), y: ana_backView.halfHeight())
+        ana_labelsBackView.center = CGPoint(x: ana_startImageView.maxX() + 15 + ana_labelsBackView.halfWidth(), y: ana_backView.halfHeight())
         ana_likeButton.sizeToFit()
-        ana_likeButton.center = CGPoint(x: ana_backView.width() - 24 - ana_likeButton.halfWidth(), y: ana_backView.halfHeight())
+        ana_likeButton.center = CGPoint(x: ana_backView.width() - 26 - ana_likeButton.halfWidth(), y: ana_backView.halfHeight())
     }
     
     

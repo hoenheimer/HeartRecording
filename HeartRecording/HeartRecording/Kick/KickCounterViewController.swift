@@ -32,7 +32,15 @@ class KickCounterViewController: AnaLargeTitleTableViewController {
 		ana_models = DbManager.manager.kickModels()
 		
 		setTitle(title: "Kick Counter")
-		setRightBarItem(image: UIImage(named: "Kick_Add")) {
+		let topButton = UIButton()
+		topButton.setImage(UIImage(named: "Kick_Add"), for: .normal)
+		let bottomButton = UIButton()
+		bottomButton.setImage(UIImage(named: "Kick_Add"), for: .normal)
+		bottomButton.bounds = CGRect(x: 0, y: 0, width: 48, height: 48)
+		bottomButton.backgroundColor = .white
+		bottomButton.layer.cornerRadius = 24
+		bottomButton.setShadow(color: .color(hexString: "#70f8e6e6"), offset: CGSize(width: 0, height: 5), radius: 25, opacity: 1)
+		setRightBarItem(topButton: topButton, bottomButton: bottomButton) {
 			[weak self] in
 			guard let self = self else { return }
 			FeedbackManager.feedback(type: .light)

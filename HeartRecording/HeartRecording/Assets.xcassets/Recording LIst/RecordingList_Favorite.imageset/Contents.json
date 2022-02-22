@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "bxs-star.png",
+      "filename" : "star-1.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "bxs-star@2x.png",
+      "filename" : "star@2x-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "bxs-star@3x.png",
+      "filename" : "star@3x-1.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

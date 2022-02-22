@@ -18,6 +18,12 @@ class RecordingListViewController: AnaLargeTitleTableViewController, SwipeTableV
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
+	
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		setProRightBarItemIfNeeded()
+	}
     
     
     override func configure() {
@@ -26,11 +32,12 @@ class RecordingListViewController: AnaLargeTitleTableViewController, SwipeTableV
         NotificationCenter.default.addObserver(self, selector: #selector(dbDidChanged), name: NotificationName.DbRecordChange, object: nil)
         
         setTitle(title: "Recording List")
+		setProRightBarItemIfNeeded()
         setHeaderView(headerView: nil)
         
         tableView.backgroundColor = .clear
         tableView.register(RecordingTableViewCell.self, forCellReuseIdentifier: String(NSStringFromClass(RecordingTableViewCell.self)))
-        tableView.rowHeight = 119
+        tableView.rowHeight = 110
         
         ana_emptyView = UIView()
         ana_emptyView.backgroundColor = .clear
@@ -42,9 +49,9 @@ class RecordingListViewController: AnaLargeTitleTableViewController, SwipeTableV
         ana_emptyView.addSubview(ana_emptyImageView)
         
         ana_emptyLabel = UILabel()
-        ana_emptyLabel.text = "No Data！"
-        ana_emptyLabel.textColor = .black
-        ana_emptyLabel.font = .systemFont(ofSize: 16)
+        ana_emptyLabel.text = "No Data!"
+        ana_emptyLabel.textColor = .color(hexString: "#6a515e")
+        ana_emptyLabel.font = UIFont(name: "Merriweather-Regular", size: 18)
         ana_emptyView.addSubview(ana_emptyLabel)
     }
     
@@ -61,9 +68,9 @@ class RecordingListViewController: AnaLargeTitleTableViewController, SwipeTableV
         ana_emptyImageView.sizeToFit()
         ana_emptyImageView.setOrigin(x: 0, y: 0)
         ana_emptyLabel.sizeToFit()
-        ana_emptyLabel.center = CGPoint(x: ana_emptyImageView.halfWidth(), y: ana_emptyImageView.maxY() - 2 + ana_emptyLabel.halfHeight())
+        ana_emptyLabel.center = CGPoint(x: ana_emptyImageView.halfWidth(), y: ana_emptyImageView.maxY() + 3 + ana_emptyLabel.halfHeight())
         ana_emptyView.bounds = CGRect(origin: .zero, size: CGSize(width: ana_emptyImageView.width(), height: ana_emptyLabel.maxY()))
-        ana_emptyView.center = CGPoint(x: tableView.halfWidth(), y: 265)
+		ana_emptyView.center = CGPoint(x: tableView.halfWidth(), y: tableView.height() * 0.45)
     }
     
     

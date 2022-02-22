@@ -23,7 +23,6 @@ class AnaLargeTitleTableViewController: UIViewController, UITableViewDelegate, U
 	public var titleText: String?
 	public var titleColor: UIColor?
 	
-	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		judgmentTrueTitleHidden()
@@ -137,27 +136,51 @@ class AnaLargeTitleTableViewController: UIViewController, UITableViewDelegate, U
 	}
 	
 	
-	func setRightBarItem(image: UIImage?, action: @escaping () -> Void) {
-		rightBarButton = UIButton()
-		rightBarButton?.isHidden = true
-		rightBarButton!.setImage(image, for: .normal)
-		rightBarButton!.reactive.controlEvents(.touchUpInside).observeValues {
-			_ in
-			action()
+	func setRightBarItem(topButton: UIButton?, bottomButton: UIButton?, action: @escaping () -> Void) {
+		rightBarButton = topButton
+		if let topButton = topButton {
+			topButton.isHidden = true
+			topButton.reactive.controlEvents(.touchUpInside).observeValues {
+				_ in
+				action()
+			}
+			topButton.sizeToFit()
+			navigationItem.rightBarButtonItem = UIBarButtonItem(customView: topButton)
+		} else {
+			navigationItem.rightBarButtonItem = nil
 		}
-		rightBarButton?.sizeToFit()
-		navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightBarButton!)
 		
-		titleRightBarButton = UIButton()
-		titleRightBarButton?.layer.cornerRadius = 24
-		titleRightBarButton?.backgroundColor = .white
-		titleRightBarButton?.setShadow(color: .color(hexString: "#70f8e6e6"), offset: CGSize(width: 0, height: 5), radius: 25, opacity: 1)
-		titleRightBarButton!.setImage(image, for: .normal)
-		titleRightBarButton!.reactive.controlEvents(.touchUpInside).observeValues {
-			_ in
-			action()
+		if titleRightBarButton != bottomButton {
+			titleRightBarButton?.removeFromSuperview()
+			titleRightBarButton = bottomButton
+			if let bottomButton = bottomButton {
+				bottomButton.reactive.controlEvents(.touchUpInside).observeValues {
+					_ in
+					action()
+				}
+				titleBackView.addSubview(bottomButton)
+			}
 		}
-		titleBackView.addSubview(titleRightBarButton!)
+	}
+	
+	
+	func setProRightBarItemIfNeeded() {
+		if NBUserVipStatusManager.shard.getVipStatus() {
+			setRightBarItem(topButton: nil, bottomButton: nil) {
+				return
+			}
+		} else if titleRightBarButton == nil {
+			let topButton = UIButton()
+			topButton.setImage(UIImage(named: "NavigationBar_Pro_Top")?.reSizeImage(reSize: CGSize(width: 18, height: 18)), for: .normal)
+			let bottomButton = UIButton()
+			bottomButton.setImage(UIImage(named: "NavigationBar_Pro_Bottom"), for: .normal)
+			bottomButton.sizeToFit()
+			bottomButton.setShadow(color: .color(hexString: "#33bdaaa0"), offset: CGSize(width: 0, height: 7), radius: 20, opacity: 1)
+			setRightBarItem(topButton: topButton, bottomButton: bottomButton) {
+				[weak self]	in
+				self?.showSubscriptionIfNeeded(handle: nil)
+			}
+		}
 	}
 	
 	
@@ -170,8 +193,8 @@ class AnaLargeTitleTableViewController: UIViewController, UITableViewDelegate, U
 		titleBackView.bounds = CGRect(x: 0, y: 0, width: tableView.bounds.width, height: titleLabel.bounds.height)
 		titleLabel.center = CGPoint(x: AnaNavigationController.margin, y: titleLabel.bounds.height + 3.5)
 		if let titleRightBarButton = titleRightBarButton {
-			titleRightBarButton.bounds = CGRect(x: 0, y: 0, width: 48, height: 48)
-			titleRightBarButton.center = CGPoint(x: view.width() - 25 - titleRightBarButton.halfWidth(), y: titleLabel.maxY() - titleLabel.halfHeight())
+			titleRightBarButton.center = CGPoint(x: view.width() - 25 - titleRightBarButton.halfWidth(),
+												 y: max(titleLabel.maxY() - titleLabel.halfHeight(), titleRightBarButton.halfHeight()))
 		}
 		subTitleLabel.center = CGPoint(x: titleLabel.maxX() + 8 + subTitleLabel.halfWidth(), y: titleLabel.maxY() - subTitleLabel.halfHeight())
 		titleBackView.center = CGPoint(x: titleBackView.halfWidth(), y: titleBackView.halfHeight())
