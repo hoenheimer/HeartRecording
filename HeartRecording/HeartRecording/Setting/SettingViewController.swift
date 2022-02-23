@@ -22,7 +22,7 @@ class SettingViewController: AnaLargeTitleViewController, MFMailComposeViewContr
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if let proItemView = ana_proItemView {
-            proItemView.ana_label.text = NBUserVipStatusManager.shard.getVipStatus() ? "You are pro!" : "Angel Premium-Unlock All Features"
+            proItemView.ana_label.text = NBUserVipStatusManager.shard.getVipStatus() ? "You are pro!" : "BabyCare Premium-Unlock All Features"
         }
 		setProRightBarItemIfNeeded()
     }
@@ -82,7 +82,6 @@ class SettingViewController: AnaLargeTitleViewController, MFMailComposeViewContr
     
     
     func itemDidTouched(key: String) {
-		#warning("TODO")
         switch key {
         case "Pro":
             if !NBUserVipStatusManager.shard.getVipStatus() {
@@ -94,16 +93,16 @@ class SettingViewController: AnaLargeTitleViewController, MFMailComposeViewContr
             navigationController?.pushViewController(FavoriteViewController(), animated: true)
         case "Privacy":
             let webView = BaseWebController()
-            webView.urlStr = "https://sites.google.com/view/angelheartbeat/home"
+            webView.urlStr = "https://sites.google.com/view/babycarepop/home"
             webView.modalPresentationStyle = .fullScreen
             present(webView, animated: true, completion: nil)
         case "Terms":
             let webView = BaseWebController()
-            webView.urlStr = "https://sites.google.com/view/angelheart/home"
+            webView.urlStr = "https://sites.google.com/view/babycaretou/home"
             webView.modalPresentationStyle = .fullScreen
             present(webView, animated: true, completion: nil)
 		case "Feedback":
-			let mailAddress = "taolanetwork@163.com"
+			let mailAddress = "xomnmmamd@outlook.com"
 			if MFMailComposeViewController.canSendMail() {
 				let name = Bundle.main.infoDictionary!["CFBundleName"] as! String
 				let currentVersionStr = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
@@ -122,10 +121,10 @@ class SettingViewController: AnaLargeTitleViewController, MFMailComposeViewContr
 				UIApplication.shared.open(URL(string: mailStr)!, options: [:], completionHandler: nil)
 			}
 		case "Share":
-			let content = "Use this app to record your baby’s heart beat https://itunes.apple.com/app/1564099404"
+			let content = "Use this app to record your baby’s heart beat https://itunes.apple.com/app/1610497712"
 			NBSharedTool.shard(to: .systemShared, shardContent: content, shardImage: nil, linkUrl: nil,fromVC: self, .zero, nil)
 		case "Rate":
-			let commentLink = "itms-apps://itunes.apple.com/app/id1564099404?action=write-review"
+			let commentLink = "itms-apps://itunes.apple.com/app/id1610497712?action=write-review"
 			if let commentUrl = URL(string: commentLink){
 				UIApplication.shared.open(commentUrl, options: [:], completionHandler: nil)
 			}
@@ -140,7 +139,7 @@ class SettingViewController: AnaLargeTitleViewController, MFMailComposeViewContr
         if NBUserVipStatusManager.shard.getVipStatus() {
             models.append(SettingItemModel(image: UIImage(named: "Setting_Pro"), title: "You are pro!", key: "Pro"))
         } else {
-            models.append(SettingItemModel(image: UIImage(named: "Setting_Pro"), title: "Angel Premium-Unlock All Features", key: "Pro"))
+            models.append(SettingItemModel(image: UIImage(named: "Setting_Pro"), title: "BabyCare Premium-Unlock All Features", key: "Pro"))
         }
         models.append(SettingItemModel(image: UIImage(named: "Setting_Favorite"), title: "Favorites", key: "Favorites"))
         models.append(SettingItemModel(image: UIImage(named: "Setting_Feedback"), title: "Feedback", key: "Feedback"))

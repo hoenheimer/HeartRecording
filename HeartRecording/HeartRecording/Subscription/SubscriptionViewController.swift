@@ -97,7 +97,7 @@ class SubscriptionViewController: UIViewController {
         view.addSubview(ana_closeButton)
         
         ana_titleLabel = UILabel()
-        ana_titleLabel.text = "Angel  Premium"
+        ana_titleLabel.text = "BabyCare  Premium"
         ana_titleLabel.textColor = .black
         ana_titleLabel.font = UIFont(name: "Poppins-SemiBold", size: 26)
         ana_scrollView.addSubview(ana_titleLabel)
@@ -224,7 +224,7 @@ class SubscriptionViewController: UIViewController {
             [weak self] _ in
             guard let self = self else { return }
             let webView = BaseWebController()
-            webView.urlStr = "https://sites.google.com/view/angelheart/home"
+            webView.urlStr = "https://sites.google.com/view/babycaretou/home"
             webView.modalPresentationStyle = .fullScreen
             self.present(webView, animated: true, completion: nil)
         }
@@ -241,7 +241,7 @@ class SubscriptionViewController: UIViewController {
             [weak self] _ in
             guard let self = self else { return }
             let webView = BaseWebController()
-            webView.urlStr = "https://sites.google.com/view/angelheartbeat/home"
+            webView.urlStr = "https://sites.google.com/view/babycarepop/home"
             webView.modalPresentationStyle = .fullScreen
             self.present(webView, animated: true, completion: nil)
         }
@@ -249,7 +249,7 @@ class SubscriptionViewController: UIViewController {
         
         ana_bottomLabel = UILabel()
         ana_bottomLabel.numberOfLines = 0
-        ana_bottomLabel.text = "Angel Premium offers weekly purchase subscription. You can subscribe to a yearly plan. You can manage or turn off auto-renew in your Apple ID account settings at any time. Subscriptions will automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Any unused portion of a free trial period will be forfeited when you purchase a subscription. Our app is functional without purchasing an Auto-Renewable subscription, and you can use all the unlocked content after the subscription expires."
+        ana_bottomLabel.text = "BabyCare Premium offers weekly purchase subscription. You can subscribe to a yearly plan. You can manage or turn off auto-renew in your Apple ID account settings at any time. Subscriptions will automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Any unused portion of a free trial period will be forfeited when you purchase a subscription. Our app is functional without purchasing an Auto-Renewable subscription, and you can use all the unlocked content after the subscription expires."
         ana_bottomLabel.textColor = .color(hexString: "#979797")
         ana_bottomLabel.font  = .systemFont(ofSize: 10, weight: .semibold)
         ana_scrollView.addSubview(ana_bottomLabel)
@@ -317,7 +317,7 @@ class SubscriptionViewController: UIViewController {
 			ana_freeDayLabel.text = string
             
 			let littleTimeString = product.subscriptionPeriod?.unit == .month ? "month" : "year"
-            ana_bottomLabel.text = "Angel Premium offers weekly purchase subscription. You can subscribe to a monthly plan(\(product.regularPrice) per \(littleTimeString). You can manage or turn off auto-renew in your Apple ID account settings at any time. Subscriptions will automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Any unused portion of a free trial period will be forfeited when you purchase a subscription. Our app is functional without purchasing an Auto-Renewable subscription, and you can use all the unlocked content after the subscription expires."
+            ana_bottomLabel.text = "BabyCare Premium offers weekly purchase subscription. You can subscribe to a monthly plan(\(product.regularPrice) per \(littleTimeString). You can manage or turn off auto-renew in your Apple ID account settings at any time. Subscriptions will automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Any unused portion of a free trial period will be forfeited when you purchase a subscription. Our app is functional without purchasing an Auto-Renewable subscription, and you can use all the unlocked content after the subscription expires."
             
             view.layoutNow()
             
