@@ -64,8 +64,8 @@ class FavoriteViewController: AnaLargeTitleTableViewController, SwipeTableViewCe
         
         ana_emptyLabel = UILabel()
         ana_emptyLabel.text = "No Data！"
-        ana_emptyLabel.textColor = .black
-        ana_emptyLabel.font = .systemFont(ofSize: 16)
+        ana_emptyLabel.textColor = .color(hexString: "#6a515e")
+        ana_emptyLabel.font = UIFont(name: "Merriweather-Regular", size: 18)
         ana_emptyView.addSubview(ana_emptyLabel)
     }
     
@@ -84,9 +84,9 @@ class FavoriteViewController: AnaLargeTitleTableViewController, SwipeTableViewCe
         ana_emptyImageView.sizeToFit()
         ana_emptyImageView.setOrigin(x: 0, y: 0)
         ana_emptyLabel.sizeToFit()
-        ana_emptyLabel.center = CGPoint(x: ana_emptyImageView.halfWidth(), y: ana_emptyImageView.maxY() - 2 + ana_emptyLabel.halfHeight())
+        ana_emptyLabel.center = CGPoint(x: ana_emptyImageView.halfWidth(), y: ana_emptyImageView.maxY() + 3 + ana_emptyLabel.halfHeight())
         ana_emptyView.bounds = CGRect(origin: .zero, size: CGSize(width: ana_emptyImageView.width(), height: ana_emptyLabel.maxY()))
-        ana_emptyView.center = CGPoint(x: tableView.halfWidth(), y: 265)
+        ana_emptyView.center = CGPoint(x: tableView.halfWidth(), y: tableView.height() * 0.45)
     }
     
     

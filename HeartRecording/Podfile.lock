@@ -16,6 +16,9 @@ PODS:
     - SQLiteRepairKit (~> 1.2.0)
     - WCDBOptimizedSQLCipher (~> 1.2.0)
   - WCDBOptimizedSQLCipher (1.2.1)
+  - YYImage (1.0.4):
+    - YYImage/Core (= 1.0.4)
+  - YYImage/Core (1.0.4)
 
 DEPENDENCIES:
   - Beta-AppsFlyerFramework
@@ -28,6 +31,7 @@ DEPENDENCIES:
   - SwiftyStoreKit (= 0.16.1)
   - SwipeCellKit (= 2.7.1)
   - WCDB.swift
+  - YYImage
 
 SPEC REPOS:
   trunk:
@@ -44,6 +48,7 @@ SPEC REPOS:
     - SwipeCellKit
     - WCDB.swift
     - WCDBOptimizedSQLCipher
+    - YYImage
 
 SPEC CHECKSUMS:
   Beta-AppsFlyerFramework: a7a8e24349fdf60d1ad16cf8085c63b4d239d342
@@ -59,7 +64,8 @@ SPEC CHECKSUMS:
   SwipeCellKit: 3972254a826da74609926daf59b08d6c72e619ea
   WCDB.swift: 05d509d7a0e60fb6e11c34eb7e4027c0fab5849f
   WCDBOptimizedSQLCipher: baf44493b0c7a3d49e97bc5b64a3856f6428ddd1
+  YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
 
-PODFILE CHECKSUM: 3344fc9299f4b75f32996588734792a41b3fcbd3
+PODFILE CHECKSUM: c72b9da0345e2dc8b5acad2afc59559f1e4f0e44
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.2

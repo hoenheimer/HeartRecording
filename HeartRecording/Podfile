@@ -15,6 +15,7 @@ target 'HeartRecording' do
 	pod 'SwipeCellKit', '2.7.1'
 	pod 'Bugly'
 	pod 'Beta-AppsFlyerFramework'
+	pod 'YYImage'
 
 end
 

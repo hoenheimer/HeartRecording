@@ -10,10 +10,11 @@ import ReactiveCocoa
 import ReactiveSwift
 import StoreKit
 import AVFoundation
+import YYImage
 
 
 class RecordViewController: AnaLargeTitleViewController {
-	var backImageView: UIImageView!
+	var backImageView: YYAnimatedImageView!
     var ana_label: UILabel!
     var ana_timerLabel: UILabel!
     var ana_buttonBackgroundView: UIView!
@@ -24,9 +25,6 @@ class RecordViewController: AnaLargeTitleViewController {
     var ana_recordStartDate = Date()
     var ana_timer: Timer?
     var ana_visiableTime: CGFloat = 0
-	
-	var avPlayer: AVPlayer?
-	var avPlayerLayer: AVPlayerLayer?
     
     
     deinit {
@@ -51,15 +49,10 @@ class RecordViewController: AnaLargeTitleViewController {
         
         scrollView.layer.masksToBounds = false
 		
-		backImageView = UIImageView(image: UIImage(named: "Record_Image"))
+		backImageView = YYAnimatedImageView()
+		backImageView.image = YYImage(named: "Record.gif")
+		backImageView.autoPlayAnimatedImage = false
 		contentView.addSubview(backImageView)
-		
-		let path = Bundle.main.path(forResource: "Record", ofType: "mp4")!
-		let url = URL(fileURLWithPath: path)
-		avPlayer = AVPlayer(url: url)
-		avPlayerLayer = AVPlayerLayer(player: avPlayer)
-		avPlayerLayer?.opacity = 0
-		backImageView.layer.addSublayer(avPlayerLayer!)
         
         ana_label = UILabel()
         ana_label.numberOfLines = 0
@@ -102,6 +95,7 @@ class RecordViewController: AnaLargeTitleViewController {
 			if !self.ana_manager.isRecording {
 				let action = {
 					FeedbackManager.feedback(type: .light)
+					self.backImageView.startAnimating()
 					self.ana_manager.beginRecord()
 					if self.ana_manager.isRecording {
 						button.setTitle("Done", for: .normal)
@@ -151,14 +145,13 @@ class RecordViewController: AnaLargeTitleViewController {
 				}
 			} else {
 				FeedbackManager.feedback(type: .light)
+				self.backImageView.stopAnimating()
 				self.ana_manager.stopRecord()
 				if !self.ana_manager.isRecording {
 					button.setTitle("Start Recording", for: .normal)
 				}
 				let model = DbManager.manager.addRecording(path: self.ana_manager.file_name!)
-				let vc = DetailViewController(model: model)
-				vc.modalPresentationStyle = .fullScreen
-				self.present(vc, animated: true, completion: nil)
+				self.navigationController?.pushViewController(DetailViewController(model: model), animated: true)
 				self.ana_timerLabel.isHidden = true
 				self.ana_label.isHidden = false
 				if self.ana_timer != nil && self.ana_timer!.isValid {
@@ -177,11 +170,14 @@ class RecordViewController: AnaLargeTitleViewController {
     
     override func layoutContentView() -> CGFloat {
 		backImageView.sizeToFit()
+		if backImageView.width() == 0 {
+			let scale = (scrollView.width() - 16) / backImageView.width()
+			backImageView.bounds = CGRect(x: 0, y: 0, width: scrollView.width() - 16, height: backImageView.height() * scale)
+		}
 		backImageView.center = CGPoint(x: scrollView.halfWidth(), y: 29 + backImageView.halfHeight())
-		avPlayerLayer?.frame = backImageView.bounds
 		let size = ana_label.sizeThatFits(CGSize(width: 230, height: CGFloat.greatestFiniteMagnitude))
 		ana_label.bounds = CGRect(origin: .zero, size: size)
-		ana_label.center = CGPoint(x: backImageView.halfWidth(), y: 262)
+		ana_label.center = CGPoint(x: backImageView.halfWidth(), y: backImageView.height() * 0.65)
 		ana_timerLabel.sizeToFit()
 		ana_timerLabel.center = ana_label.center
         ana_buttonBackgroundView.bounds = CGRect(origin: .zero, size: CGSize(width: 250, height: 54))

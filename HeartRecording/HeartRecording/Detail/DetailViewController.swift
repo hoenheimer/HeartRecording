@@ -8,6 +8,7 @@
 import UIKit
 import ReactiveCocoa
 import ReactiveSwift
+import YYImage
 
 
 class DetailViewController: UIViewController, UITextFieldDelegate {
@@ -15,7 +16,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     var ana_closeButton:        UIButton!
     var ana_likeButton:         UIButton!
     var ana_shareButton:        UIButton!
-	var backImageView: 			UIImageView!
+	var backImageView: 			YYAnimatedImageView!
     var ana_nameTextField:      UITextField!
     var ana_dateLabel:          UILabel!
     var ana_editButton:         UIButton!
@@ -121,7 +122,9 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         }
         view.addSubview(ana_shareButton)
 		
-		backImageView = UIImageView(image: UIImage(named: "Detail_Image"))
+		backImageView = YYAnimatedImageView()
+		backImageView.image = YYImage(named: "Detail.gif")
+		backImageView.autoPlayAnimatedImage = false
 		view.addSubview(backImageView)
         
         ana_nameTextField = UITextField()
@@ -279,26 +282,34 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         ana_dateLabel.center = CGPoint(x: backImageView.halfWidth(), y: ana_nameTextField.maxY() + ana_dateLabel.halfHeight())
         ana_editButton.sizeToFit()
         ana_editButton.center = CGPoint(x: backImageView.halfWidth(), y: ana_dateLabel.maxY() + 18 + ana_editButton.halfHeight())
-        ana_playButton.bounds = CGRect(origin: .zero, size: CGSize(width: 88, height: 88))
-        ana_playButton.center = CGPoint(x: view.halfWidth(), y: view.height() * 0.73)
+		ana_progressTimeLabel.sizeToFit()
+		ana_progressTimeLabel.bounds = CGRect(x: 0, y: 0, width: ana_progressTimeLabel.width(), height: 44)
+		ana_progressTimeLabel.center = CGPoint(x: 40 + ana_progressTimeLabel.halfWidth(),
+											   y: view.height() - bottomSpacing() - 35 - ana_progressTimeLabel.halfHeight())
+		ana_totalTimeLabel.sizeToFit()
+		ana_totalTimeLabel.center = CGPoint(x: view.width() - 40 - ana_totalTimeLabel.halfWidth(), y: ana_progressTimeLabel.centerY())
+		ana_progressImageView.sizeToFit()
+		ana_progressBackView.frame = CGRect(x: 40,
+											y: ana_progressTimeLabel.minY() - ana_progressImageView.height(),
+											width: view.width() - 80,
+											height: ana_progressImageView.height())
+		ana_progressBackLine.bounds = CGRect(origin: .zero, size: CGSize(width: ana_progressBackView.width(), height: 3))
+		ana_progressBackLine.center = CGPoint(x: ana_progressBackView.halfWidth(), y: ana_progressBackView.halfHeight())
+		ana_progressLine.frame = CGRect(x: 0, y: ana_progressBackLine.minY(), width: ana_progress * ana_progressBackView.width(), height: 3)
+		ana_progressImageView.center = CGPoint(x: ana_progressLine.maxX(), y: ana_progressBackView.halfHeight())
+        ana_playButton.bounds = CGRect(origin: .zero, size: CGSize(width: 72, height: 72))
+		ana_playButton.center = CGPoint(x: view.halfWidth(), y: ana_progressBackView.minY() - 37 - ana_playButton.halfHeight())
         ana_leftButton.sizeToFit()
         ana_leftButton.center = CGPoint(x: ana_playButton.minX() - 61 - ana_leftButton.halfWidth(), y: ana_playButton.centerY())
         ana_rightButton.sizeToFit()
         ana_rightButton.center = CGPoint(x: ana_playButton.maxX() + 61 + ana_rightButton.halfWidth(), y: ana_playButton.centerY())
         ana_progressImageView.sizeToFit()
-        ana_progressBackView.frame = CGRect(x: 40, y: view.height() * 0.86, width: view.width() - 80, height: ana_progressImageView.height())
-        ana_progressBackLine.bounds = CGRect(origin: .zero, size: CGSize(width: ana_progressBackView.width(), height: 3))
-        ana_progressBackLine.center = CGPoint(x: ana_progressBackView.halfWidth(), y: ana_progressBackView.halfHeight())
-        ana_progressLine.frame = CGRect(x: 0, y: ana_progressBackLine.minY(), width: ana_progress * ana_progressBackView.width(), height: 3)
-        ana_progressImageView.center = CGPoint(x: ana_progressLine.maxX(), y: ana_progressBackView.halfHeight())
-        ana_progressTimeLabel.sizeToFit()
-        ana_progressTimeLabel.center = CGPoint(x: ana_progressBackView.minX(), y: ana_progressBackView.maxY() + 4 + ana_progressTimeLabel.halfHeight())
-        ana_totalTimeLabel.sizeToFit()
-        ana_totalTimeLabel.center = CGPoint(x: ana_progressBackView.maxX(), y: ana_progressTimeLabel.centerY())
+        
     }
     
     
     func play() {
+		backImageView.startAnimating()
         PlayerManager.shared.play(path: ana_model.path!) {
             [weak self] time in
             guard let self = self else { return }
@@ -325,6 +336,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
                 self.view.layoutIfNeeded()
             }, completion: nil)
         } endAction: {
+			self.backImageView.stopAnimating()
             self.ana_playButton.setImage(UIImage(named: "Detail_Play"), for: .normal)
             self.ana_progressTimeLabel.text = "00:00"
             self.view.layoutNow()
