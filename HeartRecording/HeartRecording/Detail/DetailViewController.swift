@@ -12,11 +12,11 @@ import YYImage
 
 
 class DetailViewController: UIViewController, UITextFieldDelegate {
-    var ana_gradientLayer:      CAGradientLayer!
     var ana_closeButton:        UIButton!
     var ana_likeButton:         UIButton!
     var ana_shareButton:        UIButton!
 	var backImageView: 			YYAnimatedImageView!
+	var heartImageView: 		YYAnimatedImageView!
     var ana_nameTextField:      UITextField!
     var ana_dateLabel:          UILabel!
     var ana_editButton:         UIButton!
@@ -75,11 +75,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     
     
     func configureSubViews() {
-		ana_gradientLayer = CAGradientLayer()
-		ana_gradientLayer.colors = [UIColor.color(hexString: "#fffefd").cgColor, UIColor.color(hexString: "#fcf3f4").cgColor]
-		ana_gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
-		ana_gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
-		view.layer.addSublayer(ana_gradientLayer)
+		view.backgroundColor = .white
         
         ana_closeButton = UIButton()
         ana_closeButton.setImage(UIImage(named: "Kick_Close"), for: .normal)
@@ -126,6 +122,11 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
 		backImageView.image = YYImage(named: "Detail.gif")
 		backImageView.autoPlayAnimatedImage = false
 		view.addSubview(backImageView)
+		
+		heartImageView = YYAnimatedImageView()
+		heartImageView.image = YYImage(named: "Heart.gif")
+		heartImageView.autoPlayAnimatedImage = false
+		backImageView.addSubview(heartImageView)
         
         ana_nameTextField = UITextField()
         ana_nameTextField.text = ana_model.name
@@ -159,7 +160,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
                 self.ana_nameTextField.text = newName
             }
         }
-		backImageView.addSubview(ana_editButton)
+		view.addSubview(ana_editButton)
         
         ana_leftButton = UIButton()
         ana_leftButton.setImage(UIImage(named: "Detail_Left"), for: .normal)
@@ -183,8 +184,6 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         
         ana_playButton = UIButton()
         ana_playButton.setImage(UIImage(named: "Detail_Play"), for: .normal)
-        ana_playButton.layer.cornerRadius = 44
-        ana_playButton.backgroundColor = .color(hexString: "#FF8282")
 		ana_playButton.setShadow(color: .color(hexString: "#35d74b61"), offset: CGSize(width: 0, height: 12), radius: 38, opacity: 1)
         ana_playButton.reactive.controlEvents(.touchUpInside).observeValues {
             [weak self] button in
@@ -198,10 +197,14 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
 						self.play()
 					} else {
 						PlayerManager.shared.resume()
+						self.backImageView.startAnimating()
+						self.heartImageView.startAnimating()
 						button.setImage(UIImage(named: "Detail_Pause"), for: .normal)
 					}
 				} else {
 					PlayerManager.shared.pause()
+					self.backImageView.stopAnimating()
+					self.heartImageView.stopAnimating()
 					button.setImage(UIImage(named: "Detail_Play"), for: .normal)
 				}
 			}
@@ -262,7 +265,6 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        ana_gradientLayer.frame = view.bounds
         ana_closeButton.sizeToFit()
         ana_closeButton.setOrigin(x: 20, y: 50)
         ana_shareButton.sizeToFit()
@@ -275,13 +277,15 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
 			backImageView.bounds = CGRect(x: 0, y: 0, width: view.width() - 16, height: backImageView.height() * scale)
 		}
 		backImageView.center = CGPoint(x: view.halfWidth(), y: ana_closeButton.maxY() + 39 + backImageView.halfHeight())
+		heartImageView.sizeToFit()
+		heartImageView.center = CGPoint(x: backImageView.halfWidth(), y: backImageView.height() * 0.4)
         ana_nameTextField.sizeToFit()
         ana_nameTextField.bounds = CGRect(origin: .zero, size: CGSize(width: 264, height: ana_nameTextField.height()))
 		ana_nameTextField.center = CGPoint(x: backImageView.halfWidth(), y: backImageView.height() * 0.63)
         ana_dateLabel.sizeToFit()
         ana_dateLabel.center = CGPoint(x: backImageView.halfWidth(), y: ana_nameTextField.maxY() + ana_dateLabel.halfHeight())
         ana_editButton.sizeToFit()
-        ana_editButton.center = CGPoint(x: backImageView.halfWidth(), y: ana_dateLabel.maxY() + 18 + ana_editButton.halfHeight())
+		ana_editButton.center = CGPoint(x: view.halfWidth(), y: ana_dateLabel.maxY() + 18 + ana_editButton.halfHeight() + backImageView.minY())
 		ana_progressTimeLabel.sizeToFit()
 		ana_progressTimeLabel.bounds = CGRect(x: 0, y: 0, width: ana_progressTimeLabel.width(), height: 44)
 		ana_progressTimeLabel.center = CGPoint(x: 40 + ana_progressTimeLabel.halfWidth(),
@@ -310,6 +314,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     
     func play() {
 		backImageView.startAnimating()
+		heartImageView.startAnimating()
         PlayerManager.shared.play(path: ana_model.path!) {
             [weak self] time in
             guard let self = self else { return }
@@ -337,6 +342,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
             }, completion: nil)
         } endAction: {
 			self.backImageView.stopAnimating()
+			self.heartImageView.stopAnimating()
             self.ana_playButton.setImage(UIImage(named: "Detail_Play"), for: .normal)
             self.ana_progressTimeLabel.text = "00:00"
             self.view.layoutNow()

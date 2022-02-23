@@ -15,6 +15,7 @@ import YYImage
 
 class RecordViewController: AnaLargeTitleViewController {
 	var backImageView: YYAnimatedImageView!
+	var heartImageView: YYAnimatedImageView!
     var ana_label: UILabel!
     var ana_timerLabel: UILabel!
     var ana_buttonBackgroundView: UIView!
@@ -53,6 +54,11 @@ class RecordViewController: AnaLargeTitleViewController {
 		backImageView.image = YYImage(named: "Record.gif")
 		backImageView.autoPlayAnimatedImage = false
 		contentView.addSubview(backImageView)
+		
+		heartImageView = YYAnimatedImageView()
+		heartImageView.image = YYImage(named: "Heart.gif")
+		heartImageView.autoPlayAnimatedImage = false
+		backImageView.addSubview(heartImageView)
         
         ana_label = UILabel()
         ana_label.numberOfLines = 0
@@ -96,6 +102,7 @@ class RecordViewController: AnaLargeTitleViewController {
 				let action = {
 					FeedbackManager.feedback(type: .light)
 					self.backImageView.startAnimating()
+					self.heartImageView.startAnimating()
 					self.ana_manager.beginRecord()
 					if self.ana_manager.isRecording {
 						button.setTitle("Done", for: .normal)
@@ -146,6 +153,7 @@ class RecordViewController: AnaLargeTitleViewController {
 			} else {
 				FeedbackManager.feedback(type: .light)
 				self.backImageView.stopAnimating()
+				self.heartImageView.stopAnimating()
 				self.ana_manager.stopRecord()
 				if !self.ana_manager.isRecording {
 					button.setTitle("Start Recording", for: .normal)
@@ -175,6 +183,8 @@ class RecordViewController: AnaLargeTitleViewController {
 			backImageView.bounds = CGRect(x: 0, y: 0, width: scrollView.width() - 16, height: backImageView.height() * scale)
 		}
 		backImageView.center = CGPoint(x: scrollView.halfWidth(), y: 29 + backImageView.halfHeight())
+		heartImageView.sizeToFit()
+		heartImageView.center = CGPoint(x: backImageView.halfWidth(), y: backImageView.height() * 0.4)
 		let size = ana_label.sizeThatFits(CGSize(width: 230, height: CGFloat.greatestFiniteMagnitude))
 		ana_label.bounds = CGRect(origin: .zero, size: size)
 		ana_label.center = CGPoint(x: backImageView.halfWidth(), y: backImageView.height() * 0.65)

@@ -44,6 +44,8 @@ class NBUserVipStatusManager: NSObject {
     }
     
     @objc func getVipStatus() -> Bool{
+		#warning("TODO")
+		return true
 		#if DEBUG
 		return true
 		#else
