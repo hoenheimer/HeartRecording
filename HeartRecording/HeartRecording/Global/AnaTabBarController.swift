@@ -93,6 +93,18 @@ class TabbarButton: UIButton {
 	var imageNameSuffix: String!
 	
 	
+	override init(frame: CGRect) {
+		super.init(frame: frame)
+		titleEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: -5)
+	}
+	
+	
+	required init?(coder: NSCoder) {
+		super.init(coder: coder)
+		titleEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: -5)
+	}
+	
+	
 	override func imageRect(forContentRect contentRect: CGRect) -> CGRect {
 		let imageRect = super.imageRect(forContentRect: contentRect)
 		let titleRect = super.titleRect(forContentRect: contentRect)
