@@ -10,11 +10,12 @@ import ReactiveCocoa
 import ReactiveSwift
 import StoreKit
 import AVFoundation
+import FLAnimatedImage
 import YYImage
 
 
 class RecordViewController: AnaLargeTitleViewController {
-	var backImageView: YYAnimatedImageView!
+	var backImageView: FLAnimatedImageView!
 	var heartImageView: YYAnimatedImageView!
     var ana_label: UILabel!
     var ana_timerLabel: UILabel!
@@ -40,6 +41,14 @@ class RecordViewController: AnaLargeTitleViewController {
         super.viewWillAppear(animated)
 		setProRightBarItemIfNeeded()
     }
+	
+	
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		if !ana_manager.isRecording {
+			backImageView.stopAnimating()
+		}
+	}
     
     
     override func configure() {
@@ -50,13 +59,11 @@ class RecordViewController: AnaLargeTitleViewController {
         
         scrollView.layer.masksToBounds = false
 		
-		backImageView = YYAnimatedImageView()
-		backImageView.image = YYImage(named: "Record.gif")
-		backImageView.autoPlayAnimatedImage = false
+		backImageView = FLAnimatedImageView(gifName: "Record")
 		contentView.addSubview(backImageView)
 		
 		heartImageView = YYAnimatedImageView()
-		heartImageView.image = YYImage(named: "Heart.gif")
+		heartImageView.image = YYImage(named: "Heart")
 		heartImageView.autoPlayAnimatedImage = false
 		backImageView.addSubview(heartImageView)
         

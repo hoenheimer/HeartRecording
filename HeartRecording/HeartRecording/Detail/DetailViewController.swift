@@ -9,13 +9,14 @@ import UIKit
 import ReactiveCocoa
 import ReactiveSwift
 import YYImage
+import FLAnimatedImage
 
 
 class DetailViewController: UIViewController, UITextFieldDelegate {
     var ana_closeButton:        UIButton!
     var ana_likeButton:         UIButton!
     var ana_shareButton:        UIButton!
-	var backImageView: 			YYAnimatedImageView!
+	var backImageView: 			FLAnimatedImageView!
 	var heartImageView: 		YYAnimatedImageView!
     var ana_nameTextField:      UITextField!
     var ana_dateLabel:          UILabel!
@@ -51,6 +52,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
+		
 		navigationController?.navigationBar.isHidden = true
 		if let tabBarController = tabBarController as? AnaTabBarController {
 			tabBarController.simulationTabBar.isHidden = true
@@ -65,9 +67,12 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
 			tabBarController.simulationTabBar.isHidden = false
 		}
 	}
-    
+	
     
     override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		backImageView.stopAnimating()
+		
         if NBUserVipStatusManager.shard.getVipStatus() {
             play()
         }
@@ -118,13 +123,11 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         }
         view.addSubview(ana_shareButton)
 		
-		backImageView = YYAnimatedImageView()
-		backImageView.image = YYImage(named: "Detail.gif")
-		backImageView.autoPlayAnimatedImage = false
+		backImageView = FLAnimatedImageView(gifName: "Detail")
 		view.addSubview(backImageView)
 		
 		heartImageView = YYAnimatedImageView()
-		heartImageView.image = YYImage(named: "Heart.gif")
+		heartImageView.image = YYImage(named: "Heart")
 		heartImageView.autoPlayAnimatedImage = false
 		backImageView.addSubview(heartImageView)
         

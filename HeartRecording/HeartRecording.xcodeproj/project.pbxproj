@@ -52,6 +52,7 @@
 		1843FDF627C6035E006C449B /* Record.gif in Resources */ = {isa = PBXBuildFile; fileRef = 1843FDF527C6035E006C449B /* Record.gif */; };
 		1843FDFC27C60FE3006C449B /* Detail.gif in Resources */ = {isa = PBXBuildFile; fileRef = 1843FDFB27C60FE3006C449B /* Detail.gif */; };
 		1843FDFE27C61E53006C449B /* Heart.gif in Resources */ = {isa = PBXBuildFile; fileRef = 1843FDFD27C61E53006C449B /* Heart.gif */; };
+		1843FE0027C62F65006C449B /* FLAnimatedImageView+Addition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1843FDFF27C62F65006C449B /* FLAnimatedImageView+Addition.swift */; };
 		18D3309D26526EB000DFFFFF /* KickCounterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D3309C26526EB000DFFFFF /* KickCounterViewController.swift */; };
 		18D330AB26527C7F00DFFFFF /* AddKickCounterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D330AA26527C7F00DFFFFF /* AddKickCounterViewController.swift */; };
 		18D330AD2653841300DFFFFF /* DbKicksModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D330AC2653841300DFFFFF /* DbKicksModel.swift */; };
@@ -131,6 +132,7 @@
 		1843FDF527C6035E006C449B /* Record.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Record.gif; sourceTree = "<group>"; };
 		1843FDFB27C60FE3006C449B /* Detail.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Detail.gif; sourceTree = "<group>"; };
 		1843FDFD27C61E53006C449B /* Heart.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Heart.gif; sourceTree = "<group>"; };
+		1843FDFF27C62F65006C449B /* FLAnimatedImageView+Addition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FLAnimatedImageView+Addition.swift"; sourceTree = "<group>"; };
 		18D3309C26526EB000DFFFFF /* KickCounterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KickCounterViewController.swift; sourceTree = "<group>"; };
 		18D330AA26527C7F00DFFFFF /* AddKickCounterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddKickCounterViewController.swift; sourceTree = "<group>"; };
 		18D330AC2653841300DFFFFF /* DbKicksModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DbKicksModel.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 				1825C87C26285C05001C0FB3 /* UIView+Addition.swift */,
 				1825C87B26285C05001C0FB3 /* UIViewController+Addition.swift */,
 				1825C8EF2629D09B001C0FB3 /* String+Addition.swift */,
+				1843FDFF27C62F65006C449B /* FLAnimatedImageView+Addition.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -600,6 +603,7 @@
 				1825C87F26285C05001C0FB3 /* UIViewController+Addition.swift in Sources */,
 				1825C909262D7EDD001C0FB3 /* DbRecordModel.swift in Sources */,
 				1825C8A726286158001C0FB3 /* RecordViewController.swift in Sources */,
+				1843FE0027C62F65006C449B /* FLAnimatedImageView+Addition.swift in Sources */,
 				1825C87626285BD1001C0FB3 /* AnaNavigationController.swift in Sources */,
 				1825C8E82629C0A8001C0FB3 /* PlayerManager.swift in Sources */,
 				1825C98626303E22001C0FB3 /* FavoriteViewController.swift in Sources */,
