@@ -10,10 +10,13 @@ import UIKit
 
 
 class AnaLargeTitleViewController: UIViewController, UIScrollViewDelegate {
+	var rightBarButton: UIButton?
 	var scrollView: LargeTitleScrollView!
     var gradient: CAGradientLayer!
+	var hintShapeLayer: CAShapeLayer!
 	var titleBackView: UIView!
 	var titleLabel: UILabel!
+	var titleRightBarButton: UIButton?
 	var contentView: UIView!
 	
 	
@@ -42,6 +45,9 @@ class AnaLargeTitleViewController: UIViewController, UIScrollViewDelegate {
         gradient.endPoint = CGPoint(x: 0.5, y: 1)
         view.layer.addSublayer(gradient)
 		
+		hintShapeLayer = CAShapeLayer()
+		gradient.mask = hintShapeLayer
+		
 		scrollView = LargeTitleScrollView()
         scrollView.backgroundColor = .clear
 		scrollView.delegate = self
@@ -53,8 +59,8 @@ class AnaLargeTitleViewController: UIViewController, UIScrollViewDelegate {
 		scrollView.addSubview(titleBackView)
 		
 		titleLabel = UILabel()
-		titleLabel.font = .boldSystemFont(ofSize: 32)
-		titleLabel.textColor = .color(hexString: "#14142B")
+		titleLabel.font = UIFont(name: "Merriweather-Regular", size: 28)
+		titleLabel.textColor = .color(hexString: "#6a515e")
 		titleLabel.text = "Title"
 		titleLabel.layer.anchorPoint = CGPoint(x: 0, y: 1)
 		titleBackView.addSubview(titleLabel)
@@ -69,8 +75,14 @@ class AnaLargeTitleViewController: UIViewController, UIScrollViewDelegate {
 		super.viewWillLayoutSubviews()
         
         gradient.frame = view.bounds
+		hintShapeLayer.frame = view.bounds
+		hintShapeLayer.path = maskLayerPath()
 		scrollView.frame = CGRect(x: 0, y: topSpacing(), width: view.bounds.width, height: view.bounds.height - topSpacing())
 		titleLabel.sizeToFit()
+		if let titleRightBarButton = titleRightBarButton {
+			titleRightBarButton.center = CGPoint(x: view.width() - 25 - titleRightBarButton.halfWidth(),
+												 y: max(titleLabel.maxY() - titleLabel.halfHeight(), titleRightBarButton.halfHeight()))
+		}
 		titleBackView.frame = CGRect(x: 0, y: 0, width: scrollView.bounds.width, height: titleLabel.bounds.height)
 		titleLabel.center = CGPoint(x: AnaNavigationController.margin, y: titleLabel.bounds.height + 3.5)
 		let contentHeight = layoutContentView()
@@ -78,11 +90,33 @@ class AnaLargeTitleViewController: UIViewController, UIScrollViewDelegate {
 		scrollView.contentSize = CGSize(width: scrollView.bounds.width, height: contentView.frame.maxY)
 	}
 	
+	func maskLayerPath() -> CGPath {
+		let path = UIBezierPath()
+		path.move(to: CGPoint(x: 0, y: view.height()))
+		let tabBarMinY = view.height() - 13 - bottomSpacing() - 82
+		path.addLine(to: CGPoint(x: 0, y: tabBarMinY))
+		path.addArc(withCenter: CGPoint(x: 80, y: tabBarMinY),
+					radius: 80,
+					startAngle: -1 * CGFloat.pi,
+					endAngle: -0.5 * CGFloat.pi,
+					clockwise: true)
+		path.addLine(to: CGPoint(x: view.width() - 80, y: tabBarMinY - 80))
+		path.addArc(withCenter: CGPoint(x: view.width() - 80, y: tabBarMinY - 160),
+					radius: 80,
+					startAngle: 0.5 * CGFloat.pi,
+					endAngle: 0,
+					clockwise: false)
+		path.addLine(to: CGPoint(x: view.width(), y: view.height()))
+		path.close()
+		return path.cgPath
+	}
+	
 	
 	func judgmentTrueTitleHidden() {
 		let hidden = scrollView.contentOffset.y < 52 - 7.5
 		let textAttributes = [NSAttributedString.Key.foregroundColor : hidden ? UIColor.clear : UIColor.black]
 		titleBackView.isHidden = !hidden
+		rightBarButton?.isHidden = hidden
 		navigationController?.navigationBar.titleTextAttributes = textAttributes
 	}
 	
@@ -97,6 +131,54 @@ class AnaLargeTitleViewController: UIViewController, UIScrollViewDelegate {
 	func setTitle(title: String) {
 		navigationItem.title = title
 		titleLabel.text = title
+	}
+	
+	
+	func setRightBarItem(topButton: UIButton?, bottomButton: UIButton?, action: @escaping () -> Void) {
+		rightBarButton = topButton
+		if let topButton = topButton {
+			topButton.isHidden = true
+			topButton.reactive.controlEvents(.touchUpInside).observeValues {
+				_ in
+				action()
+			}
+			topButton.sizeToFit()
+			navigationItem.rightBarButtonItem = UIBarButtonItem(customView: topButton)
+		} else {
+			navigationItem.rightBarButtonItem = nil
+		}
+		
+		if titleRightBarButton != bottomButton {
+			titleRightBarButton?.removeFromSuperview()
+			titleRightBarButton = bottomButton
+			if let bottomButton = bottomButton {
+				bottomButton.reactive.controlEvents(.touchUpInside).observeValues {
+					_ in
+					action()
+				}
+				titleBackView.addSubview(bottomButton)
+			}
+		}
+	}
+	
+	
+	func setProRightBarItemIfNeeded() {
+		if NBUserVipStatusManager.shard.getVipStatus() {
+			setRightBarItem(topButton: nil, bottomButton: nil) {
+				return
+			}
+		} else if titleRightBarButton == nil {
+			let topButton = UIButton()
+			topButton.setImage(UIImage(named: "NavigationBar_Pro_Top")?.reSizeImage(reSize: CGSize(width: 18, height: 18)), for: .normal)
+			let bottomButton = UIButton()
+			bottomButton.setImage(UIImage(named: "NavigationBar_Pro_Bottom"), for: .normal)
+			bottomButton.sizeToFit()
+			bottomButton.setShadow(color: .color(hexString: "#33bdaaa0"), offset: CGSize(width: 0, height: 7), radius: 20, opacity: 1)
+			setRightBarItem(topButton: topButton, bottomButton: bottomButton) {
+				[weak self]	in
+				self?.showSubscriptionIfNeeded(handle: nil)
+			}
+		}
 	}
 	
 	

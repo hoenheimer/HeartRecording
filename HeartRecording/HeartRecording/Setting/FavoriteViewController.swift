@@ -10,6 +10,7 @@ import SwipeCellKit
 
 
 class FavoriteViewController: AnaLargeTitleTableViewController, SwipeTableViewCellDelegate {
+	var hintImageView: UIImageView!
     var ana_emptyView: UIView!
     var ana_emptyImageView: UIImageView!
     var ana_emptyLabel: UILabel!
@@ -18,6 +19,22 @@ class FavoriteViewController: AnaLargeTitleTableViewController, SwipeTableViewCe
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
+	
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		if let tabBarController = tabBarController as? AnaTabBarController {
+			tabBarController.simulationTabBar.isHidden = true
+		}
+	}
+	
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		if let tabBarController = tabBarController as? AnaTabBarController {
+			tabBarController.simulationTabBar.isHidden = false
+		}
+	}
     
     
     override func configure() {
@@ -27,10 +44,14 @@ class FavoriteViewController: AnaLargeTitleTableViewController, SwipeTableViewCe
         
         setTitle(title: "Favorite")
         setHeaderView(headerView: nil)
+		
+		hintImageView = UIImageView(image: UIImage(named: "Kick_Hint"))
+		view.addSubview(hintImageView)
+		view.sendSubviewToBack(hintImageView)
         
         tableView.backgroundColor = .clear
         tableView.register(RecordingTableViewCell.self, forCellReuseIdentifier: String(NSStringFromClass(RecordingTableViewCell.self)))
-        tableView.rowHeight = 119
+        tableView.rowHeight = 110
         
         ana_emptyView = UIView()
         ana_emptyView.backgroundColor = .clear
@@ -55,27 +76,17 @@ class FavoriteViewController: AnaLargeTitleTableViewController, SwipeTableViewCe
     }
     
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
+	override func viewWillLayoutSubviews() {
+		super.viewWillLayoutSubviews()
+		
+		hintImageView.sizeToFit()
+		hintImageView.setOrigin(x: 0, y: 0)
         ana_emptyImageView.sizeToFit()
         ana_emptyImageView.setOrigin(x: 0, y: 0)
         ana_emptyLabel.sizeToFit()
         ana_emptyLabel.center = CGPoint(x: ana_emptyImageView.halfWidth(), y: ana_emptyImageView.maxY() - 2 + ana_emptyLabel.halfHeight())
         ana_emptyView.bounds = CGRect(origin: .zero, size: CGSize(width: ana_emptyImageView.width(), height: ana_emptyLabel.maxY()))
         ana_emptyView.center = CGPoint(x: tableView.halfWidth(), y: 265)
-    }
-    
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        tabBarController?.tabBar.isHidden = true
-    }
-    
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        tabBarController?.tabBar.isHidden = false
     }
     
     
@@ -95,9 +106,7 @@ class FavoriteViewController: AnaLargeTitleTableViewController, SwipeTableViewCe
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let model = DbManager.manager.favoriteModels[indexPath.row]
-        let vc = DetailViewController(model: model)
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+		navigationController?.pushViewController(DetailViewController(model: model), animated: true)
     }
     
     

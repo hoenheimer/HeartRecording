@@ -9,13 +9,11 @@ import UIKit
 import ReactiveCocoa
 import ReactiveSwift
 import StoreKit
+import AVFoundation
 
 
 class RecordViewController: AnaLargeTitleViewController {
-    var ana_proButton: UIButton!
-    var ana_animationView: RippleAnimationView!
-    var ana_mainView: UIView!
-    var ana_heartImageView: UIImageView!
+	var backImageView: UIImageView!
     var ana_label: UILabel!
     var ana_timerLabel: UILabel!
     var ana_buttonBackgroundView: UIView!
@@ -26,6 +24,9 @@ class RecordViewController: AnaLargeTitleViewController {
     var ana_recordStartDate = Date()
     var ana_timer: Timer?
     var ana_visiableTime: CGFloat = 0
+	
+	var avPlayer: AVPlayer?
+	var avPlayerLayer: AVPlayerLayer?
     
     
     deinit {
@@ -38,74 +39,62 @@ class RecordViewController: AnaLargeTitleViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        ana_proButton.isHidden = NBUserVipStatusManager.shard.getVipStatus()
+		setProRightBarItemIfNeeded()
     }
     
     
     override func configure() {
         super.configure()
         
-        setTitle(title: "Angel")
+        setTitle(title: "BabyCare")
+		setProRightBarItemIfNeeded()
         
         scrollView.layer.masksToBounds = false
-        
-        ana_proButton = UIButton()
-        ana_proButton.setImage(UIImage(named: "Record_Pro"), for: .normal)
-        ana_proButton.setShadow(color: .color(hexString: "#146575a7"), offset: CGSize(width: 0, height: 8), radius: 32)
-        ana_proButton.reactive.controlEvents(.touchUpInside).observeValues {
-            [weak self] _ in
-            guard let self = self else { return }
-            let vc = SubscriptionViewController(success: nil)
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true, completion: nil)
-        }
-        titleBackView.addSubview(ana_proButton)
-        
-        ana_animationView = RippleAnimationView(bgColor: .color(hexString: "#FF8282"))
-        contentView.addSubview(ana_animationView)
-        
-        ana_mainView = UIView()
-        ana_mainView.layer.cornerRadius = 134
-        ana_mainView.backgroundColor = .color(hexString: "#FF8282")
-        contentView.addSubview(ana_mainView)
-        
-        ana_heartImageView = UIImageView()
-        ana_heartImageView.image = UIImage(named: "Record_Heart")
-        ana_mainView.addSubview(ana_heartImageView)
+		
+		backImageView = UIImageView(image: UIImage(named: "Record_Image"))
+		contentView.addSubview(backImageView)
+		
+		let path = Bundle.main.path(forResource: "Record", ofType: "mp4")!
+		let url = URL(fileURLWithPath: path)
+		avPlayer = AVPlayer(url: url)
+		avPlayerLayer = AVPlayerLayer(player: avPlayer)
+		avPlayerLayer?.opacity = 0
+		backImageView.layer.addSublayer(avPlayerLayer!)
         
         ana_label = UILabel()
         ana_label.numberOfLines = 0
         ana_label.textAlignment = .center
         ana_label.text = "When you have found your baby‘s heartbeat, tap the button to record now"
-        ana_label.textColor = .white
-        ana_label.font = UIFont(name: "Poppins-Light", size: 14)
-        ana_mainView.addSubview(ana_label)
+        ana_label.textColor = .color(hexString: "#6a515e")
+        ana_label.font = UIFont(name: "Poppins-Medium", size: 14)
+		backImageView.addSubview(ana_label)
         
         ana_timerLabel = UILabel()
-        ana_timerLabel.textColor = .white
+        ana_timerLabel.textColor = .color(hexString: "#6a515e")
         ana_timerLabel.font = UIFont(name: "Poppins-SemiBold", size: 44)
         ana_timerLabel.isHidden = true
-        ana_mainView.addSubview(ana_timerLabel)
+		backImageView.addSubview(ana_timerLabel)
         
         ana_buttonBackgroundView = UIView()
         ana_buttonBackgroundView.backgroundColor = .clear
-        ana_buttonBackgroundView.layer.cornerRadius = 24
-        ana_buttonBackgroundView.layer.borderWidth = 1
-        ana_buttonBackgroundView.layer.borderColor = UIColor.color(hexString: "#80FCFCFC").cgColor
+        ana_buttonBackgroundView.layer.cornerRadius = 27
         contentView.addSubview(ana_buttonBackgroundView)
         
         ana_buttonGradient = CAGradientLayer()
-        ana_buttonGradient.colors = [UIColor.color(hexString: "#FF7474").cgColor, UIColor.color(hexString: "#FF4747").cgColor]
-        ana_buttonGradient.startPoint = CGPoint(x: 0.5, y: 0)
-        ana_buttonGradient.endPoint = CGPoint(x: 0.5, y: 1)
-        ana_buttonGradient.cornerRadius = 24
+        ana_buttonGradient.colors = [UIColor.color(hexString: "#fff3ed").cgColor, UIColor.color(hexString: "#ffdde4").cgColor]
+		ana_buttonGradient.startPoint = CGPoint(x: 0, y: 0.5)
+		ana_buttonGradient.endPoint = CGPoint(x: 1, y: 0.5)
+        ana_buttonGradient.cornerRadius = 27
         ana_buttonBackgroundView.layer.addSublayer(ana_buttonGradient)
         
-        ana_buttonBackgroundView.setShadow(color: .color(hexString: "#28A0A3BD"), offset: CGSize(width: 0, height: 16), radius: 24)
+        ana_buttonBackgroundView.setShadow(color: .color(hexString: "#28d3afb8"), offset: CGSize(width: 0, height: 12), radius: 30)
         
         ana_button = UIButton()
+		ana_button.layer.cornerRadius = 27
+		ana_button.layer.borderWidth = 1
+		ana_button.layer.borderColor = UIColor.color(hexString: "#80fcfcfc").cgColor
         ana_button.setTitle("Start Recording", for: .normal)
-        ana_button.setTitleColor(.color(hexString: "#FCFCFC"), for: .normal)
+        ana_button.setTitleColor(.color(hexString: "#6a515e"), for: .normal)
         ana_button.titleLabel?.font = UIFont(name: "Poppins-SemiBold", size: 16)
         ana_button.reactive.controlEvents(.touchUpInside).observeValues {
             [weak self] button in
@@ -187,20 +176,16 @@ class RecordViewController: AnaLargeTitleViewController {
     
     
     override func layoutContentView() -> CGFloat {
-        ana_proButton.sizeToFit()
-        ana_proButton.center = CGPoint(x: view.width() - ana_proButton.halfWidth(), y: titleLabel.centerY() - 10)
-        ana_mainView.bounds = CGRect(origin: .zero, size: CGSize(width: 268, height: 268))
-        ana_mainView.center = CGPoint(x: view.halfWidth(), y: scrollView.height() * 0.3)
-        ana_animationView.frame = ana_mainView.frame
-        ana_heartImageView.sizeToFit()
-        ana_heartImageView.center = CGPoint(x: ana_mainView.halfWidth(), y: 65 + ana_heartImageView.halfHeight())
-        let size = ana_label.sizeThatFits(CGSize(width: 229, height: CGFloat.greatestFiniteMagnitude))
-        ana_label.bounds = CGRect(origin: .zero, size: size)
-        ana_label.center = CGPoint(x: ana_mainView.halfWidth(), y: ana_heartImageView.maxY() + 28 + ana_label.halfHeight())
-        ana_timerLabel.sizeToFit()
-        ana_timerLabel.center = CGPoint(x: ana_mainView.halfWidth(), y: ana_heartImageView.maxY() + 36 + ana_label.halfHeight())
-        ana_buttonBackgroundView.bounds = CGRect(origin: .zero, size: CGSize(width: 175, height: 48))
-        ana_buttonBackgroundView.center = CGPoint(x: view.halfWidth(), y: scrollView.height() * 0.7)
+		backImageView.sizeToFit()
+		backImageView.center = CGPoint(x: scrollView.halfWidth(), y: 29 + backImageView.halfHeight())
+		avPlayerLayer?.frame = backImageView.bounds
+		let size = ana_label.sizeThatFits(CGSize(width: 230, height: CGFloat.greatestFiniteMagnitude))
+		ana_label.bounds = CGRect(origin: .zero, size: size)
+		ana_label.center = CGPoint(x: backImageView.halfWidth(), y: 262)
+		ana_timerLabel.sizeToFit()
+		ana_timerLabel.center = ana_label.center
+        ana_buttonBackgroundView.bounds = CGRect(origin: .zero, size: CGSize(width: 250, height: 54))
+		ana_buttonBackgroundView.center = CGPoint(x: view.halfWidth(), y: backImageView.maxY() + 30 + ana_buttonBackgroundView.halfHeight())
         ana_buttonGradient.frame = ana_buttonBackgroundView.bounds
         ana_button.frame = ana_buttonBackgroundView.bounds
         return ana_buttonBackgroundView.maxY()

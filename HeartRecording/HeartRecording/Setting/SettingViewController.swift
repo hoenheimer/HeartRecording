@@ -15,7 +15,6 @@ class SettingViewController: AnaLargeTitleViewController, MFMailComposeViewContr
     var ana_gradientView: UIView!
     var ana_gradientLayer: CAGradientLayer!
     var ana_itemViews = [SettingItemView]()
-    var ana_versionLabel: UILabel!
     
     var ana_proItemView: SettingItemView?
     
@@ -25,6 +24,7 @@ class SettingViewController: AnaLargeTitleViewController, MFMailComposeViewContr
         if let proItemView = ana_proItemView {
             proItemView.ana_label.text = NBUserVipStatusManager.shard.getVipStatus() ? "You are pro!" : "Angel Premium-Unlock All Features"
         }
+		setProRightBarItemIfNeeded()
     }
     
     
@@ -32,21 +32,19 @@ class SettingViewController: AnaLargeTitleViewController, MFMailComposeViewContr
         super.configure()
         
         setTitle(title: "Setting")
+		setProRightBarItemIfNeeded()
         
         ana_backView = UIView()
-        ana_backView.layer.cornerRadius = 12
-        ana_backView.layer.borderWidth = 1
-        ana_backView.layer.borderColor = UIColor.color(hexString: "#80FFFFFF").cgColor
+        ana_backView.layer.cornerRadius = 25
         ana_backView.backgroundColor = .color(hexString: "#CDFFFFFF")
-        ana_backView.setShadow(color: .color(hexString: "#1e6e7191"), offset: CGSize(width: 0, height: 8), radius: 32)
+        ana_backView.setShadow(color: .color(hexString: "#0f933c49"), offset: CGSize(width: 0, height: 8), radius: 25)
         contentView.addSubview(ana_backView)
         
         ana_gradientView = UIView()
-        ana_gradientView.layer.cornerRadius = 12
         ana_backView.addSubview(ana_gradientView)
         
         ana_gradientLayer = CAGradientLayer()
-        ana_gradientLayer.cornerRadius = 12
+        ana_gradientLayer.cornerRadius = 25
         ana_gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
         ana_gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
         ana_gradientLayer.colors = [UIColor.color(hexString: "#E6FFFFFF").cgColor, UIColor.color(hexString: "#B3FFFFFF").cgColor]
@@ -65,32 +63,18 @@ class SettingViewController: AnaLargeTitleViewController, MFMailComposeViewContr
             ana_backView.addSubview(itemView)
             ana_itemViews.append(itemView)
         }
-        
-        ana_versionLabel = UILabel()
-        let infoDictionary = Bundle.main.infoDictionary!
-        let version = infoDictionary["CFBundleShortVersionString"] as! String
-        var versionString = "App version V" + version
-        if let build = infoDictionary["CFBundleVersion"] as? String {
-            versionString = versionString + "(\(build))"
-        }
-        ana_versionLabel.text = versionString
-        ana_versionLabel.textColor = .color(hexString: "#6e7191")
-        ana_versionLabel.font = UIFont(name: "Inter-Regular", size: 13)
-        ana_backView.addSubview(ana_versionLabel)
     }
     
     
     override func layoutContentView() -> CGFloat {
-        let backViewWidth = view.width() - 48
-        var y: CGFloat = 6
+        let backViewWidth = view.width() - 50
+        var y: CGFloat = 5
         for i in ana_itemViews.indices {
             let itemView = ana_itemViews[i]
-            itemView.frame = CGRect(x: 0, y: y, width: backViewWidth, height: 62)
+            itemView.frame = CGRect(x: 0, y: y, width: backViewWidth, height: 64)
             y = itemView.maxY()
         }
-        ana_versionLabel.sizeToFit()
-        ana_versionLabel.setOrigin(x: 16, y: y + 8)
-        ana_backView.frame = CGRect(x: 24, y: 34, width: backViewWidth, height: ana_versionLabel.maxY() + 16)
+        ana_backView.frame = CGRect(x: 25, y: 40, width: backViewWidth, height: y + 5)
         ana_gradientView.frame = ana_backView.bounds
         ana_gradientLayer.frame = ana_gradientView.bounds
         return ana_backView.maxY()
@@ -98,7 +82,7 @@ class SettingViewController: AnaLargeTitleViewController, MFMailComposeViewContr
     
     
     func itemDidTouched(key: String) {
-        print(key)
+		#warning("TODO")
         switch key {
         case "Pro":
             if !NBUserVipStatusManager.shard.getVipStatus() {

@@ -15,9 +15,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     var ana_closeButton:        UIButton!
     var ana_likeButton:         UIButton!
     var ana_shareButton:        UIButton!
-    var ana_animationView:      RippleAnimationView!
-    var ana_mainView:           UIView!
-    var ana_heartImageView:     UIImageView!
+	var backImageView: 			UIImageView!
     var ana_nameTextField:      UITextField!
     var ana_dateLabel:          UILabel!
     var ana_editButton:         UIButton!
@@ -48,6 +46,24 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         configureSubViews()
     }
+	
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		navigationController?.navigationBar.isHidden = true
+		if let tabBarController = tabBarController as? AnaTabBarController {
+			tabBarController.simulationTabBar.isHidden = true
+		}
+	}
+	
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		navigationController?.navigationBar.isHidden = false
+		if let tabBarController = tabBarController as? AnaTabBarController {
+			tabBarController.simulationTabBar.isHidden = false
+		}
+	}
     
     
     override func viewDidAppear(_ animated: Bool) {
@@ -58,18 +74,18 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     
     
     func configureSubViews() {
-        ana_gradientLayer = CAGradientLayer()
-        ana_gradientLayer.colors = [UIColor.color(hexString: "#FBFCFF").cgColor, UIColor.color(hexString: "#FFF0F0").cgColor]
-        ana_gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
-        ana_gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
-        view.layer.addSublayer(ana_gradientLayer)
+		ana_gradientLayer = CAGradientLayer()
+		ana_gradientLayer.colors = [UIColor.color(hexString: "#fffefd").cgColor, UIColor.color(hexString: "#fcf3f4").cgColor]
+		ana_gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
+		ana_gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
+		view.layer.addSublayer(ana_gradientLayer)
         
         ana_closeButton = UIButton()
-        ana_closeButton.setImage(UIImage(named: "Detail_Close"), for: .normal)
+        ana_closeButton.setImage(UIImage(named: "Kick_Close"), for: .normal)
         ana_closeButton.reactive.controlEvents(.touchUpInside).observeValues {
             [weak self] _ in
             guard let self = self else { return }
-            self.dismiss(animated: true, completion: nil)
+			self.navigationController?.popViewController(animated: true)
         }
         view.addSubview(ana_closeButton)
         
@@ -104,28 +120,19 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
             }
         }
         view.addSubview(ana_shareButton)
-        
-        ana_animationView = RippleAnimationView(bgColor: .color(hexString: "#FF8282"))
-        view.addSubview(ana_animationView)
-        
-        ana_mainView = UIView()
-        ana_mainView.layer.cornerRadius = 134
-        ana_mainView.backgroundColor = .color(hexString: "#FF8282")
-        view.addSubview(ana_mainView)
-        
-        ana_heartImageView = UIImageView()
-        ana_heartImageView.image = UIImage(named: "Record_Heart")
-        ana_mainView.addSubview(ana_heartImageView)
+		
+		backImageView = UIImageView(image: UIImage(named: "Detail_Image"))
+		view.addSubview(backImageView)
         
         ana_nameTextField = UITextField()
         ana_nameTextField.text = ana_model.name
         ana_nameTextField.isEnabled = false
-        ana_nameTextField.textColor = .white
-        ana_nameTextField.font = .systemFont(ofSize: 28)
+        ana_nameTextField.textColor = .color(hexString: "#6a515e")
+        ana_nameTextField.font = UIFont(name: "Poppins-Medium", size: 24)
         ana_nameTextField.returnKeyType = .done
         ana_nameTextField.textAlignment = .center
         ana_nameTextField.delegate = self
-        ana_mainView.addSubview(ana_nameTextField)
+		backImageView.addSubview(ana_nameTextField)
         
         let date = DbManager.manager.dateFormatter.date(from: String(ana_model.id!))!
         let dateforMatter = DateFormatter()
@@ -134,9 +141,9 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         
         ana_dateLabel = UILabel()
         ana_dateLabel.text = dateString
-        ana_dateLabel.textColor = .white
-        ana_dateLabel.font = .systemFont(ofSize: 14)
-        ana_mainView.addSubview(ana_dateLabel)
+        ana_dateLabel.textColor = .color(hexString: "#6a515e")
+        ana_dateLabel.font = UIFont(name: "Poppins-Medium", size: 13)
+		backImageView.addSubview(ana_dateLabel)
         
         ana_editButton = UIButton()
         ana_editButton.setImage(UIImage(named: "Detail_Edit"), for: .normal)
@@ -149,7 +156,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
                 self.ana_nameTextField.text = newName
             }
         }
-        ana_mainView.addSubview(ana_editButton)
+		backImageView.addSubview(ana_editButton)
         
         ana_leftButton = UIButton()
         ana_leftButton.setImage(UIImage(named: "Detail_Left"), for: .normal)
@@ -175,6 +182,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         ana_playButton.setImage(UIImage(named: "Detail_Play"), for: .normal)
         ana_playButton.layer.cornerRadius = 44
         ana_playButton.backgroundColor = .color(hexString: "#FF8282")
+		ana_playButton.setShadow(color: .color(hexString: "#35d74b61"), offset: CGSize(width: 0, height: 12), radius: 38, opacity: 1)
         ana_playButton.reactive.controlEvents(.touchUpInside).observeValues {
             [weak self] button in
             guard let self = self else { return }
@@ -222,11 +230,13 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         view.addSubview(ana_progressBackView)
         
         ana_progressBackLine = UIView()
-        ana_progressBackLine.backgroundColor = UIColor.color(hexString: "#A0A3B1").withAlphaComponent(0.5)
+		ana_progressBackLine.layer.cornerRadius = 1.5
+        ana_progressBackLine.backgroundColor = UIColor.color(hexString: "#6a515e").withAlphaComponent(0.25)
         ana_progressBackView.addSubview(ana_progressBackLine)
         
         ana_progressLine = UIView()
-        ana_progressLine.backgroundColor = .color(hexString: "#3F414E")
+		ana_progressLine.layer.cornerRadius = 1.5
+        ana_progressLine.backgroundColor = .color(hexString: "#6a515e")
         ana_progressBackView.addSubview(ana_progressLine)
         
         ana_progressImageView = UIImageView()
@@ -235,14 +245,14 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         
         ana_progressTimeLabel = UILabel()
         ana_progressTimeLabel.text = "00:00"
-        ana_progressTimeLabel.textColor = .color(hexString: "#3F414E")
-        ana_progressTimeLabel.font = .systemFont(ofSize: 16)
+        ana_progressTimeLabel.textColor = .color(hexString: "#6a515e")
+        ana_progressTimeLabel.font = UIFont(name: "Poppins-Regular", size: 12)
         view.addSubview(ana_progressTimeLabel)
         
         ana_totalTimeLabel = UILabel()
         ana_totalTimeLabel.text = "00:00"
-        ana_totalTimeLabel.textColor = .color(hexString: "#3F414E")
-        ana_totalTimeLabel.font = .systemFont(ofSize: 16)
+        ana_totalTimeLabel.textColor = .color(hexString: "#6a515e")
+        ana_totalTimeLabel.font = UIFont(name: "Poppins-Regular", size: 12)
         view.addSubview(ana_totalTimeLabel)
     }
     
@@ -256,18 +266,19 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         ana_shareButton.setOrigin(x: view.width() - 20 - ana_shareButton.width(), y: 50)
         ana_likeButton.sizeToFit()
         ana_likeButton.setOrigin(x: ana_shareButton.minX() - 15 - ana_likeButton.width(), y: 50)
-        ana_mainView.bounds = CGRect(origin: .zero, size: CGSize(width: 268, height: 268))
-        ana_mainView.center = CGPoint(x: view.halfWidth(), y: view.height() * 0.4)
-        ana_animationView.frame = ana_mainView.frame
-        ana_heartImageView.sizeToFit()
-        ana_heartImageView.center = CGPoint(x: ana_mainView.halfWidth(), y: 65 + ana_heartImageView.halfHeight())
+		backImageView.sizeToFit()
+		if backImageView.width() != 0 {
+			let scale = (view.width() - 16) / backImageView.width()
+			backImageView.bounds = CGRect(x: 0, y: 0, width: view.width() - 16, height: backImageView.height() * scale)
+		}
+		backImageView.center = CGPoint(x: view.halfWidth(), y: ana_closeButton.maxY() + 39 + backImageView.halfHeight())
         ana_nameTextField.sizeToFit()
         ana_nameTextField.bounds = CGRect(origin: .zero, size: CGSize(width: 264, height: ana_nameTextField.height()))
-        ana_nameTextField.center = CGPoint(x: ana_mainView.halfWidth(), y: ana_heartImageView.maxY() + 29 + ana_nameTextField.halfHeight())
+		ana_nameTextField.center = CGPoint(x: backImageView.halfWidth(), y: backImageView.height() * 0.63)
         ana_dateLabel.sizeToFit()
-        ana_dateLabel.center = CGPoint(x: ana_mainView.halfWidth(), y: ana_nameTextField.maxY() - 3 + ana_dateLabel.halfHeight())
+        ana_dateLabel.center = CGPoint(x: backImageView.halfWidth(), y: ana_nameTextField.maxY() + ana_dateLabel.halfHeight())
         ana_editButton.sizeToFit()
-        ana_editButton.center = CGPoint(x: ana_mainView.halfWidth(), y: ana_dateLabel.maxY() + 29 + ana_editButton.halfHeight())
+        ana_editButton.center = CGPoint(x: backImageView.halfWidth(), y: ana_dateLabel.maxY() + 18 + ana_editButton.halfHeight())
         ana_playButton.bounds = CGRect(origin: .zero, size: CGSize(width: 88, height: 88))
         ana_playButton.center = CGPoint(x: view.halfWidth(), y: view.height() * 0.73)
         ana_leftButton.sizeToFit()

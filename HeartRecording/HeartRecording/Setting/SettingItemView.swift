@@ -58,11 +58,11 @@ class SettingItemView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         ana_button.frame = bounds
-        ana_imageView.sizeToFit()
-        ana_imageView.center = CGPoint(x: 18 + ana_imageView.halfWidth(), y: halfHeight())
+        ana_imageView.bounds = CGRect(x: 0, y: 0, width: 24, height: 24)
+        ana_imageView.center = CGPoint(x: 20 + ana_imageView.halfWidth(), y: halfHeight())
         ana_label.sizeToFit()
         ana_label.center = CGPoint(x: ana_imageView.maxX() + 14 + ana_label.halfWidth(), y: halfHeight())
         ana_arrowImageView.sizeToFit()
-        ana_arrowImageView.center = CGPoint(x: width() - 16 - ana_imageView.halfWidth(), y: halfHeight())
+        ana_arrowImageView.center = CGPoint(x: width() - 21 - ana_imageView.halfWidth(), y: halfHeight())
     }
 }

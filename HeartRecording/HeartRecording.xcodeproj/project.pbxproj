@@ -48,6 +48,9 @@
 		1825C98E26304481001C0FB3 /* LSImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 1825C98D26304481001C0FB3 /* LSImage.png */; };
 		1825C99626305532001C0FB3 /* BaseWebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C99526305532001C0FB3 /* BaseWebController.swift */; };
 		18301023267E20DE006A54B0 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18301022267E20DE006A54B0 /* EventManager.swift */; };
+		1843FDF027C5EF19006C449B /* Detail.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1843FDEF27C5EF19006C449B /* Detail.mp4 */; };
+		1843FDF227C5EF29006C449B /* Record.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1843FDF127C5EF29006C449B /* Record.mp4 */; };
+		1843FDF427C5F538006C449B /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1843FDF327C5F538006C449B /* Poppins-Medium.ttf */; };
 		18D3309D26526EB000DFFFFF /* KickCounterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D3309C26526EB000DFFFFF /* KickCounterViewController.swift */; };
 		18D330AB26527C7F00DFFFFF /* AddKickCounterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D330AA26527C7F00DFFFFF /* AddKickCounterViewController.swift */; };
 		18D330AD2653841300DFFFFF /* DbKicksModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D330AC2653841300DFFFFF /* DbKicksModel.swift */; };
@@ -123,6 +126,9 @@
 		1825C98D26304481001C0FB3 /* LSImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LSImage.png; sourceTree = "<group>"; };
 		1825C99526305532001C0FB3 /* BaseWebController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseWebController.swift; sourceTree = "<group>"; };
 		18301022267E20DE006A54B0 /* EventManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
+		1843FDEF27C5EF19006C449B /* Detail.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Detail.mp4; sourceTree = "<group>"; };
+		1843FDF127C5EF29006C449B /* Record.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Record.mp4; sourceTree = "<group>"; };
+		1843FDF327C5F538006C449B /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.ttf"; sourceTree = "<group>"; };
 		18D3309C26526EB000DFFFFF /* KickCounterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KickCounterViewController.swift; sourceTree = "<group>"; };
 		18D330AA26527C7F00DFFFFF /* AddKickCounterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddKickCounterViewController.swift; sourceTree = "<group>"; };
 		18D330AC2653841300DFFFFF /* DbKicksModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DbKicksModel.swift; sourceTree = "<group>"; };
@@ -213,6 +219,8 @@
 		1825C88C26285C3A001C0FB3 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
+				1843FDEF27C5EF19006C449B /* Detail.mp4 */,
+				1843FDF127C5EF29006C449B /* Record.mp4 */,
 				1801C7CB27C370F0004D4B91 /* confuseAndBuild.sh */,
 				1825C91B262D8D49001C0FB3 /* Fonts */,
 				1825C8DD2629BA67001C0FB3 /* HeartRecording-Bridging-Header.h */,
@@ -265,6 +273,7 @@
 				181B6E5027C38BDF00E1F652 /* Merriweather-Regular.ttf */,
 				181B6E5227C3A0F400E1F652 /* Poppins-SemiBold.ttf */,
 				181B6E5427C3A15A00E1F652 /* Inter-Regular.ttf */,
+				1843FDF327C5F538006C449B /* Poppins-Medium.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -497,12 +506,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				1825C88E26285C5B001C0FB3 /* iconfont.ttf in Resources */,
+				1843FDF427C5F538006C449B /* Poppins-Medium.ttf in Resources */,
 				1801C7CC27C370F0004D4B91 /* confuseAndBuild.sh in Resources */,
 				1825C976262DFAD5001C0FB3 /* Configuration.storekit in Resources */,
 				1825C98E26304481001C0FB3 /* LSImage.png in Resources */,
 				6CD6CA1F262771350099F063 /* LaunchScreen.storyboard in Resources */,
+				1843FDF227C5EF29006C449B /* Record.mp4 in Resources */,
 				181B6E5327C3A0F400E1F652 /* Poppins-SemiBold.ttf in Resources */,
 				6CD6CA1C262771350099F063 /* Assets.xcassets in Resources */,
+				1843FDF027C5EF19006C449B /* Detail.mp4 in Resources */,
 				181B6E4F27C384CF00E1F652 /* Poppins-Regular.ttf in Resources */,
 				181B6E5527C3A15A00E1F652 /* Inter-Regular.ttf in Resources */,
 				181B6E5127C38BDF00E1F652 /* Merriweather-Regular.ttf in Resources */,

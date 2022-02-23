@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "bx-send.png",
+      "filename" : "fi_send.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "bx-send@2x.png",
+      "filename" : "fi_send@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "bx-send@3x.png",
+      "filename" : "fi_send@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

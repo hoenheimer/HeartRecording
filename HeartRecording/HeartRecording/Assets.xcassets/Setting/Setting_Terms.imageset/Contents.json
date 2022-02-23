@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "bx-news.png",
+      "filename" : "u_file-alt.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "bx-news@2x.png",
+      "filename" : "u_file-alt@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "bx-news@3x.png",
+      "filename" : "u_file-alt@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

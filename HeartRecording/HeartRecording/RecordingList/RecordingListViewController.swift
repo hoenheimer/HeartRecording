@@ -10,6 +10,7 @@ import SwipeCellKit
 
 
 class RecordingListViewController: AnaLargeTitleTableViewController, SwipeTableViewCellDelegate {
+	var hintImageView: UIImageView!
     var ana_emptyView: UIView!
     var ana_emptyImageView: UIImageView!
     var ana_emptyLabel: UILabel!
@@ -34,6 +35,10 @@ class RecordingListViewController: AnaLargeTitleTableViewController, SwipeTableV
         setTitle(title: "Recording List")
 		setProRightBarItemIfNeeded()
         setHeaderView(headerView: nil)
+		
+		hintImageView = UIImageView(image: UIImage(named: "Kick_Hint"))
+		view.addSubview(hintImageView)
+		view.sendSubviewToBack(hintImageView)
         
         tableView.backgroundColor = .clear
         tableView.register(RecordingTableViewCell.self, forCellReuseIdentifier: String(NSStringFromClass(RecordingTableViewCell.self)))
@@ -62,9 +67,11 @@ class RecordingListViewController: AnaLargeTitleTableViewController, SwipeTableV
     }
     
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
         
+		hintImageView.sizeToFit()
+		hintImageView.setOrigin(x: 0, y: 0)
         ana_emptyImageView.sizeToFit()
         ana_emptyImageView.setOrigin(x: 0, y: 0)
         ana_emptyLabel.sizeToFit()
@@ -91,9 +98,7 @@ class RecordingListViewController: AnaLargeTitleTableViewController, SwipeTableV
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		FeedbackManager.feedback(type: .light)
         let model = DbManager.manager.models[indexPath.row]
-        let vc = DetailViewController(model: model)
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+		navigationController?.pushViewController(DetailViewController(model: model), animated: true)
     }
     
     
