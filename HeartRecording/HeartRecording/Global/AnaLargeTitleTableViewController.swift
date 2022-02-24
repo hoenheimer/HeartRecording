@@ -22,6 +22,7 @@ class AnaLargeTitleTableViewController: UIViewController, UITableViewDelegate, U
 	
 	public var titleText: String?
 	public var titleColor: UIColor?
+	var rightButtonIsForPro = false
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
@@ -136,7 +137,7 @@ class AnaLargeTitleTableViewController: UIViewController, UITableViewDelegate, U
 	}
 	
 	
-	func setRightBarItem(topButton: UIButton?, bottomButton: UIButton?, action: @escaping () -> Void) {
+	func setRightBarItem(topButton: UIButton?, bottomButton: UIButton?, forPro: Bool = false, action: @escaping () -> Void) {
 		rightBarButton = topButton
 		if let topButton = topButton {
 			topButton.isHidden = true
@@ -161,6 +162,8 @@ class AnaLargeTitleTableViewController: UIViewController, UITableViewDelegate, U
 				titleBackView.addSubview(bottomButton)
 			}
 		}
+		
+		rightButtonIsForPro = forPro
 	}
 	
 	
@@ -169,14 +172,14 @@ class AnaLargeTitleTableViewController: UIViewController, UITableViewDelegate, U
 			setRightBarItem(topButton: nil, bottomButton: nil) {
 				return
 			}
-		} else if titleRightBarButton == nil {
+		} else if !rightButtonIsForPro {
 			let topButton = UIButton()
 			topButton.setImage(UIImage(named: "NavigationBar_Pro_Top")?.reSizeImage(reSize: CGSize(width: 18, height: 18)), for: .normal)
 			let bottomButton = UIButton()
 			bottomButton.setImage(UIImage(named: "NavigationBar_Pro_Bottom"), for: .normal)
 			bottomButton.sizeToFit()
 			bottomButton.setShadow(color: .color(hexString: "#33bdaaa0"), offset: CGSize(width: 0, height: 7), radius: 20, opacity: 1)
-			setRightBarItem(topButton: topButton, bottomButton: bottomButton) {
+			setRightBarItem(topButton: topButton, bottomButton: bottomButton, forPro: true) {
 				[weak self]	in
 				self?.showSubscriptionIfNeeded(handle: nil)
 			}

@@ -70,9 +70,9 @@ class RecordViewController: AnaLargeTitleViewController {
         ana_label = UILabel()
         ana_label.numberOfLines = 0
         ana_label.textAlignment = .center
-        ana_label.text = "When you have found your baby‘s heartbeat, tap the button to record now"
+        ana_label.text = "Tap Button To Start"
         ana_label.textColor = .color(hexString: "#6a515e")
-        ana_label.font = UIFont(name: "Poppins-Medium", size: 14)
+        ana_label.font = UIFont(name: "Poppins-Medium", size: 18)
 		backImageView.addSubview(ana_label)
         
         ana_timerLabel = UILabel()

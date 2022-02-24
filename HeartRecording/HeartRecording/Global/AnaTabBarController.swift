@@ -26,8 +26,8 @@ class AnaTabBarController: UITabBarController {
 		
 		viewControllers = [
 			AnaNavigationController(rootViewController: KickCounterViewController()),
-			AnaNavigationController(rootViewController: RecordingListViewController()),
 			AnaNavigationController(rootViewController: RecordViewController()),
+			AnaNavigationController(rootViewController: RecordingListViewController()),
 			AnaNavigationController(rootViewController: SettingViewController())
 		]
 		
@@ -66,8 +66,8 @@ class AnaTabBarController: UITabBarController {
 		}
 		
 		button1 = newButton(index: 0, imageNameSuffix: "TabBar_Kicks", title: "Heartbeat")
-		button2 = newButton(index: 1, imageNameSuffix: "TabBar_List", title: "Audio")
-		button3 = newButton(index: 2, imageNameSuffix: "TabBar_Record", title: "Recording")
+		button2 = newButton(index: 1, imageNameSuffix: "TabBar_Record", title: "Recording")
+		button3 = newButton(index: 2, imageNameSuffix: "TabBar_List", title: "Audio")
 		button4 = newButton(index: 3, imageNameSuffix: "TabBar_Setting", title: "Setting")
 	}
 	

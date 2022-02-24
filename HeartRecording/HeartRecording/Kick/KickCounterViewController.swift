@@ -15,12 +15,23 @@ class KickCounterViewController: AnaLargeTitleTableViewController {
 	var ana_emptyView: UIView!
 	var ana_emptyImageView: UIImageView!
 	var ana_emptyLabel: UILabel!
+	var emptyButtonView: UIView!
+	var emptyButtonGradientLayer: CAGradientLayer!
+	var emptyButton: UIButton!
 	
 	var ana_models: [DbKicksModel]!
 	
 	
 	deinit {
 		NotificationCenter.default.removeObserver(self)
+	}
+	
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		if ana_models.count == 0 {
+			setProRightBarItemIfNeeded()
+		}
 	}
 	
 	
@@ -32,19 +43,23 @@ class KickCounterViewController: AnaLargeTitleTableViewController {
 		ana_models = DbManager.manager.kickModels()
 		
 		setTitle(title: "Kick Counter")
-		let topButton = UIButton()
-		topButton.setImage(UIImage(named: "Kick_Add"), for: .normal)
-		let bottomButton = UIButton()
-		bottomButton.setImage(UIImage(named: "Kick_Add"), for: .normal)
-		bottomButton.bounds = CGRect(x: 0, y: 0, width: 48, height: 48)
-		bottomButton.backgroundColor = .white
-		bottomButton.layer.cornerRadius = 24
-		bottomButton.setShadow(color: .color(hexString: "#70f8e6e6"), offset: CGSize(width: 0, height: 5), radius: 25, opacity: 1)
-		setRightBarItem(topButton: topButton, bottomButton: bottomButton) {
-			[weak self] in
-			guard let self = self else { return }
-			FeedbackManager.feedback(type: .light)
-			self.navigationController?.pushViewController(AddKickCounterViewController(), animated: true)
+		if ana_models.count > 0 {
+			let topButton = UIButton()
+			topButton.setImage(UIImage(named: "Kick_Add"), for: .normal)
+			let bottomButton = UIButton()
+			bottomButton.setImage(UIImage(named: "Kick_Add"), for: .normal)
+			bottomButton.bounds = CGRect(x: 0, y: 0, width: 48, height: 48)
+			bottomButton.backgroundColor = .white
+			bottomButton.layer.cornerRadius = 24
+			bottomButton.setShadow(color: .color(hexString: "#70f8e6e6"), offset: CGSize(width: 0, height: 5), radius: 25, opacity: 1)
+			setRightBarItem(topButton: topButton, bottomButton: bottomButton) {
+				[weak self] in
+				guard let self = self else { return }
+				FeedbackManager.feedback(type: .light)
+				self.navigationController?.pushViewController(AddKickCounterViewController(), animated: true)
+			}
+		} else {
+			setProRightBarItemIfNeeded()
 		}
 		setHeaderView(headerView: nil)
 		
@@ -70,6 +85,34 @@ class KickCounterViewController: AnaLargeTitleTableViewController {
 		ana_emptyLabel.textColor = .color(hexString: "#6a515e")
 		ana_emptyLabel.font = UIFont(name: "Merriweather-Regular", size: 18)
 		ana_emptyView.addSubview(ana_emptyLabel)
+		
+		emptyButtonView = UIView()
+		emptyButtonView.layer.cornerRadius = 27
+		emptyButtonView.backgroundColor = .color(hexString: "#ffe8e8")
+		emptyButtonView.setShadow(color: .color(hexString: "#28d3afb8"), offset: CGSize(width: 0, height: 12), radius: 30, opacity: 1)
+		emptyButtonView.isHidden = ana_models.count > 0
+		tableView.addSubview(emptyButtonView)
+		
+		emptyButtonGradientLayer = CAGradientLayer()
+		emptyButtonGradientLayer.colors = [UIColor.color(hexString: "#fff3ed").cgColor, UIColor.color(hexString: "#ffdde4").cgColor]
+		emptyButtonGradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
+		emptyButtonGradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
+		emptyButtonGradientLayer.cornerRadius = 27
+		emptyButtonView.layer.addSublayer(emptyButtonGradientLayer)
+		
+		emptyButton = UIButton()
+		emptyButton.layer.borderWidth = 1
+		emptyButton.layer.borderColor = UIColor.color(hexString: "#80fcfcfc").cgColor
+		emptyButton.setTitle("Add", for: .normal)
+		emptyButton.setTitleColor(.color(hexString: "#6a515e"), for: .normal)
+		emptyButton.titleLabel?.font = UIFont(name: "Poppins-SemiBold", size: 16)
+		emptyButton.reactive.controlEvents(.touchUpInside).observeValues {
+			[weak self] _ in
+			guard let self = self else { return }
+			FeedbackManager.feedback(type: .light)
+			self.navigationController?.pushViewController(AddKickCounterViewController(), animated: true)
+		}
+		emptyButtonView.addSubview(emptyButton)
 	}
 	
 	
@@ -84,6 +127,10 @@ class KickCounterViewController: AnaLargeTitleTableViewController {
 		ana_emptyLabel.center = CGPoint(x: ana_emptyImageView.halfWidth(), y: ana_emptyImageView.maxY() + 23 + ana_emptyLabel.halfHeight())
 		ana_emptyView.bounds = CGRect(origin: .zero, size: CGSize(width: ana_emptyImageView.width(), height: ana_emptyLabel.maxY()))
 		ana_emptyView.center = CGPoint(x: tableView.halfWidth(), y: tableView.halfHeight())
+		emptyButtonView.bounds = CGRect(x: 0, y: 0, width: 250, height: 54)
+		emptyButtonView.center = CGPoint(x: tableView.halfWidth(), y: tableView.height() * 0.8)
+		emptyButtonGradientLayer.frame = emptyButtonView.bounds
+		emptyButton.frame = emptyButtonView.bounds
 	}
 	
 	
@@ -91,6 +138,27 @@ class KickCounterViewController: AnaLargeTitleTableViewController {
 		ana_models = DbManager.manager.kickModels()
 		tableView.reloadData()
 		ana_emptyView.isHidden = ana_models.count > 0
+		emptyButtonView.isHidden = ana_models.count > 0
+		
+		if ana_models.count > 0 {
+			let topButton = UIButton()
+			topButton.setImage(UIImage(named: "Kick_Add"), for: .normal)
+			let bottomButton = UIButton()
+			bottomButton.setImage(UIImage(named: "Kick_Add"), for: .normal)
+			bottomButton.bounds = CGRect(x: 0, y: 0, width: 48, height: 48)
+			bottomButton.backgroundColor = .white
+			bottomButton.layer.cornerRadius = 24
+			bottomButton.setShadow(color: .color(hexString: "#70f8e6e6"), offset: CGSize(width: 0, height: 5), radius: 25, opacity: 1)
+			setRightBarItem(topButton: topButton, bottomButton: bottomButton) {
+				[weak self] in
+				guard let self = self else { return }
+				FeedbackManager.feedback(type: .light)
+				self.navigationController?.pushViewController(AddKickCounterViewController(), animated: true)
+			}
+		} else {
+			setProRightBarItemIfNeeded()
+		}
+		setHeaderView(headerView: nil)
 	}
 	
 	
