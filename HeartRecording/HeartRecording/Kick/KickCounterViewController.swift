@@ -29,6 +29,11 @@ class KickCounterViewController: AnaLargeTitleTableViewController {
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
+		
+		navigationController?.setNavigationBarHidden(false, animated: false)
+		if let tabBarController = tabBarController as? AnaTabBarController {
+			tabBarController.simulationTabBar.isHidden = false
+		}
 		if ana_models.count == 0 {
 			setProRightBarItemIfNeeded()
 		}

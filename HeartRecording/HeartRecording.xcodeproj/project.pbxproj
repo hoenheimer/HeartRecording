@@ -47,12 +47,18 @@
 		1825C98626303E22001C0FB3 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C98526303E22001C0FB3 /* FavoriteViewController.swift */; };
 		1825C98E26304481001C0FB3 /* LSImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 1825C98D26304481001C0FB3 /* LSImage.png */; };
 		1825C99626305532001C0FB3 /* BaseWebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C99526305532001C0FB3 /* BaseWebController.swift */; };
-		18301023267E20DE006A54B0 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18301022267E20DE006A54B0 /* EventManager.swift */; };
 		1843FDF427C5F538006C449B /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1843FDF327C5F538006C449B /* Poppins-Medium.ttf */; };
 		1843FDF627C6035E006C449B /* Record.gif in Resources */ = {isa = PBXBuildFile; fileRef = 1843FDF527C6035E006C449B /* Record.gif */; };
 		1843FDFC27C60FE3006C449B /* Detail.gif in Resources */ = {isa = PBXBuildFile; fileRef = 1843FDFB27C60FE3006C449B /* Detail.gif */; };
 		1843FDFE27C61E53006C449B /* Heart.gif in Resources */ = {isa = PBXBuildFile; fileRef = 1843FDFD27C61E53006C449B /* Heart.gif */; };
 		1843FE0027C62F65006C449B /* FLAnimatedImageView+Addition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1843FDFF27C62F65006C449B /* FLAnimatedImageView+Addition.swift */; };
+		187FD53527D084E400E1B0F9 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FD53427D084E400E1B0F9 /* BaseViewController.swift */; };
+		187FD53727D0883600E1B0F9 /* Merriweather-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 187FD53627D0883600E1B0F9 /* Merriweather-Bold.ttf */; };
+		187FD53927D08A1E00E1B0F9 /* BaseViewController1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FD53827D08A1E00E1B0F9 /* BaseViewController1.swift */; };
+		187FD53B27D08D2200E1B0F9 /* BaseViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FD53A27D08D2200E1B0F9 /* BaseViewController2.swift */; };
+		187FD53D27D08DF700E1B0F9 /* BaseViewController3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FD53C27D08DF700E1B0F9 /* BaseViewController3.swift */; };
+		187FD53F27D08E7600E1B0F9 /* StarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FD53E27D08E7600E1B0F9 /* StarsView.swift */; };
+		187FD54127D0947F00E1B0F9 /* SubscriptionProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FD54027D0947F00E1B0F9 /* SubscriptionProductView.swift */; };
 		18D3309D26526EB000DFFFFF /* KickCounterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D3309C26526EB000DFFFFF /* KickCounterViewController.swift */; };
 		18D330AB26527C7F00DFFFFF /* AddKickCounterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D330AA26527C7F00DFFFFF /* AddKickCounterViewController.swift */; };
 		18D330AD2653841300DFFFFF /* DbKicksModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D330AC2653841300DFFFFF /* DbKicksModel.swift */; };
@@ -127,12 +133,18 @@
 		1825C98526303E22001C0FB3 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 		1825C98D26304481001C0FB3 /* LSImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LSImage.png; sourceTree = "<group>"; };
 		1825C99526305532001C0FB3 /* BaseWebController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseWebController.swift; sourceTree = "<group>"; };
-		18301022267E20DE006A54B0 /* EventManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
 		1843FDF327C5F538006C449B /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.ttf"; sourceTree = "<group>"; };
 		1843FDF527C6035E006C449B /* Record.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Record.gif; sourceTree = "<group>"; };
 		1843FDFB27C60FE3006C449B /* Detail.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Detail.gif; sourceTree = "<group>"; };
 		1843FDFD27C61E53006C449B /* Heart.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Heart.gif; sourceTree = "<group>"; };
 		1843FDFF27C62F65006C449B /* FLAnimatedImageView+Addition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FLAnimatedImageView+Addition.swift"; sourceTree = "<group>"; };
+		187FD53427D084E400E1B0F9 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		187FD53627D0883600E1B0F9 /* Merriweather-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merriweather-Bold.ttf"; sourceTree = "<group>"; };
+		187FD53827D08A1E00E1B0F9 /* BaseViewController1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController1.swift; sourceTree = "<group>"; };
+		187FD53A27D08D2200E1B0F9 /* BaseViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController2.swift; sourceTree = "<group>"; };
+		187FD53C27D08DF700E1B0F9 /* BaseViewController3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController3.swift; sourceTree = "<group>"; };
+		187FD53E27D08E7600E1B0F9 /* StarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarsView.swift; sourceTree = "<group>"; };
+		187FD54027D0947F00E1B0F9 /* SubscriptionProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionProductView.swift; sourceTree = "<group>"; };
 		18D3309C26526EB000DFFFFF /* KickCounterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KickCounterViewController.swift; sourceTree = "<group>"; };
 		18D330AA26527C7F00DFFFFF /* AddKickCounterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddKickCounterViewController.swift; sourceTree = "<group>"; };
 		18D330AC2653841300DFFFFF /* DbKicksModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DbKicksModel.swift; sourceTree = "<group>"; };
@@ -213,7 +225,6 @@
 				1825C8BD2628DB90001C0FB3 /* RecordManager.swift */,
 				1825C8E72629C0A8001C0FB3 /* PlayerManager.swift */,
 				18D330AE2653900000DFFFFF /* NBSharedTool.swift */,
-				18301022267E20DE006A54B0 /* EventManager.swift */,
 				1825C8F4262D7D5A001C0FB3 /* Db */,
 				1825C930262D970A001C0FB3 /* NotificationName.swift */,
 				1825C949262DE756001C0FB3 /* Subscription */,
@@ -280,6 +291,7 @@
 				181B6E5227C3A0F400E1F652 /* Poppins-SemiBold.ttf */,
 				181B6E5427C3A15A00E1F652 /* Inter-Regular.ttf */,
 				1843FDF327C5F538006C449B /* Poppins-Medium.ttf */,
+				187FD53627D0883600E1B0F9 /* Merriweather-Bold.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -312,8 +324,21 @@
 			isa = PBXGroup;
 			children = (
 				1825C958262DE7AF001C0FB3 /* SubscriptionViewController.swift */,
+				187FD54027D0947F00E1B0F9 /* SubscriptionProductView.swift */,
 			);
 			path = Subscription;
+			sourceTree = "<group>";
+		};
+		187FD53327D082E700E1B0F9 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				187FD53427D084E400E1B0F9 /* BaseViewController.swift */,
+				187FD53827D08A1E00E1B0F9 /* BaseViewController1.swift */,
+				187FD53A27D08D2200E1B0F9 /* BaseViewController2.swift */,
+				187FD53C27D08DF700E1B0F9 /* BaseViewController3.swift */,
+				187FD53E27D08E7600E1B0F9 /* StarsView.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 		18D3309B26526E7A00DFFFFF /* Kick */ = {
@@ -366,6 +391,7 @@
 				6CD6CA1D262771350099F063 /* LaunchScreen.storyboard */,
 				6CD6CA20262771350099F063 /* Info.plist */,
 				1825C87426285BB8001C0FB3 /* Global */,
+				187FD53327D082E700E1B0F9 /* Base */,
 				1825C8A526286145001C0FB3 /* Record */,
 				1825C8C626299485001C0FB3 /* Detail */,
 				1825C910262D86CE001C0FB3 /* RecordingList */,
@@ -525,6 +551,7 @@
 				181B6E4F27C384CF00E1F652 /* Poppins-Regular.ttf in Resources */,
 				181B6E5527C3A15A00E1F652 /* Inter-Regular.ttf in Resources */,
 				181B6E5127C38BDF00E1F652 /* Merriweather-Regular.ttf in Resources */,
+				187FD53727D0883600E1B0F9 /* Merriweather-Bold.ttf in Resources */,
 				6CD6CA1A262771330099F063 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -601,6 +628,8 @@
 				1825C89926285D32001C0FB3 /* AnaLargeTitleViewController.swift in Sources */,
 				1825C8AF26286E09001C0FB3 /* RippleAnimationView.swift in Sources */,
 				1825C87F26285C05001C0FB3 /* UIViewController+Addition.swift in Sources */,
+				187FD53B27D08D2200E1B0F9 /* BaseViewController2.swift in Sources */,
+				187FD53527D084E400E1B0F9 /* BaseViewController.swift in Sources */,
 				1825C909262D7EDD001C0FB3 /* DbRecordModel.swift in Sources */,
 				1825C8A726286158001C0FB3 /* RecordViewController.swift in Sources */,
 				1843FE0027C62F65006C449B /* FLAnimatedImageView+Addition.swift in Sources */,
@@ -608,10 +637,12 @@
 				1825C8E82629C0A8001C0FB3 /* PlayerManager.swift in Sources */,
 				1825C98626303E22001C0FB3 /* FavoriteViewController.swift in Sources */,
 				1825C951262DE771001C0FB3 /* NBLoadingBox.swift in Sources */,
+				187FD53F27D08E7600E1B0F9 /* StarsView.swift in Sources */,
 				1825C937262DA106001C0FB3 /* SettingViewController.swift in Sources */,
 				1825C88026285C05001C0FB3 /* UIView+Addition.swift in Sources */,
+				187FD53927D08A1E00E1B0F9 /* BaseViewController1.swift in Sources */,
+				187FD53D27D08DF700E1B0F9 /* BaseViewController3.swift in Sources */,
 				1825C8F02629D09B001C0FB3 /* String+Addition.swift in Sources */,
-				18301023267E20DE006A54B0 /* EventManager.swift in Sources */,
 				1825C88826285C33001C0FB3 /* Iconfont.swift in Sources */,
 				1825C912262D8758001C0FB3 /* RecordingListViewController.swift in Sources */,
 				1825C8BE2628DB90001C0FB3 /* RecordManager.swift in Sources */,
@@ -626,6 +657,7 @@
 				1825C8F6262D7D6C001C0FB3 /* DbManager.swift in Sources */,
 				1825C89C26285D32001C0FB3 /* AnaLargeTitleTableViewController.swift in Sources */,
 				1825C959262DE7AF001C0FB3 /* SubscriptionViewController.swift in Sources */,
+				187FD54127D0947F00E1B0F9 /* SubscriptionProductView.swift in Sources */,
 				6CD6CA15262771330099F063 /* SceneDelegate.swift in Sources */,
 				1825C952262DE771001C0FB3 /* NBNewStoreManager.swift in Sources */,
 				181B6E4D27C383D200E1F652 /* AnaTabBarController.swift in Sources */,

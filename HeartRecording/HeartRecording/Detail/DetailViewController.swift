@@ -110,7 +110,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
             [weak self] _ in
             guard let self = self else { return }
 			FeedbackManager.feedback(type: .light)
-			self.showSubscriptionIfNeeded(scene: .share) {
+			self.showSubscriptionIfNeeded {
                 [weak self] in
                 guard let self = self else { return }
                 if let fileName = self.ana_model.path {
@@ -192,7 +192,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
             [weak self] button in
             guard let self = self else { return }
 			FeedbackManager.feedback(type: .light)
-			self.showSubscriptionIfNeeded(scene: .play) {
+			self.showSubscriptionIfNeeded {
 				[weak self] in
 				guard let self = self else { return }
 				if !PlayerManager.shared.isPlaying {

@@ -21,7 +21,7 @@
           "adHocOffers" : [
 
           ],
-          "displayPrice" : "0.1",
+          "displayPrice" : "6.99",
           "familyShareable" : false,
           "groupNumber" : 1,
           "internalID" : "4D81E763",
@@ -37,8 +37,34 @@
               "locale" : "en_US"
             }
           ],
-          "productID" : "com.babycare.angelweekly",
-          "recurringSubscriptionPeriod" : "P1Y",
+          "productID" : "com.babycare.heartbeat.month",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : null,
+          "subscriptionGroupID" : "A5BA8A75",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "displayPrice" : "39.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "10D3D71D",
+          "introductoryOffer" : {
+            "internalID" : "FBC1E2C3",
+            "paymentMode" : "free",
+            "subscriptionPeriod" : "P3D"
+          },
+          "localizations" : [
+            {
+              "description" : "",
+              "displayName" : "",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "com.babycare.heartbeat.6month",
+          "recurringSubscriptionPeriod" : "P6M",
           "referenceName" : null,
           "subscriptionGroupID" : "A5BA8A75",
           "type" : "RecurringSubscription"

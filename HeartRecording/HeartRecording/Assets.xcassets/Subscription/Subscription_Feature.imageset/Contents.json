@@ -1,16 +1,17 @@
 {
   "images" : [
     {
+      "filename" : "oval-love.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "bxs-badge-check@2x.png",
+      "filename" : "oval-love@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "bxs-badge-check@3x.png",
+      "filename" : "oval-love@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

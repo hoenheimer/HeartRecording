@@ -25,7 +25,7 @@ class AnaTabBarController: UITabBarController {
 		tabBar.isHidden = true
 		
 		viewControllers = [
-			AnaNavigationController(rootViewController: KickCounterViewController()),
+			AnaNavigationController(rootViewController: UserDefaults.standard.bool(forKey: "Have_Launch_Once") ? KickCounterViewController() : BaseViewController1()),
 			AnaNavigationController(rootViewController: RecordViewController()),
 			AnaNavigationController(rootViewController: RecordingListViewController()),
 			AnaNavigationController(rootViewController: SettingViewController())

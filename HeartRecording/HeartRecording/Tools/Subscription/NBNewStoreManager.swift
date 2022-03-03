@@ -63,10 +63,9 @@ class NBNewStoreManager: NSObject,SKPaymentTransactionObserver{
         case restoreFailed      //恢复失败
     }
 
-//    let weekProductId = "com.ziheng.highlightCover.weeekly"
-    let monthProductId = "com.babycare.angelweekly"
-//	let onceProductId = "com.ziheng.totowallet.onetimepurchase"
-    let sharedSecret = "e1780bfd2eb24c31bce9fe2ace147443"
+    let monthProductId = "com.babycare.heartbeat.month"
+	let sixMonthProductId = "com.babycare.heartbeat.6month"
+    let sharedSecret = "7758eb5693734f68bb787fdeef0346f0"
     
     private var products: [SKProduct]?
 
@@ -122,7 +121,7 @@ class NBNewStoreManager: NSObject,SKPaymentTransactionObserver{
     
     
     func allProuductIds() -> [String] {
-        return [monthProductId]
+        return [monthProductId, sixMonthProductId]
     }
     
     /**获取所有产品信息*/
@@ -169,7 +168,6 @@ class NBNewStoreManager: NSObject,SKPaymentTransactionObserver{
                 }
                 status = .purchaseSuccess
 				
-				EventManager.income(product: purchase.product, type: "buy")
             case .error(let error):
                 status = .purchaseFailure
                 switch error.code {
@@ -238,9 +236,12 @@ class NBNewStoreManager: NSObject,SKPaymentTransactionObserver{
 //				}
 				 
 				var productIds = [String]()
-                if let yearProductId = weakSelf?.monthProductId {
-                    productIds.append(yearProductId)
+                if let monthProductId = weakSelf?.monthProductId {
+                    productIds.append(monthProductId)
                 }
+				if let sixMonthProductId = weakSelf?.sixMonthProductId {
+					productIds.append(sixMonthProductId)
+				}
 //                if let weekProductId = weakSelf?.weekProductId {
 //                    productIds.append(weekProductId)
 //                }

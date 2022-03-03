@@ -147,7 +147,6 @@ class RecordViewController: AnaLargeTitleViewController {
 						let vc = SubscriptionViewController()
 						vc.ana_success = action
 						vc.ana_dismiss = action
-						vc.ana_scene = .record
 						vc.modalPresentationStyle = .fullScreen
 						self.present(vc, animated: true, completion: nil)
 						UserDefaults.standard.setValue(todayString, forKey: "Home_Last_Show_SubscriptionVC")
