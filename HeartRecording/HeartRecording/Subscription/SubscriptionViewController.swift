@@ -14,6 +14,8 @@ import StoreKit
 class SubscriptionViewController: UIViewController {
     var ana_gradientLayer:          CAGradientLayer!
     var ana_scrollView:             UIScrollView!
+	var hintView:					UIView!
+	var hintShapeLayer: 			CAShapeLayer!
     var ana_closeButton:            UIButton!
 	var ana_imageView:              UIImageView!
     var ana_titleLabel:             UILabel!
@@ -81,6 +83,7 @@ class SubscriptionViewController: UIViewController {
         
         ana_scrollView = UIScrollView()
         ana_scrollView.backgroundColor = .clear
+		ana_scrollView.contentInsetAdjustmentBehavior = .never
         view.addSubview(ana_scrollView)
         
         ana_closeButton = UIButton()
@@ -95,6 +98,13 @@ class SubscriptionViewController: UIViewController {
 			}
         }
         view.addSubview(ana_closeButton)
+		
+		hintView = UIView()
+		hintView.backgroundColor = .white
+		ana_scrollView.addSubview(hintView)
+		
+		hintShapeLayer = CAShapeLayer()
+		hintView.layer.mask = hintShapeLayer
 		
 		ana_imageView = UIImageView()
 		ana_imageView.image = UIImage(named: "Subscription_Image")
@@ -232,6 +242,7 @@ class SubscriptionViewController: UIViewController {
         
         ana_bottomLabel = UILabel()
         ana_bottomLabel.numberOfLines = 0
+		ana_bottomLabel.textAlignment = .justified
         ana_bottomLabel.text = "BabyCare Premium offers monthly and half-yearly purchase subscription. You can subscribe to a monthly plan($6.99 per month) or a half-yearly plan($39.99 per half-year). You can manage or turn off auto-renew in your Apple ID account settings at any time. Subscriptions will automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Any unused portion of a free trial period will be forfeited when you purchase a subscription. Our app is functional without purchasing an Auto-Renewable subscription, and you can use all the unlocked content after the subscription expires."
         ana_bottomLabel.textColor = .color(hexString: "#6a515e")
         ana_bottomLabel.font  = UIFont(name: "PingFangSC-Semibold", size: 10)
@@ -281,7 +292,31 @@ class SubscriptionViewController: UIViewController {
         let size = ana_bottomLabel.sizeThatFits(CGSize(width: ana_scrollView.width() - 76, height: .greatestFiniteMagnitude))
         ana_bottomLabel.frame = CGRect(x: 38, y: ana_restoreButton.maxY() + 3, width: size.width, height: size.height)
         ana_scrollView.contentSize = CGSize(width: ana_scrollView.width(), height: ana_bottomLabel.maxY())
+		hintView.frame = CGRect(origin: .zero, size: ana_scrollView.contentSize)
+		hintShapeLayer.frame = hintView.bounds
+		hintShapeLayer.path = maskLayerPath()
     }
+	
+	
+	func maskLayerPath() -> CGPath {
+		let path = UIBezierPath()
+		path.move(to: CGPoint(x: 0, y: 0))
+		path.addLine(to: CGPoint(x: 0, y: ana_button.centerY()))
+		path.addArc(withCenter: CGPoint(x: 80, y: ana_button.centerY()),
+					radius: 80,
+					startAngle: -1 * CGFloat.pi,
+					endAngle: -0.5 * CGFloat.pi,
+					clockwise: true)
+		path.addLine(to: CGPoint(x: view.width() - 80, y: ana_button.centerY() - 80))
+		path.addArc(withCenter: CGPoint(x: view.width() - 80, y: ana_button.centerY() - 160),
+					radius: 80,
+					startAngle: 0.5 * CGFloat.pi,
+					endAngle: 0,
+					clockwise: false)
+		path.addLine(to: CGPoint(x: view.width(), y: 0))
+		path.close()
+		return path.cgPath
+	}
     
     
     func requestSuccess() {
