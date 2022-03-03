@@ -61,7 +61,7 @@ class StarView: UIView {
 	var ana_behindStarImageView: UIImageView!
 	var ana_frontStarImageView: UIImageView!
 	
-	let defaultColor = UIColor.yellow
+	let defaultColor = UIColor.color(hexString: "#00e84a63")
 	let highlightedColor = UIColor.color(hexString: "#e84a63")
 	
 	

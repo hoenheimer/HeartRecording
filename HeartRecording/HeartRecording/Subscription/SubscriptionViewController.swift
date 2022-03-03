@@ -13,6 +13,7 @@ import StoreKit
 
 class SubscriptionViewController: UIViewController {
     var ana_gradientLayer:          CAGradientLayer!
+	var backHintView:				UIView!
     var ana_scrollView:             UIScrollView!
 	var hintView:					UIView!
 	var hintShapeLayer: 			CAShapeLayer!
@@ -80,6 +81,10 @@ class SubscriptionViewController: UIViewController {
         ana_gradientLayer.endPoint = CGPoint(x: 1, y: 1)
         ana_gradientLayer.colors = [UIColor.color(hexString: "#fff6f8").cgColor, UIColor.color(hexString: "#fff0f2").cgColor]
         view.layer.addSublayer(ana_gradientLayer)
+		
+		backHintView = UIView()
+		backHintView.backgroundColor = .white
+		view.addSubview(backHintView)
         
         ana_scrollView = UIScrollView()
         ana_scrollView.backgroundColor = .clear
@@ -291,10 +296,11 @@ class SubscriptionViewController: UIViewController {
 		ana_termsButton.center = CGPoint(x: (ana_restoreButton.maxX() + ana_privacyButton.minX()) / 2, y: ana_privacyButton.centerY())
         let size = ana_bottomLabel.sizeThatFits(CGSize(width: ana_scrollView.width() - 76, height: .greatestFiniteMagnitude))
         ana_bottomLabel.frame = CGRect(x: 38, y: ana_restoreButton.maxY() + 3, width: size.width, height: size.height)
-        ana_scrollView.contentSize = CGSize(width: ana_scrollView.width(), height: ana_bottomLabel.maxY())
+        ana_scrollView.contentSize = CGSize(width: ana_scrollView.width(), height: ana_bottomLabel.maxY() + bottomSpacing())
 		hintView.frame = CGRect(origin: .zero, size: ana_scrollView.contentSize)
 		hintShapeLayer.frame = hintView.bounds
 		hintShapeLayer.path = maskLayerPath()
+		backHintView.frame = CGRect(x: 0, y: 0, width: view.width(), height: view.height() / 3)
     }
 	
 	
