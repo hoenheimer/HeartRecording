@@ -24,12 +24,13 @@ class AddKickCounterViewController: UIViewController {
 	var ana_kicks = 0
 	var ana_timer: Timer?
 	var ana_timerStartDate: Date?
+	var ana_rotationAngle: CGFloat = 0
+	var ana_isRotating = false
 	
 	
 	deinit {
 		if ana_timer?.isValid == true {
 			ana_timer?.invalidate()
-			ana_timer = nil
 		}
 	}
 	
@@ -100,6 +101,34 @@ class AddKickCounterViewController: UIViewController {
 			self.ana_kicks += 1
 			self.ana_countLabel.text = String(format: "%02d", self.ana_kicks)
 			self.view.layoutNow()
+			
+			if !self.ana_isRotating {
+				self.ana_isRotating = true
+				let pipe = Signal<Int, Never>.pipe()
+				let action: () -> Void = {
+					[weak self] in
+					guard let self = self else { return }
+					UIView.animate(withDuration: 1 / 6, delay: 0, options: .curveLinear) {
+						self.ana_backImageView.transform = CGAffineTransform(rotationAngle: self.ana_rotationAngle + .pi / 12)
+					} completion: {
+						completed in
+						if completed {
+							self.ana_rotationAngle += .pi / 12
+							pipe.input.send(value: 1)
+						}
+					}
+				}
+				pipe.output.observeValues {
+					[weak self] _ in
+					guard let self = self else { return }
+					if self.ana_rotationAngle >= CGFloat(self.ana_kicks) * .pi / 12 {
+						self.ana_isRotating = false
+					} else {
+						action()
+					}
+				}
+				action()
+			}
 		}
 		view.addSubview(ana_addButton)
 		
