@@ -24,7 +24,6 @@
 		1825C89C26285D32001C0FB3 /* AnaLargeTitleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C89826285D32001C0FB3 /* AnaLargeTitleTableViewController.swift */; };
 		1825C8A1262860C0001C0FB3 /* FeedbackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C8A0262860C0001C0FB3 /* FeedbackManager.swift */; };
 		1825C8A726286158001C0FB3 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C8A626286158001C0FB3 /* RecordViewController.swift */; };
-		1825C8AF26286E09001C0FB3 /* RippleAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C8AE26286E09001C0FB3 /* RippleAnimationView.swift */; };
 		1825C8BE2628DB90001C0FB3 /* RecordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C8BD2628DB90001C0FB3 /* RecordManager.swift */; };
 		1825C8C8262994A1001C0FB3 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C8C7262994A1001C0FB3 /* DetailViewController.swift */; };
 		1825C8E82629C0A8001C0FB3 /* PlayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C8E72629C0A8001C0FB3 /* PlayerManager.swift */; };
@@ -48,10 +47,8 @@
 		1825C98E26304481001C0FB3 /* LSImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 1825C98D26304481001C0FB3 /* LSImage.png */; };
 		1825C99626305532001C0FB3 /* BaseWebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C99526305532001C0FB3 /* BaseWebController.swift */; };
 		183B71F627E2F31600292120 /* Didot Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 183B71F527E2F31600292120 /* Didot Regular.ttf */; };
+		183B71F827E32CA800292120 /* RotationImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183B71F727E32CA800292120 /* RotationImageView.swift */; };
 		1843FDF427C5F538006C449B /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1843FDF327C5F538006C449B /* Poppins-Medium.ttf */; };
-		1843FDF627C6035E006C449B /* Record.gif in Resources */ = {isa = PBXBuildFile; fileRef = 1843FDF527C6035E006C449B /* Record.gif */; };
-		1843FDFC27C60FE3006C449B /* Detail.gif in Resources */ = {isa = PBXBuildFile; fileRef = 1843FDFB27C60FE3006C449B /* Detail.gif */; };
-		1843FDFE27C61E53006C449B /* Heart.gif in Resources */ = {isa = PBXBuildFile; fileRef = 1843FDFD27C61E53006C449B /* Heart.gif */; };
 		1843FE0027C62F65006C449B /* FLAnimatedImageView+Addition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1843FDFF27C62F65006C449B /* FLAnimatedImageView+Addition.swift */; };
 		187FD53527D084E400E1B0F9 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FD53427D084E400E1B0F9 /* BaseViewController.swift */; };
 		187FD53727D0883600E1B0F9 /* Merriweather-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 187FD53627D0883600E1B0F9 /* Merriweather-Bold.ttf */; };
@@ -110,7 +107,6 @@
 		1825C89826285D32001C0FB3 /* AnaLargeTitleTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnaLargeTitleTableViewController.swift; sourceTree = "<group>"; };
 		1825C8A0262860C0001C0FB3 /* FeedbackManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackManager.swift; sourceTree = "<group>"; };
 		1825C8A626286158001C0FB3 /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
-		1825C8AE26286E09001C0FB3 /* RippleAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RippleAnimationView.swift; sourceTree = "<group>"; };
 		1825C8BD2628DB90001C0FB3 /* RecordManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordManager.swift; sourceTree = "<group>"; };
 		1825C8C7262994A1001C0FB3 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		1825C8DD2629BA67001C0FB3 /* HeartRecording-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HeartRecording-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -135,10 +131,8 @@
 		1825C98D26304481001C0FB3 /* LSImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LSImage.png; sourceTree = "<group>"; };
 		1825C99526305532001C0FB3 /* BaseWebController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseWebController.swift; sourceTree = "<group>"; };
 		183B71F527E2F31600292120 /* Didot Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Didot Regular.ttf"; sourceTree = "<group>"; };
+		183B71F727E32CA800292120 /* RotationImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationImageView.swift; sourceTree = "<group>"; };
 		1843FDF327C5F538006C449B /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.ttf"; sourceTree = "<group>"; };
-		1843FDF527C6035E006C449B /* Record.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Record.gif; sourceTree = "<group>"; };
-		1843FDFB27C60FE3006C449B /* Detail.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Detail.gif; sourceTree = "<group>"; };
-		1843FDFD27C61E53006C449B /* Heart.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Heart.gif; sourceTree = "<group>"; };
 		1843FDFF27C62F65006C449B /* FLAnimatedImageView+Addition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FLAnimatedImageView+Addition.swift"; sourceTree = "<group>"; };
 		187FD53427D084E400E1B0F9 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		187FD53627D0883600E1B0F9 /* Merriweather-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merriweather-Bold.ttf"; sourceTree = "<group>"; };
@@ -201,7 +195,7 @@
 				1825C89826285D32001C0FB3 /* AnaLargeTitleTableViewController.swift */,
 				1825C89526285D32001C0FB3 /* AnaLargeTitleViewController.swift */,
 				181B6E4C27C383D200E1F652 /* AnaTabBarController.swift */,
-				1825C8AE26286E09001C0FB3 /* RippleAnimationView.swift */,
+				183B71F727E32CA800292120 /* RotationImageView.swift */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -237,9 +231,6 @@
 		1825C88C26285C3A001C0FB3 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				1843FDFD27C61E53006C449B /* Heart.gif */,
-				1843FDF527C6035E006C449B /* Record.gif */,
-				1843FDFB27C60FE3006C449B /* Detail.gif */,
 				1801C7CB27C370F0004D4B91 /* confuseAndBuild.sh */,
 				1825C91B262D8D49001C0FB3 /* Fonts */,
 				1825C8DD2629BA67001C0FB3 /* HeartRecording-Bridging-Header.h */,
@@ -541,15 +532,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				1825C88E26285C5B001C0FB3 /* iconfont.ttf in Resources */,
-				1843FDFC27C60FE3006C449B /* Detail.gif in Resources */,
 				1843FDF427C5F538006C449B /* Poppins-Medium.ttf in Resources */,
-				1843FDFE27C61E53006C449B /* Heart.gif in Resources */,
 				1801C7CC27C370F0004D4B91 /* confuseAndBuild.sh in Resources */,
 				1825C976262DFAD5001C0FB3 /* Configuration.storekit in Resources */,
 				183B71F627E2F31600292120 /* Didot Regular.ttf in Resources */,
 				1825C98E26304481001C0FB3 /* LSImage.png in Resources */,
 				6CD6CA1F262771350099F063 /* LaunchScreen.storyboard in Resources */,
-				1843FDF627C6035E006C449B /* Record.gif in Resources */,
 				181B6E5327C3A0F400E1F652 /* Poppins-SemiBold.ttf in Resources */,
 				6CD6CA1C262771350099F063 /* Assets.xcassets in Resources */,
 				181B6E4F27C384CF00E1F652 /* Poppins-Regular.ttf in Resources */,
@@ -626,11 +614,11 @@
 				1825C93C262DA1BE001C0FB3 /* SettingItemView.swift in Sources */,
 				1825C931262D970A001C0FB3 /* NotificationName.swift in Sources */,
 				1825C8C8262994A1001C0FB3 /* DetailViewController.swift in Sources */,
+				183B71F827E32CA800292120 /* RotationImageView.swift in Sources */,
 				1825C99626305532001C0FB3 /* BaseWebController.swift in Sources */,
 				1825C950262DE771001C0FB3 /* NBInAppPurchaseProtocol.swift in Sources */,
 				18D330AB26527C7F00DFFFFF /* AddKickCounterViewController.swift in Sources */,
 				1825C89926285D32001C0FB3 /* AnaLargeTitleViewController.swift in Sources */,
-				1825C8AF26286E09001C0FB3 /* RippleAnimationView.swift in Sources */,
 				1825C87F26285C05001C0FB3 /* UIViewController+Addition.swift in Sources */,
 				187FD53B27D08D2200E1B0F9 /* BaseViewController2.swift in Sources */,
 				187FD53527D084E400E1B0F9 /* BaseViewController.swift in Sources */,

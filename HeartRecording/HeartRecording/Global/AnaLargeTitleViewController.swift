@@ -10,13 +10,14 @@ import UIKit
 
 
 class AnaLargeTitleViewController: UIViewController, UIScrollViewDelegate {
-	var rightBarButton: UIButton?
-	var scrollView: LargeTitleScrollView!
-    var gradient: CAGradientLayer!
-	var titleBackView: UIView!
-	var titleLabel: UILabel!
-	var titleRightBarButton: UIButton?
-	var contentView: UIView!
+	var ana_rightBarButton: UIButton?
+	var ana_scrollView: LargeTitleScrollView!
+    var ana_gradient: CAGradientLayer!
+	var ana_shapeImageView: UIImageView!
+	var ana_titleBackView: UIView!
+	var ana_titleLabel: UILabel!
+	var ana_titleRightBarButton: UIButton?
+	var ana_contentView: UIView!
 	
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -38,50 +39,55 @@ class AnaLargeTitleViewController: UIViewController, UIScrollViewDelegate {
 	func configure() {
 		view.backgroundColor = .systemBackground
         
-        gradient = CAGradientLayer()
-        gradient.colors = [UIColor.color(hexString: "#fff5fb").cgColor, UIColor.white.cgColor]
-        gradient.startPoint = CGPoint(x: 0.5, y: 0)
-		gradient.endPoint = CGPoint(x: 0.5, y: 0.23)
-        view.layer.addSublayer(gradient)
+        ana_gradient = CAGradientLayer()
+        ana_gradient.colors = [UIColor.color(hexString: "#fff5fb").cgColor, UIColor.white.cgColor]
+        ana_gradient.startPoint = CGPoint(x: 0.5, y: 0)
+		ana_gradient.endPoint = CGPoint(x: 0.5, y: 0.23)
+        view.layer.addSublayer(ana_gradient)
 		
-		scrollView = LargeTitleScrollView()
-        scrollView.backgroundColor = .clear
-		scrollView.delegate = self
-		view.addSubview(scrollView)
+		ana_shapeImageView = UIImageView(image: UIImage(named: "Global_Shape"))
+		view.addSubview(ana_shapeImageView)
 		
-		titleBackView = UIView()
-		titleBackView.backgroundColor = .clear
-        titleBackView.layer.masksToBounds = false
-		scrollView.addSubview(titleBackView)
+		ana_scrollView = LargeTitleScrollView()
+        ana_scrollView.backgroundColor = .clear
+		ana_scrollView.delegate = self
+		view.addSubview(ana_scrollView)
 		
-		titleLabel = UILabel()
-		titleLabel.font = UIFont(name: "Merriweather-Regular", size: 28)
-		titleLabel.textColor = .color(hexString: "#6a515e")
-		titleLabel.text = "Title"
-		titleLabel.layer.anchorPoint = CGPoint(x: 0, y: 1)
-		titleBackView.addSubview(titleLabel)
+		ana_titleBackView = UIView()
+		ana_titleBackView.backgroundColor = .clear
+        ana_titleBackView.layer.masksToBounds = false
+		ana_scrollView.addSubview(ana_titleBackView)
 		
-		contentView = UIView()
-		contentView.backgroundColor = .clear
-		scrollView.addSubview(contentView)
+		ana_titleLabel = UILabel()
+		ana_titleLabel.font = UIFont(name: "Merriweather-Regular", size: 28)
+		ana_titleLabel.textColor = .color(hexString: "#6a515e")
+		ana_titleLabel.text = "Title"
+		ana_titleLabel.layer.anchorPoint = CGPoint(x: 0, y: 1)
+		ana_titleBackView.addSubview(ana_titleLabel)
+		
+		ana_contentView = UIView()
+		ana_contentView.backgroundColor = .clear
+		ana_scrollView.addSubview(ana_contentView)
 	}
 	
 	
 	override func viewWillLayoutSubviews() {
 		super.viewWillLayoutSubviews()
         
-        gradient.frame = view.bounds
-		scrollView.frame = CGRect(x: 0, y: topSpacing(), width: view.bounds.width, height: view.bounds.height - topSpacing())
-		titleLabel.sizeToFit()
-		if let titleRightBarButton = titleRightBarButton {
+        ana_gradient.frame = view.bounds
+		ana_shapeImageView.sizeToFit()
+		ana_shapeImageView.setOrigin(x: view.width() - ana_shapeImageView.width(), y: view.height() - ana_shapeImageView.height())
+		ana_scrollView.frame = CGRect(x: 0, y: topSpacing(), width: view.bounds.width, height: view.bounds.height - topSpacing())
+		ana_titleLabel.sizeToFit()
+		if let titleRightBarButton = ana_titleRightBarButton {
 			titleRightBarButton.center = CGPoint(x: view.width() - 25 - titleRightBarButton.halfWidth(),
-												 y: max(titleLabel.maxY() - titleLabel.halfHeight(), titleRightBarButton.halfHeight()))
+												 y: max(ana_titleLabel.maxY() - ana_titleLabel.halfHeight(), titleRightBarButton.halfHeight()))
 		}
-		titleBackView.frame = CGRect(x: 0, y: 0, width: scrollView.bounds.width, height: titleLabel.bounds.height)
-		titleLabel.center = CGPoint(x: AnaNavigationController.margin, y: titleLabel.bounds.height + 3.5)
+		ana_titleBackView.frame = CGRect(x: 0, y: 0, width: ana_scrollView.bounds.width, height: ana_titleLabel.bounds.height)
+		ana_titleLabel.center = CGPoint(x: AnaNavigationController.margin, y: ana_titleLabel.bounds.height + 3.5)
 		let contentHeight = layoutContentView()
-		contentView.frame = CGRect(x: 0, y: titleBackView.frame.maxY, width: scrollView.bounds.width, height: contentHeight)
-		scrollView.contentSize = CGSize(width: scrollView.bounds.width, height: contentView.frame.maxY)
+		ana_contentView.frame = CGRect(x: 0, y: ana_titleBackView.frame.maxY, width: ana_scrollView.bounds.width, height: contentHeight)
+		ana_scrollView.contentSize = CGSize(width: ana_scrollView.bounds.width, height: ana_contentView.frame.maxY)
 	}
 	
 	func maskLayerPath() -> CGPath {
@@ -107,10 +113,10 @@ class AnaLargeTitleViewController: UIViewController, UIScrollViewDelegate {
 	
 	
 	func judgmentTrueTitleHidden() {
-		let hidden = scrollView.contentOffset.y < 52 - 7.5
+		let hidden = ana_scrollView.contentOffset.y < 52 - 7.5
 		let textAttributes = [NSAttributedString.Key.foregroundColor : hidden ? UIColor.clear : UIColor.black]
-		titleBackView.isHidden = !hidden
-		rightBarButton?.isHidden = hidden
+		ana_titleBackView.isHidden = !hidden
+		ana_rightBarButton?.isHidden = hidden
 		navigationController?.navigationBar.titleTextAttributes = textAttributes
 	}
 	
@@ -124,12 +130,12 @@ class AnaLargeTitleViewController: UIViewController, UIScrollViewDelegate {
 	
 	func setTitle(title: String) {
 		navigationItem.title = title
-		titleLabel.text = title
+		ana_titleLabel.text = title
 	}
 	
 	
 	func setRightBarItem(topButton: UIButton?, bottomButton: UIButton?, action: @escaping () -> Void) {
-		rightBarButton = topButton
+		ana_rightBarButton = topButton
 		if let topButton = topButton {
 			topButton.isHidden = true
 			topButton.reactive.controlEvents(.touchUpInside).observeValues {
@@ -142,15 +148,15 @@ class AnaLargeTitleViewController: UIViewController, UIScrollViewDelegate {
 			navigationItem.rightBarButtonItem = nil
 		}
 		
-		if titleRightBarButton != bottomButton {
-			titleRightBarButton?.removeFromSuperview()
-			titleRightBarButton = bottomButton
+		if ana_titleRightBarButton != bottomButton {
+			ana_titleRightBarButton?.removeFromSuperview()
+			ana_titleRightBarButton = bottomButton
 			if let bottomButton = bottomButton {
 				bottomButton.reactive.controlEvents(.touchUpInside).observeValues {
 					_ in
 					action()
 				}
-				titleBackView.addSubview(bottomButton)
+				ana_titleBackView.addSubview(bottomButton)
 			}
 		}
 	}
@@ -161,7 +167,7 @@ class AnaLargeTitleViewController: UIViewController, UIScrollViewDelegate {
 			setRightBarItem(topButton: nil, bottomButton: nil) {
 				return
 			}
-		} else if titleRightBarButton == nil {
+		} else if ana_titleRightBarButton == nil {
 			let topButton = UIButton()
 			topButton.setImage(UIImage(named: "NavigationBar_Pro_Top")?.reSizeImage(reSize: CGSize(width: 18, height: 18)), for: .normal)
 			let bottomButton = UIButton()
@@ -178,13 +184,13 @@ class AnaLargeTitleViewController: UIViewController, UIScrollViewDelegate {
 	
 	// MARK: - UIScrollViewDelegate
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
-		if scrollView == self.scrollView {
+		if scrollView == self.ana_scrollView {
 			judgmentTrueTitleHidden()
 			if scrollView.contentOffset.y < 0 {
 				let scale: CGFloat = min(1 - scrollView.contentOffset.y * 0.001, 1.1)
-				titleLabel.transform = CGAffineTransform(scaleX: scale, y: scale)
+				ana_titleLabel.transform = CGAffineTransform(scaleX: scale, y: scale)
 			} else {
-				titleLabel.transform = CGAffineTransform(scaleX: 1, y: 1)
+				ana_titleLabel.transform = CGAffineTransform(scaleX: 1, y: 1)
 			}
 		}
 	}

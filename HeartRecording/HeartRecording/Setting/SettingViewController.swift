@@ -38,7 +38,7 @@ class SettingViewController: AnaLargeTitleViewController, MFMailComposeViewContr
         ana_backView.layer.cornerRadius = 25
         ana_backView.backgroundColor = .color(hexString: "#CDFFFFFF")
         ana_backView.setShadow(color: .color(hexString: "#0f933c49"), offset: CGSize(width: 0, height: 8), radius: 25)
-        contentView.addSubview(ana_backView)
+        ana_contentView.addSubview(ana_backView)
         
         ana_gradientView = UIView()
         ana_backView.addSubview(ana_gradientView)
