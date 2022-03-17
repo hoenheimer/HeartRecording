@@ -15,8 +15,6 @@ class KickCounterViewController: AnaLargeTitleTableViewController {
 	var ana_emptyView: UIView!
 	var ana_emptyImageView: UIImageView!
 	var ana_emptyLabel: UILabel!
-	var emptyButtonView: UIView!
-	var emptyButtonGradientLayer: CAGradientLayer!
 	var emptyButton: UIButton!
 	
 	var ana_models: [DbKicksModel]!
@@ -32,7 +30,7 @@ class KickCounterViewController: AnaLargeTitleTableViewController {
 		
 		navigationController?.setNavigationBarHidden(false, animated: false)
 		if let tabBarController = tabBarController as? AnaTabBarController {
-			tabBarController.simulationTabBar.isHidden = false
+			tabBarController.ana_simulationTabBar.isHidden = false
 		}
 		if ana_models.count == 0 {
 			setProRightBarItemIfNeeded()
@@ -47,7 +45,7 @@ class KickCounterViewController: AnaLargeTitleTableViewController {
 		
 		ana_models = DbManager.manager.kickModels()
 		
-		setTitle(title: "Kick Counter")
+		setTitle(title: "BabyBeat")
 		if ana_models.count > 0 {
 			let topButton = UIButton()
 			topButton.setImage(UIImage(named: "Kick_Add"), for: .normal)
@@ -72,14 +70,14 @@ class KickCounterViewController: AnaLargeTitleTableViewController {
 		view.addSubview(hintImageView)
 		view.sendSubviewToBack(hintImageView)
 		
-		tableView.backgroundColor = .clear
-		tableView.register(KickCounterTableViewCell.self, forCellReuseIdentifier: String(NSStringFromClass(KickCounterTableViewCell.self)))
-		tableView.rowHeight = 134
+		ana_tableView.backgroundColor = .clear
+		ana_tableView.register(KickCounterTableViewCell.self, forCellReuseIdentifier: String(NSStringFromClass(KickCounterTableViewCell.self)))
+		ana_tableView.rowHeight = 112
 		
 		ana_emptyView = UIView()
 		ana_emptyView.backgroundColor = .clear
 		ana_emptyView.isHidden = ana_models.count > 0
-		tableView.addSubview(ana_emptyView)
+		ana_tableView.addSubview(ana_emptyView)
 		
 		ana_emptyImageView = UIImageView()
 		ana_emptyImageView.image = UIImage(named: "Kick_Empty")
@@ -87,29 +85,16 @@ class KickCounterViewController: AnaLargeTitleTableViewController {
 		
 		ana_emptyLabel = UILabel()
 		ana_emptyLabel.text = "No Data!"
-		ana_emptyLabel.textColor = .color(hexString: "#6a515e")
-		ana_emptyLabel.font = UIFont(name: "Merriweather-Regular", size: 18)
+		ana_emptyLabel.textColor = .color(hexString: "#504278")
+		ana_emptyLabel.font = UIFont(name: "Didot", size: 16)
 		ana_emptyView.addSubview(ana_emptyLabel)
 		
-		emptyButtonView = UIView()
-		emptyButtonView.layer.cornerRadius = 27
-		emptyButtonView.backgroundColor = .color(hexString: "#ffe8e8")
-		emptyButtonView.setShadow(color: .color(hexString: "#28d3afb8"), offset: CGSize(width: 0, height: 12), radius: 30, opacity: 1)
-		emptyButtonView.isHidden = ana_models.count > 0
-		tableView.addSubview(emptyButtonView)
-		
-		emptyButtonGradientLayer = CAGradientLayer()
-		emptyButtonGradientLayer.colors = [UIColor.color(hexString: "#fff3ed").cgColor, UIColor.color(hexString: "#ffdde4").cgColor]
-		emptyButtonGradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
-		emptyButtonGradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
-		emptyButtonGradientLayer.cornerRadius = 27
-		emptyButtonView.layer.addSublayer(emptyButtonGradientLayer)
-		
 		emptyButton = UIButton()
-		emptyButton.layer.borderWidth = 1
-		emptyButton.layer.borderColor = UIColor.color(hexString: "#80fcfcfc").cgColor
+		emptyButton.isHidden = ana_models.count > 0
+		emptyButton.layer.cornerRadius = 27
+		emptyButton.backgroundColor = .color(hexString: "#8059f3")
 		emptyButton.setTitle("Add", for: .normal)
-		emptyButton.setTitleColor(.color(hexString: "#6a515e"), for: .normal)
+		emptyButton.setTitleColor(.white, for: .normal)
 		emptyButton.titleLabel?.font = UIFont(name: "Poppins-SemiBold", size: 16)
 		emptyButton.reactive.controlEvents(.touchUpInside).observeValues {
 			[weak self] _ in
@@ -117,7 +102,7 @@ class KickCounterViewController: AnaLargeTitleTableViewController {
 			FeedbackManager.feedback(type: .light)
 			self.navigationController?.pushViewController(AddKickCounterViewController(), animated: true)
 		}
-		emptyButtonView.addSubview(emptyButton)
+		ana_tableView.addSubview(emptyButton)
 	}
 	
 	
@@ -129,21 +114,19 @@ class KickCounterViewController: AnaLargeTitleTableViewController {
 		ana_emptyImageView.sizeToFit()
 		ana_emptyImageView.setOrigin(x: 0, y: 0)
 		ana_emptyLabel.sizeToFit()
-		ana_emptyLabel.center = CGPoint(x: ana_emptyImageView.halfWidth(), y: ana_emptyImageView.maxY() + 23 + ana_emptyLabel.halfHeight())
+		ana_emptyLabel.center = CGPoint(x: ana_emptyImageView.halfWidth(), y: ana_emptyImageView.maxY() + 6 + ana_emptyLabel.halfHeight())
 		ana_emptyView.bounds = CGRect(origin: .zero, size: CGSize(width: ana_emptyImageView.width(), height: ana_emptyLabel.maxY()))
-		ana_emptyView.center = CGPoint(x: tableView.halfWidth(), y: tableView.halfHeight())
-		emptyButtonView.bounds = CGRect(x: 0, y: 0, width: 250, height: 54)
-		emptyButtonView.center = CGPoint(x: tableView.halfWidth(), y: tableView.height() * 0.8)
-		emptyButtonGradientLayer.frame = emptyButtonView.bounds
-		emptyButton.frame = emptyButtonView.bounds
+		ana_emptyView.center = CGPoint(x: ana_tableView.halfWidth(), y: ana_tableView.halfHeight())
+		emptyButton.bounds = CGRect(x: 0, y: 0, width: 250, height: 54)
+		emptyButton.center = CGPoint(x: ana_tableView.halfWidth(), y: ana_tableView.height() * 0.8)
 	}
 	
 	
 	@objc func dbDidChanged() {
 		ana_models = DbManager.manager.kickModels()
-		tableView.reloadData()
+		ana_tableView.reloadData()
 		ana_emptyView.isHidden = ana_models.count > 0
-		emptyButtonView.isHidden = ana_models.count > 0
+		emptyButton.isHidden = ana_models.count > 0
 		
 		if ana_models.count > 0 {
 			let topButton = UIButton()
@@ -209,8 +192,8 @@ class KickCounterViewController: AnaLargeTitleTableViewController {
 
 class KickCounterTableViewCell: UITableViewCell {
 	var ana_backView: UIView!
+	var ana_backContentView: UIView!
 	var ana_dateView: UIView!
-	var ana_dateGradientLayer: CAGradientLayer!
 	var ana_dateLabel: UILabel!
 	var ana_timeTitleLabel: UILabel!
 	var ana_timeValueLabel: UILabel!
@@ -234,40 +217,40 @@ class KickCounterTableViewCell: UITableViewCell {
 	
 	func configure() {
 		ana_backView = UIView()
-		ana_backView.layer.cornerRadius = 25
+		ana_backView.layer.cornerRadius = 14
 		ana_backView.backgroundColor = .white
-		ana_backView.setShadow(color: .color(hexString: "#0f933c49"), offset: CGSize(width: 0, height: 8), radius: 25, opacity: 1)
+		ana_backView.setShadow(color: .color(hexString: "#079732fc"), offset: CGSize(width: 0, height: 8), radius: 18, opacity: 1)
 		addSubview(ana_backView)
 		
-		ana_dateView = UIView()
-		addSubview(ana_dateView)
+		ana_backContentView = UIView()
+		ana_backContentView.layer.cornerRadius = 14
+		ana_backContentView.layer.masksToBounds = true
+		ana_backView.addSubview(ana_backContentView)
 		
-		ana_dateGradientLayer = CAGradientLayer()
-		ana_dateGradientLayer.colors = [UIColor.color(hexString: "#fff3ed").cgColor, UIColor.color(hexString: "#ffdde4").cgColor]
-		ana_dateGradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
-		ana_dateGradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
-		ana_dateGradientLayer.cornerRadius = 14
-		ana_dateView.layer.addSublayer(ana_dateGradientLayer)
+		ana_dateView = UIView()
+		ana_dateView.layer.cornerRadius = 14
+		ana_dateView.backgroundColor = .color(hexString: "#fff5fb")
+		ana_backContentView.addSubview(ana_dateView)
 		
 		ana_dateLabel = UILabel()
-		ana_dateLabel.textColor = .color(hexString: "#6a515e")
-		ana_dateLabel.font = UIFont(name: "Poppins-Regular", size: 13)
+		ana_dateLabel.textColor = .color(hexString: "#8059f3")
+		ana_dateLabel.font = UIFont(name: "Poppins-Regular", size: 12)
 		ana_dateView.addSubview(ana_dateLabel)
 		
 		func newTitleLabel(title: String?) -> UILabel {
 			let label = UILabel()
 			label.text = title
-			label.textColor = .color(hexString: "#6a515e")
-			label.font = UIFont(name: "Poppins-SemiBold", size: 16)
-			ana_backView.addSubview(label)
+			label.textColor = .color(hexString: "#808059f3")
+			label.font = UIFont(name: "Poppins-Medium", size: 16)
+			ana_backContentView.addSubview(label)
 			return label
 		}
 		
 		func newValueLabel() -> UILabel {
 			let label = UILabel()
-			label.textColor = UIColor.color(hexString: "#6a515e").withAlphaComponent(0.5)
-			label.font = UIFont(name: "Inter-Regular", size: 13)
-			ana_backView.addSubview(label)
+			label.textColor = .color(hexString: "#504278")
+			label.font = UIFont(name: "Inter-Regular", size: 14)
+			ana_backContentView.addSubview(label)
 			return label
 		}
 		
@@ -283,23 +266,23 @@ class KickCounterTableViewCell: UITableViewCell {
 	override func layoutSubviews() {
 		let margin = AnaNavigationController.margin
 		
-		ana_backView.frame = CGRect(x: margin, y: 14, width: contentView.width() - margin * 2, height: 90)
-		ana_dateView.frame = CGRect(x: ana_backView.minX() + 25, y: 0, width: 109, height: 28)
-		ana_dateGradientLayer.frame = ana_dateView.bounds
+		ana_backView.frame = CGRect(x: margin, y: 0, width: contentView.width() - margin * 2, height: 90)
+		ana_backContentView.frame = ana_backView.bounds
+		ana_dateView.frame = CGRect(x: -14, y: -14, width: 104 + 14, height: 24 + 14)
 		ana_dateLabel.sizeToFit()
-		ana_dateLabel.center = CGPoint(x: ana_dateView.halfWidth(), y: ana_dateView.halfHeight())
+		ana_dateLabel.center = CGPoint(x: ana_dateView.halfWidth() + 7, y: ana_dateView.halfHeight() + 7)
 		ana_timeTitleLabel.sizeToFit()
-		ana_timeTitleLabel.setOrigin(x: 25, y: 28)
+		ana_timeTitleLabel.center = CGPoint(x: 46, y: 42)
 		ana_timeValueLabel.sizeToFit()
-		ana_timeValueLabel.center = CGPoint(x: max(25 + ana_timeValueLabel.halfWidth(), ana_timeTitleLabel.centerX()), y: ana_timeTitleLabel.maxY() + 8 + ana_timeValueLabel.halfHeight())
+		ana_timeValueLabel.center = CGPoint(x: ana_timeTitleLabel.centerX(), y: ana_timeTitleLabel.maxY() + 6 + ana_timeValueLabel.halfHeight())
 		ana_durationTitleLabel.sizeToFit()
 		ana_durationTitleLabel.center = CGPoint(x: ana_backView.halfWidth(), y: ana_timeTitleLabel.centerY())
 		ana_durationValueLabel.sizeToFit()
 		ana_durationValueLabel.center = CGPoint(x: ana_durationTitleLabel.centerX(), y: ana_timeValueLabel.centerY())
 		ana_kicksTitleLabel.sizeToFit()
-		ana_kicksTitleLabel.setOrigin(x: ana_backView.width() - 25 - ana_kicksTitleLabel.width(), y: ana_timeTitleLabel.minY())
+		ana_kicksTitleLabel.center = CGPoint(x: ana_backView.width() - 46, y: ana_timeTitleLabel.centerY())
 		ana_kicksValueLabel.sizeToFit()
-		ana_kicksValueLabel.center = CGPoint(x: min(ana_backView.width() - 25 - ana_kicksValueLabel.halfWidth(), ana_kicksTitleLabel.centerX()), y: ana_timeValueLabel.centerY())
+		ana_kicksValueLabel.center = CGPoint(x: ana_kicksTitleLabel.centerX(), y: ana_timeValueLabel.centerY())
 	}
 	
 	

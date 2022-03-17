@@ -24,7 +24,7 @@ class FavoriteViewController: AnaLargeTitleTableViewController, SwipeTableViewCe
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		if let tabBarController = tabBarController as? AnaTabBarController {
-			tabBarController.simulationTabBar.isHidden = true
+			tabBarController.ana_simulationTabBar.isHidden = true
 		}
 	}
 	
@@ -32,7 +32,7 @@ class FavoriteViewController: AnaLargeTitleTableViewController, SwipeTableViewCe
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
 		if let tabBarController = tabBarController as? AnaTabBarController {
-			tabBarController.simulationTabBar.isHidden = false
+			tabBarController.ana_simulationTabBar.isHidden = false
 		}
 	}
     
@@ -49,14 +49,14 @@ class FavoriteViewController: AnaLargeTitleTableViewController, SwipeTableViewCe
 		view.addSubview(hintImageView)
 		view.sendSubviewToBack(hintImageView)
         
-        tableView.backgroundColor = .clear
-        tableView.register(RecordingTableViewCell.self, forCellReuseIdentifier: String(NSStringFromClass(RecordingTableViewCell.self)))
-        tableView.rowHeight = 110
+        ana_tableView.backgroundColor = .clear
+        ana_tableView.register(RecordingTableViewCell.self, forCellReuseIdentifier: String(NSStringFromClass(RecordingTableViewCell.self)))
+        ana_tableView.rowHeight = 110
         
         ana_emptyView = UIView()
         ana_emptyView.backgroundColor = .clear
         ana_emptyView.isHidden = DbManager.manager.models.count > 0
-        tableView.addSubview(ana_emptyView)
+        ana_tableView.addSubview(ana_emptyView)
         
         ana_emptyImageView = UIImageView()
         ana_emptyImageView.image = UIImage(named: "RecordingList_Empty")
@@ -71,7 +71,7 @@ class FavoriteViewController: AnaLargeTitleTableViewController, SwipeTableViewCe
     
     
     @objc func dbDidChanged() {
-        tableView.reloadData()
+        ana_tableView.reloadData()
         ana_emptyView.isHidden = DbManager.manager.models.count > 0
     }
     
@@ -86,7 +86,7 @@ class FavoriteViewController: AnaLargeTitleTableViewController, SwipeTableViewCe
         ana_emptyLabel.sizeToFit()
         ana_emptyLabel.center = CGPoint(x: ana_emptyImageView.halfWidth(), y: ana_emptyImageView.maxY() + 3 + ana_emptyLabel.halfHeight())
         ana_emptyView.bounds = CGRect(origin: .zero, size: CGSize(width: ana_emptyImageView.width(), height: ana_emptyLabel.maxY()))
-        ana_emptyView.center = CGPoint(x: tableView.halfWidth(), y: tableView.height() * 0.45)
+        ana_emptyView.center = CGPoint(x: ana_tableView.halfWidth(), y: ana_tableView.height() * 0.45)
     }
     
     

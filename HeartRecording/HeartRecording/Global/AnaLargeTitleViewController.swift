@@ -13,7 +13,6 @@ class AnaLargeTitleViewController: UIViewController, UIScrollViewDelegate {
 	var rightBarButton: UIButton?
 	var scrollView: LargeTitleScrollView!
     var gradient: CAGradientLayer!
-	var hintShapeLayer: CAShapeLayer!
 	var titleBackView: UIView!
 	var titleLabel: UILabel!
 	var titleRightBarButton: UIButton?
@@ -40,13 +39,10 @@ class AnaLargeTitleViewController: UIViewController, UIScrollViewDelegate {
 		view.backgroundColor = .systemBackground
         
         gradient = CAGradientLayer()
-        gradient.colors = [UIColor.color(hexString: "#FBFCFF").cgColor, UIColor.color(hexString: "#FFF0F0").cgColor]
+        gradient.colors = [UIColor.color(hexString: "#fff5fb").cgColor, UIColor.white.cgColor]
         gradient.startPoint = CGPoint(x: 0.5, y: 0)
-        gradient.endPoint = CGPoint(x: 0.5, y: 1)
+		gradient.endPoint = CGPoint(x: 0.5, y: 0.23)
         view.layer.addSublayer(gradient)
-		
-		hintShapeLayer = CAShapeLayer()
-		gradient.mask = hintShapeLayer
 		
 		scrollView = LargeTitleScrollView()
         scrollView.backgroundColor = .clear
@@ -75,8 +71,6 @@ class AnaLargeTitleViewController: UIViewController, UIScrollViewDelegate {
 		super.viewWillLayoutSubviews()
         
         gradient.frame = view.bounds
-		hintShapeLayer.frame = view.bounds
-		hintShapeLayer.path = maskLayerPath()
 		scrollView.frame = CGRect(x: 0, y: topSpacing(), width: view.bounds.width, height: view.bounds.height - topSpacing())
 		titleLabel.sizeToFit()
 		if let titleRightBarButton = titleRightBarButton {

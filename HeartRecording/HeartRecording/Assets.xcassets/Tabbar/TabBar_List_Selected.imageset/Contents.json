@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "notebook-one.png",
+      "filename" : "Document Align Left 12.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "notebook-one@2x.png",
+      "filename" : "Document Align Left 12@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "notebook-one@3x.png",
+      "filename" : "Document Align Left 12@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

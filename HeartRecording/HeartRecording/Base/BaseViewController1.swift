@@ -16,7 +16,7 @@ class BaseViewController1: BaseViewController {
 		
 		navigationController?.setNavigationBarHidden(true, animated: false)
 		if let tabBarController = tabBarController as? AnaTabBarController {
-			tabBarController.simulationTabBar.isHidden = true
+			tabBarController.ana_simulationTabBar.isHidden = true
 		}
 	}
 	

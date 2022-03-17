@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Heart 4-1.png",
+      "filename" : "Frame 3.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Heart 4@2x-1.png",
+      "filename" : "Frame 3@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Heart 4@3x-1.png",
+      "filename" : "Frame 3@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

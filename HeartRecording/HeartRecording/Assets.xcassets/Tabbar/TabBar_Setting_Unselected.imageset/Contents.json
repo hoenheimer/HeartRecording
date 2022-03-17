@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "setting-one-1.png",
+      "filename" : "Filter 6-1.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "setting-one@2x-1.png",
+      "filename" : "Filter 6@2x-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "setting-one@3x-1.png",
+      "filename" : "Filter 6@3x-1.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

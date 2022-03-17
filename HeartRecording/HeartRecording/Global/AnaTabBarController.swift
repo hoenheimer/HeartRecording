@@ -12,11 +12,11 @@ import ReactiveCocoa
 
 
 class AnaTabBarController: UITabBarController {
-	var simulationTabBar: UIView!
-	var button1: TabbarButton!
-	var button2: TabbarButton!
-	var button3: TabbarButton!
-	var button4: TabbarButton!
+	var ana_simulationTabBar: UIView!
+	var ana_button1: TabbarButton!
+	var ana_button2: TabbarButton!
+	var ana_button3: TabbarButton!
+	var ana_button4: TabbarButton!
 	
 	
 	override func viewDidLoad() {
@@ -31,11 +31,11 @@ class AnaTabBarController: UITabBarController {
 			AnaNavigationController(rootViewController: SettingViewController())
 		]
 		
-		simulationTabBar = UIView()
-		simulationTabBar.layer.cornerRadius = 25
-		simulationTabBar.backgroundColor = .white
-		simulationTabBar.setShadow(color: .color(hexString: "#1ee46a7d"), offset: CGSize(width: 0, height: 19), radius: 50, opacity: 1)
-		view.addSubview(simulationTabBar)
+		ana_simulationTabBar = UIView()
+		ana_simulationTabBar.layer.cornerRadius = 18
+		ana_simulationTabBar.backgroundColor = .white
+		ana_simulationTabBar.setShadow(color: .color(hexString: "#1e704a8e"), offset: CGSize(width: 0, height: 15), radius: 30, opacity: 1)
+		view.addSubview(ana_simulationTabBar)
 		
 		func newButton(index: Int, imageNameSuffix: String, title: String) -> TabbarButton {
 			let button = TabbarButton()
@@ -45,7 +45,7 @@ class AnaTabBarController: UITabBarController {
 			button.imageNameSuffix = imageNameSuffix
 			button.setImage(UIImage(named: imageNameSuffix + (selected ? "_Selected" : "_Unselected")), for: .normal)
 			button.setTitle(title, for: .normal)
-			button.setTitleColor(.color(hexString: (selected ? "#e46a7d" : "#f5d1d6")), for: .normal)
+			button.setTitleColor(.color(hexString: (selected ? "#8059f3" : "#8b869a")), for: .normal)
 			button.titleLabel?.font = UIFont(name: "Poppins-Regular", size: 12)
 			button.reactive.controlEvents(.touchUpInside).observeValues {
 				[weak self] touchButton in
@@ -53,32 +53,32 @@ class AnaTabBarController: UITabBarController {
 				guard self.selectedIndex != index else { return }
 				FeedbackManager.feedback(type: .light)
 				self.selectedIndex = index
-				for button in [self.button1, self.button2, self.button3, self.button4] {
+				for button in [self.ana_button1, self.ana_button2, self.ana_button3, self.ana_button4] {
 					if let button = button {
 						let selected = button == touchButton
 						button.setImage(UIImage(named: button.imageNameSuffix + (selected ? "_Selected" : "_Unselected")), for: .normal)
-						button.setTitleColor(.color(hexString: (selected ? "#e46a7d" : "#f5d1d6")), for: .normal)
+						button.setTitleColor(.color(hexString: (selected ? "#8059f3" : "#8b869a")), for: .normal)
 					}
 				}
 			}
-			simulationTabBar.addSubview(button)
+			ana_simulationTabBar.addSubview(button)
 			return button
 		}
 		
-		button1 = newButton(index: 0, imageNameSuffix: "TabBar_Kicks", title: "Heartbeat")
-		button2 = newButton(index: 1, imageNameSuffix: "TabBar_Record", title: "Recording")
-		button3 = newButton(index: 2, imageNameSuffix: "TabBar_List", title: "Audio")
-		button4 = newButton(index: 3, imageNameSuffix: "TabBar_Setting", title: "Setting")
+		ana_button1 = newButton(index: 0, imageNameSuffix: "TabBar_Kicks", title: "Home")
+		ana_button2 = newButton(index: 1, imageNameSuffix: "TabBar_Record", title: "Action")
+		ana_button3 = newButton(index: 2, imageNameSuffix: "TabBar_List", title: "List")
+		ana_button4 = newButton(index: 3, imageNameSuffix: "TabBar_Setting", title: "Setting")
 	}
 	
 	
 	override func viewWillLayoutSubviews() {
 		super.viewWillLayoutSubviews()
 		let margin = AnaNavigationController.margin
-		simulationTabBar.frame = CGRect(x: margin, y: view.height() - 13 - bottomSpacing() - 82, width: view.width() - margin * 2, height: 82)
-		let buttonWidth = (simulationTabBar.width() - 44) / 4
+		ana_simulationTabBar.frame = CGRect(x: margin, y: view.height() - 13 - bottomSpacing() - 82, width: view.width() - margin * 2, height: 82)
+		let buttonWidth = (ana_simulationTabBar.width() - 44) / 4
 		var x: CGFloat = 13
-		for button in [self.button1, self.button2, self.button3, self.button4] {
+		for button in [self.ana_button1, self.ana_button2, self.ana_button3, self.ana_button4] {
 			if let button = button {
 				button.frame = CGRect(x: x, y: 15, width: buttonWidth, height: 56)
 				x = button.maxX() + 6

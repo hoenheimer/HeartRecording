@@ -41,7 +41,7 @@ class AddKickCounterViewController: UIViewController {
 		super.viewWillAppear(animated)
 		navigationController?.navigationBar.isHidden = true
 		if let tabBarController = tabBarController as? AnaTabBarController {
-			tabBarController.simulationTabBar.isHidden = true
+			tabBarController.ana_simulationTabBar.isHidden = true
 		}
 	}
 	
@@ -50,7 +50,7 @@ class AddKickCounterViewController: UIViewController {
 		super.viewWillDisappear(animated)
 		navigationController?.navigationBar.isHidden = false
 		if let tabBarController = tabBarController as? AnaTabBarController {
-			tabBarController.simulationTabBar.isHidden = false
+			tabBarController.ana_simulationTabBar.isHidden = false
 		}
 	}
 	
