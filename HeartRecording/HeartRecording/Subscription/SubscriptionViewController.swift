@@ -13,22 +13,19 @@ import StoreKit
 
 class SubscriptionViewController: UIViewController {
     var ana_gradientLayer:          CAGradientLayer!
-	var backHintView:				UIView!
     var ana_scrollView:             UIScrollView!
-	var hintView:					UIView!
-	var hintShapeLayer: 			CAShapeLayer!
     var ana_closeButton:            UIButton!
-	var ana_imageView:              UIImageView!
-    var ana_titleLabel:             UILabel!
 	var ana_titleImageView:			UIImageView!
+	var ana_titleLabel:             UILabel!
+	var ana_imageView:              UIImageView!
     var ana_featuresBackView:       UIView!
     var ana_iconImageView1:         UIImageView!
     var ana_iconImageView2:         UIImageView!
-    var ana_iconImageView3:         UIImageView!
     var ana_featureLabel1:          UILabel!
     var ana_featureLabel2:          UILabel!
-    var ana_featureLabel3:          UILabel!
+	var ana_productBackView:		UIView!
 	var ana_topProductView:			SubscriptionProductView!
+	var ana_productSeparateLine:	UIView!
 	var ana_bottomProductView:		SubscriptionProductView!
     var ana_button:                 UIButton!
     var ana_buttonBottomLabel:      UILabel!
@@ -77,14 +74,10 @@ class SubscriptionViewController: UIViewController {
     
     func configure() {
         ana_gradientLayer = CAGradientLayer()
-        ana_gradientLayer.startPoint = CGPoint(x: 0, y: 0)
-        ana_gradientLayer.endPoint = CGPoint(x: 1, y: 1)
-        ana_gradientLayer.colors = [UIColor.color(hexString: "#fff6f8").cgColor, UIColor.color(hexString: "#fff0f2").cgColor]
+		ana_gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
+		ana_gradientLayer.endPoint = CGPoint(x: 0.5, y: 0.23)
+        ana_gradientLayer.colors = [UIColor.color(hexString: "#fff5fb").cgColor, UIColor.white.cgColor]
         view.layer.addSublayer(ana_gradientLayer)
-		
-		backHintView = UIView()
-		backHintView.backgroundColor = .white
-		view.addSubview(backHintView)
         
         ana_scrollView = UIScrollView()
         ana_scrollView.backgroundColor = .clear
@@ -104,25 +97,18 @@ class SubscriptionViewController: UIViewController {
         }
         view.addSubview(ana_closeButton)
 		
-		hintView = UIView()
-		hintView.backgroundColor = .white
-		ana_scrollView.addSubview(hintView)
+		ana_titleImageView = UIImageView(image: UIImage(named: "Subscription_Title"))
+		ana_scrollView.addSubview(ana_titleImageView)
 		
-		hintShapeLayer = CAShapeLayer()
-		hintView.layer.mask = hintShapeLayer
+		ana_titleLabel = UILabel()
+		ana_titleLabel.text = "BabyBeat Premium"
+		ana_titleLabel.textColor = .color(hexString: "#504278")
+		ana_titleLabel.font = UIFont(name: "Didot", size: 36)
+		ana_scrollView.addSubview(ana_titleLabel)
 		
 		ana_imageView = UIImageView()
 		ana_imageView.image = UIImage(named: "Subscription_Image")
 		ana_scrollView.addSubview(ana_imageView)
-        
-        ana_titleLabel = UILabel()
-        ana_titleLabel.text = "BabyCare Premium"
-        ana_titleLabel.textColor = .color(hexString: "#6a515e")
-        ana_titleLabel.font = UIFont(name: "Merriweather-Regular", size: 28)
-        ana_scrollView.addSubview(ana_titleLabel)
-		
-		ana_titleImageView = UIImageView(image: UIImage(named: "Subscription_Title"))
-		ana_scrollView.addSubview(ana_titleImageView)
         
         ana_featuresBackView = UIView()
         ana_featuresBackView.backgroundColor = .clear
@@ -136,10 +122,6 @@ class SubscriptionViewController: UIViewController {
         ana_iconImageView2.image = UIImage(named: "Subscription_Feature")
         ana_featuresBackView.addSubview(ana_iconImageView2)
         
-        ana_iconImageView3 = UIImageView()
-        ana_iconImageView3.image = UIImage(named: "Subscription_Feature")
-        ana_featuresBackView.addSubview(ana_iconImageView3)
-        
         ana_featureLabel1 = UILabel()
         ana_featureLabel1.text = "Unlock All Features"
         ana_featureLabel1.textColor = .black
@@ -151,12 +133,12 @@ class SubscriptionViewController: UIViewController {
         ana_featureLabel2.textColor = .black
         ana_featureLabel2.font = UIFont(name: "PingFangSC-Regular", size: 14)
         ana_featuresBackView.addSubview(ana_featureLabel2)
-        
-        ana_featureLabel3 = UILabel()
-        ana_featureLabel3.text = "Remove Ads"
-        ana_featureLabel3.textColor = .black
-        ana_featureLabel3.font = UIFont(name: "PingFangSC-Regular", size: 14)
-        ana_featuresBackView.addSubview(ana_featureLabel3)
+		
+		ana_productBackView = UIView()
+		ana_productBackView.layer.cornerRadius = 14
+		ana_productBackView.backgroundColor = .white
+		ana_productBackView.setShadow(color: .color(hexString: "#0fff7e3e"), offset: CGSize(width: 0, height: 8), radius: 14, opacity: 1)
+		ana_scrollView.addSubview(ana_productBackView)
 		
 		ana_topProductView = SubscriptionProductView()
 		ana_topProductView.set(price: "$6.99", freeDays: 3, durationString: "month")
@@ -168,7 +150,11 @@ class SubscriptionViewController: UIViewController {
 			self.ana_topProductView.setSelected(true)
 			self.ana_bottomProductView.setSelected(false)
 		}
-		ana_scrollView.addSubview(ana_topProductView)
+		ana_productBackView.addSubview(ana_topProductView)
+		
+		ana_productSeparateLine = UIView()
+		ana_productSeparateLine.backgroundColor = UIColor.black.withAlphaComponent(0.1)
+		ana_productBackView.addSubview(ana_productSeparateLine)
 		
 		ana_bottomProductView = SubscriptionProductView()
 		ana_bottomProductView.set(price: "$39.99", freeDays: 3, durationString: "Half year")
@@ -180,14 +166,11 @@ class SubscriptionViewController: UIViewController {
 			self.ana_topProductView.setSelected(false)
 			self.ana_bottomProductView.setSelected(true)
 		}
-		ana_scrollView.addSubview(ana_bottomProductView)
+		ana_productBackView.addSubview(ana_bottomProductView)
         
         ana_button = UIButton()
 		ana_button.layer.cornerRadius = 27
-		ana_button.layer.borderWidth = 1
-		ana_button.layer.borderColor = UIColor.color(hexString: "#80fcfcfc").cgColor
-        ana_button.backgroundColor = .color(hexString: "#e46a7d")
-		ana_button.setShadow(color: .color(hexString: "#4cde7d94"), offset: CGSize(width: 0, height: 12), radius: 30, opacity: 1)
+        ana_button.backgroundColor = .color(hexString: "#8059f3")
 		ana_button.setTitle("Start Free Trial", for: .normal)
         ana_button.setTitleColor(.color(hexString: "#FCFCFC"), for: .normal)
         ana_button.titleLabel?.font = UIFont(name: "Poppins-SemiBold", size: 16)
@@ -248,7 +231,7 @@ class SubscriptionViewController: UIViewController {
         ana_bottomLabel = UILabel()
         ana_bottomLabel.numberOfLines = 0
 		ana_bottomLabel.textAlignment = .justified
-        ana_bottomLabel.text = "BabyCare Premium offers monthly and half-yearly purchase subscription. You can subscribe to a monthly plan($6.99 per month) or a half-yearly plan($39.99 per half-year). You can manage or turn off auto-renew in your Apple ID account settings at any time. Subscriptions will automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Any unused portion of a free trial period will be forfeited when you purchase a subscription. Our app is functional without purchasing an Auto-Renewable subscription, and you can use all the unlocked content after the subscription expires."
+        ana_bottomLabel.text = "BabyBeat Premium offers monthly and half-yearly purchase subscription. You can subscribe to a monthly plan($6.99 per month) or a half-yearly plan($39.99 per half-year). You can manage or turn off auto-renew in your Apple ID account settings at any time. Subscriptions will automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Any unused portion of a free trial period will be forfeited when you purchase a subscription. Our app is functional without purchasing an Auto-Renewable subscription, and you can use all the unlocked content after the subscription expires."
         ana_bottomLabel.textColor = .color(hexString: "#6a515e")
         ana_bottomLabel.font  = UIFont(name: "PingFangSC-Semibold", size: 10)
         ana_scrollView.addSubview(ana_bottomLabel)
@@ -262,30 +245,29 @@ class SubscriptionViewController: UIViewController {
         ana_scrollView.frame = view.bounds
         ana_closeButton.sizeToFit()
         ana_closeButton.setOrigin(x: 20, y: topSpacing() + 30)
-		ana_imageView.sizeToFit()
-		ana_imageView.center = CGPoint(x: view.halfWidth(), y: topSpacing() + 8 + ana_imageView.halfHeight())
-        ana_titleLabel.sizeToFit()
-		ana_titleLabel.center = CGPoint(x: ana_scrollView.halfWidth(), y: topSpacing() + 96 + ana_titleLabel.halfHeight())
 		ana_titleImageView.sizeToFit()
-		ana_titleImageView.center = CGPoint(x: ana_titleLabel.maxX() + 12 + ana_titleImageView.halfWidth(), y: ana_titleLabel.centerY())
+		ana_titleImageView.center = CGPoint(x: ana_scrollView.halfWidth(), y: ana_closeButton.centerY())
+		ana_titleLabel.sizeToFit()
+		ana_titleLabel.center = CGPoint(x: ana_scrollView.halfWidth(), y: ana_titleImageView.maxY() - 9 + ana_titleLabel.halfHeight())
+		ana_imageView.sizeToFit()
+		ana_imageView.center = CGPoint(x: view.halfWidth(), y: ana_titleLabel.maxY() - 8 + ana_imageView.halfHeight())
         ana_iconImageView1.sizeToFit()
         ana_iconImageView1.setOrigin(x: 0, y: 0)
         ana_iconImageView2.sizeToFit()
-        ana_iconImageView2.setOrigin(x: 0, y: ana_iconImageView1.maxY() + 21)
-        ana_iconImageView3.sizeToFit()
-        ana_iconImageView3.setOrigin(x: 0, y: ana_iconImageView2.maxY() + 21)
+        ana_iconImageView2.setOrigin(x: 0, y: ana_iconImageView1.maxY() + 15)
         ana_featureLabel1.sizeToFit()
-        ana_featureLabel1.center = CGPoint(x: ana_iconImageView1.maxX() + 9 + ana_featureLabel1.halfWidth(), y: ana_iconImageView1.centerY())
+        ana_featureLabel1.center = CGPoint(x: ana_iconImageView1.maxX() + 8 + ana_featureLabel1.halfWidth(), y: ana_iconImageView1.centerY())
         ana_featureLabel2.sizeToFit()
-        ana_featureLabel2.center = CGPoint(x: ana_iconImageView2.maxX() + 9 + ana_featureLabel2.halfWidth(), y: ana_iconImageView2.centerY())
-        ana_featureLabel3.sizeToFit()
-        ana_featureLabel3.center = CGPoint(x: ana_iconImageView3.maxX() + 9 + ana_featureLabel3.halfWidth(), y: ana_iconImageView3.centerY())
-        ana_featuresBackView.bounds = CGRect(origin: .zero, size: CGSize(width: max(ana_featureLabel1.maxX(), ana_featureLabel2.maxX(), ana_featureLabel3.maxX()),
-                                                                     height: ana_iconImageView3.maxY()))
-		ana_featuresBackView.center = CGPoint(x: ana_scrollView.halfWidth(), y: ana_imageView.maxY() + 13.4 + ana_featuresBackView.halfHeight())
-		ana_topProductView.frame = CGRect(x: 25, y: ana_featuresBackView.maxY() + 35, width: ana_scrollView.width() - 25 * 2, height: 44)
-		ana_bottomProductView.frame = CGRect(x: 25, y: ana_topProductView.maxY() + 16, width: ana_scrollView.width() - 25 * 2, height: 44)
-        ana_button.frame = CGRect(x: 25, y: ana_bottomProductView.maxY() + 24, width: ana_scrollView.width() - 25 * 2, height: 54)
+        ana_featureLabel2.center = CGPoint(x: ana_iconImageView2.maxX() + 8 + ana_featureLabel2.halfWidth(), y: ana_iconImageView2.centerY())
+        ana_featuresBackView.bounds = CGRect(origin: .zero, size: CGSize(width: max(ana_featureLabel1.maxX(), ana_featureLabel2.maxX()),
+                                                                     height: ana_iconImageView2.maxY()))
+		ana_featuresBackView.center = CGPoint(x: ana_scrollView.halfWidth(), y: ana_imageView.maxY() + 32 + ana_featuresBackView.halfHeight())
+		let productViewWidth = ana_scrollView.width() - 24 * 2
+		ana_topProductView.frame = CGRect(x: 0, y: 0, width: productViewWidth, height: 50)
+		ana_productSeparateLine.frame = CGRect(x: 0, y: ana_topProductView.maxY(), width: productViewWidth, height: 0.4)
+		ana_bottomProductView.frame = CGRect(x: 0, y: ana_productSeparateLine.maxY(), width: productViewWidth, height: 50)
+		ana_productBackView.frame = CGRect(x: 24, y: ana_featuresBackView.maxY() + 21, width: productViewWidth, height: ana_bottomProductView.maxY())
+        ana_button.frame = CGRect(x: 24, y: ana_productBackView.maxY() + 22, width: ana_scrollView.width() - 24 * 2, height: 54)
 		ana_buttonBottomLabel.sizeToFit()
 		ana_buttonBottomLabel.center = CGPoint(x: ana_scrollView.halfWidth(), y: ana_button.maxY() + 12 + ana_buttonBottomLabel.halfHeight())
         ana_restoreButton.sizeToFit()
@@ -297,32 +279,7 @@ class SubscriptionViewController: UIViewController {
         let size = ana_bottomLabel.sizeThatFits(CGSize(width: ana_scrollView.width() - 76, height: .greatestFiniteMagnitude))
         ana_bottomLabel.frame = CGRect(x: 38, y: ana_restoreButton.maxY() + 3, width: size.width, height: size.height)
         ana_scrollView.contentSize = CGSize(width: ana_scrollView.width(), height: ana_bottomLabel.maxY() + bottomSpacing())
-		hintView.frame = CGRect(origin: .zero, size: ana_scrollView.contentSize)
-		hintShapeLayer.frame = hintView.bounds
-		hintShapeLayer.path = maskLayerPath()
-		backHintView.frame = CGRect(x: 0, y: 0, width: view.width(), height: view.height() / 3)
     }
-	
-	
-	func maskLayerPath() -> CGPath {
-		let path = UIBezierPath()
-		path.move(to: CGPoint(x: 0, y: 0))
-		path.addLine(to: CGPoint(x: 0, y: ana_button.centerY()))
-		path.addArc(withCenter: CGPoint(x: 80, y: ana_button.centerY()),
-					radius: 80,
-					startAngle: -1 * CGFloat.pi,
-					endAngle: -0.5 * CGFloat.pi,
-					clockwise: true)
-		path.addLine(to: CGPoint(x: view.width() - 80, y: ana_button.centerY() - 80))
-		path.addArc(withCenter: CGPoint(x: view.width() - 80, y: ana_button.centerY() - 160),
-					radius: 80,
-					startAngle: 0.5 * CGFloat.pi,
-					endAngle: 0,
-					clockwise: false)
-		path.addLine(to: CGPoint(x: view.width(), y: 0))
-		path.close()
-		return path.cgPath
-	}
     
     
     func requestSuccess() {
@@ -332,7 +289,7 @@ class SubscriptionViewController: UIViewController {
 		if let ana_sixMonthProduct = ana_sixMonthProduct {
 			ana_bottomProductView.set(price: ana_sixMonthProduct.regularPrice, freeDays: ana_sixMonthProduct.freeDays, durationString: "Half year")
 		}
-		ana_bottomLabel.text = "BabyCare Premium offers monthly and half-yearly purchase subscription. You can subscribe to a monthly plan(\(ana_monthProduct?.regularPrice ?? "$6.99") per month) or a half-yearly plan(\(ana_sixMonthProduct?.regularPrice ?? "39.99") per half-year). You can manage or turn off auto-renew in your Apple ID account settings at any time. Subscriptions will automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Any unused portion of a free trial period will be forfeited when you purchase a subscription. Our app is functional without purchasing an Auto-Renewable subscription, and you can use all the unlocked content after the subscription expires."
+		ana_bottomLabel.text = "BabyBeat Premium offers monthly and half-yearly purchase subscription. You can subscribe to a monthly plan(\(ana_monthProduct?.regularPrice ?? "$6.99") per month) or a half-yearly plan(\(ana_sixMonthProduct?.regularPrice ?? "39.99") per half-year). You can manage or turn off auto-renew in your Apple ID account settings at any time. Subscriptions will automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Any unused portion of a free trial period will be forfeited when you purchase a subscription. Our app is functional without purchasing an Auto-Renewable subscription, and you can use all the unlocked content after the subscription expires."
 		view.layoutNow()
     }
     

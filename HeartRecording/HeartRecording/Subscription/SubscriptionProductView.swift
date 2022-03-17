@@ -30,9 +30,7 @@ class SubscriptionProductView: UIView {
 	
 	
 	func configure() {
-		layer.cornerRadius = 12
-		backgroundColor = .white
-		setShadow(color: .color(hexString: "#33c37682"), offset: CGSize(width: 0, height: 1), radius: 2, opacity: 1)
+		backgroundColor = .clear
 		
 		let tap = UITapGestureRecognizer()
 		tap.reactive.stateChanged.observeValues {
@@ -75,5 +73,6 @@ class SubscriptionProductView: UIView {
 	
 	func setSelected(_ selected: Bool) {
 		imageView.image = UIImage(named: "Subscription_Product_" + (selected ? "Selected" : "Default"))
+		label.alpha = selected ? 1 : 0.3
 	}
 }
