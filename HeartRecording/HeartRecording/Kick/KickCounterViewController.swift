@@ -48,11 +48,11 @@ class KickCounterViewController: AnaLargeTitleTableViewController {
 		setTitle(title: "BabyBeat")
 		if ana_models.count > 0 {
 			let topButton = UIButton()
-			topButton.setImage(UIImage(named: "Kick_Add"), for: .normal)
+			topButton.setImage(UIImage(named: "Kick_Add_Small"), for: .normal)
 			let bottomButton = UIButton()
 			bottomButton.setImage(UIImage(named: "Kick_Add"), for: .normal)
 			bottomButton.bounds = CGRect(x: 0, y: 0, width: 48, height: 48)
-			bottomButton.backgroundColor = .white
+			bottomButton.backgroundColor = .color(hexString: "#9dc379")
 			bottomButton.layer.cornerRadius = 24
 			bottomButton.setShadow(color: .color(hexString: "#70f8e6e6"), offset: CGSize(width: 0, height: 5), radius: 25, opacity: 1)
 			setRightBarItem(topButton: topButton, bottomButton: bottomButton) {
