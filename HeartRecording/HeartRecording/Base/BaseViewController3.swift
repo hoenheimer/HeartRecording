@@ -12,7 +12,6 @@ import ReactiveSwift
 
 
 class BaseViewController3: BaseViewController {
-	var starImageView: UIImageView!
 	var starsView: StarsView!
 	
 	
@@ -26,26 +25,18 @@ class BaseViewController3: BaseViewController {
 	override func configure() {
 		super.configure()
 		
-		starImageView = UIImageView(image: UIImage(named: "Base_3_Star"))
-		view.addSubview(starImageView)
-		view.sendSubviewToBack(starImageView)
+		ana_backgroundImageView.isHidden = true
 		
-		shapeImageView.image = UIImage(named: "Base_3_Shape")
+		ana_primaryLabel.text = "Rate Us"
 		
-		primaryLabel.text = "Rate Us"
-		
-		secondaryLabel.text = "If you like our app, please rate us on the App Store. This is a great support for our team. Thank you!"
+		ana_secondaryLabel.text = "If you like our app, please rate us on the App Store. This is a great support for our team. Thank you!"
 		
 		starsView = StarsView()
 		view.addSubview(starsView)
 		
-		imageView.image = UIImage(named: "Base_3_Image")
+		ana_imageView.image = UIImage(named: "Base_3_Image")
 		
-		pageImageView1.setHighlighted(false)
-		pageImageView2.setHighlighted(false)
-		pageImageView3.setHighlighted(true)
-		
-		button.reactive.controlEvents(.touchUpInside).observeValues {
+		ana_button.reactive.controlEvents(.touchUpInside).observeValues {
 			[weak self] _ in
 			guard let self = self else { return }
 			FeedbackManager.feedback(type: .light)
@@ -68,13 +59,9 @@ class BaseViewController3: BaseViewController {
 	override func viewWillLayoutSubviews() {
 		super.viewWillLayoutSubviews()
 		
-		starImageView.sizeToFit()
-		starImageView.center = CGPoint(x: view.halfWidth(), y: topSpacing() + 6 + starImageView.halfHeight())
-		shapeImageView.sizeToFit()
-		shapeImageView.setOrigin(x: 0, y: view.height() - shapeImageView.height())
 		starsView.layoutNow()
-		starsView.center = CGPoint(x: view.halfWidth(), y: view.height() * 0.33)
-		imageView.sizeToFit()
-		imageView.center = CGPoint(x: view.halfWidth(), y: view.height() * 0.58)
+		starsView.center = CGPoint(x: view.halfWidth(), y: view.height() * 0.35)
+		ana_imageView.sizeToFit()
+		ana_imageView.center = CGPoint(x: view.halfWidth(), y: view.height() * 0.56)
 	}
 }

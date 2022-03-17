@@ -24,22 +24,26 @@ class BaseViewController1: BaseViewController {
 	override func configure() {
 		super.configure()
 		
-		shapeImageView.image = UIImage(named: "Base_1_Shape")
+		ana_primaryLabel.text = "BabyBeat"
 		
-		primaryLabel.text = "Baby Care"
+		ana_secondaryLabel.text = "Track & Count your baby kicks"
 		
-		secondaryLabel.text = "Track & Count your baby kicks"
+		ana_imageView.image = UIImage(named: "Base_1_Image")
 		
-		imageView.image = UIImage(named: "Base_1_Image")
-		
-		pageImageView1.setHighlighted(true)
-		pageImageView2.setHighlighted(false)
-		pageImageView3.setHighlighted(false)
-		
-		button.reactive.controlEvents(.touchUpInside).observeValues {
+		ana_button.reactive.controlEvents(.touchUpInside).observeValues {
 			[weak self] _ in
 			guard let self = self else { return }
 			self.navigationController?.pushViewController(BaseViewController2(), animated: true)
+		}
+		
+		
+		for familyName in UIFont.familyNames {
+			print(familyName)
+			
+			for fontName in UIFont.fontNames(forFamilyName: familyName) {
+				print(fontName)
+			}
+			print("--------")
 		}
 	}
 	
@@ -47,9 +51,7 @@ class BaseViewController1: BaseViewController {
 	override func viewWillLayoutSubviews() {
 		super.viewWillLayoutSubviews()
 		
-		shapeImageView.sizeToFit()
-		shapeImageView.setOrigin(x: 0, y: 0)
-		imageView.sizeToFit()
-		imageView.center = CGPoint(x: view.halfWidth(), y: view.halfHeight())
+		ana_imageView.sizeToFit()
+		ana_imageView.center = CGPoint(x: view.halfWidth(), y: view.height() * 0.51)
 	}
 }

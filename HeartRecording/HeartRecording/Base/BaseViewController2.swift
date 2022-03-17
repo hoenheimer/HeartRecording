@@ -14,19 +14,13 @@ class BaseViewController2: BaseViewController {
 	override func configure() {
 		super.configure()
 		
-		shapeImageView.image = UIImage(named: "Base_2_Shape")
+		ana_primaryLabel.text = "BabyBeat"
 		
-		primaryLabel.text = "Baby Care"
+		ana_secondaryLabel.text = "Record and Share Baby Sounds "
 		
-		secondaryLabel.text = "Record and Share Baby Sounds "
+		ana_imageView.image = UIImage(named: "Base_2_Image")
 		
-		imageView.image = UIImage(named: "Base_2_Image")
-		
-		pageImageView1.setHighlighted(false)
-		pageImageView2.setHighlighted(true)
-		pageImageView3.setHighlighted(false)
-		
-		button.reactive.controlEvents(.touchUpInside).observeValues {
+		ana_button.reactive.controlEvents(.touchUpInside).observeValues {
 			[weak self] _ in
 			guard let self = self else { return }
 			self.navigationController?.pushViewController(BaseViewController3(), animated: true)
@@ -37,9 +31,7 @@ class BaseViewController2: BaseViewController {
 	override func viewWillLayoutSubviews() {
 		super.viewWillLayoutSubviews()
 		
-		shapeImageView.sizeToFit()
-		shapeImageView.setOrigin(x: view.width() - shapeImageView.width(), y: view.height() - shapeImageView.height())
-		imageView.sizeToFit()
-		imageView.center = CGPoint(x: view.halfWidth(), y: view.halfHeight())
+		ana_imageView.sizeToFit()
+		ana_imageView.center = CGPoint(x: view.halfWidth(), y: view.height() * 0.51)
 	}
 }

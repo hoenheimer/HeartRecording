@@ -1,0 +1,725 @@
+./HeartRecording/Kick/AddKickCounterViewController.swift:14:	var ana_gradientView: UIView!
+./HeartRecording/Kick/AddKickCounterViewController.swift:15:	var ana_gradientLayer: CAGradientLayer!
+./HeartRecording/Kick/AddKickCounterViewController.swift:16:	var ana_closeButton: UIButton!
+./HeartRecording/Kick/AddKickCounterViewController.swift:27:	var ana_kicks = 0
+./HeartRecording/Kick/AddKickCounterViewController.swift:28:	var ana_timer: Timer?
+./HeartRecording/Kick/AddKickCounterViewController.swift:29:	var ana_timerStartDate: Date?
+./HeartRecording/Kick/AddKickCounterViewController.swift:33:		if ana_timer?.isValid == true {
+./HeartRecording/Kick/AddKickCounterViewController.swift:34:			ana_timer?.invalidate()
+./HeartRecording/Kick/AddKickCounterViewController.swift:35:			ana_timer = nil
+./HeartRecording/Kick/AddKickCounterViewController.swift:67:		ana_gradientView = UIView()
+./HeartRecording/Kick/AddKickCounterViewController.swift:68:		view.addSubview(ana_gradientView)
+./HeartRecording/Kick/AddKickCounterViewController.swift:70:		ana_gradientLayer = CAGradientLayer()
+./HeartRecording/Kick/AddKickCounterViewController.swift:71:		ana_gradientLayer.colors = [UIColor.color(hexString: "#fffefd").cgColor, UIColor.color(hexString: "#fcf3f4").cgColor]
+./HeartRecording/Kick/AddKickCounterViewController.swift:72:		ana_gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
+./HeartRecording/Kick/AddKickCounterViewController.swift:73:		ana_gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
+./HeartRecording/Kick/AddKickCounterViewController.swift:74:		ana_gradientView.layer.addSublayer(ana_gradientLayer)
+./HeartRecording/Kick/AddKickCounterViewController.swift:76:		ana_closeButton = UIButton()
+./HeartRecording/Kick/AddKickCounterViewController.swift:77:		ana_closeButton.setImage(UIImage(named: "Kick_Close"), for: .normal)
+./HeartRecording/Kick/AddKickCounterViewController.swift:78:		ana_closeButton.reactive.controlEvents(.touchUpInside).observeValues {
+./HeartRecording/Kick/AddKickCounterViewController.swift:83:		view.addSubview(ana_closeButton)
+./HeartRecording/Kick/AddKickCounterViewController.swift:104:			self.ana_kicks += 1
+./HeartRecording/Kick/AddKickCounterViewController.swift:105:			self.countLabel.text = String(format: "%02d", self.ana_kicks)
+./HeartRecording/Kick/AddKickCounterViewController.swift:106:			self.stepImageView.image = UIImage(named: "Kick_Add_Steps_Active_\(self.ana_kicks % 2)")
+./HeartRecording/Kick/AddKickCounterViewController.swift:142:			if self.ana_timer?.isValid != true {
+./HeartRecording/Kick/AddKickCounterViewController.swift:146:				self.ana_timer?.invalidate()
+./HeartRecording/Kick/AddKickCounterViewController.swift:147:				self.ana_timer = nil
+./HeartRecording/Kick/AddKickCounterViewController.swift:148:				self.ana_timerStartDate = Date()
+./HeartRecording/Kick/AddKickCounterViewController.swift:149:				self.ana_timer = Timer(timeInterval: 1, repeats: true, block: {
+./HeartRecording/Kick/AddKickCounterViewController.swift:152:					if let startDate = self.ana_timerStartDate {
+./HeartRecording/Kick/AddKickCounterViewController.swift:168:				RunLoop.current.add(self.ana_timer!, forMode: .default)
+./HeartRecording/Kick/AddKickCounterViewController.swift:171:				if let startDate = self.ana_timerStartDate {
+./HeartRecording/Kick/AddKickCounterViewController.swift:174:				DbManager.manager.insertKicks(duration: min(Int(duration), 6000), kicks: self.ana_kicks)
+./HeartRecording/Kick/AddKickCounterViewController.swift:180:		view.bringSubviewToFront(ana_closeButton)
+./HeartRecording/Kick/AddKickCounterViewController.swift:187:		ana_gradientView.frame = view.bounds
+./HeartRecording/Kick/AddKickCounterViewController.swift:188:		ana_gradientLayer.frame = ana_gradientView.bounds
+./HeartRecording/Kick/AddKickCounterViewController.swift:189:		ana_closeButton.sizeToFit()
+./HeartRecording/Kick/AddKickCounterViewController.swift:190:		ana_closeButton.setOrigin(x: 20, y: topSpacing() + 27)
+./HeartRecording/Kick/AddKickCounterViewController.swift:192:		backImageView.center = CGPoint(x: view.halfWidth(), y: ana_closeButton.maxY() + 43 + backImageView.halfHeight())
+./HeartRecording/Kick/KickCounterViewController.swift:15:	var ana_emptyView: UIView!
+./HeartRecording/Kick/KickCounterViewController.swift:16:	var ana_emptyImageView: UIImageView!
+./HeartRecording/Kick/KickCounterViewController.swift:17:	var ana_emptyLabel: UILabel!
+./HeartRecording/Kick/KickCounterViewController.swift:22:	var ana_models: [DbKicksModel]!
+./HeartRecording/Kick/KickCounterViewController.swift:37:		if ana_models.count == 0 {
+./HeartRecording/Kick/KickCounterViewController.swift:48:		ana_models = DbManager.manager.kickModels()
+./HeartRecording/Kick/KickCounterViewController.swift:51:		if ana_models.count > 0 {
+./HeartRecording/Kick/KickCounterViewController.swift:79:		ana_emptyView = UIView()
+./HeartRecording/Kick/KickCounterViewController.swift:80:		ana_emptyView.backgroundColor = .clear
+./HeartRecording/Kick/KickCounterViewController.swift:81:		ana_emptyView.isHidden = ana_models.count > 0
+./HeartRecording/Kick/KickCounterViewController.swift:82:		tableView.addSubview(ana_emptyView)
+./HeartRecording/Kick/KickCounterViewController.swift:84:		ana_emptyImageView = UIImageView()
+./HeartRecording/Kick/KickCounterViewController.swift:85:		ana_emptyImageView.image = UIImage(named: "Kick_Empty")
+./HeartRecording/Kick/KickCounterViewController.swift:86:		ana_emptyView.addSubview(ana_emptyImageView)
+./HeartRecording/Kick/KickCounterViewController.swift:88:		ana_emptyLabel = UILabel()
+./HeartRecording/Kick/KickCounterViewController.swift:89:		ana_emptyLabel.text = "No Data!"
+./HeartRecording/Kick/KickCounterViewController.swift:90:		ana_emptyLabel.textColor = .color(hexString: "#6a515e")
+./HeartRecording/Kick/KickCounterViewController.swift:91:		ana_emptyLabel.font = UIFont(name: "Merriweather-Regular", size: 18)
+./HeartRecording/Kick/KickCounterViewController.swift:92:		ana_emptyView.addSubview(ana_emptyLabel)
+./HeartRecording/Kick/KickCounterViewController.swift:98:		emptyButtonView.isHidden = ana_models.count > 0
+./HeartRecording/Kick/KickCounterViewController.swift:129:		ana_emptyImageView.sizeToFit()
+./HeartRecording/Kick/KickCounterViewController.swift:130:		ana_emptyImageView.setOrigin(x: 0, y: 0)
+./HeartRecording/Kick/KickCounterViewController.swift:131:		ana_emptyLabel.sizeToFit()
+./HeartRecording/Kick/KickCounterViewController.swift:132:		ana_emptyLabel.center = CGPoint(x: ana_emptyImageView.halfWidth(), y: ana_emptyImageView.maxY() + 23 + ana_emptyLabel.halfHeight())
+./HeartRecording/Kick/KickCounterViewController.swift:133:		ana_emptyView.bounds = CGRect(origin: .zero, size: CGSize(width: ana_emptyImageView.width(), height: ana_emptyLabel.maxY()))
+./HeartRecording/Kick/KickCounterViewController.swift:134:		ana_emptyView.center = CGPoint(x: tableView.halfWidth(), y: tableView.halfHeight())
+./HeartRecording/Kick/KickCounterViewController.swift:143:		ana_models = DbManager.manager.kickModels()
+./HeartRecording/Kick/KickCounterViewController.swift:145:		ana_emptyView.isHidden = ana_models.count > 0
+./HeartRecording/Kick/KickCounterViewController.swift:146:		emptyButtonView.isHidden = ana_models.count > 0
+./HeartRecording/Kick/KickCounterViewController.swift:148:		if ana_models.count > 0 {
+./HeartRecording/Kick/KickCounterViewController.swift:172:		return ana_models.count
+./HeartRecording/Kick/KickCounterViewController.swift:178:		let model = ana_models[indexPath.row]
+./HeartRecording/Kick/KickCounterViewController.swift:211:	var ana_backView: UIView!
+./HeartRecording/Kick/KickCounterViewController.swift:212:	var ana_dateView: UIView!
+./HeartRecording/Kick/KickCounterViewController.swift:213:	var ana_dateGradientLayer: CAGradientLayer!
+./HeartRecording/Kick/KickCounterViewController.swift:214:	var ana_dateLabel: UILabel!
+./HeartRecording/Kick/KickCounterViewController.swift:215:	var ana_timeTitleLabel: UILabel!
+./HeartRecording/Kick/KickCounterViewController.swift:216:	var ana_timeValueLabel: UILabel!
+./HeartRecording/Kick/KickCounterViewController.swift:217:	var ana_durationTitleLabel: UILabel!
+./HeartRecording/Kick/KickCounterViewController.swift:218:	var ana_durationValueLabel: UILabel!
+./HeartRecording/Kick/KickCounterViewController.swift:219:	var ana_kicksTitleLabel: UILabel!
+./HeartRecording/Kick/KickCounterViewController.swift:220:	var ana_kicksValueLabel: UILabel!
+./HeartRecording/Kick/KickCounterViewController.swift:236:		ana_backView = UIView()
+./HeartRecording/Kick/KickCounterViewController.swift:237:		ana_backView.layer.cornerRadius = 25
+./HeartRecording/Kick/KickCounterViewController.swift:238:		ana_backView.backgroundColor = .white
+./HeartRecording/Kick/KickCounterViewController.swift:239:		ana_backView.setShadow(color: .color(hexString: "#0f933c49"), offset: CGSize(width: 0, height: 8), radius: 25, opacity: 1)
+./HeartRecording/Kick/KickCounterViewController.swift:240:		addSubview(ana_backView)
+./HeartRecording/Kick/KickCounterViewController.swift:242:		ana_dateView = UIView()
+./HeartRecording/Kick/KickCounterViewController.swift:243:		addSubview(ana_dateView)
+./HeartRecording/Kick/KickCounterViewController.swift:245:		ana_dateGradientLayer = CAGradientLayer()
+./HeartRecording/Kick/KickCounterViewController.swift:246:		ana_dateGradientLayer.colors = [UIColor.color(hexString: "#fff3ed").cgColor, UIColor.color(hexString: "#ffdde4").cgColor]
+./HeartRecording/Kick/KickCounterViewController.swift:247:		ana_dateGradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
+./HeartRecording/Kick/KickCounterViewController.swift:248:		ana_dateGradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
+./HeartRecording/Kick/KickCounterViewController.swift:249:		ana_dateGradientLayer.cornerRadius = 14
+./HeartRecording/Kick/KickCounterViewController.swift:250:		ana_dateView.layer.addSublayer(ana_dateGradientLayer)
+./HeartRecording/Kick/KickCounterViewController.swift:252:		ana_dateLabel = UILabel()
+./HeartRecording/Kick/KickCounterViewController.swift:253:		ana_dateLabel.textColor = .color(hexString: "#6a515e")
+./HeartRecording/Kick/KickCounterViewController.swift:254:		ana_dateLabel.font = UIFont(name: "Poppins-Regular", size: 13)
+./HeartRecording/Kick/KickCounterViewController.swift:255:		ana_dateView.addSubview(ana_dateLabel)
+./HeartRecording/Kick/KickCounterViewController.swift:262:			ana_backView.addSubview(label)
+./HeartRecording/Kick/KickCounterViewController.swift:270:			ana_backView.addSubview(label)
+./HeartRecording/Kick/KickCounterViewController.swift:274:		ana_timeTitleLabel = newTitleLabel(title: "Time")
+./HeartRecording/Kick/KickCounterViewController.swift:275:		ana_durationTitleLabel = newTitleLabel(title: "Duration")
+./HeartRecording/Kick/KickCounterViewController.swift:276:		ana_kicksTitleLabel = newTitleLabel(title: "Kicks")
+./HeartRecording/Kick/KickCounterViewController.swift:277:		ana_timeValueLabel = newValueLabel()
+./HeartRecording/Kick/KickCounterViewController.swift:278:		ana_durationValueLabel = newValueLabel()
+./HeartRecording/Kick/KickCounterViewController.swift:279:		ana_kicksValueLabel = newValueLabel()
+./HeartRecording/Kick/KickCounterViewController.swift:286:		ana_backView.frame = CGRect(x: margin, y: 14, width: contentView.width() - margin * 2, height: 90)
+./HeartRecording/Kick/KickCounterViewController.swift:287:		ana_dateView.frame = CGRect(x: ana_backView.minX() + 25, y: 0, width: 109, height: 28)
+./HeartRecording/Kick/KickCounterViewController.swift:288:		ana_dateGradientLayer.frame = ana_dateView.bounds
+./HeartRecording/Kick/KickCounterViewController.swift:289:		ana_dateLabel.sizeToFit()
+./HeartRecording/Kick/KickCounterViewController.swift:290:		ana_dateLabel.center = CGPoint(x: ana_dateView.halfWidth(), y: ana_dateView.halfHeight())
+./HeartRecording/Kick/KickCounterViewController.swift:291:		ana_timeTitleLabel.sizeToFit()
+./HeartRecording/Kick/KickCounterViewController.swift:292:		ana_timeTitleLabel.setOrigin(x: 25, y: 28)
+./HeartRecording/Kick/KickCounterViewController.swift:293:		ana_timeValueLabel.sizeToFit()
+./HeartRecording/Kick/KickCounterViewController.swift:294:		ana_timeValueLabel.center = CGPoint(x: max(25 + ana_timeValueLabel.halfWidth(), ana_timeTitleLabel.centerX()), y: ana_timeTitleLabel.maxY() + 8 + ana_timeValueLabel.halfHeight())
+./HeartRecording/Kick/KickCounterViewController.swift:295:		ana_durationTitleLabel.sizeToFit()
+./HeartRecording/Kick/KickCounterViewController.swift:296:		ana_durationTitleLabel.center = CGPoint(x: ana_backView.halfWidth(), y: ana_timeTitleLabel.centerY())
+./HeartRecording/Kick/KickCounterViewController.swift:297:		ana_durationValueLabel.sizeToFit()
+./HeartRecording/Kick/KickCounterViewController.swift:298:		ana_durationValueLabel.center = CGPoint(x: ana_durationTitleLabel.centerX(), y: ana_timeValueLabel.centerY())
+./HeartRecording/Kick/KickCounterViewController.swift:299:		ana_kicksTitleLabel.sizeToFit()
+./HeartRecording/Kick/KickCounterViewController.swift:300:		ana_kicksTitleLabel.setOrigin(x: ana_backView.width() - 25 - ana_kicksTitleLabel.width(), y: ana_timeTitleLabel.minY())
+./HeartRecording/Kick/KickCounterViewController.swift:301:		ana_kicksValueLabel.sizeToFit()
+./HeartRecording/Kick/KickCounterViewController.swift:302:		ana_kicksValueLabel.center = CGPoint(x: min(ana_backView.width() - 25 - ana_kicksValueLabel.halfWidth(), ana_kicksTitleLabel.centerX()), y: ana_timeValueLabel.centerY())
+./HeartRecording/Kick/KickCounterViewController.swift:307:		ana_dateLabel.text = date
+./HeartRecording/Kick/KickCounterViewController.swift:308:		ana_timeValueLabel.text = time
+./HeartRecording/Kick/KickCounterViewController.swift:309:		ana_durationValueLabel.text = duration
+./HeartRecording/Kick/KickCounterViewController.swift:310:		ana_kicksValueLabel.text = kicks
+./HeartRecording/Record/RecordViewController.swift:20:    var ana_label: UILabel!
+./HeartRecording/Record/RecordViewController.swift:21:    var ana_timerLabel: UILabel!
+./HeartRecording/Record/RecordViewController.swift:22:    var ana_buttonBackgroundView: UIView!
+./HeartRecording/Record/RecordViewController.swift:23:    var ana_buttonGradient: CAGradientLayer!
+./HeartRecording/Record/RecordViewController.swift:24:    var ana_button: UIButton!
+./HeartRecording/Record/RecordViewController.swift:26:    let ana_manager = RecordManager()
+./HeartRecording/Record/RecordViewController.swift:27:    var ana_recordStartDate = Date()
+./HeartRecording/Record/RecordViewController.swift:28:    var ana_timer: Timer?
+./HeartRecording/Record/RecordViewController.swift:29:    var ana_visiableTime: CGFloat = 0
+./HeartRecording/Record/RecordViewController.swift:33:        if ana_timer != nil && ana_timer!.isValid {
+./HeartRecording/Record/RecordViewController.swift:34:            ana_timer!.invalidate()
+./HeartRecording/Record/RecordViewController.swift:35:            ana_timer = nil
+./HeartRecording/Record/RecordViewController.swift:48:		if !ana_manager.isRecording {
+./HeartRecording/Record/RecordViewController.swift:70:        ana_label = UILabel()
+./HeartRecording/Record/RecordViewController.swift:71:        ana_label.numberOfLines = 0
+./HeartRecording/Record/RecordViewController.swift:72:        ana_label.textAlignment = .center
+./HeartRecording/Record/RecordViewController.swift:73:        ana_label.text = "Tap Button To Start"
+./HeartRecording/Record/RecordViewController.swift:74:        ana_label.textColor = .color(hexString: "#6a515e")
+./HeartRecording/Record/RecordViewController.swift:75:        ana_label.font = UIFont(name: "Poppins-Medium", size: 18)
+./HeartRecording/Record/RecordViewController.swift:76:		backImageView.addSubview(ana_label)
+./HeartRecording/Record/RecordViewController.swift:78:        ana_timerLabel = UILabel()
+./HeartRecording/Record/RecordViewController.swift:79:        ana_timerLabel.textColor = .color(hexString: "#6a515e")
+./HeartRecording/Record/RecordViewController.swift:80:        ana_timerLabel.font = UIFont(name: "Poppins-SemiBold", size: 44)
+./HeartRecording/Record/RecordViewController.swift:81:        ana_timerLabel.isHidden = true
+./HeartRecording/Record/RecordViewController.swift:82:		backImageView.addSubview(ana_timerLabel)
+./HeartRecording/Record/RecordViewController.swift:84:        ana_buttonBackgroundView = UIView()
+./HeartRecording/Record/RecordViewController.swift:85:        ana_buttonBackgroundView.backgroundColor = .clear
+./HeartRecording/Record/RecordViewController.swift:86:        ana_buttonBackgroundView.layer.cornerRadius = 27
+./HeartRecording/Record/RecordViewController.swift:87:        contentView.addSubview(ana_buttonBackgroundView)
+./HeartRecording/Record/RecordViewController.swift:89:        ana_buttonGradient = CAGradientLayer()
+./HeartRecording/Record/RecordViewController.swift:90:        ana_buttonGradient.colors = [UIColor.color(hexString: "#fff3ed").cgColor, UIColor.color(hexString: "#ffdde4").cgColor]
+./HeartRecording/Record/RecordViewController.swift:91:		ana_buttonGradient.startPoint = CGPoint(x: 0, y: 0.5)
+./HeartRecording/Record/RecordViewController.swift:92:		ana_buttonGradient.endPoint = CGPoint(x: 1, y: 0.5)
+./HeartRecording/Record/RecordViewController.swift:93:        ana_buttonGradient.cornerRadius = 27
+./HeartRecording/Record/RecordViewController.swift:94:        ana_buttonBackgroundView.layer.addSublayer(ana_buttonGradient)
+./HeartRecording/Record/RecordViewController.swift:96:        ana_buttonBackgroundView.setShadow(color: .color(hexString: "#28d3afb8"), offset: CGSize(width: 0, height: 12), radius: 30)
+./HeartRecording/Record/RecordViewController.swift:98:        ana_button = UIButton()
+./HeartRecording/Record/RecordViewController.swift:99:		ana_button.layer.cornerRadius = 27
+./HeartRecording/Record/RecordViewController.swift:100:		ana_button.layer.borderWidth = 1
+./HeartRecording/Record/RecordViewController.swift:101:		ana_button.layer.borderColor = UIColor.color(hexString: "#80fcfcfc").cgColor
+./HeartRecording/Record/RecordViewController.swift:102:        ana_button.setTitle("Start Recording", for: .normal)
+./HeartRecording/Record/RecordViewController.swift:103:        ana_button.setTitleColor(.color(hexString: "#6a515e"), for: .normal)
+./HeartRecording/Record/RecordViewController.swift:104:        ana_button.titleLabel?.font = UIFont(name: "Poppins-SemiBold", size: 16)
+./HeartRecording/Record/RecordViewController.swift:105:        ana_button.reactive.controlEvents(.touchUpInside).observeValues {
+./HeartRecording/Record/RecordViewController.swift:108:			if !self.ana_manager.isRecording {
+./HeartRecording/Record/RecordViewController.swift:113:					self.ana_manager.beginRecord()
+./HeartRecording/Record/RecordViewController.swift:114:					if self.ana_manager.isRecording {
+./HeartRecording/Record/RecordViewController.swift:118:					self.ana_timerLabel.text = "00:00"
+./HeartRecording/Record/RecordViewController.swift:120:					self.ana_timerLabel.isHidden = false
+./HeartRecording/Record/RecordViewController.swift:121:					self.ana_label.isHidden = true
+./HeartRecording/Record/RecordViewController.swift:122:					self.ana_recordStartDate = Date()
+./HeartRecording/Record/RecordViewController.swift:123:					self.ana_visiableTime = 0
+./HeartRecording/Record/RecordViewController.swift:124:					if self.ana_timer != nil && self.ana_timer!.isValid {
+./HeartRecording/Record/RecordViewController.swift:125:						self.ana_timer!.invalidate()
+./HeartRecording/Record/RecordViewController.swift:126:						self.ana_timer = nil
+./HeartRecording/Record/RecordViewController.swift:128:					self.ana_timer = Timer(timeInterval: 1, repeats: true, block: {
+./HeartRecording/Record/RecordViewController.swift:131:						let time = Date().timeIntervalSince(self.ana_recordStartDate)
+./HeartRecording/Record/RecordViewController.swift:132:						if self.ana_visiableTime >= CGFloat(time) {
+./HeartRecording/Record/RecordViewController.swift:133:							self.ana_visiableTime += 1
+./HeartRecording/Record/RecordViewController.swift:135:							self.ana_visiableTime = CGFloat(time)
+./HeartRecording/Record/RecordViewController.swift:137:						self.ana_timerLabel.text = String.stringFromTime(self.ana_visiableTime)
+./HeartRecording/Record/RecordViewController.swift:140:					RunLoop.current.add(self.ana_timer!, forMode: .default)
+./HeartRecording/Record/RecordViewController.swift:148:						vc.ana_success = action
+./HeartRecording/Record/RecordViewController.swift:149:						vc.ana_dismiss = action
+./HeartRecording/Record/RecordViewController.swift:163:				self.ana_manager.stopRecord()
+./HeartRecording/Record/RecordViewController.swift:164:				if !self.ana_manager.isRecording {
+./HeartRecording/Record/RecordViewController.swift:167:				let model = DbManager.manager.addRecording(path: self.ana_manager.file_name!)
+./HeartRecording/Record/RecordViewController.swift:169:				self.ana_timerLabel.isHidden = true
+./HeartRecording/Record/RecordViewController.swift:170:				self.ana_label.isHidden = false
+./HeartRecording/Record/RecordViewController.swift:171:				if self.ana_timer != nil && self.ana_timer!.isValid {
+./HeartRecording/Record/RecordViewController.swift:172:					self.ana_timer!.invalidate()
+./HeartRecording/Record/RecordViewController.swift:173:					self.ana_timer = nil
+./HeartRecording/Record/RecordViewController.swift:181:        ana_buttonBackgroundView.addSubview(ana_button)
+./HeartRecording/Record/RecordViewController.swift:194:		let size = ana_label.sizeThatFits(CGSize(width: 230, height: CGFloat.greatestFiniteMagnitude))
+./HeartRecording/Record/RecordViewController.swift:195:		ana_label.bounds = CGRect(origin: .zero, size: size)
+./HeartRecording/Record/RecordViewController.swift:196:		ana_label.center = CGPoint(x: backImageView.halfWidth(), y: backImageView.height() * 0.65)
+./HeartRecording/Record/RecordViewController.swift:197:		ana_timerLabel.sizeToFit()
+./HeartRecording/Record/RecordViewController.swift:198:		ana_timerLabel.center = ana_label.center
+./HeartRecording/Record/RecordViewController.swift:199:        ana_buttonBackgroundView.bounds = CGRect(origin: .zero, size: CGSize(width: 250, height: 54))
+./HeartRecording/Record/RecordViewController.swift:200:		ana_buttonBackgroundView.center = CGPoint(x: view.halfWidth(), y: backImageView.maxY() + 30 + ana_buttonBackgroundView.halfHeight())
+./HeartRecording/Record/RecordViewController.swift:201:        ana_buttonGradient.frame = ana_buttonBackgroundView.bounds
+./HeartRecording/Record/RecordViewController.swift:202:        ana_button.frame = ana_buttonBackgroundView.bounds
+./HeartRecording/Record/RecordViewController.swift:203:        return ana_buttonBackgroundView.maxY()
+./HeartRecording/Subscription/SubscriptionViewController.swift:15:    var ana_gradientLayer:          CAGradientLayer!
+./HeartRecording/Subscription/SubscriptionViewController.swift:17:    var ana_scrollView:             UIScrollView!
+./HeartRecording/Subscription/SubscriptionViewController.swift:20:    var ana_closeButton:            UIButton!
+./HeartRecording/Subscription/SubscriptionViewController.swift:21:	var ana_imageView:              UIImageView!
+./HeartRecording/Subscription/SubscriptionViewController.swift:22:    var ana_titleLabel:             UILabel!
+./HeartRecording/Subscription/SubscriptionViewController.swift:23:	var ana_titleImageView:			UIImageView!
+./HeartRecording/Subscription/SubscriptionViewController.swift:24:    var ana_featuresBackView:       UIView!
+./HeartRecording/Subscription/SubscriptionViewController.swift:25:    var ana_iconImageView1:         UIImageView!
+./HeartRecording/Subscription/SubscriptionViewController.swift:26:    var ana_iconImageView2:         UIImageView!
+./HeartRecording/Subscription/SubscriptionViewController.swift:27:    var ana_iconImageView3:         UIImageView!
+./HeartRecording/Subscription/SubscriptionViewController.swift:28:    var ana_featureLabel1:          UILabel!
+./HeartRecording/Subscription/SubscriptionViewController.swift:29:    var ana_featureLabel2:          UILabel!
+./HeartRecording/Subscription/SubscriptionViewController.swift:30:    var ana_featureLabel3:          UILabel!
+./HeartRecording/Subscription/SubscriptionViewController.swift:31:	var ana_topProductView:			SubscriptionProductView!
+./HeartRecording/Subscription/SubscriptionViewController.swift:32:	var ana_bottomProductView:		SubscriptionProductView!
+./HeartRecording/Subscription/SubscriptionViewController.swift:33:    var ana_button:                 UIButton!
+./HeartRecording/Subscription/SubscriptionViewController.swift:34:    var ana_buttonBottomLabel:      UILabel!
+./HeartRecording/Subscription/SubscriptionViewController.swift:35:    var ana_restoreButton:          UIButton!
+./HeartRecording/Subscription/SubscriptionViewController.swift:36:    var ana_termsButton:            UIButton!
+./HeartRecording/Subscription/SubscriptionViewController.swift:37:    var ana_privacyButton:          UIButton!
+./HeartRecording/Subscription/SubscriptionViewController.swift:38:    var ana_bottomLabel:            UILabel!
+./HeartRecording/Subscription/SubscriptionViewController.swift:40:    var ana_monthProduct: SKProduct?
+./HeartRecording/Subscription/SubscriptionViewController.swift:41:	var ana_sixMonthProduct: SKProduct?
+./HeartRecording/Subscription/SubscriptionViewController.swift:43:    var ana_success: (() -> Void)? = nil
+./HeartRecording/Subscription/SubscriptionViewController.swift:44:	var ana_dismiss: (() -> Void)? = nil
+./HeartRecording/Subscription/SubscriptionViewController.swift:50:        self.ana_success = success
+./HeartRecording/Subscription/SubscriptionViewController.swift:79:        ana_gradientLayer = CAGradientLayer()
+./HeartRecording/Subscription/SubscriptionViewController.swift:80:        ana_gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+./HeartRecording/Subscription/SubscriptionViewController.swift:81:        ana_gradientLayer.endPoint = CGPoint(x: 1, y: 1)
+./HeartRecording/Subscription/SubscriptionViewController.swift:82:        ana_gradientLayer.colors = [UIColor.color(hexString: "#fff6f8").cgColor, UIColor.color(hexString: "#fff0f2").cgColor]
+./HeartRecording/Subscription/SubscriptionViewController.swift:83:        view.layer.addSublayer(ana_gradientLayer)
+./HeartRecording/Subscription/SubscriptionViewController.swift:89:        ana_scrollView = UIScrollView()
+./HeartRecording/Subscription/SubscriptionViewController.swift:90:        ana_scrollView.backgroundColor = .clear
+./HeartRecording/Subscription/SubscriptionViewController.swift:91:		ana_scrollView.contentInsetAdjustmentBehavior = .never
+./HeartRecording/Subscription/SubscriptionViewController.swift:92:        view.addSubview(ana_scrollView)
+./HeartRecording/Subscription/SubscriptionViewController.swift:94:        ana_closeButton = UIButton()
+./HeartRecording/Subscription/SubscriptionViewController.swift:95:        ana_closeButton.setImage(UIImage(named: "Subscription_Close"), for: .normal)
+./HeartRecording/Subscription/SubscriptionViewController.swift:96:        ana_closeButton.reactive.controlEvents(.touchUpInside).observeValues {
+./HeartRecording/Subscription/SubscriptionViewController.swift:102:				self.dismiss(animated: true, completion: self.ana_dismiss)
+./HeartRecording/Subscription/SubscriptionViewController.swift:105:        view.addSubview(ana_closeButton)
+./HeartRecording/Subscription/SubscriptionViewController.swift:109:		ana_scrollView.addSubview(hintView)
+./HeartRecording/Subscription/SubscriptionViewController.swift:114:		ana_imageView = UIImageView()
+./HeartRecording/Subscription/SubscriptionViewController.swift:115:		ana_imageView.image = UIImage(named: "Subscription_Image")
+./HeartRecording/Subscription/SubscriptionViewController.swift:116:		ana_scrollView.addSubview(ana_imageView)
+./HeartRecording/Subscription/SubscriptionViewController.swift:118:        ana_titleLabel = UILabel()
+./HeartRecording/Subscription/SubscriptionViewController.swift:119:        ana_titleLabel.text = "BabyCare Premium"
+./HeartRecording/Subscription/SubscriptionViewController.swift:120:        ana_titleLabel.textColor = .color(hexString: "#6a515e")
+./HeartRecording/Subscription/SubscriptionViewController.swift:121:        ana_titleLabel.font = UIFont(name: "Merriweather-Regular", size: 28)
+./HeartRecording/Subscription/SubscriptionViewController.swift:122:        ana_scrollView.addSubview(ana_titleLabel)
+./HeartRecording/Subscription/SubscriptionViewController.swift:124:		ana_titleImageView = UIImageView(image: UIImage(named: "Subscription_Title"))
+./HeartRecording/Subscription/SubscriptionViewController.swift:125:		ana_scrollView.addSubview(ana_titleImageView)
+./HeartRecording/Subscription/SubscriptionViewController.swift:127:        ana_featuresBackView = UIView()
+./HeartRecording/Subscription/SubscriptionViewController.swift:128:        ana_featuresBackView.backgroundColor = .clear
+./HeartRecording/Subscription/SubscriptionViewController.swift:129:        ana_scrollView.addSubview(ana_featuresBackView)
+./HeartRecording/Subscription/SubscriptionViewController.swift:131:        ana_iconImageView1 = UIImageView()
+./HeartRecording/Subscription/SubscriptionViewController.swift:132:        ana_iconImageView1.image = UIImage(named: "Subscription_Feature")
+./HeartRecording/Subscription/SubscriptionViewController.swift:133:        ana_featuresBackView.addSubview(ana_iconImageView1)
+./HeartRecording/Subscription/SubscriptionViewController.swift:135:        ana_iconImageView2 = UIImageView()
+./HeartRecording/Subscription/SubscriptionViewController.swift:136:        ana_iconImageView2.image = UIImage(named: "Subscription_Feature")
+./HeartRecording/Subscription/SubscriptionViewController.swift:137:        ana_featuresBackView.addSubview(ana_iconImageView2)
+./HeartRecording/Subscription/SubscriptionViewController.swift:139:        ana_iconImageView3 = UIImageView()
+./HeartRecording/Subscription/SubscriptionViewController.swift:140:        ana_iconImageView3.image = UIImage(named: "Subscription_Feature")
+./HeartRecording/Subscription/SubscriptionViewController.swift:141:        ana_featuresBackView.addSubview(ana_iconImageView3)
+./HeartRecording/Subscription/SubscriptionViewController.swift:143:        ana_featureLabel1 = UILabel()
+./HeartRecording/Subscription/SubscriptionViewController.swift:144:        ana_featureLabel1.text = "Unlock All Features"
+./HeartRecording/Subscription/SubscriptionViewController.swift:145:        ana_featureLabel1.textColor = .black
+./HeartRecording/Subscription/SubscriptionViewController.swift:146:        ana_featureLabel1.font = UIFont(name: "PingFangSC-Regular", size: 14)
+./HeartRecording/Subscription/SubscriptionViewController.swift:147:        ana_featuresBackView.addSubview(ana_featureLabel1)
+./HeartRecording/Subscription/SubscriptionViewController.swift:149:        ana_featureLabel2 = UILabel()
+./HeartRecording/Subscription/SubscriptionViewController.swift:150:        ana_featureLabel2.text = "Share Recording With Others"
+./HeartRecording/Subscription/SubscriptionViewController.swift:151:        ana_featureLabel2.textColor = .black
+./HeartRecording/Subscription/SubscriptionViewController.swift:152:        ana_featureLabel2.font = UIFont(name: "PingFangSC-Regular", size: 14)
+./HeartRecording/Subscription/SubscriptionViewController.swift:153:        ana_featuresBackView.addSubview(ana_featureLabel2)
+./HeartRecording/Subscription/SubscriptionViewController.swift:155:        ana_featureLabel3 = UILabel()
+./HeartRecording/Subscription/SubscriptionViewController.swift:156:        ana_featureLabel3.text = "Remove Ads"
+./HeartRecording/Subscription/SubscriptionViewController.swift:157:        ana_featureLabel3.textColor = .black
+./HeartRecording/Subscription/SubscriptionViewController.swift:158:        ana_featureLabel3.font = UIFont(name: "PingFangSC-Regular", size: 14)
+./HeartRecording/Subscription/SubscriptionViewController.swift:159:        ana_featuresBackView.addSubview(ana_featureLabel3)
+./HeartRecording/Subscription/SubscriptionViewController.swift:161:		ana_topProductView = SubscriptionProductView()
+./HeartRecording/Subscription/SubscriptionViewController.swift:162:		ana_topProductView.set(price: "$6.99", freeDays: 3, durationString: "month")
+./HeartRecording/Subscription/SubscriptionViewController.swift:163:		ana_topProductView.setSelected(true)
+./HeartRecording/Subscription/SubscriptionViewController.swift:164:		ana_topProductView.pipe.output.observeValues {
+./HeartRecording/Subscription/SubscriptionViewController.swift:168:			self.ana_topProductView.setSelected(true)
+./HeartRecording/Subscription/SubscriptionViewController.swift:169:			self.ana_bottomProductView.setSelected(false)
+./HeartRecording/Subscription/SubscriptionViewController.swift:171:		ana_scrollView.addSubview(ana_topProductView)
+./HeartRecording/Subscription/SubscriptionViewController.swift:173:		ana_bottomProductView = SubscriptionProductView()
+./HeartRecording/Subscription/SubscriptionViewController.swift:174:		ana_bottomProductView.set(price: "$39.99", freeDays: 3, durationString: "Half year")
+./HeartRecording/Subscription/SubscriptionViewController.swift:175:		ana_bottomProductView.setSelected(false)
+./HeartRecording/Subscription/SubscriptionViewController.swift:176:		ana_bottomProductView.pipe.output.observeValues {
+./HeartRecording/Subscription/SubscriptionViewController.swift:180:			self.ana_topProductView.setSelected(false)
+./HeartRecording/Subscription/SubscriptionViewController.swift:181:			self.ana_bottomProductView.setSelected(true)
+./HeartRecording/Subscription/SubscriptionViewController.swift:183:		ana_scrollView.addSubview(ana_bottomProductView)
+./HeartRecording/Subscription/SubscriptionViewController.swift:185:        ana_button = UIButton()
+./HeartRecording/Subscription/SubscriptionViewController.swift:186:		ana_button.layer.cornerRadius = 27
+./HeartRecording/Subscription/SubscriptionViewController.swift:187:		ana_button.layer.borderWidth = 1
+./HeartRecording/Subscription/SubscriptionViewController.swift:188:		ana_button.layer.borderColor = UIColor.color(hexString: "#80fcfcfc").cgColor
+./HeartRecording/Subscription/SubscriptionViewController.swift:189:        ana_button.backgroundColor = .color(hexString: "#e46a7d")
+./HeartRecording/Subscription/SubscriptionViewController.swift:190:		ana_button.setShadow(color: .color(hexString: "#4cde7d94"), offset: CGSize(width: 0, height: 12), radius: 30, opacity: 1)
+./HeartRecording/Subscription/SubscriptionViewController.swift:191:		ana_button.setTitle("Start Free Trial", for: .normal)
+./HeartRecording/Subscription/SubscriptionViewController.swift:192:        ana_button.setTitleColor(.color(hexString: "#FCFCFC"), for: .normal)
+./HeartRecording/Subscription/SubscriptionViewController.swift:193:        ana_button.titleLabel?.font = UIFont(name: "Poppins-SemiBold", size: 16)
+./HeartRecording/Subscription/SubscriptionViewController.swift:194:        ana_button.reactive.controlEvents(.touchUpInside).observeValues {
+./HeartRecording/Subscription/SubscriptionViewController.swift:197:			if let product = self.selectBottomProduct ? self.ana_sixMonthProduct : self.ana_monthProduct {
+./HeartRecording/Subscription/SubscriptionViewController.swift:201:        ana_scrollView.addSubview(ana_button)
+./HeartRecording/Subscription/SubscriptionViewController.swift:203:		ana_buttonBottomLabel = UILabel()
+./HeartRecording/Subscription/SubscriptionViewController.swift:204:		ana_buttonBottomLabel.text = "Auto renewable, Cancel anytime"
+./HeartRecording/Subscription/SubscriptionViewController.swift:205:		ana_buttonBottomLabel.textColor = .color(hexString: "#6a515e")
+./HeartRecording/Subscription/SubscriptionViewController.swift:206:		ana_buttonBottomLabel.font = UIFont(name: "PingFangSC-Regular", size: 13)
+./HeartRecording/Subscription/SubscriptionViewController.swift:207:		ana_scrollView.addSubview(ana_buttonBottomLabel)
+./HeartRecording/Subscription/SubscriptionViewController.swift:209:        ana_restoreButton = UIButton()
+./HeartRecording/Subscription/SubscriptionViewController.swift:210:        ana_restoreButton.setTitle("RESTORE PURCHASE", for: .normal)
+./HeartRecording/Subscription/SubscriptionViewController.swift:211:        ana_restoreButton.setTitleColor(.color(hexString: "#6a515e"), for: .normal)
+./HeartRecording/Subscription/SubscriptionViewController.swift:212:        ana_restoreButton.titleLabel?.font = UIFont(name: "PingFangSC-Semibold", size: 10)
+./HeartRecording/Subscription/SubscriptionViewController.swift:213:        ana_restoreButton.reactive.controlEvents(.touchUpInside).observeValues {
+./HeartRecording/Subscription/SubscriptionViewController.swift:218:        ana_scrollView.addSubview(ana_restoreButton)
+./HeartRecording/Subscription/SubscriptionViewController.swift:220:        ana_termsButton = UIButton()
+./HeartRecording/Subscription/SubscriptionViewController.swift:221:		ana_termsButton.setTitle("Terms of Service", for: .normal)
+./HeartRecording/Subscription/SubscriptionViewController.swift:222:		ana_termsButton.setTitleColor(.color(hexString: "#6a515e"), for: .normal)
+./HeartRecording/Subscription/SubscriptionViewController.swift:223:		ana_termsButton.titleLabel?.font = UIFont(name: "PingFangSC-Semibold", size: 10)
+./HeartRecording/Subscription/SubscriptionViewController.swift:224:        ana_termsButton.reactive.controlEvents(.touchUpInside).observeValues {
+./HeartRecording/Subscription/SubscriptionViewController.swift:232:        ana_scrollView.addSubview(ana_termsButton)
+./HeartRecording/Subscription/SubscriptionViewController.swift:234:        ana_privacyButton = UIButton()
+./HeartRecording/Subscription/SubscriptionViewController.swift:235:		ana_privacyButton.setTitle("Privacy Policy", for: .normal)
+./HeartRecording/Subscription/SubscriptionViewController.swift:236:		ana_privacyButton.setTitleColor(.color(hexString: "#6a515e"), for: .normal)
+./HeartRecording/Subscription/SubscriptionViewController.swift:237:		ana_privacyButton.titleLabel?.font = UIFont(name: "PingFangSC-Semibold", size: 10)
+./HeartRecording/Subscription/SubscriptionViewController.swift:238:        ana_privacyButton.reactive.controlEvents(.touchUpInside).observeValues {
+./HeartRecording/Subscription/SubscriptionViewController.swift:246:        ana_scrollView.addSubview(ana_privacyButton)
+./HeartRecording/Subscription/SubscriptionViewController.swift:248:        ana_bottomLabel = UILabel()
+./HeartRecording/Subscription/SubscriptionViewController.swift:249:        ana_bottomLabel.numberOfLines = 0
+./HeartRecording/Subscription/SubscriptionViewController.swift:250:		ana_bottomLabel.textAlignment = .justified
+./HeartRecording/Subscription/SubscriptionViewController.swift:251:        ana_bottomLabel.text = "BabyCare Premium offers monthly and half-yearly purchase subscription. You can subscribe to a monthly plan($6.99 per month) or a half-yearly plan($39.99 per half-year). You can manage or turn off auto-renew in your Apple ID account settings at any time. Subscriptions will automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Any unused portion of a free trial period will be forfeited when you purchase a subscription. Our app is functional without purchasing an Auto-Renewable subscription, and you can use all the unlocked content after the subscription expires."
+./HeartRecording/Subscription/SubscriptionViewController.swift:252:        ana_bottomLabel.textColor = .color(hexString: "#6a515e")
+./HeartRecording/Subscription/SubscriptionViewController.swift:253:        ana_bottomLabel.font  = UIFont(name: "PingFangSC-Semibold", size: 10)
+./HeartRecording/Subscription/SubscriptionViewController.swift:254:        ana_scrollView.addSubview(ana_bottomLabel)
+./HeartRecording/Subscription/SubscriptionViewController.swift:261:        ana_gradientLayer.frame = view.bounds
+./HeartRecording/Subscription/SubscriptionViewController.swift:262:        ana_scrollView.frame = view.bounds
+./HeartRecording/Subscription/SubscriptionViewController.swift:263:        ana_closeButton.sizeToFit()
+./HeartRecording/Subscription/SubscriptionViewController.swift:264:        ana_closeButton.setOrigin(x: 20, y: topSpacing() + 30)
+./HeartRecording/Subscription/SubscriptionViewController.swift:265:		ana_imageView.sizeToFit()
+./HeartRecording/Subscription/SubscriptionViewController.swift:266:		ana_imageView.center = CGPoint(x: view.halfWidth(), y: topSpacing() + 8 + ana_imageView.halfHeight())
+./HeartRecording/Subscription/SubscriptionViewController.swift:267:        ana_titleLabel.sizeToFit()
+./HeartRecording/Subscription/SubscriptionViewController.swift:268:		ana_titleLabel.center = CGPoint(x: ana_scrollView.halfWidth(), y: topSpacing() + 96 + ana_titleLabel.halfHeight())
+./HeartRecording/Subscription/SubscriptionViewController.swift:269:		ana_titleImageView.sizeToFit()
+./HeartRecording/Subscription/SubscriptionViewController.swift:270:		ana_titleImageView.center = CGPoint(x: ana_titleLabel.maxX() + 12 + ana_titleImageView.halfWidth(), y: ana_titleLabel.centerY())
+./HeartRecording/Subscription/SubscriptionViewController.swift:271:        ana_iconImageView1.sizeToFit()
+./HeartRecording/Subscription/SubscriptionViewController.swift:272:        ana_iconImageView1.setOrigin(x: 0, y: 0)
+./HeartRecording/Subscription/SubscriptionViewController.swift:273:        ana_iconImageView2.sizeToFit()
+./HeartRecording/Subscription/SubscriptionViewController.swift:274:        ana_iconImageView2.setOrigin(x: 0, y: ana_iconImageView1.maxY() + 21)
+./HeartRecording/Subscription/SubscriptionViewController.swift:275:        ana_iconImageView3.sizeToFit()
+./HeartRecording/Subscription/SubscriptionViewController.swift:276:        ana_iconImageView3.setOrigin(x: 0, y: ana_iconImageView2.maxY() + 21)
+./HeartRecording/Subscription/SubscriptionViewController.swift:277:        ana_featureLabel1.sizeToFit()
+./HeartRecording/Subscription/SubscriptionViewController.swift:278:        ana_featureLabel1.center = CGPoint(x: ana_iconImageView1.maxX() + 9 + ana_featureLabel1.halfWidth(), y: ana_iconImageView1.centerY())
+./HeartRecording/Subscription/SubscriptionViewController.swift:279:        ana_featureLabel2.sizeToFit()
+./HeartRecording/Subscription/SubscriptionViewController.swift:280:        ana_featureLabel2.center = CGPoint(x: ana_iconImageView2.maxX() + 9 + ana_featureLabel2.halfWidth(), y: ana_iconImageView2.centerY())
+./HeartRecording/Subscription/SubscriptionViewController.swift:281:        ana_featureLabel3.sizeToFit()
+./HeartRecording/Subscription/SubscriptionViewController.swift:282:        ana_featureLabel3.center = CGPoint(x: ana_iconImageView3.maxX() + 9 + ana_featureLabel3.halfWidth(), y: ana_iconImageView3.centerY())
+./HeartRecording/Subscription/SubscriptionViewController.swift:283:        ana_featuresBackView.bounds = CGRect(origin: .zero, size: CGSize(width: max(ana_featureLabel1.maxX(), ana_featureLabel2.maxX(), ana_featureLabel3.maxX()),
+./HeartRecording/Subscription/SubscriptionViewController.swift:284:                                                                     height: ana_iconImageView3.maxY()))
+./HeartRecording/Subscription/SubscriptionViewController.swift:285:		ana_featuresBackView.center = CGPoint(x: ana_scrollView.halfWidth(), y: ana_imageView.maxY() + 13.4 + ana_featuresBackView.halfHeight())
+./HeartRecording/Subscription/SubscriptionViewController.swift:286:		ana_topProductView.frame = CGRect(x: 25, y: ana_featuresBackView.maxY() + 35, width: ana_scrollView.width() - 25 * 2, height: 44)
+./HeartRecording/Subscription/SubscriptionViewController.swift:287:		ana_bottomProductView.frame = CGRect(x: 25, y: ana_topProductView.maxY() + 16, width: ana_scrollView.width() - 25 * 2, height: 44)
+./HeartRecording/Subscription/SubscriptionViewController.swift:288:        ana_button.frame = CGRect(x: 25, y: ana_bottomProductView.maxY() + 24, width: ana_scrollView.width() - 25 * 2, height: 54)
+./HeartRecording/Subscription/SubscriptionViewController.swift:289:		ana_buttonBottomLabel.sizeToFit()
+./HeartRecording/Subscription/SubscriptionViewController.swift:290:		ana_buttonBottomLabel.center = CGPoint(x: ana_scrollView.halfWidth(), y: ana_button.maxY() + 12 + ana_buttonBottomLabel.halfHeight())
+./HeartRecording/Subscription/SubscriptionViewController.swift:291:        ana_restoreButton.sizeToFit()
+./HeartRecording/Subscription/SubscriptionViewController.swift:292:        ana_restoreButton.setOrigin(x: 38, y: ana_buttonBottomLabel.maxY() + 22)
+./HeartRecording/Subscription/SubscriptionViewController.swift:293:        ana_privacyButton.sizeToFit()
+./HeartRecording/Subscription/SubscriptionViewController.swift:294:        ana_privacyButton.center = CGPoint(x: ana_scrollView.width() - 38 - ana_privacyButton.halfWidth(), y: ana_restoreButton.centerY())
+./HeartRecording/Subscription/SubscriptionViewController.swift:295:        ana_termsButton.sizeToFit()
+./HeartRecording/Subscription/SubscriptionViewController.swift:296:		ana_termsButton.center = CGPoint(x: (ana_restoreButton.maxX() + ana_privacyButton.minX()) / 2, y: ana_privacyButton.centerY())
+./HeartRecording/Subscription/SubscriptionViewController.swift:297:        let size = ana_bottomLabel.sizeThatFits(CGSize(width: ana_scrollView.width() - 76, height: .greatestFiniteMagnitude))
+./HeartRecording/Subscription/SubscriptionViewController.swift:298:        ana_bottomLabel.frame = CGRect(x: 38, y: ana_restoreButton.maxY() + 3, width: size.width, height: size.height)
+./HeartRecording/Subscription/SubscriptionViewController.swift:299:        ana_scrollView.contentSize = CGSize(width: ana_scrollView.width(), height: ana_bottomLabel.maxY() + bottomSpacing())
+./HeartRecording/Subscription/SubscriptionViewController.swift:300:		hintView.frame = CGRect(origin: .zero, size: ana_scrollView.contentSize)
+./HeartRecording/Subscription/SubscriptionViewController.swift:310:		path.addLine(to: CGPoint(x: 0, y: ana_button.centerY()))
+./HeartRecording/Subscription/SubscriptionViewController.swift:311:		path.addArc(withCenter: CGPoint(x: 80, y: ana_button.centerY()),
+./HeartRecording/Subscription/SubscriptionViewController.swift:316:		path.addLine(to: CGPoint(x: view.width() - 80, y: ana_button.centerY() - 80))
+./HeartRecording/Subscription/SubscriptionViewController.swift:317:		path.addArc(withCenter: CGPoint(x: view.width() - 80, y: ana_button.centerY() - 160),
+./HeartRecording/Subscription/SubscriptionViewController.swift:329:		if let ana_monthProduct = ana_monthProduct {
+./HeartRecording/Subscription/SubscriptionViewController.swift:330:			ana_topProductView.set(price: ana_monthProduct.regularPrice, freeDays: ana_monthProduct.freeDays, durationString: "month")
+./HeartRecording/Subscription/SubscriptionViewController.swift:332:		if let ana_sixMonthProduct = ana_sixMonthProduct {
+./HeartRecording/Subscription/SubscriptionViewController.swift:333:			ana_bottomProductView.set(price: ana_sixMonthProduct.regularPrice, freeDays: ana_sixMonthProduct.freeDays, durationString: "Half year")
+./HeartRecording/Subscription/SubscriptionViewController.swift:335:		ana_bottomLabel.text = "BabyCare Premium offers monthly and half-yearly purchase subscription. You can subscribe to a monthly plan(\(ana_monthProduct?.regularPrice ?? "$6.99") per month) or a half-yearly plan(\(ana_sixMonthProduct?.regularPrice ?? "39.99") per half-year). You can manage or turn off auto-renew in your Apple ID account settings at any time. Subscriptions will automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Any unused portion of a free trial period will be forfeited when you purchase a subscription. Our app is functional without purchasing an Auto-Renewable subscription, and you can use all the unlocked content after the subscription expires."
+./HeartRecording/Subscription/SubscriptionViewController.swift:349:        ana_monthProduct = products.filter({$0.productIdentifier == NBNewStoreManager.shard.monthProductId}).first
+./HeartRecording/Subscription/SubscriptionViewController.swift:350:		ana_sixMonthProduct = products.filter({$0.productIdentifier == NBNewStoreManager.shard.sixMonthProductId}).first
+./HeartRecording/Subscription/SubscriptionViewController.swift:376:				self.dismiss(animated: true, completion: self.ana_dismiss)
+./HeartRecording/Subscription/SubscriptionViewController.swift:395:				self.dismiss(animated: true, completion: self.ana_dismiss)
+./HeartRecording/Subscription/SubscriptionViewController.swift:397:            if let success = self.ana_success {
+./HeartRecording/Detail/DetailViewController.swift:16:    var ana_closeButton:        UIButton!
+./HeartRecording/Detail/DetailViewController.swift:17:    var ana_likeButton:         UIButton!
+./HeartRecording/Detail/DetailViewController.swift:18:    var ana_shareButton:        UIButton!
+./HeartRecording/Detail/DetailViewController.swift:21:    var ana_nameTextField:      UITextField!
+./HeartRecording/Detail/DetailViewController.swift:22:    var ana_dateLabel:          UILabel!
+./HeartRecording/Detail/DetailViewController.swift:23:    var ana_editButton:         UIButton!
+./HeartRecording/Detail/DetailViewController.swift:24:    var ana_leftButton:         UIButton!
+./HeartRecording/Detail/DetailViewController.swift:25:    var ana_playButton:         UIButton!
+./HeartRecording/Detail/DetailViewController.swift:26:    var ana_rightButton:        UIButton!
+./HeartRecording/Detail/DetailViewController.swift:27:    var ana_progressBackView:   UIView!
+./HeartRecording/Detail/DetailViewController.swift:28:    var ana_progressBackLine:   UIView!
+./HeartRecording/Detail/DetailViewController.swift:29:    var ana_progressLine:       UIView!
+./HeartRecording/Detail/DetailViewController.swift:30:    var ana_progressImageView:  UIImageView!
+./HeartRecording/Detail/DetailViewController.swift:31:    var ana_progressTimeLabel:  UILabel!
+./HeartRecording/Detail/DetailViewController.swift:32:    var ana_totalTimeLabel:     UILabel!
+./HeartRecording/Detail/DetailViewController.swift:34:    var ana_model: DbRecordModel!
+./HeartRecording/Detail/DetailViewController.swift:35:    var ana_totalTime: CGFloat = 0
+./HeartRecording/Detail/DetailViewController.swift:36:    var ana_currectTime: CGFloat = 0
+./HeartRecording/Detail/DetailViewController.swift:37:    var ana_progress: CGFloat = 0
+./HeartRecording/Detail/DetailViewController.swift:38:    var ana_shouldSeek = false
+./HeartRecording/Detail/DetailViewController.swift:43:        self.ana_model = model
+./HeartRecording/Detail/DetailViewController.swift:85:        ana_closeButton = UIButton()
+./HeartRecording/Detail/DetailViewController.swift:86:        ana_closeButton.setImage(UIImage(named: "Kick_Close"), for: .normal)
+./HeartRecording/Detail/DetailViewController.swift:87:        ana_closeButton.reactive.controlEvents(.touchUpInside).observeValues {
+./HeartRecording/Detail/DetailViewController.swift:92:        view.addSubview(ana_closeButton)
+./HeartRecording/Detail/DetailViewController.swift:94:        ana_likeButton = UIButton()
+./HeartRecording/Detail/DetailViewController.swift:95:        ana_likeButton.setImage(UIImage(named: "Detail_" + ((ana_model.favorite ?? false) ? "Favorite" : "Like")), for: .normal)
+./HeartRecording/Detail/DetailViewController.swift:96:        ana_likeButton.reactive.controlEvents(.touchUpInside).observeValues {
+./HeartRecording/Detail/DetailViewController.swift:100:            DbManager.manager.changeFavoriteModel(self.ana_model)
+./HeartRecording/Detail/DetailViewController.swift:101:            self.ana_model.favorite = !(self.ana_model.favorite ?? false)
+./HeartRecording/Detail/DetailViewController.swift:102:            button.setImage(UIImage(named: "Detail_" + ((self.ana_model.favorite ?? false) ? "Favorite" : "Like")), for: .normal)
+./HeartRecording/Detail/DetailViewController.swift:104:        view.addSubview(ana_likeButton)
+./HeartRecording/Detail/DetailViewController.swift:106:        ana_shareButton = UIButton()
+./HeartRecording/Detail/DetailViewController.swift:107:        ana_shareButton.setImage(UIImage(named: "Detail_Share"), for: .normal)
+./HeartRecording/Detail/DetailViewController.swift:108:        ana_shareButton.setImage(UIImage(named: "Detail_Share"), for: .highlighted)
+./HeartRecording/Detail/DetailViewController.swift:109:        ana_shareButton.reactive.controlEvents(.touchUpInside).observeValues {
+./HeartRecording/Detail/DetailViewController.swift:116:                if let fileName = self.ana_model.path {
+./HeartRecording/Detail/DetailViewController.swift:124:        view.addSubview(ana_shareButton)
+./HeartRecording/Detail/DetailViewController.swift:134:        ana_nameTextField = UITextField()
+./HeartRecording/Detail/DetailViewController.swift:135:        ana_nameTextField.text = ana_model.name
+./HeartRecording/Detail/DetailViewController.swift:136:        ana_nameTextField.isEnabled = false
+./HeartRecording/Detail/DetailViewController.swift:137:        ana_nameTextField.textColor = .color(hexString: "#6a515e")
+./HeartRecording/Detail/DetailViewController.swift:138:        ana_nameTextField.font = UIFont(name: "Poppins-Medium", size: 24)
+./HeartRecording/Detail/DetailViewController.swift:139:        ana_nameTextField.returnKeyType = .done
+./HeartRecording/Detail/DetailViewController.swift:140:        ana_nameTextField.textAlignment = .center
+./HeartRecording/Detail/DetailViewController.swift:141:        ana_nameTextField.delegate = self
+./HeartRecording/Detail/DetailViewController.swift:142:		backImageView.addSubview(ana_nameTextField)
+./HeartRecording/Detail/DetailViewController.swift:144:        let date = DbManager.manager.dateFormatter.date(from: String(ana_model.id!))!
+./HeartRecording/Detail/DetailViewController.swift:149:        ana_dateLabel = UILabel()
+./HeartRecording/Detail/DetailViewController.swift:150:        ana_dateLabel.text = dateString
+./HeartRecording/Detail/DetailViewController.swift:151:        ana_dateLabel.textColor = .color(hexString: "#6a515e")
+./HeartRecording/Detail/DetailViewController.swift:152:        ana_dateLabel.font = UIFont(name: "Poppins-Medium", size: 13)
+./HeartRecording/Detail/DetailViewController.swift:153:		backImageView.addSubview(ana_dateLabel)
+./HeartRecording/Detail/DetailViewController.swift:155:        ana_editButton = UIButton()
+./HeartRecording/Detail/DetailViewController.swift:156:        ana_editButton.setImage(UIImage(named: "Detail_Edit"), for: .normal)
+./HeartRecording/Detail/DetailViewController.swift:157:        ana_editButton.reactive.controlEvents(.touchUpInside).observeValues {
+./HeartRecording/Detail/DetailViewController.swift:160:            NameEditAlert.show(name: self.ana_model.name, id: self.ana_model.id!, vc: self) {
+./HeartRecording/Detail/DetailViewController.swift:163:                self.ana_nameTextField.text = newName
+./HeartRecording/Detail/DetailViewController.swift:166:		view.addSubview(ana_editButton)
+./HeartRecording/Detail/DetailViewController.swift:168:        ana_leftButton = UIButton()
+./HeartRecording/Detail/DetailViewController.swift:169:        ana_leftButton.setImage(UIImage(named: "Detail_Left"), for: .normal)
+./HeartRecording/Detail/DetailViewController.swift:170:        ana_leftButton.reactive.controlEvents(.touchUpInside).observeValues {
+./HeartRecording/Detail/DetailViewController.swift:174:            if self.ana_currectTime == 0 {
+./HeartRecording/Detail/DetailViewController.swift:177:            self.ana_currectTime = max(0, self.ana_currectTime - 5)
+./HeartRecording/Detail/DetailViewController.swift:178:            self.ana_progress = self.ana_currectTime / self.ana_totalTime
+./HeartRecording/Detail/DetailViewController.swift:181:                PlayerManager.shared.seekToProgress(self.ana_progress)
+./HeartRecording/Detail/DetailViewController.swift:183:                self.ana_shouldSeek = true
+./HeartRecording/Detail/DetailViewController.swift:186:        view.addSubview(ana_leftButton)
+./HeartRecording/Detail/DetailViewController.swift:188:        ana_playButton = UIButton()
+./HeartRecording/Detail/DetailViewController.swift:189:        ana_playButton.setImage(UIImage(named: "Detail_Play"), for: .normal)
+./HeartRecording/Detail/DetailViewController.swift:190:		ana_playButton.setShadow(color: .color(hexString: "#35d74b61"), offset: CGSize(width: 0, height: 12), radius: 38, opacity: 1)
+./HeartRecording/Detail/DetailViewController.swift:191:        ana_playButton.reactive.controlEvents(.touchUpInside).observeValues {
+./HeartRecording/Detail/DetailViewController.swift:199:					if self.ana_progress == 0 {
+./HeartRecording/Detail/DetailViewController.swift:215:        view.addSubview(ana_playButton)
+./HeartRecording/Detail/DetailViewController.swift:217:        ana_rightButton = UIButton()
+./HeartRecording/Detail/DetailViewController.swift:218:        ana_rightButton.setImage(UIImage(named: "Detail_Right"), for: .normal)
+./HeartRecording/Detail/DetailViewController.swift:219:        ana_rightButton.reactive.controlEvents(.touchUpInside).observeValues {
+./HeartRecording/Detail/DetailViewController.swift:223:            if self.ana_currectTime + 5 >= self.ana_totalTime {
+./HeartRecording/Detail/DetailViewController.swift:226:            self.ana_currectTime += 5
+./HeartRecording/Detail/DetailViewController.swift:227:            self.ana_progress = self.ana_currectTime / self.ana_totalTime
+./HeartRecording/Detail/DetailViewController.swift:230:                PlayerManager.shared.seekToProgress(self.ana_progress)
+./HeartRecording/Detail/DetailViewController.swift:232:                self.ana_shouldSeek = true
+./HeartRecording/Detail/DetailViewController.swift:235:        view.addSubview(ana_rightButton)
+./HeartRecording/Detail/DetailViewController.swift:237:        ana_progressBackView = UIView()
+./HeartRecording/Detail/DetailViewController.swift:238:        ana_progressBackView.backgroundColor = .clear
+./HeartRecording/Detail/DetailViewController.swift:239:        view.addSubview(ana_progressBackView)
+./HeartRecording/Detail/DetailViewController.swift:241:        ana_progressBackLine = UIView()
+./HeartRecording/Detail/DetailViewController.swift:242:		ana_progressBackLine.layer.cornerRadius = 1.5
+./HeartRecording/Detail/DetailViewController.swift:243:        ana_progressBackLine.backgroundColor = UIColor.color(hexString: "#6a515e").withAlphaComponent(0.25)
+./HeartRecording/Detail/DetailViewController.swift:244:        ana_progressBackView.addSubview(ana_progressBackLine)
+./HeartRecording/Detail/DetailViewController.swift:246:        ana_progressLine = UIView()
+./HeartRecording/Detail/DetailViewController.swift:247:		ana_progressLine.layer.cornerRadius = 1.5
+./HeartRecording/Detail/DetailViewController.swift:248:        ana_progressLine.backgroundColor = .color(hexString: "#6a515e")
+./HeartRecording/Detail/DetailViewController.swift:249:        ana_progressBackView.addSubview(ana_progressLine)
+./HeartRecording/Detail/DetailViewController.swift:251:        ana_progressImageView = UIImageView()
+./HeartRecording/Detail/DetailViewController.swift:252:        ana_progressImageView.image = UIImage(named: "Detail_Progress")
+./HeartRecording/Detail/DetailViewController.swift:253:        ana_progressBackView.addSubview(ana_progressImageView)
+./HeartRecording/Detail/DetailViewController.swift:255:        ana_progressTimeLabel = UILabel()
+./HeartRecording/Detail/DetailViewController.swift:256:        ana_progressTimeLabel.text = "00:00"
+./HeartRecording/Detail/DetailViewController.swift:257:        ana_progressTimeLabel.textColor = .color(hexString: "#6a515e")
+./HeartRecording/Detail/DetailViewController.swift:258:        ana_progressTimeLabel.font = UIFont(name: "Poppins-Regular", size: 12)
+./HeartRecording/Detail/DetailViewController.swift:259:        view.addSubview(ana_progressTimeLabel)
+./HeartRecording/Detail/DetailViewController.swift:261:        ana_totalTimeLabel = UILabel()
+./HeartRecording/Detail/DetailViewController.swift:262:        ana_totalTimeLabel.text = "00:00"
+./HeartRecording/Detail/DetailViewController.swift:263:        ana_totalTimeLabel.textColor = .color(hexString: "#6a515e")
+./HeartRecording/Detail/DetailViewController.swift:264:        ana_totalTimeLabel.font = UIFont(name: "Poppins-Regular", size: 12)
+./HeartRecording/Detail/DetailViewController.swift:265:        view.addSubview(ana_totalTimeLabel)
+./HeartRecording/Detail/DetailViewController.swift:271:        ana_closeButton.sizeToFit()
+./HeartRecording/Detail/DetailViewController.swift:272:        ana_closeButton.setOrigin(x: 20, y: 50)
+./HeartRecording/Detail/DetailViewController.swift:273:        ana_shareButton.sizeToFit()
+./HeartRecording/Detail/DetailViewController.swift:274:        ana_shareButton.setOrigin(x: view.width() - 20 - ana_shareButton.width(), y: 50)
+./HeartRecording/Detail/DetailViewController.swift:275:        ana_likeButton.sizeToFit()
+./HeartRecording/Detail/DetailViewController.swift:276:        ana_likeButton.setOrigin(x: ana_shareButton.minX() - 15 - ana_likeButton.width(), y: 50)
+./HeartRecording/Detail/DetailViewController.swift:282:		backImageView.center = CGPoint(x: view.halfWidth(), y: ana_closeButton.maxY() + 39 + backImageView.halfHeight())
+./HeartRecording/Detail/DetailViewController.swift:285:        ana_nameTextField.sizeToFit()
+./HeartRecording/Detail/DetailViewController.swift:286:        ana_nameTextField.bounds = CGRect(origin: .zero, size: CGSize(width: 264, height: ana_nameTextField.height()))
+./HeartRecording/Detail/DetailViewController.swift:287:		ana_nameTextField.center = CGPoint(x: backImageView.halfWidth(), y: backImageView.height() * 0.63)
+./HeartRecording/Detail/DetailViewController.swift:288:        ana_dateLabel.sizeToFit()
+./HeartRecording/Detail/DetailViewController.swift:289:        ana_dateLabel.center = CGPoint(x: backImageView.halfWidth(), y: ana_nameTextField.maxY() + ana_dateLabel.halfHeight())
+./HeartRecording/Detail/DetailViewController.swift:290:        ana_editButton.sizeToFit()
+./HeartRecording/Detail/DetailViewController.swift:291:		ana_editButton.center = CGPoint(x: view.halfWidth(), y: ana_dateLabel.maxY() + 18 + ana_editButton.halfHeight() + backImageView.minY())
+./HeartRecording/Detail/DetailViewController.swift:292:		ana_progressTimeLabel.sizeToFit()
+./HeartRecording/Detail/DetailViewController.swift:293:		ana_progressTimeLabel.bounds = CGRect(x: 0, y: 0, width: ana_progressTimeLabel.width(), height: 44)
+./HeartRecording/Detail/DetailViewController.swift:294:		ana_progressTimeLabel.center = CGPoint(x: 40 + ana_progressTimeLabel.halfWidth(),
+./HeartRecording/Detail/DetailViewController.swift:295:											   y: view.height() - bottomSpacing() - 35 - ana_progressTimeLabel.halfHeight())
+./HeartRecording/Detail/DetailViewController.swift:296:		ana_totalTimeLabel.sizeToFit()
+./HeartRecording/Detail/DetailViewController.swift:297:		ana_totalTimeLabel.center = CGPoint(x: view.width() - 40 - ana_totalTimeLabel.halfWidth(), y: ana_progressTimeLabel.centerY())
+./HeartRecording/Detail/DetailViewController.swift:298:		ana_progressImageView.sizeToFit()
+./HeartRecording/Detail/DetailViewController.swift:299:		ana_progressBackView.frame = CGRect(x: 40,
+./HeartRecording/Detail/DetailViewController.swift:300:											y: ana_progressTimeLabel.minY() - ana_progressImageView.height(),
+./HeartRecording/Detail/DetailViewController.swift:302:											height: ana_progressImageView.height())
+./HeartRecording/Detail/DetailViewController.swift:303:		ana_progressBackLine.bounds = CGRect(origin: .zero, size: CGSize(width: ana_progressBackView.width(), height: 3))
+./HeartRecording/Detail/DetailViewController.swift:304:		ana_progressBackLine.center = CGPoint(x: ana_progressBackView.halfWidth(), y: ana_progressBackView.halfHeight())
+./HeartRecording/Detail/DetailViewController.swift:305:		ana_progressLine.frame = CGRect(x: 0, y: ana_progressBackLine.minY(), width: ana_progress * ana_progressBackView.width(), height: 3)
+./HeartRecording/Detail/DetailViewController.swift:306:		ana_progressImageView.center = CGPoint(x: ana_progressLine.maxX(), y: ana_progressBackView.halfHeight())
+./HeartRecording/Detail/DetailViewController.swift:307:        ana_playButton.bounds = CGRect(origin: .zero, size: CGSize(width: 72, height: 72))
+./HeartRecording/Detail/DetailViewController.swift:308:		ana_playButton.center = CGPoint(x: view.halfWidth(), y: ana_progressBackView.minY() - 37 - ana_playButton.halfHeight())
+./HeartRecording/Detail/DetailViewController.swift:309:        ana_leftButton.sizeToFit()
+./HeartRecording/Detail/DetailViewController.swift:310:        ana_leftButton.center = CGPoint(x: ana_playButton.minX() - 61 - ana_leftButton.halfWidth(), y: ana_playButton.centerY())
+./HeartRecording/Detail/DetailViewController.swift:311:        ana_rightButton.sizeToFit()
+./HeartRecording/Detail/DetailViewController.swift:312:        ana_rightButton.center = CGPoint(x: ana_playButton.maxX() + 61 + ana_rightButton.halfWidth(), y: ana_playButton.centerY())
+./HeartRecording/Detail/DetailViewController.swift:313:        ana_progressImageView.sizeToFit()
+./HeartRecording/Detail/DetailViewController.swift:321:        PlayerManager.shared.play(path: ana_model.path!) {
+./HeartRecording/Detail/DetailViewController.swift:325:                self.ana_totalTime = floor(time)
+./HeartRecording/Detail/DetailViewController.swift:327:            self.ana_totalTimeLabel.text = String.stringFromTime(self.ana_totalTime)
+./HeartRecording/Detail/DetailViewController.swift:328:            self.ana_playButton.setImage(UIImage(named: "Detail_Pause"), for: .normal)
+./HeartRecording/Detail/DetailViewController.swift:333:                self.ana_currectTime = floor(time)
+./HeartRecording/Detail/DetailViewController.swift:335:            self.ana_progressTimeLabel.text = String.stringFromTime(self.ana_currectTime)
+./HeartRecording/Detail/DetailViewController.swift:338:				self.ana_totalTime = totalTime
+./HeartRecording/Detail/DetailViewController.swift:339:				self.ana_progress = self.ana_currectTime / self.ana_totalTime
+./HeartRecording/Detail/DetailViewController.swift:340:				self.ana_totalTimeLabel.text = String.stringFromTime(self.ana_totalTime)
+./HeartRecording/Detail/DetailViewController.swift:349:            self.ana_playButton.setImage(UIImage(named: "Detail_Play"), for: .normal)
+./HeartRecording/Detail/DetailViewController.swift:350:            self.ana_progressTimeLabel.text = "00:00"
+./HeartRecording/Detail/DetailViewController.swift:352:            self.ana_progress = 0
+./HeartRecording/Detail/DetailViewController.swift:370:            textField.text = ana_model.name
+./HeartRecording/Detail/DetailViewController.swift:372:            DbManager.manager.updateName(textField.text!, id: ana_model.id!)
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:13:    var ana_backView: UIView!
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:14:    var ana_gradientView: UIView!
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:15:    var ana_gradientLayer: CAGradientLayer!
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:16:    var ana_startImageView: UIImageView!
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:17:    var ana_labelsBackView: UIView!
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:18:    var ana_nameLabel: UILabel!
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:19:    var ana_dateLabel: UILabel!
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:20:    var ana_likeButton: UIButton!
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:42:        ana_backView = UIView()
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:43:        ana_backView.layer.cornerRadius = 25
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:44:        ana_backView.backgroundColor = .color(hexString: "#CDFFFFFF")
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:45:        ana_backView.setShadow(color: .color(hexString: "#0f933c49"), offset: CGSize(width: 0, height: 8), radius: 25)
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:46:        contentView.addSubview(ana_backView)
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:48:        ana_gradientView = UIView()
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:49:        ana_gradientView.layer.cornerRadius = 12
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:50:        ana_backView.addSubview(ana_gradientView)
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:52:        ana_gradientLayer = CAGradientLayer()
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:53:        ana_gradientLayer.cornerRadius = 12
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:54:        ana_gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:55:        ana_gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:56:        ana_gradientLayer.colors = [UIColor.color(hexString: "#E6FFFFFF").cgColor, UIColor.color(hexString: "#B3FFFFFF").cgColor]
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:57:        ana_gradientView.layer.addSublayer(ana_gradientLayer)
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:59:        ana_startImageView = UIImageView()
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:60:        ana_startImageView.image = UIImage(named: "RecordingList_Start")
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:61:		ana_startImageView.setShadow(color: .color(hexString: "#35d74b61"), offset: CGSize(width: 0, height: 12), radius: 38, opacity: 1)
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:62:        ana_backView.addSubview(ana_startImageView)
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:64:        ana_labelsBackView = UIView()
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:65:        ana_labelsBackView.backgroundColor = .clear
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:66:        ana_backView.addSubview(ana_labelsBackView)
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:68:        ana_nameLabel = UILabel()
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:69:        ana_nameLabel.textColor = .color(hexString: "#6a515e")
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:70:        ana_nameLabel.font = UIFont(name: "Poppins-SemiBold", size: 16)
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:71:        ana_labelsBackView.addSubview(ana_nameLabel)
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:73:        ana_dateLabel = UILabel()
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:74:		ana_dateLabel.textColor = UIColor.color(hexString: "#6a515e").withAlphaComponent(0.5)
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:75:        ana_dateLabel.font = UIFont(name: "Inter-Regular", size: 13)
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:76:        ana_labelsBackView.addSubview(ana_dateLabel)
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:78:        ana_likeButton = UIButton()
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:79:        ana_likeButton.reactive.controlEvents(.touchUpInside).observeValues {
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:85:        ana_backView.addSubview(ana_likeButton)
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:92:        ana_backView.frame = CGRect(x: 25, y: 0, width: contentView.width() - 50, height: 90)
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:93:        ana_gradientView.frame = ana_backView.bounds
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:94:        ana_gradientLayer.frame = ana_gradientView.bounds
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:95:        ana_startImageView.sizeToFit()
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:96:		ana_startImageView.center = CGPoint(x: 20 + ana_startImageView.halfWidth(), y: ana_backView.halfHeight())
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:97:        ana_nameLabel.sizeToFit()
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:98:        ana_nameLabel.setOrigin(x: 0, y: 0)
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:99:        ana_dateLabel.sizeToFit()
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:100:        ana_dateLabel.setOrigin(x: 0, y: ana_nameLabel.maxY() + 2)
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:101:        ana_labelsBackView.bounds = CGRect(origin: .zero, size: CGSize(width: max(ana_nameLabel.width(), ana_dateLabel.width()), height: ana_dateLabel.maxY()))
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:102:        ana_labelsBackView.center = CGPoint(x: ana_startImageView.maxX() + 15 + ana_labelsBackView.halfWidth(), y: ana_backView.halfHeight())
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:103:        ana_likeButton.sizeToFit()
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:104:        ana_likeButton.center = CGPoint(x: ana_backView.width() - 26 - ana_likeButton.halfWidth(), y: ana_backView.halfHeight())
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:110:        ana_nameLabel.text = model.name
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:115:        ana_dateLabel.text = dateString
+./HeartRecording/RecordingList/RecordingTableViewCell.swift:116:        ana_likeButton.setImage(UIImage(named: "RecordingList_" + ((model.favorite ?? false) ? "Favorite" : "Like")), for: .normal)
+./HeartRecording/RecordingList/RecordingListViewController.swift:14:    var ana_emptyView: UIView!
+./HeartRecording/RecordingList/RecordingListViewController.swift:15:    var ana_emptyImageView: UIImageView!
+./HeartRecording/RecordingList/RecordingListViewController.swift:16:    var ana_emptyLabel: UILabel!
+./HeartRecording/RecordingList/RecordingListViewController.swift:47:        ana_emptyView = UIView()
+./HeartRecording/RecordingList/RecordingListViewController.swift:48:        ana_emptyView.backgroundColor = .clear
+./HeartRecording/RecordingList/RecordingListViewController.swift:49:        ana_emptyView.isHidden = DbManager.manager.models.count > 0
+./HeartRecording/RecordingList/RecordingListViewController.swift:50:        tableView.addSubview(ana_emptyView)
+./HeartRecording/RecordingList/RecordingListViewController.swift:52:        ana_emptyImageView = UIImageView()
+./HeartRecording/RecordingList/RecordingListViewController.swift:53:        ana_emptyImageView.image = UIImage(named: "RecordingList_Empty")
+./HeartRecording/RecordingList/RecordingListViewController.swift:54:        ana_emptyView.addSubview(ana_emptyImageView)
+./HeartRecording/RecordingList/RecordingListViewController.swift:56:        ana_emptyLabel = UILabel()
+./HeartRecording/RecordingList/RecordingListViewController.swift:57:        ana_emptyLabel.text = "No Data!"
+./HeartRecording/RecordingList/RecordingListViewController.swift:58:        ana_emptyLabel.textColor = .color(hexString: "#6a515e")
+./HeartRecording/RecordingList/RecordingListViewController.swift:59:        ana_emptyLabel.font = UIFont(name: "Merriweather-Regular", size: 18)
+./HeartRecording/RecordingList/RecordingListViewController.swift:60:        ana_emptyView.addSubview(ana_emptyLabel)
+./HeartRecording/RecordingList/RecordingListViewController.swift:66:        ana_emptyView.isHidden = DbManager.manager.models.count > 0
+./HeartRecording/RecordingList/RecordingListViewController.swift:75:        ana_emptyImageView.sizeToFit()
+./HeartRecording/RecordingList/RecordingListViewController.swift:76:        ana_emptyImageView.setOrigin(x: 0, y: 0)
+./HeartRecording/RecordingList/RecordingListViewController.swift:77:        ana_emptyLabel.sizeToFit()
+./HeartRecording/RecordingList/RecordingListViewController.swift:78:        ana_emptyLabel.center = CGPoint(x: ana_emptyImageView.halfWidth(), y: ana_emptyImageView.maxY() + 3 + ana_emptyLabel.halfHeight())
+./HeartRecording/RecordingList/RecordingListViewController.swift:79:        ana_emptyView.bounds = CGRect(origin: .zero, size: CGSize(width: ana_emptyImageView.width(), height: ana_emptyLabel.maxY()))
+./HeartRecording/RecordingList/RecordingListViewController.swift:80:		ana_emptyView.center = CGPoint(x: tableView.halfWidth(), y: tableView.height() * 0.45)
+./HeartRecording/Setting/SettingViewController.swift:14:    var ana_backView: UIView!
+./HeartRecording/Setting/SettingViewController.swift:15:    var ana_gradientView: UIView!
+./HeartRecording/Setting/SettingViewController.swift:16:    var ana_gradientLayer: CAGradientLayer!
+./HeartRecording/Setting/SettingViewController.swift:17:    var ana_itemViews = [SettingItemView]()
+./HeartRecording/Setting/SettingViewController.swift:19:    var ana_proItemView: SettingItemView?
+./HeartRecording/Setting/SettingViewController.swift:24:        if let proItemView = ana_proItemView {
+./HeartRecording/Setting/SettingViewController.swift:25:            proItemView.ana_label.text = NBUserVipStatusManager.shard.getVipStatus() ? "You are pro!" : "BabyCare Premium-Unlock All Features"
+./HeartRecording/Setting/SettingViewController.swift:37:        ana_backView = UIView()
+./HeartRecording/Setting/SettingViewController.swift:38:        ana_backView.layer.cornerRadius = 25
+./HeartRecording/Setting/SettingViewController.swift:39:        ana_backView.backgroundColor = .color(hexString: "#CDFFFFFF")
+./HeartRecording/Setting/SettingViewController.swift:40:        ana_backView.setShadow(color: .color(hexString: "#0f933c49"), offset: CGSize(width: 0, height: 8), radius: 25)
+./HeartRecording/Setting/SettingViewController.swift:41:        contentView.addSubview(ana_backView)
+./HeartRecording/Setting/SettingViewController.swift:43:        ana_gradientView = UIView()
+./HeartRecording/Setting/SettingViewController.swift:44:        ana_backView.addSubview(ana_gradientView)
+./HeartRecording/Setting/SettingViewController.swift:46:        ana_gradientLayer = CAGradientLayer()
+./HeartRecording/Setting/SettingViewController.swift:47:        ana_gradientLayer.cornerRadius = 25
+./HeartRecording/Setting/SettingViewController.swift:48:        ana_gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
+./HeartRecording/Setting/SettingViewController.swift:49:        ana_gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
+./HeartRecording/Setting/SettingViewController.swift:50:        ana_gradientLayer.colors = [UIColor.color(hexString: "#E6FFFFFF").cgColor, UIColor.color(hexString: "#B3FFFFFF").cgColor]
+./HeartRecording/Setting/SettingViewController.swift:51:        ana_gradientView.layer.addSublayer(ana_gradientLayer)
+./HeartRecording/Setting/SettingViewController.swift:55:            itemView.ana_pipe.output.observeValues {
+./HeartRecording/Setting/SettingViewController.swift:61:                ana_proItemView = itemView
+./HeartRecording/Setting/SettingViewController.swift:63:            ana_backView.addSubview(itemView)
+./HeartRecording/Setting/SettingViewController.swift:64:            ana_itemViews.append(itemView)
+./HeartRecording/Setting/SettingViewController.swift:72:        for i in ana_itemViews.indices {
+./HeartRecording/Setting/SettingViewController.swift:73:            let itemView = ana_itemViews[i]
+./HeartRecording/Setting/SettingViewController.swift:77:        ana_backView.frame = CGRect(x: 25, y: 40, width: backViewWidth, height: y + 5)
+./HeartRecording/Setting/SettingViewController.swift:78:        ana_gradientView.frame = ana_backView.bounds
+./HeartRecording/Setting/SettingViewController.swift:79:        ana_gradientLayer.frame = ana_gradientView.bounds
+./HeartRecording/Setting/SettingViewController.swift:80:        return ana_backView.maxY()
+./HeartRecording/Setting/FavoriteViewController.swift:14:    var ana_emptyView: UIView!
+./HeartRecording/Setting/FavoriteViewController.swift:15:    var ana_emptyImageView: UIImageView!
+./HeartRecording/Setting/FavoriteViewController.swift:16:    var ana_emptyLabel: UILabel!
+./HeartRecording/Setting/FavoriteViewController.swift:56:        ana_emptyView = UIView()
+./HeartRecording/Setting/FavoriteViewController.swift:57:        ana_emptyView.backgroundColor = .clear
+./HeartRecording/Setting/FavoriteViewController.swift:58:        ana_emptyView.isHidden = DbManager.manager.models.count > 0
+./HeartRecording/Setting/FavoriteViewController.swift:59:        tableView.addSubview(ana_emptyView)
+./HeartRecording/Setting/FavoriteViewController.swift:61:        ana_emptyImageView = UIImageView()
+./HeartRecording/Setting/FavoriteViewController.swift:62:        ana_emptyImageView.image = UIImage(named: "RecordingList_Empty")
+./HeartRecording/Setting/FavoriteViewController.swift:63:        ana_emptyView.addSubview(ana_emptyImageView)
+./HeartRecording/Setting/FavoriteViewController.swift:65:        ana_emptyLabel = UILabel()
+./HeartRecording/Setting/FavoriteViewController.swift:66:        ana_emptyLabel.text = "No Data！"
+./HeartRecording/Setting/FavoriteViewController.swift:67:        ana_emptyLabel.textColor = .color(hexString: "#6a515e")
+./HeartRecording/Setting/FavoriteViewController.swift:68:        ana_emptyLabel.font = UIFont(name: "Merriweather-Regular", size: 18)
+./HeartRecording/Setting/FavoriteViewController.swift:69:        ana_emptyView.addSubview(ana_emptyLabel)
+./HeartRecording/Setting/FavoriteViewController.swift:75:        ana_emptyView.isHidden = DbManager.manager.models.count > 0
+./HeartRecording/Setting/FavoriteViewController.swift:84:        ana_emptyImageView.sizeToFit()
+./HeartRecording/Setting/FavoriteViewController.swift:85:        ana_emptyImageView.setOrigin(x: 0, y: 0)
+./HeartRecording/Setting/FavoriteViewController.swift:86:        ana_emptyLabel.sizeToFit()
+./HeartRecording/Setting/FavoriteViewController.swift:87:        ana_emptyLabel.center = CGPoint(x: ana_emptyImageView.halfWidth(), y: ana_emptyImageView.maxY() + 3 + ana_emptyLabel.halfHeight())
+./HeartRecording/Setting/FavoriteViewController.swift:88:        ana_emptyView.bounds = CGRect(origin: .zero, size: CGSize(width: ana_emptyImageView.width(), height: ana_emptyLabel.maxY()))
+./HeartRecording/Setting/FavoriteViewController.swift:89:        ana_emptyView.center = CGPoint(x: tableView.halfWidth(), y: tableView.height() * 0.45)
+./HeartRecording/Setting/SettingItemView.swift:14:    var ana_button: UIButton!
+./HeartRecording/Setting/SettingItemView.swift:15:    var ana_imageView: UIImageView!
+./HeartRecording/Setting/SettingItemView.swift:16:    var ana_label: UILabel!
+./HeartRecording/Setting/SettingItemView.swift:17:    var ana_arrowImageView: UIImageView!
+./HeartRecording/Setting/SettingItemView.swift:19:    var ana_key: String!
+./HeartRecording/Setting/SettingItemView.swift:20:    let ana_pipe = Signal<String, Never>.pipe()
+./HeartRecording/Setting/SettingItemView.swift:26:        ana_imageView.image = image
+./HeartRecording/Setting/SettingItemView.swift:27:        ana_label.text = title
+./HeartRecording/Setting/SettingItemView.swift:28:        self.ana_key = key
+./HeartRecording/Setting/SettingItemView.swift:35:        ana_button = UIButton()
+./HeartRecording/Setting/SettingItemView.swift:36:        ana_button.backgroundColor = .clear
+./HeartRecording/Setting/SettingItemView.swift:37:        ana_button.reactive.controlEvents(.touchUpInside).observeValues {
+./HeartRecording/Setting/SettingItemView.swift:40:            self.ana_pipe.input.send(value: self.ana_key)
+./HeartRecording/Setting/SettingItemView.swift:42:        addSubview(ana_button)
+./HeartRecording/Setting/SettingItemView.swift:44:        ana_imageView = UIImageView()
+./HeartRecording/Setting/SettingItemView.swift:45:        addSubview(ana_imageView)
+./HeartRecording/Setting/SettingItemView.swift:47:        ana_label = UILabel()
+./HeartRecording/Setting/SettingItemView.swift:48:        ana_label.textColor = .color(hexString: "#14142B")
+./HeartRecording/Setting/SettingItemView.swift:49:        ana_label.font = UIFont(name: "Inter-Regular", size: 14)
+./HeartRecording/Setting/SettingItemView.swift:50:        addSubview(ana_label)
+./HeartRecording/Setting/SettingItemView.swift:52:        ana_arrowImageView = UIImageView()
+./HeartRecording/Setting/SettingItemView.swift:53:        ana_arrowImageView.image = UIImage(named: "Setting_Arrow")
+./HeartRecording/Setting/SettingItemView.swift:54:        addSubview(ana_arrowImageView)
+./HeartRecording/Setting/SettingItemView.swift:60:        ana_button.frame = bounds
+./HeartRecording/Setting/SettingItemView.swift:61:        ana_imageView.bounds = CGRect(x: 0, y: 0, width: 24, height: 24)
+./HeartRecording/Setting/SettingItemView.swift:62:        ana_imageView.center = CGPoint(x: 20 + ana_imageView.halfWidth(), y: halfHeight())
+./HeartRecording/Setting/SettingItemView.swift:63:        ana_label.sizeToFit()
+./HeartRecording/Setting/SettingItemView.swift:64:        ana_label.center = CGPoint(x: ana_imageView.maxX() + 14 + ana_label.halfWidth(), y: halfHeight())
+./HeartRecording/Setting/SettingItemView.swift:65:        ana_arrowImageView.sizeToFit()
+./HeartRecording/Setting/SettingItemView.swift:66:        ana_arrowImageView.center = CGPoint(x: width() - 21 - ana_imageView.halfWidth(), y: halfHeight())
+./HeartRecording/Base/StarsView.swift:52:					self.starViews[i].ana_frontStarImageView.alpha = 1
+./HeartRecording/Base/StarsView.swift:61:	var ana_behindStarImageView: UIImageView!
+./HeartRecording/Base/StarsView.swift:62:	var ana_frontStarImageView: UIImageView!
+./HeartRecording/Base/StarsView.swift:83:		ana_behindStarImageView = UIImageView(image: UIImage(named: "Base_Star")?.withTintColor(defaultColor))
+./HeartRecording/Base/StarsView.swift:84:		addSubview(ana_behindStarImageView)
+./HeartRecording/Base/StarsView.swift:86:		ana_frontStarImageView = UIImageView(image: UIImage(named: "Base_Star")?.withTintColor(highlightedColor))
+./HeartRecording/Base/StarsView.swift:87:		ana_frontStarImageView.alpha = 0
+./HeartRecording/Base/StarsView.swift:88:		addSubview(ana_frontStarImageView)
+./HeartRecording/Base/StarsView.swift:95:		ana_behindStarImageView.sizeToFit()
+./HeartRecording/Base/StarsView.swift:96:		ana_behindStarImageView.setOrigin(x: 0, y: 0)
+./HeartRecording/Base/StarsView.swift:97:		ana_frontStarImageView.frame = ana_behindStarImageView.frame
+./HeartRecording/Base/StarsView.swift:98:		bounds = ana_behindStarImageView.frame

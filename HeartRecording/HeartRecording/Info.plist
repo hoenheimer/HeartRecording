@@ -26,6 +26,7 @@
 	<string>BabyCare needs access to microphone to record baby heartbeat, all the data will be only saved in your local file.</string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Didot Regular.ttf</string>
 		<string>Merriweather-Bold.ttf</string>
 		<string>Poppins-Medium.ttf</string>
 		<string>Inter-Regular.ttf</string>
@@ -66,8 +67,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>

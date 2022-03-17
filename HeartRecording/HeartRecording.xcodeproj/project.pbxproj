@@ -47,6 +47,7 @@
 		1825C98626303E22001C0FB3 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C98526303E22001C0FB3 /* FavoriteViewController.swift */; };
 		1825C98E26304481001C0FB3 /* LSImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 1825C98D26304481001C0FB3 /* LSImage.png */; };
 		1825C99626305532001C0FB3 /* BaseWebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C99526305532001C0FB3 /* BaseWebController.swift */; };
+		183B71F627E2F31600292120 /* Didot Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 183B71F527E2F31600292120 /* Didot Regular.ttf */; };
 		1843FDF427C5F538006C449B /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1843FDF327C5F538006C449B /* Poppins-Medium.ttf */; };
 		1843FDF627C6035E006C449B /* Record.gif in Resources */ = {isa = PBXBuildFile; fileRef = 1843FDF527C6035E006C449B /* Record.gif */; };
 		1843FDFC27C60FE3006C449B /* Detail.gif in Resources */ = {isa = PBXBuildFile; fileRef = 1843FDFB27C60FE3006C449B /* Detail.gif */; };
@@ -133,6 +134,7 @@
 		1825C98526303E22001C0FB3 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 		1825C98D26304481001C0FB3 /* LSImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LSImage.png; sourceTree = "<group>"; };
 		1825C99526305532001C0FB3 /* BaseWebController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseWebController.swift; sourceTree = "<group>"; };
+		183B71F527E2F31600292120 /* Didot Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Didot Regular.ttf"; sourceTree = "<group>"; };
 		1843FDF327C5F538006C449B /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.ttf"; sourceTree = "<group>"; };
 		1843FDF527C6035E006C449B /* Record.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Record.gif; sourceTree = "<group>"; };
 		1843FDFB27C60FE3006C449B /* Detail.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Detail.gif; sourceTree = "<group>"; };
@@ -292,6 +294,7 @@
 				181B6E5427C3A15A00E1F652 /* Inter-Regular.ttf */,
 				1843FDF327C5F538006C449B /* Poppins-Medium.ttf */,
 				187FD53627D0883600E1B0F9 /* Merriweather-Bold.ttf */,
+				183B71F527E2F31600292120 /* Didot Regular.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -543,6 +546,7 @@
 				1843FDFE27C61E53006C449B /* Heart.gif in Resources */,
 				1801C7CC27C370F0004D4B91 /* confuseAndBuild.sh in Resources */,
 				1825C976262DFAD5001C0FB3 /* Configuration.storekit in Resources */,
+				183B71F627E2F31600292120 /* Didot Regular.ttf in Resources */,
 				1825C98E26304481001C0FB3 /* LSImage.png in Resources */,
 				6CD6CA1F262771350099F063 /* LaunchScreen.storyboard in Resources */,
 				1843FDF627C6035E006C449B /* Record.gif in Resources */,
@@ -855,7 +859,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "HeartRecording/Support Files/HeartRecording-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -879,7 +883,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "HeartRecording/Support Files/HeartRecording-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

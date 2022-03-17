@@ -8,15 +8,12 @@
 import UIKit
 
 class BaseViewController: UIViewController {
-	var gradientLayer: CAGradientLayer!
-	var shapeImageView: UIImageView!
-	var primaryLabel: UILabel!
-	var secondaryLabel: UILabel!
-	var imageView: UIImageView!
-	var button: UIButton!
-	var pageImageView1: BasePageImageView!
-	var pageImageView2: BasePageImageView!
-	var pageImageView3: BasePageImageView!
+	var ana_gradientLayer: CAGradientLayer!
+	var ana_backgroundImageView: UIImageView!
+	var ana_primaryLabel: UILabel!
+	var ana_secondaryLabel: UILabel!
+	var ana_imageView: UIImageView!
+	var ana_button: UIButton!
 	
 	
 
@@ -27,68 +24,52 @@ class BaseViewController: UIViewController {
 	
 	
 	func configure() {
-		gradientLayer = CAGradientLayer()
-		gradientLayer.colors = [UIColor.color(hexString: "#fffdfd").cgColor, UIColor.color(hexString: "#fff0f2").cgColor]
-		gradientLayer.startPoint = CGPoint(x: 0, y: 0)
-		gradientLayer.endPoint = CGPoint(x: 1, y: 1)
-		view.layer.addSublayer(gradientLayer)
+		ana_gradientLayer = CAGradientLayer()
+		ana_gradientLayer.colors = [UIColor.color(hexString: "#fffbf5").cgColor, UIColor.white.cgColor]
+		ana_gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
+		ana_gradientLayer.endPoint = CGPoint(x: 0.5, y: 0.23)
+		view.layer.addSublayer(ana_gradientLayer)
 		
-		shapeImageView = UIImageView()
-		view.addSubview(shapeImageView)
+		ana_backgroundImageView = UIImageView(image: UIImage(named: "Base_Background"))
+		view.addSubview(ana_backgroundImageView)
 		
-		primaryLabel = UILabel()
-		primaryLabel.textColor = .color(hexString: "#6a515e")
-		primaryLabel.font = UIFont(name: "Merriweather-Bold", size: 36)
-		view.addSubview(primaryLabel)
+		ana_primaryLabel = UILabel()
+		ana_primaryLabel.textColor = .color(hexString: "#504278")
+		ana_primaryLabel.font = UIFont(name: "Didot", size: 36)
+		view.addSubview(ana_primaryLabel)
 		
-		secondaryLabel = UILabel()
-		secondaryLabel.numberOfLines = 0
-		secondaryLabel.textAlignment = .center
-		secondaryLabel.textColor = .color(hexString: "#6a515e")
-		secondaryLabel.font = UIFont(name: "PingFangHK-Regular", size: 20)
-		view.addSubview(secondaryLabel)
+		ana_secondaryLabel = UILabel()
+		ana_secondaryLabel.numberOfLines = 0
+		ana_secondaryLabel.textAlignment = .center
+		ana_secondaryLabel.textColor = .color(hexString: "#504278")
+		ana_secondaryLabel.font = UIFont(name: "PingFangHK-Light", size: 20)
+		view.addSubview(ana_secondaryLabel)
 		
-		imageView = UIImageView()
-		view.addSubview(imageView)
+		ana_imageView = UIImageView()
+		view.addSubview(ana_imageView)
 		
-		button = UIButton()
-		button.setImage(UIImage(named: "Base_Button"), for: .normal)
-		view.addSubview(button)
-		
-		pageImageView1 = BasePageImageView()
-		view.addSubview(pageImageView1)
-		
-		pageImageView2 = BasePageImageView()
-		view.addSubview(pageImageView2)
-		
-		pageImageView3 = BasePageImageView()
-		view.addSubview(pageImageView3)
+		ana_button = UIButton()
+		ana_button.layer.cornerRadius = 27
+		ana_button.backgroundColor = .color(hexString: "#8059f3")
+		ana_button.setTitle("Continue", for: .normal)
+		ana_button.setTitleColor(.color(hexString: "#FCFCFC"), for: .normal)
+		ana_button.titleLabel?.font = UIFont(name: "Poppins-SemiBold", size: 16)
+		view.addSubview(ana_button)
 	}
 	
 	
 	override func viewWillLayoutSubviews() {
 		super.viewWillLayoutSubviews()
 		
-		gradientLayer.frame = view.bounds
-		primaryLabel.sizeToFit()
-		primaryLabel.center = CGPoint(x: view.halfWidth(), y: topSpacing() + 52 + primaryLabel.halfHeight())
-		let size = secondaryLabel.sizeThatFits(CGSize(width: view.width() - 30 * 2, height: .greatestFiniteMagnitude))
-		secondaryLabel.bounds = CGRect(origin: .zero, size: size)
-		secondaryLabel.center = CGPoint(x: view.halfWidth(), y: primaryLabel.maxY() + 9 + secondaryLabel.halfHeight())
-		pageImageView2.sizeToFit()
-		pageImageView2.center = CGPoint(x: view.halfWidth(), y: view.height() * 0.86)
-		pageImageView1.sizeToFit()
-		pageImageView1.center = CGPoint(x: pageImageView2.centerX() - 22, y: pageImageView2.centerY())
-		pageImageView3.sizeToFit()
-		pageImageView3.center = CGPoint(x: pageImageView2.centerX() + 22, y: pageImageView2.centerY())
-		button.sizeToFit()
-		button.center = CGPoint(x: pageImageView1.centerX() - 67, y: pageImageView2.centerY())
-	}
-}
-
-
-class BasePageImageView: UIImageView {
-	func setHighlighted(_ highlighted: Bool) {
-		image = UIImage(named: "Base_Page_" + (highlighted ? "Highlighted" : "Default"))
+		ana_gradientLayer.frame = view.bounds
+		ana_backgroundImageView.sizeToFit()
+		ana_backgroundImageView.center = CGPoint(x: view.halfWidth(), y: view.halfHeight())
+		ana_primaryLabel.sizeToFit()
+		ana_primaryLabel.center = CGPoint(x: view.halfWidth(), y: topSpacing() + 66 + ana_primaryLabel.halfHeight())
+		let size = ana_secondaryLabel.sizeThatFits(CGSize(width: view.width() - 31 * 2, height: .greatestFiniteMagnitude))
+		ana_secondaryLabel.bounds = CGRect(origin: .zero, size: size)
+		ana_secondaryLabel.center = CGPoint(x: view.halfWidth(), y: ana_primaryLabel.maxY() + 9 + ana_secondaryLabel.halfHeight())
+		ana_button.bounds = CGRect(x: 0, y: 0, width: view.width() - 24 * 2, height: 54)
+		ana_button.center = CGPoint(x: view.halfWidth(), y: view.height() - bottomSpacing() - 74 - ana_button.halfHeight())
 	}
 }
