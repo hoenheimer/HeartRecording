@@ -183,7 +183,7 @@ class AnaLargeTitleTableViewController: UIViewController, UITableViewDelegate, U
 			headerView.center = CGPoint(x: headerView.halfWidth(), y: ana_titleBackView.maxY() + 16 + headerView.halfHeight())
 			backView.bounds = CGRect(x: 0, y: 0, width: view.width(), height: headerView.maxY())
 		} else {
-			backView.bounds = CGRect(x: 0, y: 0, width: view.width(), height: ana_titleBackView.maxY() + 56)
+			backView.bounds = CGRect(x: 0, y: 0, width: view.width(), height: ana_titleBackView.maxY() + 34)
 		}
 		ana_titleBackView.frame = CGRect(x: 0, y: 0, width: backView.width(), height: ana_titleBackView.height())
 		ana_tableView.tableHeaderView = backView

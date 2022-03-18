@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "u_parcel.png",
+      "filename" : "Profile Octagon.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "u_parcel@2x.png",
+      "filename" : "Profile Octagon@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "u_parcel@3x.png",
+      "filename" : "Profile Octagon@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

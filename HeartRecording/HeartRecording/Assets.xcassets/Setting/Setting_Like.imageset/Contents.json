@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "fi_heart.png",
+      "filename" : "Heart 6.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "fi_heart@2x.png",
+      "filename" : "Heart 6@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "fi_heart@3x.png",
+      "filename" : "Heart 6@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

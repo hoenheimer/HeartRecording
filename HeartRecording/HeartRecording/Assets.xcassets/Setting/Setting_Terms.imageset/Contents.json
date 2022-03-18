@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "u_file-alt.png",
+      "filename" : "Document Justify Center 2.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "u_file-alt@2x.png",
+      "filename" : "Document Justify Center 2@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "u_file-alt@3x.png",
+      "filename" : "Document Justify Center 2@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

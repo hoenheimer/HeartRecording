@@ -10,21 +10,10 @@ import MessageUI
 import DeviceKit
 
 
-class SettingViewController: AnaLargeTitleViewController, MFMailComposeViewControllerDelegate {
-    var ana_backView: UIView!
-    var ana_gradientView: UIView!
-    var ana_gradientLayer: CAGradientLayer!
-    var ana_itemViews = [SettingItemView]()
-    
-    var ana_proItemView: SettingItemView?
-    
-    
+class SettingViewController: AnaLargeTitleTableViewController, MFMailComposeViewControllerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let proItemView = ana_proItemView {
-            proItemView.ana_label.text = NBUserVipStatusManager.shard.getVipStatus() ? "You are pro!" : "BabyCare Premium-Unlock All Features"
-        }
-		setProRightBarItemIfNeeded()
+		ana_tableView.reloadData()
     }
     
     
@@ -33,75 +22,54 @@ class SettingViewController: AnaLargeTitleViewController, MFMailComposeViewContr
         
         setTitle(title: "Setting")
 		setProRightBarItemIfNeeded()
+		setHeaderView(headerView: nil)
         
-        ana_backView = UIView()
-        ana_backView.layer.cornerRadius = 25
-        ana_backView.backgroundColor = .color(hexString: "#CDFFFFFF")
-        ana_backView.setShadow(color: .color(hexString: "#0f933c49"), offset: CGSize(width: 0, height: 8), radius: 25)
-        ana_contentView.addSubview(ana_backView)
-        
-        ana_gradientView = UIView()
-        ana_backView.addSubview(ana_gradientView)
-        
-        ana_gradientLayer = CAGradientLayer()
-        ana_gradientLayer.cornerRadius = 25
-        ana_gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
-        ana_gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
-        ana_gradientLayer.colors = [UIColor.color(hexString: "#E6FFFFFF").cgColor, UIColor.color(hexString: "#B3FFFFFF").cgColor]
-        ana_gradientView.layer.addSublayer(ana_gradientLayer)
-        
-        for model in itemModels() {
-            let itemView = SettingItemView(image: model.image, title: model.title, key: model.key)
-            itemView.ana_pipe.output.observeValues {
-                [weak self] key in
-                guard let self = self else { return }
-                self.itemDidTouched(key: key)
-            }
-            if model.key == "Pro" {
-                ana_proItemView = itemView
-            }
-            ana_backView.addSubview(itemView)
-            ana_itemViews.append(itemView)
-        }
+		ana_tableView.register(SettingTableViewCell.self, forCellReuseIdentifier: String(NSStringFromClass(SettingTableViewCell.self)))
+		ana_tableView.rowHeight = 76
     }
-    
-    
-    override func layoutContentView() -> CGFloat {
-        let backViewWidth = view.width() - 50
-        var y: CGFloat = 5
-        for i in ana_itemViews.indices {
-            let itemView = ana_itemViews[i]
-            itemView.frame = CGRect(x: 0, y: y, width: backViewWidth, height: 64)
-            y = itemView.maxY()
-        }
-        ana_backView.frame = CGRect(x: 25, y: 40, width: backViewWidth, height: y + 5)
-        ana_gradientView.frame = ana_backView.bounds
-        ana_gradientLayer.frame = ana_gradientView.bounds
-        return ana_backView.maxY()
-    }
-    
-    
-    func itemDidTouched(key: String) {
-        switch key {
-        case "Pro":
-            if !NBUserVipStatusManager.shard.getVipStatus() {
-                let vc = SubscriptionViewController(success: nil)
-                vc.modalPresentationStyle = .fullScreen
-                present(vc, animated: true, completion: nil)
-            }
-        case "Favorites":
-            navigationController?.pushViewController(FavoriteViewController(), animated: true)
-        case "Privacy":
-            let webView = BaseWebController()
-            webView.urlStr = "https://sites.google.com/view/babycarepop/home"
-            webView.modalPresentationStyle = .fullScreen
-            present(webView, animated: true, completion: nil)
-        case "Terms":
-            let webView = BaseWebController()
-            webView.urlStr = "https://sites.google.com/view/babycaretou/home"
-            webView.modalPresentationStyle = .fullScreen
-            present(webView, animated: true, completion: nil)
-		case "Feedback":
+	
+	
+	// MARK: - UITableViewDelegate & UITableViewDataSource
+	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return 7
+	}
+	
+	
+	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = tableView.dequeueReusableCell(withIdentifier: String(NSStringFromClass(SettingTableViewCell.self)), for: indexPath) as! SettingTableViewCell
+		switch indexPath.row {
+		case 0:
+			cell.set(imageName: "Setting_Pro", title: NBUserVipStatusManager.shard.getVipStatus() ? "You are pro!" : "Angel Premium-Unlock All Features")
+		case 1:
+			cell.set(imageName: "Setting_Favorite", title: "Favorite")
+		case 2:
+			cell.set(imageName: "Setting_Feedback", title: "Feedback")
+		case 3:
+			cell.set(imageName: "Setting_Share", title: "Share with friends")
+		case 4:
+			cell.set(imageName: "Setting_Like", title: "Rate us")
+		case 5:
+			cell.set(imageName: "Setting_Privacy", title: "Privacy Policy")
+		case 6:
+			cell.set(imageName: "Setting_Terms", title: "Terms of use")
+		default:
+			break
+		}
+		return cell
+	}
+	
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		switch indexPath.row {
+		case 0:
+			if !NBUserVipStatusManager.shard.getVipStatus() {
+				let vc = SubscriptionViewController(success: nil)
+				vc.modalPresentationStyle = .fullScreen
+				present(vc, animated: true, completion: nil)
+			}
+		case 1:
+			navigationController?.pushViewController(FavoriteViewController(), animated: true)
+		case 2:
 			let mailAddress = "xomnmmamd@outlook.com"
 			if MFMailComposeViewController.canSendMail() {
 				let name = Bundle.main.infoDictionary!["CFBundleName"] as! String
@@ -120,46 +88,32 @@ class SettingViewController: AnaLargeTitleViewController, MFMailComposeViewContr
 				let mailStr = "mailto:" + mailAddress
 				UIApplication.shared.open(URL(string: mailStr)!, options: [:], completionHandler: nil)
 			}
-		case "Share":
+		case 3:
 			let content = "Use this app to record your baby’s heart beat https://itunes.apple.com/app/1610497712"
 			NBSharedTool.shard(to: .systemShared, shardContent: content, shardImage: nil, linkUrl: nil,fromVC: self, .zero, nil)
-		case "Rate":
+		case 4:
 			let commentLink = "itms-apps://itunes.apple.com/app/id1610497712?action=write-review"
 			if let commentUrl = URL(string: commentLink){
 				UIApplication.shared.open(commentUrl, options: [:], completionHandler: nil)
 			}
-        default:
-            return
-        }
-    }
-    
-    
-    func itemModels() -> [SettingItemModel] {
-        var models = [SettingItemModel]()
-        if NBUserVipStatusManager.shard.getVipStatus() {
-            models.append(SettingItemModel(image: UIImage(named: "Setting_Pro"), title: "You are pro!", key: "Pro"))
-        } else {
-            models.append(SettingItemModel(image: UIImage(named: "Setting_Pro"), title: "BabyCare Premium-Unlock All Features", key: "Pro"))
-        }
-        models.append(SettingItemModel(image: UIImage(named: "Setting_Favorite"), title: "Favorites", key: "Favorites"))
-        models.append(SettingItemModel(image: UIImage(named: "Setting_Feedback"), title: "Feedback", key: "Feedback"))
-        models.append(SettingItemModel(image: UIImage(named: "Setting_Share"), title: "Share with friends", key: "Share"))
-        models.append(SettingItemModel(image: UIImage(named: "Setting_Like"), title: "Rate us", key: "Rate"))
-        models.append(SettingItemModel(image: UIImage(named: "Setting_Privacy"), title: "Privacy Policy", key: "Privacy"))
-        models.append(SettingItemModel(image: UIImage(named: "Setting_Terms"), title: "Terms of use", key: "Terms"))
-        return models
-    }
+		case 5:
+			let webView = BaseWebController()
+			webView.urlStr = "https://sites.google.com/view/babycarepop/home"
+			webView.modalPresentationStyle = .fullScreen
+			present(webView, animated: true, completion: nil)
+		case 6:
+			let webView = BaseWebController()
+			webView.urlStr = "https://sites.google.com/view/babycaretou/home"
+			webView.modalPresentationStyle = .fullScreen
+			present(webView, animated: true, completion: nil)
+		default:
+			return
+		}
+	}
 	
 	
 	// MARK: - MFMailComposeViewControllerDelegate
 	func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
 		controller.dismiss(animated: true, completion: nil)
 	}
-}
-
-
-struct SettingItemModel {
-    var image: UIImage?
-    var title: String?
-    var key: String
 }
