@@ -35,7 +35,7 @@
 		1825C931262D970A001C0FB3 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C930262D970A001C0FB3 /* NotificationName.swift */; };
 		1825C937262DA106001C0FB3 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C936262DA106001C0FB3 /* SettingViewController.swift */; };
 		1825C93C262DA1BE001C0FB3 /* SettingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C93B262DA1BE001C0FB3 /* SettingItemView.swift */; };
-		1825C942262DE452001C0FB3 /* NameEditAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C941262DE452001C0FB3 /* NameEditAlert.swift */; };
+		1825C942262DE452001C0FB3 /* NameEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C941262DE452001C0FB3 /* NameEditView.swift */; };
 		1825C94F262DE771001C0FB3 /* NBBasePopUpBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C94A262DE770001C0FB3 /* NBBasePopUpBox.swift */; };
 		1825C950262DE771001C0FB3 /* NBInAppPurchaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C94B262DE770001C0FB3 /* NBInAppPurchaseProtocol.swift */; };
 		1825C951262DE771001C0FB3 /* NBLoadingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C94C262DE771001C0FB3 /* NBLoadingBox.swift */; };
@@ -119,7 +119,7 @@
 		1825C930262D970A001C0FB3 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		1825C936262DA106001C0FB3 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		1825C93B262DA1BE001C0FB3 /* SettingItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingItemView.swift; sourceTree = "<group>"; };
-		1825C941262DE452001C0FB3 /* NameEditAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameEditAlert.swift; sourceTree = "<group>"; };
+		1825C941262DE452001C0FB3 /* NameEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameEditView.swift; sourceTree = "<group>"; };
 		1825C94A262DE770001C0FB3 /* NBBasePopUpBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NBBasePopUpBox.swift; sourceTree = "<group>"; };
 		1825C94B262DE770001C0FB3 /* NBInAppPurchaseProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NBInAppPurchaseProtocol.swift; sourceTree = "<group>"; };
 		1825C94C262DE771001C0FB3 /* NBLoadingBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NBLoadingBox.swift; sourceTree = "<group>"; };
@@ -251,7 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				1825C8C7262994A1001C0FB3 /* DetailViewController.swift */,
-				1825C941262DE452001C0FB3 /* NameEditAlert.swift */,
+				1825C941262DE452001C0FB3 /* NameEditView.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -654,7 +654,7 @@
 				1825C952262DE771001C0FB3 /* NBNewStoreManager.swift in Sources */,
 				181B6E4D27C383D200E1F652 /* AnaTabBarController.swift in Sources */,
 				1825C88126285C05001C0FB3 /* UIImage+Additon.swift in Sources */,
-				1825C942262DE452001C0FB3 /* NameEditAlert.swift in Sources */,
+				1825C942262DE452001C0FB3 /* NameEditView.swift in Sources */,
 				1825C8A1262860C0001C0FB3 /* FeedbackManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -59,8 +59,8 @@ class AnaLargeTitleViewController: UIViewController, UIScrollViewDelegate {
 		ana_scrollView.addSubview(ana_titleBackView)
 		
 		ana_titleLabel = UILabel()
-		ana_titleLabel.font = UIFont(name: "Merriweather-Regular", size: 28)
-		ana_titleLabel.textColor = .color(hexString: "#6a515e")
+		ana_titleLabel.font = UIFont(name: "Didot", size: 36)
+		ana_titleLabel.textColor = .color(hexString: "#504278")
 		ana_titleLabel.text = "Title"
 		ana_titleLabel.layer.anchorPoint = CGPoint(x: 0, y: 1)
 		ana_titleBackView.addSubview(ana_titleLabel)

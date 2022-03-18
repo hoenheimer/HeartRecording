@@ -117,7 +117,7 @@ class FavoriteViewController: AnaLargeTitleTableViewController, SwipeTableViewCe
             let edit = SwipeAction(style: .default, title: nil) {
                 [weak self] (_, indexPath) in
                 guard let self = self else { return }
-                NameEditAlert.show(name: model.name, id: model.id!, vc: self, success: nil)
+//                NameEditAlert.show(name: model.name, id: model.id!, vc: self, success: nil)
             }
             edit.backgroundColor = .clear
             edit.image = UIImage(named: "RecordingList_Edit")

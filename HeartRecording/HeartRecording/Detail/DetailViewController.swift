@@ -28,6 +28,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     var ana_leftButton:         UIButton!
     var ana_playButton:         UIButton!
     var ana_rightButton:        UIButton!
+	var ana_nameEditView:		NameEditView!
     
     var ana_model: DbRecordModel!
     var ana_totalTime: CGFloat = 0
@@ -143,11 +144,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
 		ana_editButton.reactive.controlEvents(.touchUpInside).observeValues {
 			[weak self] _ in
 			guard let self = self else { return }
-			NameEditAlert.show(name: self.ana_model.name, id: self.ana_model.id!, vc: self) {
-				[weak self] newName in
-				guard let self = self else { return }
-				self.ana_nameTextField.text = newName
-			}
+			self.ana_nameEditView.show(content: self.ana_model.name)
 		}
 		view.addSubview(ana_editButton)
 		
@@ -261,6 +258,19 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
             }
         }
         view.addSubview(ana_rightButton)
+		
+		ana_nameEditView = NameEditView()
+		ana_nameEditView.editPipe.output.observeValues {
+			[weak self] name in
+			guard let self = self else { return }
+			self.ana_model.name = name
+			self.ana_nameTextField.text = name
+			self.view.layoutNow()
+			if let name = name {
+				DbManager.manager.updateName(name, id: self.ana_model.id!)
+			}
+		}
+		view.addSubview(ana_nameEditView)
     }
     
     
@@ -304,7 +314,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         ana_rightButton.sizeToFit()
         ana_rightButton.center = CGPoint(x: ana_playButton.maxX() + 60 + ana_rightButton.halfWidth(), y: ana_playButton.centerY())
         ana_progressImageView.sizeToFit()
-        
+		ana_nameEditView.frame = view.bounds
     }
     
     
