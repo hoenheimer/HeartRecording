@@ -2,7 +2,6 @@ ${PODS_ROOT}/Target Support Files/Pods-HeartRecording/Pods-HeartRecording-framew
 ${BUILT_PRODUCTS_DIR}/DFPlayer/DFPlayer.framework
 ${BUILT_PRODUCTS_DIR}/DeviceKit/DeviceKit.framework
 ${BUILT_PRODUCTS_DIR}/FFPopup/FFPopup.framework
-${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework
 ${BUILT_PRODUCTS_DIR}/ReactiveCocoa/ReactiveCocoa.framework
 ${BUILT_PRODUCTS_DIR}/ReactiveSwift/ReactiveSwift.framework
 ${BUILT_PRODUCTS_DIR}/SQLiteRepairKit/sqliterk.framework
@@ -11,4 +10,3 @@ ${BUILT_PRODUCTS_DIR}/SwiftyStoreKit/SwiftyStoreKit.framework
 ${BUILT_PRODUCTS_DIR}/SwipeCellKit/SwipeCellKit.framework
 ${BUILT_PRODUCTS_DIR}/WCDB.swift/WCDBSwift.framework
 ${BUILT_PRODUCTS_DIR}/WCDBOptimizedSQLCipher/sqlcipher.framework
-${BUILT_PRODUCTS_DIR}/YYImage/YYImage.framework
