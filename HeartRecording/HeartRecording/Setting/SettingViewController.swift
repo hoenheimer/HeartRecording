@@ -98,12 +98,12 @@ class SettingViewController: AnaLargeTitleTableViewController, MFMailComposeView
 			}
 		case 5:
 			let webView = BaseWebController()
-			webView.urlStr = "https://sites.google.com/view/babycarepop/home"
+			webView.urlStr = "https://sites.google.com/view/pre-eggerspop/home"
 			webView.modalPresentationStyle = .fullScreen
 			present(webView, animated: true, completion: nil)
 		case 6:
 			let webView = BaseWebController()
-			webView.urlStr = "https://sites.google.com/view/babycaretou/home"
+			webView.urlStr = "https://sites.google.com/view/preeggerstou/home"
 			webView.modalPresentationStyle = .fullScreen
 			present(webView, animated: true, completion: nil)
 		default:

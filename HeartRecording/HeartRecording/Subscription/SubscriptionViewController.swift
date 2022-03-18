@@ -208,7 +208,7 @@ class SubscriptionViewController: UIViewController {
             [weak self] _ in
             guard let self = self else { return }
             let webView = BaseWebController()
-            webView.urlStr = "https://sites.google.com/view/babycaretou/home"
+            webView.urlStr = "https://sites.google.com/view/preeggerstou/home"
             webView.modalPresentationStyle = .fullScreen
             self.present(webView, animated: true, completion: nil)
         }
@@ -222,7 +222,7 @@ class SubscriptionViewController: UIViewController {
             [weak self] _ in
             guard let self = self else { return }
             let webView = BaseWebController()
-            webView.urlStr = "https://sites.google.com/view/babycarepop/home"
+            webView.urlStr = "https://sites.google.com/view/pre-eggerspop/home"
             webView.modalPresentationStyle = .fullScreen
             self.present(webView, animated: true, completion: nil)
         }
