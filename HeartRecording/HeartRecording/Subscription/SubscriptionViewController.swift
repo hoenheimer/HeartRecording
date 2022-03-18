@@ -101,7 +101,7 @@ class SubscriptionViewController: UIViewController {
 		ana_scrollView.addSubview(ana_titleImageView)
 		
 		ana_titleLabel = UILabel()
-		ana_titleLabel.text = "BabyBeat Premium"
+		ana_titleLabel.text = "Pre Eggers Premium"
 		ana_titleLabel.textColor = .color(hexString: "#504278")
 		ana_titleLabel.font = UIFont(name: "Didot", size: 36)
 		ana_scrollView.addSubview(ana_titleLabel)
@@ -231,7 +231,7 @@ class SubscriptionViewController: UIViewController {
         ana_bottomLabel = UILabel()
         ana_bottomLabel.numberOfLines = 0
 		ana_bottomLabel.textAlignment = .justified
-        ana_bottomLabel.text = "BabyBeat Premium offers monthly and half-yearly purchase subscription. You can subscribe to a monthly plan($6.99 per month) or a half-yearly plan($39.99 per half-year). You can manage or turn off auto-renew in your Apple ID account settings at any time. Subscriptions will automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Any unused portion of a free trial period will be forfeited when you purchase a subscription. Our app is functional without purchasing an Auto-Renewable subscription, and you can use all the unlocked content after the subscription expires."
+        ana_bottomLabel.text = "Pre Eggers Premium offers monthly and half-yearly purchase subscription. You can subscribe to a monthly plan($6.99 per month) or a half-yearly plan($39.99 per half-year). You can manage or turn off auto-renew in your Apple ID account settings at any time. Subscriptions will automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Any unused portion of a free trial period will be forfeited when you purchase a subscription. Our app is functional without purchasing an Auto-Renewable subscription, and you can use all the unlocked content after the subscription expires."
         ana_bottomLabel.textColor = .color(hexString: "#6a515e")
         ana_bottomLabel.font  = UIFont(name: "PingFangSC-Semibold", size: 10)
         ana_scrollView.addSubview(ana_bottomLabel)
@@ -289,7 +289,7 @@ class SubscriptionViewController: UIViewController {
 		if let ana_sixMonthProduct = ana_sixMonthProduct {
 			ana_bottomProductView.set(price: ana_sixMonthProduct.regularPrice, freeDays: ana_sixMonthProduct.freeDays, durationString: "Half year")
 		}
-		ana_bottomLabel.text = "BabyBeat Premium offers monthly and half-yearly purchase subscription. You can subscribe to a monthly plan(\(ana_monthProduct?.regularPrice ?? "$6.99") per month) or a half-yearly plan(\(ana_sixMonthProduct?.regularPrice ?? "39.99") per half-year). You can manage or turn off auto-renew in your Apple ID account settings at any time. Subscriptions will automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Any unused portion of a free trial period will be forfeited when you purchase a subscription. Our app is functional without purchasing an Auto-Renewable subscription, and you can use all the unlocked content after the subscription expires."
+		ana_bottomLabel.text = "Pre Eggers Premium offers monthly and half-yearly purchase subscription. You can subscribe to a monthly plan(\(ana_monthProduct?.regularPrice ?? "$6.99") per month) or a half-yearly plan(\(ana_sixMonthProduct?.regularPrice ?? "39.99") per half-year). You can manage or turn off auto-renew in your Apple ID account settings at any time. Subscriptions will automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Any unused portion of a free trial period will be forfeited when you purchase a subscription. Our app is functional without purchasing an Auto-Renewable subscription, and you can use all the unlocked content after the subscription expires."
 		view.layoutNow()
     }
     

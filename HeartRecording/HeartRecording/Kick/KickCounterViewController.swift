@@ -45,7 +45,7 @@ class KickCounterViewController: AnaLargeTitleTableViewController {
 		
 		ana_models = DbManager.manager.kickModels()
 		
-		setTitle(title: "BabyBeat")
+		setTitle(title: "Pre Eggers")
 		if ana_models.count > 0 {
 			let topButton = UIButton()
 			topButton.setImage(UIImage(named: "Kick_Add_Small"), for: .normal)

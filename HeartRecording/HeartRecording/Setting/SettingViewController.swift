@@ -39,7 +39,7 @@ class SettingViewController: AnaLargeTitleTableViewController, MFMailComposeView
 		let cell = tableView.dequeueReusableCell(withIdentifier: String(NSStringFromClass(SettingTableViewCell.self)), for: indexPath) as! SettingTableViewCell
 		switch indexPath.row {
 		case 0:
-			cell.set(imageName: "Setting_Pro", title: NBUserVipStatusManager.shard.getVipStatus() ? "You are pro!" : "Angel Premium-Unlock All Features")
+			cell.set(imageName: "Setting_Pro", title: NBUserVipStatusManager.shard.getVipStatus() ? "You are pro!" : "Pre Eggers Premium-Unlock All Features")
 		case 1:
 			cell.set(imageName: "Setting_Favorite", title: "Favorite")
 		case 2:
@@ -70,7 +70,7 @@ class SettingViewController: AnaLargeTitleTableViewController, MFMailComposeView
 		case 1:
 			navigationController?.pushViewController(FavoriteViewController(), animated: true)
 		case 2:
-			let mailAddress = "xomnmmamd@outlook.com"
+			let mailAddress = "992976910@qq.com"
 			if MFMailComposeViewController.canSendMail() {
 				let name = Bundle.main.infoDictionary!["CFBundleName"] as! String
 				let currentVersionStr = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
@@ -89,10 +89,10 @@ class SettingViewController: AnaLargeTitleTableViewController, MFMailComposeView
 				UIApplication.shared.open(URL(string: mailStr)!, options: [:], completionHandler: nil)
 			}
 		case 3:
-			let content = "Use this app to record your baby’s heart beat https://itunes.apple.com/app/1610497712"
+			let content = "Use this app to record your baby’s heart beat https://itunes.apple.com/app/1614775980"
 			NBSharedTool.shard(to: .systemShared, shardContent: content, shardImage: nil, linkUrl: nil,fromVC: self, .zero, nil)
 		case 4:
-			let commentLink = "itms-apps://itunes.apple.com/app/id1610497712?action=write-review"
+			let commentLink = "itms-apps://itunes.apple.com/app/id1614775980?action=write-review"
 			if let commentUrl = URL(string: commentLink){
 				UIApplication.shared.open(commentUrl, options: [:], completionHandler: nil)
 			}
