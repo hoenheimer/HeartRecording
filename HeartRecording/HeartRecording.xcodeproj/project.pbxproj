@@ -48,6 +48,7 @@
 		1825C99626305532001C0FB3 /* BaseWebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825C99526305532001C0FB3 /* BaseWebController.swift */; };
 		183B71F627E2F31600292120 /* Didot Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 183B71F527E2F31600292120 /* Didot Regular.ttf */; };
 		183B71F827E32CA800292120 /* RotationImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183B71F727E32CA800292120 /* RotationImageView.swift */; };
+		183B71FA27E447F500292120 /* RecordingListDeleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183B71F927E447F500292120 /* RecordingListDeleteView.swift */; };
 		1843FDF427C5F538006C449B /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1843FDF327C5F538006C449B /* Poppins-Medium.ttf */; };
 		1843FE0027C62F65006C449B /* FLAnimatedImageView+Addition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1843FDFF27C62F65006C449B /* FLAnimatedImageView+Addition.swift */; };
 		187FD53527D084E400E1B0F9 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FD53427D084E400E1B0F9 /* BaseViewController.swift */; };
@@ -132,6 +133,7 @@
 		1825C99526305532001C0FB3 /* BaseWebController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseWebController.swift; sourceTree = "<group>"; };
 		183B71F527E2F31600292120 /* Didot Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Didot Regular.ttf"; sourceTree = "<group>"; };
 		183B71F727E32CA800292120 /* RotationImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationImageView.swift; sourceTree = "<group>"; };
+		183B71F927E447F500292120 /* RecordingListDeleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingListDeleteView.swift; sourceTree = "<group>"; };
 		1843FDF327C5F538006C449B /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.ttf"; sourceTree = "<group>"; };
 		1843FDFF27C62F65006C449B /* FLAnimatedImageView+Addition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FLAnimatedImageView+Addition.swift"; sourceTree = "<group>"; };
 		187FD53427D084E400E1B0F9 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 			children = (
 				1825C911262D8758001C0FB3 /* RecordingListViewController.swift */,
 				1825C916262D882B001C0FB3 /* RecordingTableViewCell.swift */,
+				183B71F927E447F500292120 /* RecordingListDeleteView.swift */,
 			);
 			path = RecordingList;
 			sourceTree = "<group>";
@@ -640,6 +643,7 @@
 				1825C8BE2628DB90001C0FB3 /* RecordManager.swift in Sources */,
 				1825C953262DE771001C0FB3 /* NBUserVipStatusManager.swift in Sources */,
 				18D3309D26526EB000DFFFFF /* KickCounterViewController.swift in Sources */,
+				183B71FA27E447F500292120 /* RecordingListDeleteView.swift in Sources */,
 				18D330AF2653900000DFFFFF /* NBSharedTool.swift in Sources */,
 				1825C917262D882B001C0FB3 /* RecordingTableViewCell.swift in Sources */,
 				1825C94F262DE771001C0FB3 /* NBBasePopUpBox.swift in Sources */,

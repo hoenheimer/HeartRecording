@@ -14,6 +14,9 @@ class RecordingListViewController: AnaLargeTitleTableViewController, SwipeTableV
     var ana_emptyView: UIView!
     var ana_emptyImageView: UIImageView!
     var ana_emptyLabel: UILabel!
+	var ana_nameEditView: NameEditView!
+	
+	var ana_editingNameModelId: Int?
     
     
     deinit {
@@ -32,7 +35,7 @@ class RecordingListViewController: AnaLargeTitleTableViewController, SwipeTableV
         
         NotificationCenter.default.addObserver(self, selector: #selector(dbDidChanged), name: NotificationName.DbRecordChange, object: nil)
         
-        setTitle(title: "Recording List")
+        setTitle(title: "List")
 		setProRightBarItemIfNeeded()
         setHeaderView(headerView: nil)
 		
@@ -42,7 +45,7 @@ class RecordingListViewController: AnaLargeTitleTableViewController, SwipeTableV
         
         ana_tableView.backgroundColor = .clear
         ana_tableView.register(RecordingTableViewCell.self, forCellReuseIdentifier: String(NSStringFromClass(RecordingTableViewCell.self)))
-        ana_tableView.rowHeight = 110
+        ana_tableView.rowHeight = 114
         
         ana_emptyView = UIView()
         ana_emptyView.backgroundColor = .clear
@@ -55,9 +58,19 @@ class RecordingListViewController: AnaLargeTitleTableViewController, SwipeTableV
         
         ana_emptyLabel = UILabel()
         ana_emptyLabel.text = "No Data!"
-        ana_emptyLabel.textColor = .color(hexString: "#6a515e")
-        ana_emptyLabel.font = UIFont(name: "Merriweather-Regular", size: 18)
+        ana_emptyLabel.textColor = .color(hexString: "#504278")
+        ana_emptyLabel.font = UIFont(name: "Didot", size: 18)
         ana_emptyView.addSubview(ana_emptyLabel)
+		
+		ana_nameEditView = NameEditView()
+		ana_nameEditView.savePipe.output.observeValues {
+			[weak self] name in
+			guard let self = self else { return }
+			if self.ana_editingNameModelId != nil && name != nil {
+				DbManager.manager.updateName(name!, id: self.ana_editingNameModelId!)
+			}
+		}
+		view.addSubview(ana_nameEditView)
     }
     
     
@@ -78,6 +91,7 @@ class RecordingListViewController: AnaLargeTitleTableViewController, SwipeTableV
         ana_emptyLabel.center = CGPoint(x: ana_emptyImageView.halfWidth(), y: ana_emptyImageView.maxY() + 3 + ana_emptyLabel.halfHeight())
         ana_emptyView.bounds = CGRect(origin: .zero, size: CGSize(width: ana_emptyImageView.width(), height: ana_emptyLabel.maxY()))
 		ana_emptyView.center = CGPoint(x: ana_tableView.halfWidth(), y: ana_tableView.height() * 0.45)
+		ana_nameEditView.frame = view.bounds
     }
     
     
@@ -109,30 +123,16 @@ class RecordingListViewController: AnaLargeTitleTableViewController, SwipeTableV
                 [weak self] (_, indexPath) in
                 guard let self = self else { return }
                 let model = DbManager.manager.models[indexPath.row]
-//                NameEditAlert.show(name: model.name, id: model.id!, vc: self, success: nil)
+				self.ana_editingNameModelId = model.id
+				self.ana_nameEditView.show(content: model.name)
             }
             edit.backgroundColor = .clear
             edit.image = UIImage(named: "RecordingList_Edit")
             
             let delete = SwipeAction(style: .default, title: nil) {
-                [weak self] (_, indexPath) in
-                guard let self = self else { return }
-                let vc = UIAlertController(title: nil, message: "Are you sure you want to delete this recording file?", preferredStyle: .alert)
-                let yes = UIAlertAction(title: "YES", style: .destructive) {
-                    [indexPath, weak vc] (_) in
-                    guard let vc = vc else { return }
-                    let model = DbManager.manager.models[indexPath.row]
-                    DbManager.manager.deleteModel(model)
-                    vc.dismiss(animated: true, completion: nil)
-                }
-                vc.addAction(yes)
-                let no = UIAlertAction(title: "NO", style: .cancel) {
-                    [weak vc] _ in
-                    guard let vc = vc else { return }
-                    vc.dismiss(animated: true, completion: nil)
-                }
-                vc.addAction(no)
-                self.present(vc, animated: true, completion: nil)
+                (_, indexPath) in
+				let model = DbManager.manager.models[indexPath.row]
+				RecordingListDeleteView.shared.show(model: model)
             }
             delete.backgroundColor = .clear
             delete.image = UIImage(named: "RecordingList_Delete")
