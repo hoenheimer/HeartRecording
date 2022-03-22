@@ -63,9 +63,9 @@ class NBNewStoreManager: NSObject,SKPaymentTransactionObserver{
         case restoreFailed      //恢复失败
     }
 
-    let monthProductId = "com.babycare.heartbeat.month"
-	let sixMonthProductId = "com.babycare.heartbeat.6month"
-    let sharedSecret = "7758eb5693734f68bb787fdeef0346f0"
+    let monthProductId = "com.preeggers.month"
+	let yearProductId = "com.preeggers.year"
+    let sharedSecret = "e2a31bb4d24646119675061c980eca35"
     
     private var products: [SKProduct]?
 
@@ -121,7 +121,7 @@ class NBNewStoreManager: NSObject,SKPaymentTransactionObserver{
     
     
     func allProuductIds() -> [String] {
-        return [monthProductId, sixMonthProductId]
+        return [monthProductId, yearProductId]
     }
     
     /**获取所有产品信息*/
@@ -239,7 +239,7 @@ class NBNewStoreManager: NSObject,SKPaymentTransactionObserver{
                 if let monthProductId = weakSelf?.monthProductId {
                     productIds.append(monthProductId)
                 }
-				if let sixMonthProductId = weakSelf?.sixMonthProductId {
+				if let sixMonthProductId = weakSelf?.yearProductId {
 					productIds.append(sixMonthProductId)
 				}
 //                if let weekProductId = weakSelf?.weekProductId {

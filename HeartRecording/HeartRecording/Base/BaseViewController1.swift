@@ -24,7 +24,7 @@ class BaseViewController1: BaseViewController {
 	override func configure() {
 		super.configure()
 		
-		ana_primaryLabel.text = "BabyBeat"
+		ana_primaryLabel.text = "Pre Eggers"
 		
 		ana_secondaryLabel.text = "Track & Count your baby kicks"
 		

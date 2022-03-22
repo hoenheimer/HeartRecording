@@ -35,7 +35,7 @@ class SubscriptionViewController: UIViewController {
     var ana_bottomLabel:            UILabel!
     
     var ana_monthProduct: SKProduct?
-	var ana_sixMonthProduct: SKProduct?
+	var ana_yearProduct: SKProduct?
 	var selectBottomProduct = false
     var ana_success: (() -> Void)? = nil
 	var ana_dismiss: (() -> Void)? = nil
@@ -157,7 +157,7 @@ class SubscriptionViewController: UIViewController {
 		ana_productBackView.addSubview(ana_productSeparateLine)
 		
 		ana_bottomProductView = SubscriptionProductView()
-		ana_bottomProductView.set(price: "$39.99", freeDays: 3, durationString: "Half year")
+		ana_bottomProductView.set(price: "$39.99", freeDays: 3, durationString: "year")
 		ana_bottomProductView.setSelected(false)
 		ana_bottomProductView.pipe.output.observeValues {
 			[weak self] _ in
@@ -177,7 +177,7 @@ class SubscriptionViewController: UIViewController {
         ana_button.reactive.controlEvents(.touchUpInside).observeValues {
             [weak self] button in
             guard let self = self else { return }
-			if let product = self.selectBottomProduct ? self.ana_sixMonthProduct : self.ana_monthProduct {
+			if let product = self.selectBottomProduct ? self.ana_yearProduct : self.ana_monthProduct {
 				self.purchase(product: product)
 			}
         }
@@ -231,7 +231,7 @@ class SubscriptionViewController: UIViewController {
         ana_bottomLabel = UILabel()
         ana_bottomLabel.numberOfLines = 0
 		ana_bottomLabel.textAlignment = .justified
-        ana_bottomLabel.text = "Pre Eggers Premium offers monthly and half-yearly purchase subscription. You can subscribe to a monthly plan($6.99 per month) or a half-yearly plan($39.99 per half-year). You can manage or turn off auto-renew in your Apple ID account settings at any time. Subscriptions will automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Any unused portion of a free trial period will be forfeited when you purchase a subscription. Our app is functional without purchasing an Auto-Renewable subscription, and you can use all the unlocked content after the subscription expires."
+        ana_bottomLabel.text = "Pre Eggers Premium offers monthly and yearly purchase subscription. You can subscribe to a monthly plan($6.99 per month) or a yearly plan($39.99 per year). You can manage or turn off auto-renew in your Apple ID account settings at any time. Subscriptions will automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Any unused portion of a free trial period will be forfeited when you purchase a subscription. Our app is functional without purchasing an Auto-Renewable subscription, and you can use all the unlocked content after the subscription expires."
         ana_bottomLabel.textColor = .color(hexString: "#6a515e")
         ana_bottomLabel.font  = UIFont(name: "PingFangSC-Semibold", size: 10)
         ana_scrollView.addSubview(ana_bottomLabel)
@@ -286,10 +286,10 @@ class SubscriptionViewController: UIViewController {
 		if let ana_monthProduct = ana_monthProduct {
 			ana_topProductView.set(price: ana_monthProduct.regularPrice, freeDays: ana_monthProduct.freeDays, durationString: "month")
 		}
-		if let ana_sixMonthProduct = ana_sixMonthProduct {
-			ana_bottomProductView.set(price: ana_sixMonthProduct.regularPrice, freeDays: ana_sixMonthProduct.freeDays, durationString: "Half year")
+		if let ana_yearProduct = ana_yearProduct {
+			ana_bottomProductView.set(price: ana_yearProduct.regularPrice, freeDays: ana_yearProduct.freeDays, durationString: "year")
 		}
-		ana_bottomLabel.text = "Pre Eggers Premium offers monthly and half-yearly purchase subscription. You can subscribe to a monthly plan(\(ana_monthProduct?.regularPrice ?? "$6.99") per month) or a half-yearly plan(\(ana_sixMonthProduct?.regularPrice ?? "39.99") per half-year). You can manage or turn off auto-renew in your Apple ID account settings at any time. Subscriptions will automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Any unused portion of a free trial period will be forfeited when you purchase a subscription. Our app is functional without purchasing an Auto-Renewable subscription, and you can use all the unlocked content after the subscription expires."
+		ana_bottomLabel.text = "Pre Eggers Premium offers monthly and yearly purchase subscription. You can subscribe to a monthly plan(\(ana_monthProduct?.regularPrice ?? "$6.99") per month) or a yearly plan(\(ana_yearProduct?.regularPrice ?? "39.99") per year). You can manage or turn off auto-renew in your Apple ID account settings at any time. Subscriptions will automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Any unused portion of a free trial period will be forfeited when you purchase a subscription. Our app is functional without purchasing an Auto-Renewable subscription, and you can use all the unlocked content after the subscription expires."
 		view.layoutNow()
     }
     
@@ -304,7 +304,7 @@ extension SubscriptionViewController: NBInAppPurchaseProtocol {
     /**获取订阅产品成功*/
     func subscriptionProductsDidReciveSuccess(products: [SKProduct]) {
         ana_monthProduct = products.filter({$0.productIdentifier == NBNewStoreManager.shard.monthProductId}).first
-		ana_sixMonthProduct = products.filter({$0.productIdentifier == NBNewStoreManager.shard.sixMonthProductId}).first
+		ana_yearProduct = products.filter({$0.productIdentifier == NBNewStoreManager.shard.yearProductId}).first
         requestSuccess()
     }
     /**获取订阅产品失败*/
