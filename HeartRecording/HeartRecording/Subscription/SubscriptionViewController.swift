@@ -23,10 +23,7 @@ class SubscriptionViewController: UIViewController {
     var ana_iconImageView2:         UIImageView!
     var ana_featureLabel1:          UILabel!
     var ana_featureLabel2:          UILabel!
-	var ana_productBackView:		UIView!
-	var ana_topProductView:			SubscriptionProductView!
-	var ana_productSeparateLine:	UIView!
-	var ana_bottomProductView:		SubscriptionProductView!
+	var ana_priceLabel:				UILabel!
     var ana_button:                 UIButton!
     var ana_buttonBottomLabel:      UILabel!
     var ana_restoreButton:          UIButton!
@@ -34,9 +31,7 @@ class SubscriptionViewController: UIViewController {
     var ana_privacyButton:          UIButton!
     var ana_bottomLabel:            UILabel!
     
-    var ana_monthProduct: SKProduct?
-	var ana_yearProduct: SKProduct?
-	var selectBottomProduct = false
+    var ana_product: SKProduct?
     var ana_success: (() -> Void)? = nil
 	var ana_dismiss: (() -> Void)? = nil
 	var fromBase = false
@@ -134,50 +129,22 @@ class SubscriptionViewController: UIViewController {
         ana_featureLabel2.font = UIFont(name: "PingFangSC-Regular", size: 14)
         ana_featuresBackView.addSubview(ana_featureLabel2)
 		
-		ana_productBackView = UIView()
-		ana_productBackView.layer.cornerRadius = 14
-		ana_productBackView.backgroundColor = .white
-		ana_productBackView.setShadow(color: .color(hexString: "#0fff7e3e"), offset: CGSize(width: 0, height: 8), radius: 14, opacity: 1)
-		ana_scrollView.addSubview(ana_productBackView)
-		
-		ana_topProductView = SubscriptionProductView()
-		ana_topProductView.set(price: "$6.99", freeDays: 3, durationString: "month")
-		ana_topProductView.setSelected(true)
-		ana_topProductView.pipe.output.observeValues {
-			[weak self] _ in
-			guard let self = self else { return }
-			self.selectBottomProduct = false
-			self.ana_topProductView.setSelected(true)
-			self.ana_bottomProductView.setSelected(false)
-		}
-		ana_productBackView.addSubview(ana_topProductView)
-		
-		ana_productSeparateLine = UIView()
-		ana_productSeparateLine.backgroundColor = UIColor.black.withAlphaComponent(0.1)
-		ana_productBackView.addSubview(ana_productSeparateLine)
-		
-		ana_bottomProductView = SubscriptionProductView()
-		ana_bottomProductView.set(price: "$39.99", freeDays: 3, durationString: "year")
-		ana_bottomProductView.setSelected(false)
-		ana_bottomProductView.pipe.output.observeValues {
-			[weak self] _ in
-			guard let self = self else { return }
-			self.selectBottomProduct = true
-			self.ana_topProductView.setSelected(false)
-			self.ana_bottomProductView.setSelected(true)
-		}
-		ana_productBackView.addSubview(ana_bottomProductView)
+		ana_priceLabel = UILabel()
+		ana_priceLabel.text = "$6.99 to open a permanent membership"
+		ana_priceLabel.textColor = .black
+		ana_priceLabel.font = UIFont(name: "Poppins-Light", size: 14)
+		ana_scrollView.addSubview(ana_priceLabel)
         
         ana_button = UIButton()
 		ana_button.layer.cornerRadius = 27
         ana_button.backgroundColor = .color(hexString: "#8059f3")
-		ana_button.setTitle("Start Free Trial", for: .normal)
+		ana_button.setTitle("Contiune", for: .normal)
         ana_button.setTitleColor(.color(hexString: "#FCFCFC"), for: .normal)
         ana_button.titleLabel?.font = UIFont(name: "Poppins-SemiBold", size: 16)
         ana_button.reactive.controlEvents(.touchUpInside).observeValues {
             [weak self] button in
             guard let self = self else { return }
-			if let product = self.selectBottomProduct ? self.ana_yearProduct : self.ana_monthProduct {
+			if let product = self.ana_product {
 				self.purchase(product: product)
 			}
         }
@@ -231,7 +198,7 @@ class SubscriptionViewController: UIViewController {
         ana_bottomLabel = UILabel()
         ana_bottomLabel.numberOfLines = 0
 		ana_bottomLabel.textAlignment = .justified
-        ana_bottomLabel.text = "Pre Eggers Premium offers monthly and yearly purchase subscription. You can subscribe to a monthly plan($6.99 per month) or a yearly plan($39.99 per year). You can manage or turn off auto-renew in your Apple ID account settings at any time. Subscriptions will automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Any unused portion of a free trial period will be forfeited when you purchase a subscription. Our app is functional without purchasing an Auto-Renewable subscription, and you can use all the unlocked content after the subscription expires."
+        ana_bottomLabel.text = "Pre Eggers Premium offers onetime purchase subscription. You can subscribe to onetime purchase plan($6.99)."
         ana_bottomLabel.textColor = .color(hexString: "#6a515e")
         ana_bottomLabel.font  = UIFont(name: "PingFangSC-Semibold", size: 10)
         ana_scrollView.addSubview(ana_bottomLabel)
@@ -246,11 +213,11 @@ class SubscriptionViewController: UIViewController {
         ana_closeButton.sizeToFit()
         ana_closeButton.setOrigin(x: 20, y: topSpacing() + 30)
 		ana_titleImageView.sizeToFit()
-		ana_titleImageView.center = CGPoint(x: ana_scrollView.halfWidth(), y: ana_closeButton.centerY())
+		ana_titleImageView.center = CGPoint(x: ana_scrollView.halfWidth(), y: topSpacing() + 64 + ana_titleImageView.halfHeight())
 		ana_titleLabel.sizeToFit()
-		ana_titleLabel.center = CGPoint(x: ana_scrollView.halfWidth(), y: ana_titleImageView.maxY() - 9 + ana_titleLabel.halfHeight())
+		ana_titleLabel.center = CGPoint(x: ana_scrollView.halfWidth(), y: ana_titleImageView.maxY() - 6 + ana_titleLabel.halfHeight())
 		ana_imageView.sizeToFit()
-		ana_imageView.center = CGPoint(x: view.halfWidth(), y: ana_titleLabel.maxY() - 8 + ana_imageView.halfHeight())
+		ana_imageView.center = CGPoint(x: view.halfWidth(), y: ana_titleLabel.maxY() + 29 + ana_imageView.halfHeight())
         ana_iconImageView1.sizeToFit()
         ana_iconImageView1.setOrigin(x: 0, y: 0)
         ana_iconImageView2.sizeToFit()
@@ -261,13 +228,10 @@ class SubscriptionViewController: UIViewController {
         ana_featureLabel2.center = CGPoint(x: ana_iconImageView2.maxX() + 8 + ana_featureLabel2.halfWidth(), y: ana_iconImageView2.centerY())
         ana_featuresBackView.bounds = CGRect(origin: .zero, size: CGSize(width: max(ana_featureLabel1.maxX(), ana_featureLabel2.maxX()),
                                                                      height: ana_iconImageView2.maxY()))
-		ana_featuresBackView.center = CGPoint(x: ana_scrollView.halfWidth(), y: ana_imageView.maxY() + 32 + ana_featuresBackView.halfHeight())
-		let productViewWidth = ana_scrollView.width() - 24 * 2
-		ana_topProductView.frame = CGRect(x: 0, y: 0, width: productViewWidth, height: 50)
-		ana_productSeparateLine.frame = CGRect(x: 0, y: ana_topProductView.maxY(), width: productViewWidth, height: 0.4)
-		ana_bottomProductView.frame = CGRect(x: 0, y: ana_productSeparateLine.maxY(), width: productViewWidth, height: 50)
-		ana_productBackView.frame = CGRect(x: 24, y: ana_featuresBackView.maxY() + 21, width: productViewWidth, height: ana_bottomProductView.maxY())
-        ana_button.frame = CGRect(x: 24, y: ana_productBackView.maxY() + 22, width: ana_scrollView.width() - 24 * 2, height: 54)
+		ana_featuresBackView.center = CGPoint(x: ana_scrollView.halfWidth(), y: ana_imageView.maxY() + 34 + ana_featuresBackView.halfHeight())
+		ana_priceLabel.sizeToFit()
+		ana_priceLabel.center = CGPoint(x: ana_scrollView.halfWidth(), y: ana_featuresBackView.maxY() + 58 + ana_priceLabel.halfHeight())
+        ana_button.frame = CGRect(x: 24, y: ana_priceLabel.maxY() + 8, width: ana_scrollView.width() - 24 * 2, height: 54)
 		ana_buttonBottomLabel.sizeToFit()
 		ana_buttonBottomLabel.center = CGPoint(x: ana_scrollView.halfWidth(), y: ana_button.maxY() + 12 + ana_buttonBottomLabel.halfHeight())
         ana_restoreButton.sizeToFit()
@@ -283,13 +247,10 @@ class SubscriptionViewController: UIViewController {
     
     
     func requestSuccess() {
-		if let ana_monthProduct = ana_monthProduct {
-			ana_topProductView.set(price: ana_monthProduct.regularPrice, freeDays: ana_monthProduct.freeDays, durationString: "month")
+		if let ana_product = ana_product {
+			ana_priceLabel.text = "\(ana_product.regularPrice) to open a permanent membership"
+			ana_bottomLabel.text = "Pre Eggers Premium offers onetime purchase subscription. You can subscribe to onetime purchase plan(\(ana_product.regularPrice)."
 		}
-		if let ana_yearProduct = ana_yearProduct {
-			ana_bottomProductView.set(price: ana_yearProduct.regularPrice, freeDays: ana_yearProduct.freeDays, durationString: "year")
-		}
-		ana_bottomLabel.text = "Pre Eggers Premium offers monthly and yearly purchase subscription. You can subscribe to a monthly plan(\(ana_monthProduct?.regularPrice ?? "$6.99") per month) or a yearly plan(\(ana_yearProduct?.regularPrice ?? "39.99") per year). You can manage or turn off auto-renew in your Apple ID account settings at any time. Subscriptions will automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Any unused portion of a free trial period will be forfeited when you purchase a subscription. Our app is functional without purchasing an Auto-Renewable subscription, and you can use all the unlocked content after the subscription expires."
 		view.layoutNow()
     }
     
@@ -303,8 +264,7 @@ extension SubscriptionViewController: NBInAppPurchaseProtocol {
     
     /**获取订阅产品成功*/
     func subscriptionProductsDidReciveSuccess(products: [SKProduct]) {
-        ana_monthProduct = products.filter({$0.productIdentifier == NBNewStoreManager.shard.monthProductId}).first
-		ana_yearProduct = products.filter({$0.productIdentifier == NBNewStoreManager.shard.yearProductId}).first
+		ana_product = products.filter({$0.productIdentifier == NBNewStoreManager.shard.onceProductId}).first
         requestSuccess()
     }
     /**获取订阅产品失败*/

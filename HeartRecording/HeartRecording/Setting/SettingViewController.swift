@@ -89,7 +89,7 @@ class SettingViewController: AnaLargeTitleTableViewController, MFMailComposeView
 				UIApplication.shared.open(URL(string: mailStr)!, options: [:], completionHandler: nil)
 			}
 		case 3:
-			let content = "Use this app to record your baby’s heart beat https://itunes.apple.com/app/1614775980"
+			let content = "Mom & Baby's Memo https://itunes.apple.com/app/1614775980"
 			NBSharedTool.shard(to: .systemShared, shardContent: content, shardImage: nil, linkUrl: nil,fromVC: self, .zero, nil)
 		case 4:
 			let commentLink = "itms-apps://itunes.apple.com/app/id1614775980?action=write-review"

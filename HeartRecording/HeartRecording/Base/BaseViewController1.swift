@@ -26,7 +26,7 @@ class BaseViewController1: BaseViewController {
 		
 		ana_primaryLabel.text = "Pre Eggers"
 		
-		ana_secondaryLabel.text = "Track & Count your baby kicks"
+		ana_secondaryLabel.text = "Track & Count Your Baby Kicks"
 		
 		ana_imageView.image = UIImage(named: "Base_1_Image")
 		

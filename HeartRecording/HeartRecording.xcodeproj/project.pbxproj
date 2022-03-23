@@ -57,6 +57,7 @@
 		187FD53D27D08DF700E1B0F9 /* BaseViewController3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FD53C27D08DF700E1B0F9 /* BaseViewController3.swift */; };
 		187FD53F27D08E7600E1B0F9 /* StarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FD53E27D08E7600E1B0F9 /* StarsView.swift */; };
 		187FD54127D0947F00E1B0F9 /* SubscriptionProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FD54027D0947F00E1B0F9 /* SubscriptionProductView.swift */; };
+		18C08A1D27EAD6FF0048023A /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18C08A1C27EAD6FF0048023A /* Poppins-Light.ttf */; };
 		18D3309D26526EB000DFFFFF /* KickCounterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D3309C26526EB000DFFFFF /* KickCounterViewController.swift */; };
 		18D330AB26527C7F00DFFFFF /* AddKickCounterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D330AA26527C7F00DFFFFF /* AddKickCounterViewController.swift */; };
 		18D330AD2653841300DFFFFF /* DbKicksModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D330AC2653841300DFFFFF /* DbKicksModel.swift */; };
@@ -141,6 +142,7 @@
 		187FD53C27D08DF700E1B0F9 /* BaseViewController3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController3.swift; sourceTree = "<group>"; };
 		187FD53E27D08E7600E1B0F9 /* StarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarsView.swift; sourceTree = "<group>"; };
 		187FD54027D0947F00E1B0F9 /* SubscriptionProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionProductView.swift; sourceTree = "<group>"; };
+		18C08A1C27EAD6FF0048023A /* Poppins-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Light.ttf"; sourceTree = "<group>"; };
 		18D3309C26526EB000DFFFFF /* KickCounterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KickCounterViewController.swift; sourceTree = "<group>"; };
 		18D330AA26527C7F00DFFFFF /* AddKickCounterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddKickCounterViewController.swift; sourceTree = "<group>"; };
 		18D330AC2653841300DFFFFF /* DbKicksModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DbKicksModel.swift; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 				1843FDF327C5F538006C449B /* Poppins-Medium.ttf */,
 				187FD53627D0883600E1B0F9 /* Merriweather-Bold.ttf */,
 				183B71F527E2F31600292120 /* Didot Regular.ttf */,
+				18C08A1C27EAD6FF0048023A /* Poppins-Light.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -532,6 +535,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1825C88E26285C5B001C0FB3 /* iconfont.ttf in Resources */,
+				18C08A1D27EAD6FF0048023A /* Poppins-Light.ttf in Resources */,
 				1843FDF427C5F538006C449B /* Poppins-Medium.ttf in Resources */,
 				1801C7CC27C370F0004D4B91 /* confuseAndBuild.sh in Resources */,
 				1825C976262DFAD5001C0FB3 /* Configuration.storekit in Resources */,
@@ -834,7 +838,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 98F99FS382;
 				INFOPLIST_FILE = HeartRecording/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -859,7 +863,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 98F99FS382;
 				INFOPLIST_FILE = HeartRecording/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
