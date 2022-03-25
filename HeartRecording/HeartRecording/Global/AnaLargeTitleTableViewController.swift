@@ -86,7 +86,7 @@ class AnaLargeTitleTableViewController: UIViewController, UITableViewDelegate, U
         ana_gradientLayer.frame = view.bounds
 		ana_shapeImageView.sizeToFit()
 		ana_shapeImageView.setOrigin(x: view.width() - ana_shapeImageView.width(), y: view.height() - ana_shapeImageView.height())
-		ana_tableView.frame = CGRect(x: 0, y: topSpacing(), width: view.bounds.width, height: (view.height() - 13 - bottomSpacing() - 82) - topSpacing())
+		ana_tableView.frame = CGRect(x: 0, y: topSpacing(), width: view.bounds.width, height: (view.height() - bottomSpacing()) - topSpacing())
 	}
 	
 	

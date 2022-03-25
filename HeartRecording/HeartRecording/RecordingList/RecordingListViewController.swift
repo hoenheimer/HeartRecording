@@ -39,7 +39,7 @@ class RecordingListViewController: AnaLargeTitleTableViewController, SwipeTableV
 		setProRightBarItemIfNeeded()
         setHeaderView(headerView: nil)
 		
-		hintImageView = UIImageView(image: UIImage(named: "Kick_Hint"))
+		hintImageView = UIImageView(image: UIImage(named: "Kick_Background"))
 		view.addSubview(hintImageView)
 		view.sendSubviewToBack(hintImageView)
         

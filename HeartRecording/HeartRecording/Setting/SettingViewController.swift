@@ -31,7 +31,7 @@ class SettingViewController: AnaLargeTitleTableViewController, MFMailComposeView
 	
 	// MARK: - UITableViewDelegate & UITableViewDataSource
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return 7
+		return 8
 	}
 	
 	
@@ -52,6 +52,8 @@ class SettingViewController: AnaLargeTitleTableViewController, MFMailComposeView
 			cell.set(imageName: "Setting_Privacy", title: "Privacy Policy")
 		case 6:
 			cell.set(imageName: "Setting_Terms", title: "Terms of use")
+		case 7:
+			cell.set(imageName: "Setting_Health", title: "Health Information Source")
 		default:
 			break
 		}
@@ -106,6 +108,10 @@ class SettingViewController: AnaLargeTitleTableViewController, MFMailComposeView
 			webView.urlStr = "https://sites.google.com/view/preeggerstou/home"
 			webView.modalPresentationStyle = .fullScreen
 			present(webView, animated: true, completion: nil)
+		case 7:
+			if let url = URL(string: "https://www.nhs.uk/pregnancy/keeping-well/your-babys-movements/") {
+				UIApplication.shared.open(url)
+			}
 		default:
 			return
 		}

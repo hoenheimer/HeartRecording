@@ -10,12 +10,18 @@ import ReactiveCocoa
 import ReactiveSwift
 
 
-class KickCounterViewController: AnaLargeTitleTableViewController {
+class KickCounterViewController: AnaLargeTitleTableViewController, UITextViewDelegate {
 	var hintImageView: UIImageView!
 	var ana_emptyView: UIView!
 	var ana_emptyImageView: UIImageView!
 	var ana_emptyLabel: UILabel!
 	var emptyButton: UIButton!
+	
+	var linkView: UIView!
+	var linkGradientLayer: CAGradientLayer!
+	var linkImageView: UIImageView!
+	var linkTextView: UITextView!
+	var linkCloseButton: UIButton!
 	
 	var ana_models: [DbKicksModel]!
 	
@@ -66,7 +72,7 @@ class KickCounterViewController: AnaLargeTitleTableViewController {
 		}
 		setHeaderView(headerView: nil)
 		
-		hintImageView = UIImageView(image: UIImage(named: "Kick_Hint"))
+		hintImageView = UIImageView(image: UIImage(named: "Kick_Background"))
 		view.addSubview(hintImageView)
 		view.sendSubviewToBack(hintImageView)
 		
@@ -103,6 +109,43 @@ class KickCounterViewController: AnaLargeTitleTableViewController {
 			self.navigationController?.pushViewController(AddKickCounterViewController(), animated: true)
 		}
 		ana_tableView.addSubview(emptyButton)
+		
+		linkView = UIView()
+		linkView.isHidden = UserDefaults.standard.bool(forKey: "Have_Closed_Link")
+		view.addSubview(linkView)
+		
+		linkGradientLayer = CAGradientLayer()
+		linkGradientLayer.cornerRadius = 14
+		linkGradientLayer.colors = [UIColor.color(hexString: "#d0c0ff").withAlphaComponent(0.3).cgColor, UIColor.color(hexString: "#f9f8ff").withAlphaComponent(0.3).cgColor]
+		linkGradientLayer.startPoint = CGPoint(x: 1, y: 0.5)
+		linkGradientLayer.endPoint = CGPoint(x: 0, y: 0.5)
+		linkView.layer.addSublayer(linkGradientLayer)
+		
+		linkImageView = UIImageView(image: UIImage(named: "Kick_Link"))
+		linkView.addSubview(linkImageView)
+		
+		linkTextView = UITextView()
+		linkTextView.backgroundColor = .clear
+		linkTextView.delegate = self
+		linkTextView.isEditable = false
+		let attributedString = NSMutableAttributedString(string: "Health information source: Baby Movement, (Nati-onal Health Service).",
+														 attributes: [.font : UIFont(name: "Poppins-Regular", size: 12)!,
+															.foregroundColor : UIColor.color(hexString: "#504278")])
+		attributedString.addAttribute(.link, value: "https://www.nhs.uk/pregnancy/keeping-well/your-babys-movements/", range: NSRange(location: 27, length: 41))
+		linkTextView.attributedText = attributedString
+		linkTextView.textContainer.lineFragmentPadding = 0
+		linkTextView.textContainerInset = .zero
+		linkView.addSubview(linkTextView)
+		
+		linkCloseButton = UIButton()
+		linkCloseButton.setImage(UIImage(named: "Kick_Link_Close"), for: .normal)
+		linkCloseButton.reactive.controlEvents(.touchUpInside).observeValues {
+			[weak self] _ in
+			guard let self = self else { return }
+			self.linkView.isHidden = true
+			UserDefaults.standard.set(true, forKey: "Have_Closed_Link")
+		}
+		linkView.addSubview(linkCloseButton)
 	}
 	
 	
@@ -119,6 +162,14 @@ class KickCounterViewController: AnaLargeTitleTableViewController {
 		ana_emptyView.center = CGPoint(x: ana_tableView.halfWidth(), y: ana_tableView.halfHeight())
 		emptyButton.bounds = CGRect(x: 0, y: 0, width: 250, height: 54)
 		emptyButton.center = CGPoint(x: ana_tableView.halfWidth(), y: ana_tableView.height() * 0.8)
+		linkView.frame = CGRect(x: 24, y: view.height() - bottomSpacing() - 12 - 52, width: view.width() - 24 * 2, height: 52)
+		linkGradientLayer.frame = linkView.bounds
+		linkImageView.sizeToFit()
+		linkImageView.setOrigin(x: 10, y: 8)
+		linkCloseButton.sizeToFit()
+		linkCloseButton.setOrigin(x: linkView.width() - 7 - linkCloseButton.width(), y: 7)
+		let size = linkTextView.sizeThatFits(CGSize(width: linkCloseButton.minX() - 7 - linkImageView.maxX() - 4, height: .greatestFiniteMagnitude))
+		linkTextView.frame = CGRect(x: linkImageView.maxX() + 4, y: 7, width: size.width, height: size.height)
 	}
 	
 	
@@ -186,6 +237,13 @@ class KickCounterViewController: AnaLargeTitleTableViewController {
 	
 	func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
 		return 0.1
+	}
+	
+	
+	// MARK: - UITextViewDelegate
+	func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+		UIApplication.shared.open(URL)
+		return false
 	}
 }
 

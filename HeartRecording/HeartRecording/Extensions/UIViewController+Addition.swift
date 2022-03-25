@@ -45,6 +45,9 @@ public extension UIViewController {
 	
 	
 	func tabBarHeight() -> CGFloat {
+		if let simulationTabBar = (tabBarController as? AnaTabBarController)?.ana_simulationTabBar {
+			return view.height() - simulationTabBar.minY()
+		}
         if let tabBarController = tabBarController {
             return tabBarController.tabBar.isHidden ? 0 : tabBarController.tabBar.height()
         }
