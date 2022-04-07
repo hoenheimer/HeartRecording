@@ -58,7 +58,6 @@
 		187FD53B27D08D2200E1B0F9 /* BaseViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FD53A27D08D2200E1B0F9 /* BaseViewController2.swift */; };
 		187FD53D27D08DF700E1B0F9 /* BaseViewController3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FD53C27D08DF700E1B0F9 /* BaseViewController3.swift */; };
 		187FD53F27D08E7600E1B0F9 /* StarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FD53E27D08E7600E1B0F9 /* StarsView.swift */; };
-		187FD54127D0947F00E1B0F9 /* SubscriptionProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FD54027D0947F00E1B0F9 /* SubscriptionProductView.swift */; };
 		18D3309D26526EB000DFFFFF /* KickCounterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D3309C26526EB000DFFFFF /* KickCounterViewController.swift */; };
 		18D330AB26527C7F00DFFFFF /* AddKickCounterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D330AA26527C7F00DFFFFF /* AddKickCounterViewController.swift */; };
 		18D330AD2653841300DFFFFF /* DbKicksModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D330AC2653841300DFFFFF /* DbKicksModel.swift */; };
@@ -144,7 +143,6 @@
 		187FD53A27D08D2200E1B0F9 /* BaseViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController2.swift; sourceTree = "<group>"; };
 		187FD53C27D08DF700E1B0F9 /* BaseViewController3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController3.swift; sourceTree = "<group>"; };
 		187FD53E27D08E7600E1B0F9 /* StarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarsView.swift; sourceTree = "<group>"; };
-		187FD54027D0947F00E1B0F9 /* SubscriptionProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionProductView.swift; sourceTree = "<group>"; };
 		18D3309C26526EB000DFFFFF /* KickCounterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KickCounterViewController.swift; sourceTree = "<group>"; };
 		18D330AA26527C7F00DFFFFF /* AddKickCounterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddKickCounterViewController.swift; sourceTree = "<group>"; };
 		18D330AC2653841300DFFFFF /* DbKicksModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DbKicksModel.swift; sourceTree = "<group>"; };
@@ -324,7 +322,6 @@
 			isa = PBXGroup;
 			children = (
 				1825C958262DE7AF001C0FB3 /* SubscriptionViewController.swift */,
-				187FD54027D0947F00E1B0F9 /* SubscriptionProductView.swift */,
 			);
 			path = Subscription;
 			sourceTree = "<group>";
@@ -657,7 +654,6 @@
 				1825C8F6262D7D6C001C0FB3 /* DbManager.swift in Sources */,
 				1825C89C26285D32001C0FB3 /* AnaLargeTitleTableViewController.swift in Sources */,
 				1825C959262DE7AF001C0FB3 /* SubscriptionViewController.swift in Sources */,
-				187FD54127D0947F00E1B0F9 /* SubscriptionProductView.swift in Sources */,
 				6CD6CA15262771330099F063 /* SceneDelegate.swift in Sources */,
 				1825C952262DE771001C0FB3 /* NBNewStoreManager.swift in Sources */,
 				181B6E4D27C383D200E1F652 /* AnaTabBarController.swift in Sources */,
@@ -842,14 +838,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 98F99FS382;
 				INFOPLIST_FILE = HeartRecording/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.babycare.heartbeat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "HeartRecording/Support Files/HeartRecording-Bridging-Header.h";
@@ -867,14 +863,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 98F99FS382;
 				INFOPLIST_FILE = HeartRecording/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.babycare.heartbeat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "HeartRecording/Support Files/HeartRecording-Bridging-Header.h";

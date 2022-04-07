@@ -40,6 +40,10 @@ class BaseViewController2: BaseViewController {
 		shapeImageView.sizeToFit()
 		shapeImageView.setOrigin(x: view.width() - shapeImageView.width(), y: view.height() - shapeImageView.height())
 		imageView.sizeToFit()
+		if imageView.width() > 0 {
+			let scale = view.width() / imageView.width()
+			imageView.bounds = CGRect(x: 0, y: 0, width: view.width(), height: imageView.height() * scale)
+		}
 		imageView.center = CGPoint(x: view.halfWidth(), y: view.halfHeight())
 	}
 }

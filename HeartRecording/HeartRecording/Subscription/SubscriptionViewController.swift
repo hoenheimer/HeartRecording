@@ -19,6 +19,7 @@ class SubscriptionViewController: UIViewController {
 	var hintShapeLayer: 			CAShapeLayer!
     var ana_closeButton:            UIButton!
 	var ana_imageView:              UIImageView!
+	var ana_shapeImageView:			UIImageView!
     var ana_titleLabel:             UILabel!
 	var ana_titleImageView:			UIImageView!
     var ana_featuresBackView:       UIView!
@@ -28,8 +29,7 @@ class SubscriptionViewController: UIViewController {
     var ana_featureLabel1:          UILabel!
     var ana_featureLabel2:          UILabel!
     var ana_featureLabel3:          UILabel!
-	var ana_topProductView:			SubscriptionProductView!
-	var ana_bottomProductView:		SubscriptionProductView!
+	var ana_priceLabel:				UILabel!
     var ana_button:                 UIButton!
     var ana_buttonBottomLabel:      UILabel!
     var ana_restoreButton:          UIButton!
@@ -38,8 +38,6 @@ class SubscriptionViewController: UIViewController {
     var ana_bottomLabel:            UILabel!
     
     var ana_monthProduct: SKProduct?
-	var ana_sixMonthProduct: SKProduct?
-	var selectBottomProduct = false
     var ana_success: (() -> Void)? = nil
 	var ana_dismiss: (() -> Void)? = nil
 	var fromBase = false
@@ -89,6 +87,7 @@ class SubscriptionViewController: UIViewController {
         ana_scrollView = UIScrollView()
         ana_scrollView.backgroundColor = .clear
 		ana_scrollView.contentInsetAdjustmentBehavior = .never
+		ana_scrollView.showsVerticalScrollIndicator = false
         view.addSubview(ana_scrollView)
         
         ana_closeButton = UIButton()
@@ -114,6 +113,9 @@ class SubscriptionViewController: UIViewController {
 		ana_imageView = UIImageView()
 		ana_imageView.image = UIImage(named: "Subscription_Image")
 		ana_scrollView.addSubview(ana_imageView)
+		
+		ana_shapeImageView = UIImageView(image: UIImage(named: "Subscription_Shape"))
+		ana_scrollView.addSubview(ana_shapeImageView)
         
         ana_titleLabel = UILabel()
         ana_titleLabel.text = "BabyCare Premium"
@@ -158,29 +160,11 @@ class SubscriptionViewController: UIViewController {
         ana_featureLabel3.font = UIFont(name: "PingFangSC-Regular", size: 14)
         ana_featuresBackView.addSubview(ana_featureLabel3)
 		
-		ana_topProductView = SubscriptionProductView()
-		ana_topProductView.set(price: "$6.99", freeDays: 3, durationString: "month")
-		ana_topProductView.setSelected(true)
-		ana_topProductView.pipe.output.observeValues {
-			[weak self] _ in
-			guard let self = self else { return }
-			self.selectBottomProduct = false
-			self.ana_topProductView.setSelected(true)
-			self.ana_bottomProductView.setSelected(false)
-		}
-		ana_scrollView.addSubview(ana_topProductView)
-		
-		ana_bottomProductView = SubscriptionProductView()
-		ana_bottomProductView.set(price: "$39.99", freeDays: 3, durationString: "Half year")
-		ana_bottomProductView.setSelected(false)
-		ana_bottomProductView.pipe.output.observeValues {
-			[weak self] _ in
-			guard let self = self else { return }
-			self.selectBottomProduct = true
-			self.ana_topProductView.setSelected(false)
-			self.ana_bottomProductView.setSelected(true)
-		}
-		ana_scrollView.addSubview(ana_bottomProductView)
+		ana_priceLabel = UILabel()
+		ana_priceLabel.text = "3 Days Free Trial,then $6.99/month"
+		ana_priceLabel.textColor = .color(hexString: "#e46a7d")
+		ana_priceLabel.font = UIFont(name: "Poppins-Medium", size: 14)
+		ana_scrollView.addSubview(ana_priceLabel)
         
         ana_button = UIButton()
 		ana_button.layer.cornerRadius = 27
@@ -194,7 +178,7 @@ class SubscriptionViewController: UIViewController {
         ana_button.reactive.controlEvents(.touchUpInside).observeValues {
             [weak self] button in
             guard let self = self else { return }
-			if let product = self.selectBottomProduct ? self.ana_sixMonthProduct : self.ana_monthProduct {
+			if let product = self.ana_monthProduct {
 				self.purchase(product: product)
 			}
         }
@@ -202,13 +186,13 @@ class SubscriptionViewController: UIViewController {
 		
 		ana_buttonBottomLabel = UILabel()
 		ana_buttonBottomLabel.text = "Auto renewable, Cancel anytime"
-		ana_buttonBottomLabel.textColor = .color(hexString: "#6a515e")
+		ana_buttonBottomLabel.textColor = UIColor.color(hexString: "#6a515e").withAlphaComponent(0.5)
 		ana_buttonBottomLabel.font = UIFont(name: "PingFangSC-Regular", size: 13)
 		ana_scrollView.addSubview(ana_buttonBottomLabel)
         
         ana_restoreButton = UIButton()
         ana_restoreButton.setTitle("RESTORE PURCHASE", for: .normal)
-        ana_restoreButton.setTitleColor(.color(hexString: "#6a515e"), for: .normal)
+        ana_restoreButton.setTitleColor(UIColor.color(hexString: "#6a515e").withAlphaComponent(0.5), for: .normal)
         ana_restoreButton.titleLabel?.font = UIFont(name: "PingFangSC-Semibold", size: 10)
         ana_restoreButton.reactive.controlEvents(.touchUpInside).observeValues {
             [weak self] _ in
@@ -219,7 +203,7 @@ class SubscriptionViewController: UIViewController {
         
         ana_termsButton = UIButton()
 		ana_termsButton.setTitle("Terms of Service", for: .normal)
-		ana_termsButton.setTitleColor(.color(hexString: "#6a515e"), for: .normal)
+		ana_termsButton.setTitleColor(UIColor.color(hexString: "#6a515e").withAlphaComponent(0.5), for: .normal)
 		ana_termsButton.titleLabel?.font = UIFont(name: "PingFangSC-Semibold", size: 10)
         ana_termsButton.reactive.controlEvents(.touchUpInside).observeValues {
             [weak self] _ in
@@ -233,7 +217,7 @@ class SubscriptionViewController: UIViewController {
         
         ana_privacyButton = UIButton()
 		ana_privacyButton.setTitle("Privacy Policy", for: .normal)
-		ana_privacyButton.setTitleColor(.color(hexString: "#6a515e"), for: .normal)
+		ana_privacyButton.setTitleColor(UIColor.color(hexString: "#6a515e").withAlphaComponent(0.5), for: .normal)
 		ana_privacyButton.titleLabel?.font = UIFont(name: "PingFangSC-Semibold", size: 10)
         ana_privacyButton.reactive.controlEvents(.touchUpInside).observeValues {
             [weak self] _ in
@@ -248,8 +232,8 @@ class SubscriptionViewController: UIViewController {
         ana_bottomLabel = UILabel()
         ana_bottomLabel.numberOfLines = 0
 		ana_bottomLabel.textAlignment = .justified
-        ana_bottomLabel.text = "BabyCare Premium offers monthly and half-yearly purchase subscription. You can subscribe to a monthly plan($6.99 per month) or a half-yearly plan($39.99 per half-year). You can manage or turn off auto-renew in your Apple ID account settings at any time. Subscriptions will automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Any unused portion of a free trial period will be forfeited when you purchase a subscription. Our app is functional without purchasing an Auto-Renewable subscription, and you can use all the unlocked content after the subscription expires."
-        ana_bottomLabel.textColor = .color(hexString: "#6a515e")
+        ana_bottomLabel.text = "BabyCare Premium offers monthly purchase subscription. You can subscribe to a monthly plan ($6.99 per month). You can manage or turn off auto-renew in your Apple ID account settings at any time. Subscriptions will automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Any unused portion of a free trial period will be forfeited when you purchase a subscription. Our app is functional without purchasing an Auto-Renewable subscription, and you can use all the unlocked content after the subscription expires."
+        ana_bottomLabel.textColor = UIColor.color(hexString: "#6a515e").withAlphaComponent(0.5)
         ana_bottomLabel.font  = UIFont(name: "PingFangSC-Semibold", size: 10)
         ana_scrollView.addSubview(ana_bottomLabel)
     }
@@ -263,9 +247,11 @@ class SubscriptionViewController: UIViewController {
         ana_closeButton.sizeToFit()
         ana_closeButton.setOrigin(x: 20, y: topSpacing() + 30)
 		ana_imageView.sizeToFit()
-		ana_imageView.center = CGPoint(x: view.halfWidth(), y: topSpacing() + 8 + ana_imageView.halfHeight())
+		ana_imageView.center = CGPoint(x: view.halfWidth(), y: topSpacing() + 32 + ana_imageView.halfHeight())
+		ana_shapeImageView.sizeToFit()
+		ana_shapeImageView.setOrigin(x: 0, y: 0)
         ana_titleLabel.sizeToFit()
-		ana_titleLabel.center = CGPoint(x: ana_scrollView.halfWidth(), y: topSpacing() + 96 + ana_titleLabel.halfHeight())
+		ana_titleLabel.center = CGPoint(x: ana_scrollView.halfWidth(), y: topSpacing() + 105 + ana_titleLabel.halfHeight())
 		ana_titleImageView.sizeToFit()
 		ana_titleImageView.center = CGPoint(x: ana_titleLabel.maxX() + 12 + ana_titleImageView.halfWidth(), y: ana_titleLabel.centerY())
         ana_iconImageView1.sizeToFit()
@@ -282,10 +268,11 @@ class SubscriptionViewController: UIViewController {
         ana_featureLabel3.center = CGPoint(x: ana_iconImageView3.maxX() + 9 + ana_featureLabel3.halfWidth(), y: ana_iconImageView3.centerY())
         ana_featuresBackView.bounds = CGRect(origin: .zero, size: CGSize(width: max(ana_featureLabel1.maxX(), ana_featureLabel2.maxX(), ana_featureLabel3.maxX()),
                                                                      height: ana_iconImageView3.maxY()))
-		ana_featuresBackView.center = CGPoint(x: ana_scrollView.halfWidth(), y: ana_imageView.maxY() + 13.4 + ana_featuresBackView.halfHeight())
-		ana_topProductView.frame = CGRect(x: 25, y: ana_featuresBackView.maxY() + 35, width: ana_scrollView.width() - 25 * 2, height: 44)
-		ana_bottomProductView.frame = CGRect(x: 25, y: ana_topProductView.maxY() + 16, width: ana_scrollView.width() - 25 * 2, height: 44)
-        ana_button.frame = CGRect(x: 25, y: ana_bottomProductView.maxY() + 24, width: ana_scrollView.width() - 25 * 2, height: 54)
+		ana_featuresBackView.center = CGPoint(x: ana_scrollView.halfWidth(), y: ana_imageView.maxY() - 8 - ana_featuresBackView.halfHeight())
+		ana_priceLabel.sizeToFit()
+		ana_priceLabel.bounds = CGRect(x: 0, y: 0, width: ana_priceLabel.width(), height: 24)
+		ana_priceLabel.center = CGPoint(x: ana_scrollView.halfWidth(), y: ana_featuresBackView.maxY() + 45 + ana_priceLabel.halfHeight())
+        ana_button.frame = CGRect(x: 25, y: ana_priceLabel.maxY() + 6, width: ana_scrollView.width() - 25 * 2, height: 54)
 		ana_buttonBottomLabel.sizeToFit()
 		ana_buttonBottomLabel.center = CGPoint(x: ana_scrollView.halfWidth(), y: ana_button.maxY() + 12 + ana_buttonBottomLabel.halfHeight())
         ana_restoreButton.sizeToFit()
@@ -327,12 +314,14 @@ class SubscriptionViewController: UIViewController {
     
     func requestSuccess() {
 		if let ana_monthProduct = ana_monthProduct {
-			ana_topProductView.set(price: ana_monthProduct.regularPrice, freeDays: ana_monthProduct.freeDays, durationString: "month")
+			var string = ""
+			if ana_monthProduct.freeDays > 0 {
+				string.append("\(ana_monthProduct.freeDays) Days Free Trial,then ")
+			}
+			string.append("\(ana_monthProduct.regularPrice)/month")
+			ana_priceLabel.text = "3 Days Free Trial,then $6.99/month"
 		}
-		if let ana_sixMonthProduct = ana_sixMonthProduct {
-			ana_bottomProductView.set(price: ana_sixMonthProduct.regularPrice, freeDays: ana_sixMonthProduct.freeDays, durationString: "Half year")
-		}
-		ana_bottomLabel.text = "BabyCare Premium offers monthly and half-yearly purchase subscription. You can subscribe to a monthly plan(\(ana_monthProduct?.regularPrice ?? "$6.99") per month) or a half-yearly plan(\(ana_sixMonthProduct?.regularPrice ?? "39.99") per half-year). You can manage or turn off auto-renew in your Apple ID account settings at any time. Subscriptions will automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Any unused portion of a free trial period will be forfeited when you purchase a subscription. Our app is functional without purchasing an Auto-Renewable subscription, and you can use all the unlocked content after the subscription expires."
+		ana_bottomLabel.text = "BabyCare Premium offers monthly purchase subscription. You can subscribe to a monthly plan (\(ana_monthProduct?.regularPrice ?? "$6.99") per month). You can manage or turn off auto-renew in your Apple ID account settings at any time. Subscriptions will automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Any unused portion of a free trial period will be forfeited when you purchase a subscription. Our app is functional without purchasing an Auto-Renewable subscription, and you can use all the unlocked content after the subscription expires."
 		view.layoutNow()
     }
     
@@ -347,7 +336,6 @@ extension SubscriptionViewController: NBInAppPurchaseProtocol {
     /**获取订阅产品成功*/
     func subscriptionProductsDidReciveSuccess(products: [SKProduct]) {
         ana_monthProduct = products.filter({$0.productIdentifier == NBNewStoreManager.shard.monthProductId}).first
-		ana_sixMonthProduct = products.filter({$0.productIdentifier == NBNewStoreManager.shard.sixMonthProductId}).first
         requestSuccess()
     }
     /**获取订阅产品失败*/
