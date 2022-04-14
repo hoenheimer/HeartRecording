@@ -54,6 +54,8 @@
 		182C9B0C2807D719006B48C8 /* CancelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182C9B0B2807D719006B48C8 /* CancelViewController.swift */; };
 		182C9B0E2807EA07006B48C8 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 182C9B0D2807EA07006B48C8 /* Poppins-Bold.ttf */; };
 		182C9B102807EC35006B48C8 /* ProductItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182C9B0F2807EC35006B48C8 /* ProductItemView.swift */; };
+		182C9B122807FEA2006B48C8 /* KickTipsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182C9B112807FEA2006B48C8 /* KickTipsViewController.swift */; };
+		182C9B1428081125006B48C8 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 182C9B1328081125006B48C8 /* Poppins-Medium.ttf */; };
 		18301023267E20DE006A54B0 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18301022267E20DE006A54B0 /* EventManager.swift */; };
 		1840ACDB26664B07006CC5FE /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840ACDA26664B07006CC5FE /* GuideViewController.swift */; };
 		18D3309D26526EB000DFFFFF /* KickCounterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D3309C26526EB000DFFFFF /* KickCounterViewController.swift */; };
@@ -137,6 +139,8 @@
 		182C9B0B2807D719006B48C8 /* CancelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelViewController.swift; sourceTree = "<group>"; };
 		182C9B0D2807EA07006B48C8 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
 		182C9B0F2807EC35006B48C8 /* ProductItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductItemView.swift; sourceTree = "<group>"; };
+		182C9B112807FEA2006B48C8 /* KickTipsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KickTipsViewController.swift; sourceTree = "<group>"; };
+		182C9B1328081125006B48C8 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.ttf"; sourceTree = "<group>"; };
 		18301022267E20DE006A54B0 /* EventManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
 		1840ACDA26664B07006CC5FE /* GuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideViewController.swift; sourceTree = "<group>"; };
 		18D3309C26526EB000DFFFFF /* KickCounterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KickCounterViewController.swift; sourceTree = "<group>"; };
@@ -281,6 +285,7 @@
 				1825C88D26285C5B001C0FB3 /* iconfont.ttf */,
 				1825C8B32628D431001C0FB3 /* Poppins-Light.ttf */,
 				1825C8B82628D9ED001C0FB3 /* Poppins-SemiBold.ttf */,
+				182C9B1328081125006B48C8 /* Poppins-Medium.ttf */,
 				1825C91C262D8D55001C0FB3 /* Inter-Regular.ttf */,
 				182C9B052807C850006B48C8 /* Poppins-Regular.ttf */,
 				182C9B0D2807EA07006B48C8 /* Poppins-Bold.ttf */,
@@ -337,6 +342,7 @@
 			children = (
 				18D3309C26526EB000DFFFFF /* KickCounterViewController.swift */,
 				18D330AA26527C7F00DFFFFF /* AddKickCounterViewController.swift */,
+				182C9B112807FEA2006B48C8 /* KickTipsViewController.swift */,
 			);
 			path = Kick;
 			sourceTree = "<group>";
@@ -531,6 +537,7 @@
 				1825C88E26285C5B001C0FB3 /* iconfont.ttf in Resources */,
 				1801C7CC27C370F0004D4B91 /* confuseAndBuild.sh in Resources */,
 				1825C976262DFAD5001C0FB3 /* Configuration.storekit in Resources */,
+				182C9B1428081125006B48C8 /* Poppins-Medium.ttf in Resources */,
 				1825C98E26304481001C0FB3 /* LSImage.png in Resources */,
 				1825C8B42628D431001C0FB3 /* Poppins-Light.ttf in Resources */,
 				6CD6CA1F262771350099F063 /* LaunchScreen.storyboard in Resources */,
@@ -623,6 +630,7 @@
 				1825C87626285BD1001C0FB3 /* AnaNavigationController.swift in Sources */,
 				1825C8E82629C0A8001C0FB3 /* PlayerManager.swift in Sources */,
 				1825C98626303E22001C0FB3 /* FavoriteViewController.swift in Sources */,
+				182C9B122807FEA2006B48C8 /* KickTipsViewController.swift in Sources */,
 				1825C951262DE771001C0FB3 /* NBLoadingBox.swift in Sources */,
 				1825C937262DA106001C0FB3 /* SettingViewController.swift in Sources */,
 				1825C88026285C05001C0FB3 /* UIView+Addition.swift in Sources */,

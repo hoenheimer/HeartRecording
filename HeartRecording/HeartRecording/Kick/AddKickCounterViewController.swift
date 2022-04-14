@@ -22,11 +22,17 @@ class AddKickCounterViewController: UIViewController {
 	var ana_startButtonBackView: UIView!
 	var ana_startButtonGradientLayer: CAGradientLayer!
 	var ana_startButton: UIButton!
+    var ana_tipsView: UIView!
+    var ana_tipsLogoImageView: UIImageView!
+    var ana_tipsLabel: UILabel!
+    var ana_tipsArrowImageView: UIImageView!
+    var ana_tipsSeparateLine: UIView!
 	
 	var ana_countingView: UIView!
 	var ana_kicksLabelsBackView: UIView!
 	var ana_kicksTitleLabel: UILabel!
 	var ana_kicksValueLabel: UILabel!
+    var ana_kickStepImageView: UIImageView!
 	var ana_kickButton: UIButton!
 	var ana_timerLabel: UILabel!
 	var ana_doneButtonBackView: UIView!
@@ -36,6 +42,7 @@ class AddKickCounterViewController: UIViewController {
 	var ana_kicks = 0
 	var ana_timer: Timer?
 	var ana_timerStartDate: Date?
+    var ana_stepRansformScaleX: CGFloat = 1
 	
 	
 	deinit {
@@ -69,7 +76,7 @@ class AddKickCounterViewController: UIViewController {
 		ana_closeButton.reactive.controlEvents(.touchUpInside).observeValues {
 			[weak self] _ in
 			guard let self = self else { return }
-			self.dismiss(animated: true, completion: nil)
+            self.navigationController?.dismiss(animated: true, completion: nil)
 		}
 		view.addSubview(ana_closeButton)
 		
@@ -146,6 +153,33 @@ class AddKickCounterViewController: UIViewController {
 			RunLoop.current.add(self.ana_timer!, forMode: .default)
 		}
 		ana_originView.addSubview(ana_startButton)
+        
+        ana_tipsView = UIView()
+        ana_originView.addSubview(ana_tipsView)
+        
+        let tipsTap = UITapGestureRecognizer()
+        tipsTap.reactive.stateChanged.observeValues {
+            [weak self] _ in
+            guard let self = self else { return }
+            self.navigationController?.pushViewController(KickTipsViewController(), animated: true)
+        }
+        ana_tipsView.addGestureRecognizer(tipsTap)
+        
+        ana_tipsLogoImageView = UIImageView(image: UIImage(named: "Kick_Tips_Icon"))
+        ana_tipsView.addSubview(ana_tipsLogoImageView)
+        
+        ana_tipsLabel = UILabel()
+        ana_tipsLabel.text = "Your Baby's Movements"
+        ana_tipsLabel.textColor = .color(hexString: "#333333")
+        ana_tipsLabel.font = UIFont(name: "Poppins-Regular", size: 13)
+        ana_tipsView.addSubview(ana_tipsLabel)
+        
+        ana_tipsArrowImageView = UIImageView(image: UIImage(named: "Kick_Tips_Arrow"))
+        ana_tipsView.addSubview(ana_tipsArrowImageView)
+        
+        ana_tipsSeparateLine = UIView()
+        ana_tipsSeparateLine.backgroundColor = UIColor.color(hexString: "#333333").withAlphaComponent(0.7)
+        ana_tipsView.addSubview(ana_tipsSeparateLine)
 		
 		ana_countingView = UIView()
 		ana_countingView.backgroundColor = .clear
@@ -167,6 +201,9 @@ class AddKickCounterViewController: UIViewController {
 		ana_kicksValueLabel.textColor = .black
 		ana_kicksValueLabel.font = UIFont(name: "Poppins-SemiBold", size: 100)
 		ana_kicksLabelsBackView.addSubview(ana_kicksValueLabel)
+        
+        ana_kickStepImageView = UIImageView(image: UIImage(named: "Kick_Step"))
+        ana_countingView.addSubview(ana_kickStepImageView)
 		
 		ana_kickButton = UIButton()
 		ana_kickButton.setImage(UIImage(named: "Kick_Button"), for: .normal)
@@ -176,6 +213,8 @@ class AddKickCounterViewController: UIViewController {
 			FeedbackManager.feedback(type: .light)
 			self.ana_kicks += 1
 			self.ana_kicksValueLabel.text = "\(self.ana_kicks)"
+            self.ana_stepRansformScaleX *= -1
+            self.ana_kickStepImageView.transform = CGAffineTransform(scaleX: self.ana_stepRansformScaleX, y: 1)
 			self.view.layoutNow()
 		}
 		ana_countingView.addSubview(ana_kickButton)
@@ -242,19 +281,30 @@ class AddKickCounterViewController: UIViewController {
 		ana_originArrowLabel.center = CGPoint(x: ana_originView.halfWidth(), y: ana_startButton.minY() - 17 - ana_originArrowLabel.halfHeight())
 		ana_originLabel.sizeToFit()
 		ana_originLabel.center = CGPoint(x: ana_originView.halfWidth(), y: ana_originArrowLabel.minY() - 9 - ana_originLabel.halfHeight())
+        ana_tipsLogoImageView.sizeToFit()
+        ana_tipsLogoImageView.setOrigin(x: 0, y: 0)
+        ana_tipsLabel.sizeToFit()
+        ana_tipsLabel.center = CGPoint(x: ana_tipsLogoImageView.maxX() + 5 + ana_tipsLabel.halfWidth(), y: ana_tipsLogoImageView.centerY())
+        ana_tipsArrowImageView.sizeToFit()
+        ana_tipsArrowImageView.center = CGPoint(x: ana_tipsLabel.maxX() + 29 + ana_tipsArrowImageView.halfWidth(), y: ana_tipsLogoImageView.centerY())
+        ana_tipsSeparateLine.frame = CGRect(x: 0, y: ana_tipsLogoImageView.maxY() + 6.7, width: ana_tipsArrowImageView.maxX(), height: 0.6)
+        ana_tipsView.bounds = CGRect(x: 0, y: 0, width: ana_tipsArrowImageView.maxX(), height: ana_tipsSeparateLine.maxY())
+        ana_tipsView.center = CGPoint(x: ana_originView.halfWidth(), y: ana_originView.height() * 0.91)
 		
 		ana_countingView.frame = view.bounds
 		ana_kicksTitleLabel.sizeToFit()
 		ana_kicksValueLabel.sizeToFit()
 		ana_kicksLabelsBackView.bounds = CGRect(origin: .zero, size: CGSize(width: max(ana_kicksTitleLabel.width(), ana_kicksValueLabel.width()),
-																		height: ana_kicksTitleLabel.height() + ana_kicksValueLabel.height()))
+                                                                            height: ana_kicksTitleLabel.height() + ana_kicksValueLabel.height()))
 		ana_kicksTitleLabel.center = CGPoint(x: ana_kicksLabelsBackView.halfWidth(), y: ana_kicksTitleLabel.halfHeight())
 		ana_kicksValueLabel.center = CGPoint(x: ana_kicksLabelsBackView.halfWidth(), y: ana_kicksTitleLabel.maxY() + ana_kicksValueLabel.halfHeight())
-		ana_kicksLabelsBackView.center = CGPoint(x: ana_countingView.halfWidth(), y: ana_countingView.height() * 0.3)
+		ana_kicksLabelsBackView.center = CGPoint(x: ana_countingView.halfWidth(), y: ana_countingView.height() * 0.27)
+        ana_kickStepImageView.sizeToFit()
+        ana_kickStepImageView.center = CGPoint(x: ana_countingView.halfWidth(), y: ana_countingView.height() * 0.43)
 		ana_kickButton.sizeToFit()
-		ana_kickButton.center = CGPoint(x: ana_countingView.halfWidth(), y: ana_countingView.height() * 0.55)
+		ana_kickButton.center = CGPoint(x: ana_countingView.halfWidth(), y: ana_countingView.height() * 0.59)
 		ana_timerLabel.sizeToFit()
-		ana_timerLabel.center = CGPoint(x: ana_countingView.halfWidth(), y: ana_countingView.height() * 0.735)
+		ana_timerLabel.center = CGPoint(x: ana_countingView.halfWidth(), y: ana_countingView.height() * 0.74)
 		ana_doneButtonBackView.frame = ana_startButton.frame
 		ana_doneButtonGradientLayer.frame = ana_doneButtonBackView.bounds
 		ana_doneButton.frame = ana_doneButtonBackView.frame

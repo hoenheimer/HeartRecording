@@ -60,8 +60,10 @@ class KickCounterViewController: AnaLargeTitleTableViewController {
 			guard let self = self else { return }
 			FeedbackManager.feedback(type: .light)
 			let vc = AddKickCounterViewController()
-			vc.modalPresentationStyle = .fullScreen
-			self.present(vc, animated: true, completion: nil)
+			let navigationController = UINavigationController(rootViewController: vc)
+            navigationController.setNavigationBarHidden(true, animated: false)
+            navigationController.modalPresentationStyle = .fullScreen
+			self.present(navigationController, animated: true, completion: nil)
 		}
 		navigationItem.rightBarButtonItem = UIBarButtonItem(customView: button)
 	}
