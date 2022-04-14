@@ -65,7 +65,7 @@ class NBNewStoreManager: NSObject,SKPaymentTransactionObserver{
 
 //    let weekProductId = "com.ziheng.highlightCover.weeekly"
     let monthProductId = "com.babycare.angelweekly"
-//	let onceProductId = "com.ziheng.totowallet.onetimepurchase"
+	let onceProductId = "com.babycare.lifetime"
     let sharedSecret = "e1780bfd2eb24c31bce9fe2ace147443"
     
     private var products: [SKProduct]?
@@ -122,7 +122,7 @@ class NBNewStoreManager: NSObject,SKPaymentTransactionObserver{
     
     
     func allProuductIds() -> [String] {
-        return [monthProductId]
+        return [monthProductId, onceProductId]
     }
     
     /**获取所有产品信息*/
@@ -212,7 +212,7 @@ class NBNewStoreManager: NSObject,SKPaymentTransactionObserver{
         SwiftyStoreKit.verifyReceipt(using: appleValidator) { result in
             var cheackSuccess: Bool = false
 			//是否有买断状态
-            let haveOnetimePurchase: Bool = false
+            var haveOnetimePurchase: Bool = false
             //是否有订阅
             var haveSubscription: Bool = false
             //订阅到期时间
@@ -224,22 +224,22 @@ class NBNewStoreManager: NSObject,SKPaymentTransactionObserver{
             case .success(let receipt):
                 cheackSuccess = true
 				
-//				//一次购买状态
-//				if let onetimeId = weakSelf?.onceProductId{
-//					let onetimeResult = SwiftyStoreKit.verifyPurchase(productId: onetimeId, inReceipt: receipt)
-//					switch onetimeResult {
-//					case .purchased( _):
-//						haveOnetimePurchase = true
-//						haveSubscription = true
-//					case .notPurchased:
-//						haveOnetimePurchase = false
-//						haveSubscription = false
-//					}
-//				}
+				//一次购买状态
+				if let onetimeId = weakSelf?.onceProductId{
+					let onetimeResult = SwiftyStoreKit.verifyPurchase(productId: onetimeId, inReceipt: receipt)
+					switch onetimeResult {
+					case .purchased( _):
+						haveOnetimePurchase = true
+						haveSubscription = true
+					case .notPurchased:
+						haveOnetimePurchase = false
+						haveSubscription = false
+					}
+				}
 				 
 				var productIds = [String]()
-                if let yearProductId = weakSelf?.monthProductId {
-                    productIds.append(yearProductId)
+                if let monthProductId = weakSelf?.monthProductId {
+                    productIds.append(monthProductId)
                 }
 //                if let weekProductId = weakSelf?.weekProductId {
 //                    productIds.append(weekProductId)
@@ -269,8 +269,8 @@ class NBNewStoreManager: NSObject,SKPaymentTransactionObserver{
             }
             let purchaseState = NBPurchaseState(cheackSuccess: cheackSuccess, haveSubscription: haveSubscription, deadLine: deadLine, receiptItems: receiptItems)
 			if haveOnetimePurchase { //有一次性买断
-//				NBUserVipStatusManager.shard.recordOnetimePurchase()
-//				callBack(purchaseState)
+				NBUserVipStatusManager.shard.recordOnetimePurchase()
+				callBack(purchaseState)
 			} else if haveSubscription {  //有订阅
 				NBUserVipStatusManager.shard.recordSubscriptionStatus(deadLine)
 				callBack(purchaseState)

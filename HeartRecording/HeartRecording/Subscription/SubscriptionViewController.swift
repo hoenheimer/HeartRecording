@@ -33,14 +33,15 @@ class SubscriptionViewController: UIViewController {
     var ana_featureLabel1:          UILabel!
     var ana_featureLabel2:          UILabel!
     var ana_featureLabel3:          UILabel!
-    var ana_freeDayLabel:           UILabel!
+    var ana_topProductView:         ProductItemView!
+    var ana_bottomProductView:         ProductItemView!
     var ana_buttonBackView:         UIView!
     var ana_buttonShadowView:       UIView!
     var ana_buttonGradientView:     UIView!
     var ana_buttonGradientLayer:    CAGradientLayer!
     var ana_button:                 UIButton!
     var ana_activityView:           UIActivityIndicatorView!
-    var ana_buttonBottomButton:     UIButton!
+    var ana_buttonBottomLabel:      UILabel!
     var ana_restoreButton:          UIButton!
     var ana_termsButton:            UIButton!
     var ana_privacyButton:          UIButton!
@@ -48,7 +49,9 @@ class SubscriptionViewController: UIViewController {
 	
 	var ana_scene: SubscriptionScene = .normal
     
-    var ana_product: SKProduct?
+    var ana_monthlyProduct: SKProduct?
+    var ana_onceProduct: SKProduct?
+    var ana_selectBottomProduct = false
     var ana_success: (() -> Void)? = nil
 	var ana_dismiss: (() -> Void)? = nil
     
@@ -125,25 +128,54 @@ class SubscriptionViewController: UIViewController {
         ana_featureLabel1 = UILabel()
         ana_featureLabel1.text = "Unlock All Features"
         ana_featureLabel1.textColor = .black
-        ana_featureLabel1.font = .systemFont(ofSize: 14)
+        ana_featureLabel1.font = UIFont(name: "PingFangSC-Regular", size: 14)
         ana_featuresBackView.addSubview(ana_featureLabel1)
         
         ana_featureLabel2 = UILabel()
         ana_featureLabel2.text = "Share Recording With Others"
         ana_featureLabel2.textColor = .black
-        ana_featureLabel2.font = .systemFont(ofSize: 14)
+        ana_featureLabel2.font = UIFont(name: "PingFangSC-Regular", size: 14)
         ana_featuresBackView.addSubview(ana_featureLabel2)
         
         ana_featureLabel3 = UILabel()
         ana_featureLabel3.text = "Remove Ads"
         ana_featureLabel3.textColor = .black
-        ana_featureLabel3.font = .systemFont(ofSize: 14)
+        ana_featureLabel3.font = UIFont(name: "PingFangSC-Regular", size: 14)
         ana_featuresBackView.addSubview(ana_featureLabel3)
         
-        ana_freeDayLabel = UILabel()
-        ana_freeDayLabel.textColor = .color(hexString: "#EB5757")
-        ana_freeDayLabel.font = .systemFont(ofSize: 16, weight: .semibold)
-        ana_scrollView.addSubview(ana_freeDayLabel)
+        ana_topProductView = ProductItemView()
+        ana_topProductView.setSelected(true)
+        ana_topProductView.setContent("3 Days Free Trial, Then Only $6.99/Month")
+        ana_topProductView.pipe.output.observeValues {
+            [weak self] _ in
+            guard let self = self else { return }
+            self.ana_selectBottomProduct = false
+            self.ana_topProductView.setSelected(true)
+            self.ana_bottomProductView.setSelected(false)
+            if let freeDays = self.ana_monthlyProduct?.freeDays {
+                if freeDays > 0 {
+                    self.ana_button.setTitle("\(freeDays) Days Free Trial", for: .normal)
+                } else {
+                    self.ana_button.setTitle("Continue", for: .normal)
+                }
+            } else {
+                self.ana_button.setTitle("3 Days Free Trial", for: .normal)
+            }
+        }
+        ana_scrollView.addSubview(ana_topProductView)
+        
+        ana_bottomProductView = ProductItemView()
+        ana_bottomProductView.setSelected(false)
+        ana_bottomProductView.setContent("Lifetime Purchase $19.99")
+        ana_bottomProductView.pipe.output.observeValues {
+            [weak self] _ in
+            guard let self = self else { return }
+            self.ana_selectBottomProduct = true
+            self.ana_topProductView.setSelected(false)
+            self.ana_bottomProductView.setSelected(true)
+            self.ana_button.setTitle("Continue", for: .normal)
+        }
+        ana_scrollView.addSubview(ana_bottomProductView)
         
         ana_buttonBackView = UIView()
         ana_buttonBackView.backgroundColor = .clear
@@ -170,15 +202,20 @@ class SubscriptionViewController: UIViewController {
         
         ana_button = UIButton()
         ana_button.backgroundColor = .clear
-		ana_button.setTitle("Continue", for: .normal)
+		ana_button.setTitle("3 Days Free Trial", for: .normal)
         ana_button.setTitleColor(.color(hexString: "#FCFCFC"), for: .normal)
         ana_button.titleLabel?.font = UIFont(name: "Poppins-SemiBold", size: 16)
         ana_button.reactive.controlEvents(.touchUpInside).observeValues {
             [weak self] button in
             guard let self = self else { return }
-            if let product = self.ana_product {
+            var product: SKProduct?
+            if self.ana_selectBottomProduct {
+                product = self.ana_onceProduct
+            } else {
+                product = self.ana_monthlyProduct
+            }
+            if let product = product {
                 self.purchase(product: product)
-				EventManager.income(product: product, type: "test")
             }
 			EventManager.log(name: "Subscription_buttontapped_\(self.ana_scene)")
 			EventManager.log(name: "Subscription_buttontapped")
@@ -190,22 +227,16 @@ class SubscriptionViewController: UIViewController {
         ana_activityView.startAnimating()
         ana_button.addSubview(ana_activityView)
         
-        ana_buttonBottomButton = UIButton()
-        ana_buttonBottomButton.setTitle("Auto renewable, Cancel anytime", for: .normal)
-        ana_buttonBottomButton.setTitleColor(.color(hexString: "#979797"), for: .normal)
-        ana_buttonBottomButton.titleLabel?.font = .systemFont(ofSize: 13)
-        ana_buttonBottomButton.reactive.controlEvents(.touchUpInside).observeValues {
-            [weak self] _ in
-            guard let self = self else { return }
-            self.dismiss(animated: true, completion: nil)
-        }
-        ana_buttonBottomButton.isEnabled = false
-        ana_scrollView.addSubview(ana_buttonBottomButton)
+        ana_buttonBottomLabel = UILabel()
+        ana_buttonBottomLabel.text = "Auto renewable, Cancel anytime"
+        ana_buttonBottomLabel.textColor = .color(hexString: "#979797")
+        ana_buttonBottomLabel.font = UIFont(name: "PingFangSC-Regular", size: 13)
+        ana_scrollView.addSubview(ana_buttonBottomLabel)
         
         ana_restoreButton = UIButton()
         ana_restoreButton.setTitle("RESTORE PURCHASE", for: .normal)
-        ana_restoreButton.setTitleColor(.color(hexString: "#979797"), for: .normal)
-        ana_restoreButton.titleLabel?.font = .systemFont(ofSize: 10, weight: .semibold)
+        ana_restoreButton.setTitleColor(UIColor.black.withAlphaComponent(0.2), for: .normal)
+        ana_restoreButton.titleLabel?.font = UIFont(name: "PingFangSC-Semibold", size: 10)
         ana_restoreButton.reactive.controlEvents(.touchUpInside).observeValues {
             [weak self] _ in
             guard let self = self else { return }
@@ -215,10 +246,10 @@ class SubscriptionViewController: UIViewController {
         
         ana_termsButton = UIButton()
         ana_termsButton.setAttributedTitle(NSAttributedString(string: "Terms of Service",
-                                                          attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 10),
-                                                                       NSAttributedString.Key.foregroundColor : UIColor.color(hexString: "#979797"),
-                                                                       NSAttributedString.Key.underlineStyle : NSUnderlineStyle.single.rawValue,
-                                                                       NSAttributedString.Key.underlineColor : UIColor.color(hexString: "#979797").cgColor]),
+                                                          attributes: [.font : UIFont(name: "PingFangSC-Regular", size: 10)!,
+                                                                       .foregroundColor : UIColor.black.withAlphaComponent(0.2),
+                                                                       .underlineStyle : NSUnderlineStyle.single.rawValue,
+                                                                       .underlineColor : UIColor.black.withAlphaComponent(0.2).cgColor]),
                                        for: .normal)
         ana_termsButton.reactive.controlEvents(.touchUpInside).observeValues {
             [weak self] _ in
@@ -232,10 +263,10 @@ class SubscriptionViewController: UIViewController {
         
         ana_privacyButton = UIButton()
         ana_privacyButton.setAttributedTitle(NSAttributedString(string: "Privacy Policy",
-                                                          attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 10),
-                                                                       NSAttributedString.Key.foregroundColor : UIColor.color(hexString: "#979797"),
-                                                                       NSAttributedString.Key.underlineStyle : NSUnderlineStyle.single.rawValue,
-                                                                       NSAttributedString.Key.underlineColor : UIColor.color(hexString: "#979797").cgColor]),
+                                                          attributes: [.font : UIFont(name: "PingFangSC-Regular", size: 10)!,
+                                                                       .foregroundColor : UIColor.black.withAlphaComponent(0.2),
+                                                                       .underlineStyle : NSUnderlineStyle.single.rawValue,
+                                                                       .underlineColor : UIColor.black.withAlphaComponent(0.2).cgColor]),
                                        for: .normal)
         ana_privacyButton.reactive.controlEvents(.touchUpInside).observeValues {
             [weak self] _ in
@@ -249,9 +280,13 @@ class SubscriptionViewController: UIViewController {
         
         ana_bottomLabel = UILabel()
         ana_bottomLabel.numberOfLines = 0
-        ana_bottomLabel.text = "Angel Premium offers weekly purchase subscription. You can subscribe to a yearly plan. You can manage or turn off auto-renew in your Apple ID account settings at any time. Subscriptions will automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Any unused portion of a free trial period will be forfeited when you purchase a subscription. Our app is functional without purchasing an Auto-Renewable subscription, and you can use all the unlocked content after the subscription expires."
-        ana_bottomLabel.textColor = .color(hexString: "#979797")
-        ana_bottomLabel.font  = .systemFont(ofSize: 10, weight: .semibold)
+        let pStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
+        pStyle.lineSpacing = 10
+        pStyle.alignment = .justified
+        ana_bottomLabel.attributedText = NSAttributedString(string: "Angel Premium offers monthly and lifetime purchase subscription. You can subscribe to a monthly plan($6.99 billed once a month) or lifetime plan($19.99). You can manage or turn off auto-renew in your Apple ID account settings at any time. Subscriptions will automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Any unused portion of a free trial period will be forfeited when you purchase a subscription. Our app is functional without purchasing an Auto-Renewable subscription, and you can use all the unlocked content after the subscription expires.",
+                                                            attributes: [.font : UIFont(name: "PingFangSC-Semibold", size: 10)!,
+                                                                .foregroundColor : UIColor.black.withAlphaComponent(0.2),
+                                                                .paragraphStyle : pStyle])
         ana_scrollView.addSubview(ana_bottomLabel)
     }
     
@@ -282,57 +317,72 @@ class SubscriptionViewController: UIViewController {
         ana_featuresBackView.bounds = CGRect(origin: .zero, size: CGSize(width: max(ana_featureLabel1.maxX(), ana_featureLabel2.maxX(), ana_featureLabel3.maxX()),
                                                                      height: ana_iconImageView3.maxY()))
         ana_featuresBackView.center = CGPoint(x: ana_scrollView.halfWidth(), y: ana_imageView.maxY() + 15 + ana_featuresBackView.halfHeight())
-        ana_freeDayLabel.sizeToFit()
-        ana_buttonBackView.frame = CGRect(x: 42, y: ana_featuresBackView.maxY() + 72, width: ana_scrollView.width() - 84, height: 48)
-        ana_freeDayLabel.center = CGPoint(x: ana_scrollView.halfWidth(), y: ana_buttonBackView.minY() - 10 - ana_freeDayLabel.halfHeight())
+        ana_topProductView.frame = CGRect(x: 50, y: ana_featuresBackView.maxY() + 30, width: ana_scrollView.width() - 50 * 2, height: 38)
+        ana_bottomProductView.frame = CGRect(x: 50, y: ana_topProductView.maxY() + 8, width: ana_scrollView.width() - 50 * 2, height: 38)
+        ana_buttonBackView.frame = CGRect(x: 42, y: ana_bottomProductView.maxY() + 20, width: ana_scrollView.width() - 84, height: 48)
         ana_buttonShadowView.frame = ana_buttonBackView.bounds
         ana_buttonGradientView.frame = ana_buttonShadowView.frame
         ana_buttonGradientLayer.frame = ana_buttonGradientView.bounds
         ana_button.frame = ana_buttonGradientView.frame
         ana_activityView.sizeToFit()
         ana_activityView.center = CGPoint(x: ana_button.halfWidth(), y: ana_button.halfHeight())
-        ana_buttonBottomButton.sizeToFit()
-        ana_buttonBottomButton.center = CGPoint(x: ana_scrollView.halfWidth(), y: ana_buttonBackView.maxY() + 7 + ana_buttonBottomButton.halfHeight())
+        ana_buttonBottomLabel.sizeToFit()
+        ana_buttonBottomLabel.bounds = CGRect(x: 0, y: 0, width: ana_buttonBottomLabel.width(), height: 24)
+        ana_buttonBottomLabel.center = CGPoint(x: ana_scrollView.halfWidth(),
+                                               y: ana_buttonBackView.maxY() + 7 + ana_buttonBottomLabel.halfHeight())
         ana_restoreButton.sizeToFit()
-        ana_restoreButton.setOrigin(x: 42, y: ana_buttonBottomButton.maxY() + 29)
+        ana_restoreButton.frame = CGRect(x: 37, y: ana_buttonBottomLabel.maxY() + 20, width: ana_restoreButton.width(), height: 24)
         ana_privacyButton.sizeToFit()
-        ana_privacyButton.center = CGPoint(x: ana_scrollView.width() - 42 - ana_privacyButton.halfWidth(), y: ana_restoreButton.centerY())
+        ana_privacyButton.center = CGPoint(x: ana_scrollView.width() - 38 - ana_privacyButton.halfWidth(), y: ana_restoreButton.centerY())
         ana_termsButton.sizeToFit()
-        ana_termsButton.center = CGPoint(x: ana_privacyButton.minX() - 27 - ana_termsButton.halfWidth(), y: ana_privacyButton.centerY())
-        let size = ana_bottomLabel.sizeThatFits(CGSize(width: ana_scrollView.width() - 84, height: .greatestFiniteMagnitude))
-        ana_bottomLabel.frame = CGRect(x: 42, y: ana_restoreButton.maxY() + 3, width: size.width, height: size.height)
+        ana_termsButton.center = CGPoint(x: ana_privacyButton.minX() - 27.5 - ana_termsButton.halfWidth(), y: ana_privacyButton.centerY())
+        let size = ana_bottomLabel.sizeThatFits(CGSize(width: ana_scrollView.width() - 74, height: .greatestFiniteMagnitude))
+        ana_bottomLabel.frame = CGRect(x: 37, y: ana_restoreButton.maxY() + 3, width: size.width, height: size.height)
         ana_scrollView.contentSize = CGSize(width: ana_scrollView.width(), height: ana_bottomLabel.maxY())
     }
     
     
     func requestSuccess() {
         ana_activityView.stopAnimating()
-        if let product = ana_product {
+        if let product = ana_monthlyProduct {
             var string = ""
 			if product.freeDays > 0 {
 				string.append("\(product.freeDays) Days Free Trial, Then ")
-			}
-			let timeString = product.subscriptionPeriod?.unit == .month ? "Month" : "Year"
-			string.append("Only \(product.regularPrice)/\(timeString)")
-			ana_freeDayLabel.text = string
-            
-			let littleTimeString = product.subscriptionPeriod?.unit == .month ? "month" : "year"
-            ana_bottomLabel.text = "Angel Premium offers weekly purchase subscription. You can subscribe to a monthly plan(\(product.regularPrice) per \(littleTimeString). You can manage or turn off auto-renew in your Apple ID account settings at any time. Subscriptions will automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Any unused portion of a free trial period will be forfeited when you purchase a subscription. Our app is functional without purchasing an Auto-Renewable subscription, and you can use all the unlocked content after the subscription expires."
-            
-            view.layoutNow()
-            
-            let animation = CABasicAnimation(keyPath: "transform.rotation.z")
-            animation.fromValue = -0.15
-            animation.toValue = 0.15
-            animation.autoreverses = true
-            animation.duration = 0.15
-
-            let animationGroup = CAAnimationGroup()
-            animationGroup.animations = [animation]
-            animationGroup.duration = 2.15
-            animationGroup.repeatCount = .greatestFiniteMagnitude
-            ana_buttonBackView.layer.add(animationGroup, forKey: nil)
+                if !ana_selectBottomProduct {
+                    ana_button.setTitle("\(product.freeDays) Days Free Trial", for: .normal)
+                }
+            } else {
+                ana_button.setTitle("Continue", for: .normal)
+            }
+			string.append("Only \(product.regularPrice)/Month")
+            ana_topProductView.setContent(string)
         }
+        
+        if let product = ana_onceProduct {
+            ana_bottomProductView.setContent("Lifetime purchase \(product.regularPrice)")
+        }
+        
+        let pStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
+        pStyle.lineSpacing = 10
+        pStyle.alignment = .justified
+        ana_bottomLabel.attributedText = NSAttributedString(string: "Angel Premium offers monthly and lifetime purchase subscription. You can subscribe to a monthly plan(\(ana_monthlyProduct?.regularPrice ?? "$6.99") billed once a month) or lifetime plan(\(ana_onceProduct?.regularPrice ?? "$19.99"). You can manage or turn off auto-renew in your Apple ID account settings at any time. Subscriptions will automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Any unused portion of a free trial period will be forfeited when you purchase a subscription. Our app is functional without purchasing an Auto-Renewable subscription, and you can use all the unlocked content after the subscription expires.",
+                                                            attributes: [.font : UIFont(name: "PingFangSC-Semibold", size: 10)!,
+                                                                .foregroundColor : UIColor.black.withAlphaComponent(0.2),
+                                                                .paragraphStyle : pStyle])
+
+        view.layoutNow()
+
+        let animation = CABasicAnimation(keyPath: "transform.rotation.z")
+        animation.fromValue = -0.15
+        animation.toValue = 0.15
+        animation.autoreverses = true
+        animation.duration = 0.15
+
+        let animationGroup = CAAnimationGroup()
+        animationGroup.animations = [animation]
+        animationGroup.duration = 2.15
+        animationGroup.repeatCount = .greatestFiniteMagnitude
+        ana_buttonBackView.layer.add(animationGroup, forKey: nil)
     }
     
     
@@ -346,7 +396,8 @@ extension SubscriptionViewController: NBInAppPurchaseProtocol {
     
     /**获取订阅产品成功*/
     func subscriptionProductsDidReciveSuccess(products: [SKProduct]) {
-        ana_product = products.filter({$0.productIdentifier == NBNewStoreManager.shard.monthProductId}).first
+        ana_monthlyProduct = products.filter({$0.productIdentifier == NBNewStoreManager.shard.monthProductId}).first
+        ana_onceProduct = products.filter({$0.productIdentifier == NBNewStoreManager.shard.onceProductId}).first
         requestSuccess()
     }
     /**获取订阅产品失败*/

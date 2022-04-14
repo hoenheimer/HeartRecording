@@ -53,6 +53,7 @@
 		182C9B0A2807CA78006B48C8 /* GuideViewController3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182C9B092807CA78006B48C8 /* GuideViewController3.swift */; };
 		182C9B0C2807D719006B48C8 /* CancelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182C9B0B2807D719006B48C8 /* CancelViewController.swift */; };
 		182C9B0E2807EA07006B48C8 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 182C9B0D2807EA07006B48C8 /* Poppins-Bold.ttf */; };
+		182C9B102807EC35006B48C8 /* ProductItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182C9B0F2807EC35006B48C8 /* ProductItemView.swift */; };
 		18301023267E20DE006A54B0 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18301022267E20DE006A54B0 /* EventManager.swift */; };
 		1840ACDB26664B07006CC5FE /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840ACDA26664B07006CC5FE /* GuideViewController.swift */; };
 		18D3309D26526EB000DFFFFF /* KickCounterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D3309C26526EB000DFFFFF /* KickCounterViewController.swift */; };
@@ -135,6 +136,7 @@
 		182C9B092807CA78006B48C8 /* GuideViewController3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideViewController3.swift; sourceTree = "<group>"; };
 		182C9B0B2807D719006B48C8 /* CancelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelViewController.swift; sourceTree = "<group>"; };
 		182C9B0D2807EA07006B48C8 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
+		182C9B0F2807EC35006B48C8 /* ProductItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductItemView.swift; sourceTree = "<group>"; };
 		18301022267E20DE006A54B0 /* EventManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
 		1840ACDA26664B07006CC5FE /* GuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideViewController.swift; sourceTree = "<group>"; };
 		18D3309C26526EB000DFFFFF /* KickCounterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KickCounterViewController.swift; sourceTree = "<group>"; };
@@ -314,6 +316,7 @@
 			isa = PBXGroup;
 			children = (
 				1825C958262DE7AF001C0FB3 /* SubscriptionViewController.swift */,
+				182C9B0F2807EC35006B48C8 /* ProductItemView.swift */,
 			);
 			path = Subscription;
 			sourceTree = "<group>";
@@ -608,6 +611,7 @@
 				1825C89A26285D32001C0FB3 /* AnaTabBar.swift in Sources */,
 				1825C931262D970A001C0FB3 /* NotificationName.swift in Sources */,
 				1825C8C8262994A1001C0FB3 /* DetailViewController.swift in Sources */,
+				182C9B102807EC35006B48C8 /* ProductItemView.swift in Sources */,
 				1825C99626305532001C0FB3 /* BaseWebController.swift in Sources */,
 				1825C950262DE771001C0FB3 /* NBInAppPurchaseProtocol.swift in Sources */,
 				18D330AB26527C7F00DFFFFF /* AddKickCounterViewController.swift in Sources */,
