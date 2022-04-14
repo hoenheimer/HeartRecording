@@ -7,6 +7,8 @@
 
 import UIKit
 import StoreKit
+import ReactiveCocoa
+import ReactiveSwift
 
 
 class GuideViewController3: GuideViewController {
@@ -16,11 +18,31 @@ class GuideViewController3: GuideViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         EventManager.log(name: "GuideVC_3_Show")
-        for i in starImageViews.indices {
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(i)) {
-                UIView.animate(withDuration: 1, delay: 0, options: .curveLinear) {
-                    self.starImageViews[i].alpha = 1
+        let pipe = Signal<Int, Never>.pipe()
+        let startAnimation: (Int) -> Void = {
+            index in
+            UIView.animate(withDuration: 0.3) {
+                self.starImageViews[index].alpha = 1
+            } completion: {
+                completed in
+                if completed && index < 4 {
+                    pipe.input.send(value: index + 1)
                 }
+            }
+        }
+        pipe.output.observeValues {
+            index in
+            startAnimation(index)
+        }
+        startAnimation(0)
+        
+        DispatchQueue.main.async {
+            if #available(iOS 14.0, *) {
+                if let windowScene = self.view.window?.windowScene {
+                    SKStoreReviewController.requestReview(in: windowScene)
+                }
+            } else {
+                SKStoreReviewController.requestReview()
             }
         }
     }
@@ -51,15 +73,6 @@ class GuideViewController3: GuideViewController {
             [weak self] button in
             guard let self = self else { return }
             EventManager.log(name: "Guidebutton_3_tapped")
-            DispatchQueue.main.async {
-                if #available(iOS 14.0, *) {
-                    if let windowScene = self.view.window?.windowScene {
-                        SKStoreReviewController.requestReview(in: windowScene)
-                    }
-                } else {
-                    SKStoreReviewController.requestReview()
-                }
-            }
             self.navigationController?.pushViewController(RecordViewController(), animated: true)
         }
     }
