@@ -25,7 +25,7 @@ public extension UIViewController {
     
     
 	func statusBarHeight() -> CGFloat {
-		return getWindoww().windowScene!.statusBarManager?.statusBarFrame.size.height ?? 0
+		return getWindoww().windowScene?.statusBarManager?.statusBarFrame.size.height ?? 0
 	}
 	
 	

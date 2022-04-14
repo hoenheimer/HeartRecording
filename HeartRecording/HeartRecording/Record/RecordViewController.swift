@@ -9,9 +9,11 @@ import UIKit
 import ReactiveCocoa
 import ReactiveSwift
 import StoreKit
+import MessageUI
+import DeviceKit
 
 
-class RecordViewController: AnaLargeTitleViewController {
+class RecordViewController: AnaLargeTitleViewController, MFMailComposeViewControllerDelegate {
     var ana_proButton: UIButton!
     var ana_animationView: RippleAnimationView!
     var ana_mainView: UIView!
@@ -21,6 +23,7 @@ class RecordViewController: AnaLargeTitleViewController {
     var ana_buttonBackgroundView: UIView!
     var ana_buttonGradient: CAGradientLayer!
     var ana_button: UIButton!
+    var ana_helpButton: UIButton!
     
     let ana_manager = RecordManager()
     var ana_recordStartDate = Date()
@@ -38,7 +41,11 @@ class RecordViewController: AnaLargeTitleViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        ana_proButton.isHidden = NBUserVipStatusManager.shard.getVipStatus()
+        ana_proButton.setImage(UIImage(named: "Record_Pro" + (NBUserVipStatusManager.shard.getVipStatus() ? "_Cancel" : "")), for: .normal)
+        view.layoutNow()
+        
+        UserDefaults.standard.set(true, forKey: "Have_Start_Once")
+        navigationController?.viewControllers = [self]
     }
     
     
@@ -55,9 +62,14 @@ class RecordViewController: AnaLargeTitleViewController {
         ana_proButton.reactive.controlEvents(.touchUpInside).observeValues {
             [weak self] _ in
             guard let self = self else { return }
-            let vc = SubscriptionViewController(success: nil)
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true, completion: nil)
+            if NBUserVipStatusManager.shard.getVipStatus() {
+                let vc = CancelViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
+            } else {
+                let vc = SubscriptionViewController(success: nil)
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true, completion: nil)
+            }
         }
         titleBackView.addSubview(ana_proButton)
         
@@ -76,7 +88,7 @@ class RecordViewController: AnaLargeTitleViewController {
         ana_label = UILabel()
         ana_label.numberOfLines = 0
         ana_label.textAlignment = .center
-        ana_label.text = "When you have found your baby‘s heartbeat, tap the button to record now"
+        ana_label.text = "Tap \"Start\" to record now"
         ana_label.textColor = .white
         ana_label.font = UIFont(name: "Poppins-Light", size: 14)
         ana_mainView.addSubview(ana_label)
@@ -176,13 +188,35 @@ class RecordViewController: AnaLargeTitleViewController {
 					self.ana_timer!.invalidate()
 					self.ana_timer = nil
 				}
-				if !UserDefaults.standard.bool(forKey: "Has_Request_View") {
-					SKStoreReviewController.requestReview()
-					UserDefaults.standard.setValue(true, forKey: "Has_Request_View")
-				}
 			}
         }
         ana_buttonBackgroundView.addSubview(ana_button)
+        
+        ana_helpButton = UIButton()
+        ana_helpButton.setImage(UIImage(named: "Record_Help"), for: .normal)
+        ana_helpButton.reactive.controlEvents(.touchUpInside).observeValues {
+            [weak self] _ in
+            guard let self = self else { return }
+            let mailAddress = "taolanetwork@163.com"
+            if MFMailComposeViewController.canSendMail() {
+                let name = Bundle.main.infoDictionary!["CFBundleName"] as! String
+                let currentVersionStr = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
+                let deviceInfo = String(format: "(%@ %@ on %@ running with %@ %@,device %@)", name, currentVersionStr, Device.current.description, Device.current.systemName ?? "",Device.current.systemVersion ?? "" , Device.identifier)
+
+                let bodyHtml = String(format: "<br><br><br><div style=\"color: gray;font-size: 12;\">%@</div><br><br><br>", arguments: [deviceInfo])
+                    
+                let mailVC = MFMailComposeViewController()
+                mailVC.mailComposeDelegate = self
+                mailVC.setToRecipients([mailAddress])
+                mailVC.setSubject("HeartRecording Feedback")
+                mailVC.setMessageBody(bodyHtml, isHTML: true)
+                self.navigationController!.present(mailVC, animated: true, completion: nil)
+            } else {
+                let mailStr = "mailto:" + mailAddress
+                UIApplication.shared.open(URL(string: mailStr)!, options: [:], completionHandler: nil)
+            }
+        }
+        view.addSubview(ana_helpButton)
     }
     
     
@@ -196,13 +230,22 @@ class RecordViewController: AnaLargeTitleViewController {
         ana_heartImageView.center = CGPoint(x: ana_mainView.halfWidth(), y: 65 + ana_heartImageView.halfHeight())
         let size = ana_label.sizeThatFits(CGSize(width: 229, height: CGFloat.greatestFiniteMagnitude))
         ana_label.bounds = CGRect(origin: .zero, size: size)
-        ana_label.center = CGPoint(x: ana_mainView.halfWidth(), y: ana_heartImageView.maxY() + 28 + ana_label.halfHeight())
+        ana_label.center = CGPoint(x: ana_mainView.halfWidth(), y: ana_heartImageView.maxY() + 55)
         ana_timerLabel.sizeToFit()
         ana_timerLabel.center = CGPoint(x: ana_mainView.halfWidth(), y: ana_heartImageView.maxY() + 36 + ana_label.halfHeight())
         ana_buttonBackgroundView.bounds = CGRect(origin: .zero, size: CGSize(width: 175, height: 48))
-        ana_buttonBackgroundView.center = CGPoint(x: view.halfWidth(), y: scrollView.height() * 0.7)
+        ana_buttonBackgroundView.center = CGPoint(x: view.halfWidth(), y: scrollView.height() * 0.63)
         ana_buttonGradient.frame = ana_buttonBackgroundView.bounds
         ana_button.frame = ana_buttonBackgroundView.bounds
+        ana_helpButton.sizeToFit()
+        ana_helpButton.center = CGPoint(x: view.width() - ana_helpButton.halfWidth(),
+                                        y: view.height() - bottomSpacing() - 42 - ana_helpButton.halfHeight())
         return ana_buttonBackgroundView.maxY()
+    }
+    
+    
+    // MARK: - MFMailComposeViewControllerDelegate
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
     }
 }

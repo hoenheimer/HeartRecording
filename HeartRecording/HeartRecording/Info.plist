@@ -26,10 +26,12 @@
 	<string>Angel needs access to microphone to record baby heartbeat, all the data will be only saved in your local file.</string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Poppins-Regular.ttf</string>
 		<string>Inter-Regular.ttf</string>
 		<string>Poppins-SemiBold.ttf</string>
 		<string>Poppins-Light.ttf</string>
 		<string>iconfont.ttf</string>
+		<string>Poppins-Bold.ttf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

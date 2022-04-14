@@ -49,8 +49,8 @@ class AnaTabBar: UITabBar {
 	override func layoutSubviews() {
 		super.layoutSubviews()
 		
-        backView.frame = CGRect(x: 0, y: 0, width: width(), height: 100)
         let height = (window?.safeAreaInsets.bottom ?? 0) + 64
         frame = CGRect(x: 0, y: maxY() - height, width: width(), height: height)
+        backView.frame = bounds
 	}
 }

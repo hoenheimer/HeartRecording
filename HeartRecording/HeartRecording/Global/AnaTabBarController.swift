@@ -36,10 +36,10 @@ class AnaTabBarController: UITabBarController {
 		
 		let firstTime = !UserDefaults.standard.bool(forKey: "Have_Start_Once")
 		viewControllers = [
-			navigationVC(rootVC: firstTime ? GuideViewController(index: 1) : RecordViewController(), imageName: "TabBar_Record", title: "Record Now"),
-            navigationVC(rootVC: RecordingListViewController(), imageName: "TabBar_Recording", title: "Recording"),
+			navigationVC(rootVC: firstTime ? GuideViewController1() : RecordViewController(), imageName: "Tabbar_Record", title: "Record Now"),
+            navigationVC(rootVC: RecordingListViewController(), imageName: "Tabbar_Recording", title: "Recording"),
 			navigationVC(rootVC: KickCounterViewController(), imageName: "TabBar_Kicks", title: "Kick Counter"),
-            navigationVC(rootVC: SettingViewController(), imageName: "TabBar_Setting", title: "Setting")
+            navigationVC(rootVC: SettingViewController(), imageName: "Tabbar_Setting", title: "Setting")
 		]
 	}
     
