@@ -24,7 +24,7 @@ class BaseViewController1: BaseViewController {
 	override func configure() {
 		super.configure()
 		
-		ana_primaryLabel.text = "Pre Eggers"
+		ana_primaryLabel.text = "BabyHear"
 		
 		ana_secondaryLabel.text = "Track & Count Your Baby Kicks"
 		
@@ -34,16 +34,6 @@ class BaseViewController1: BaseViewController {
 			[weak self] _ in
 			guard let self = self else { return }
 			self.navigationController?.pushViewController(BaseViewController2(), animated: true)
-		}
-		
-		
-		for familyName in UIFont.familyNames {
-			print(familyName)
-			
-			for fontName in UIFont.fontNames(forFamilyName: familyName) {
-				print(fontName)
-			}
-			print("--------")
 		}
 	}
 	

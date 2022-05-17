@@ -25,11 +25,14 @@ class AnaTabBarController: UITabBarController {
 		tabBar.isHidden = true
 		
 		viewControllers = [
-			AnaNavigationController(rootViewController: UserDefaults.standard.bool(forKey: "Have_Launch_Once") ? KickCounterViewController() : BaseViewController1()),
-			AnaNavigationController(rootViewController: RecordViewController()),
+			AnaNavigationController(rootViewController: KickCounterViewController()),
+			AnaNavigationController(rootViewController: UserDefaults.standard.bool(forKey: "Have_Launch_Once") ? RecordViewController() : BaseViewController1()),
 			AnaNavigationController(rootViewController: RecordingListViewController()),
 			AnaNavigationController(rootViewController: SettingViewController())
 		]
+        if !UserDefaults.standard.bool(forKey: "Have_Launch_Once") {
+            selectedIndex = 1
+        }
 		
 		ana_simulationTabBar = UIView()
 		ana_simulationTabBar.layer.cornerRadius = 18
@@ -41,7 +44,7 @@ class AnaTabBarController: UITabBarController {
 			let button = TabbarButton()
 			button.index = index
 			button.backgroundColor = .clear
-			let selected = index == 0
+			let selected = index == selectedIndex
 			button.imageNameSuffix = imageNameSuffix
 			button.setImage(UIImage(named: imageNameSuffix + (selected ? "_Selected" : "_Unselected")), for: .normal)
 			button.setTitle(title, for: .normal)

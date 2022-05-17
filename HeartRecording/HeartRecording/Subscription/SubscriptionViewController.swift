@@ -60,7 +60,7 @@ class SubscriptionViewController: UIViewController {
 					vc in
 					return !(vc is BaseViewController)
 				}
-				vcs.insert(KickCounterViewController(), at: 0)
+				vcs.insert(RecordViewController(), at: 0)
 				navigationController.viewControllers = vcs
 			}
 		}
@@ -80,7 +80,7 @@ class SubscriptionViewController: UIViewController {
         view.addSubview(ana_scrollView)
         
         ana_closeButton = UIButton()
-        ana_closeButton.setImage(UIImage(named: "Subscription_Close"), for: .normal)
+        ana_closeButton.setImage(UIImage(named: "Detail_Close"), for: .normal)
         ana_closeButton.reactive.controlEvents(.touchUpInside).observeValues {
             [weak self] _ in
             guard let self = self else { return }
@@ -96,7 +96,7 @@ class SubscriptionViewController: UIViewController {
 		ana_scrollView.addSubview(ana_titleImageView)
 		
 		ana_titleLabel = UILabel()
-		ana_titleLabel.text = "Pre Eggers Premium"
+		ana_titleLabel.text = "BabyHear Premium"
 		ana_titleLabel.textColor = .color(hexString: "#504278")
 		ana_titleLabel.font = UIFont(name: "Didot", size: 36)
 		ana_scrollView.addSubview(ana_titleLabel)
@@ -198,7 +198,7 @@ class SubscriptionViewController: UIViewController {
         ana_bottomLabel = UILabel()
         ana_bottomLabel.numberOfLines = 0
 		ana_bottomLabel.textAlignment = .justified
-        ana_bottomLabel.text = "Pre Eggers Premium offers onetime purchase subscription. You can subscribe to onetime purchase plan($6.99)."
+        ana_bottomLabel.text = "BabyHear Premium offers onetime purchase subscription. You can subscribe to onetime purchase plan($6.99)."
         ana_bottomLabel.textColor = .color(hexString: "#6a515e")
         ana_bottomLabel.font  = UIFont(name: "PingFangSC-Semibold", size: 10)
         ana_scrollView.addSubview(ana_bottomLabel)
@@ -249,7 +249,7 @@ class SubscriptionViewController: UIViewController {
     func requestSuccess() {
 		if let ana_product = ana_product {
 			ana_priceLabel.text = "\(ana_product.regularPrice) to open a permanent membership"
-			ana_bottomLabel.text = "Pre Eggers Premium offers onetime purchase subscription. You can subscribe to onetime purchase plan(\(ana_product.regularPrice)."
+			ana_bottomLabel.text = "BabyHear Premium offers onetime purchase subscription. You can subscribe to onetime purchase plan(\(ana_product.regularPrice)."
 		}
 		view.layoutNow()
     }

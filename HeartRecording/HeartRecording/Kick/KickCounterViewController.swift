@@ -34,10 +34,6 @@ class KickCounterViewController: AnaLargeTitleTableViewController, UITextViewDel
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
-		navigationController?.setNavigationBarHidden(false, animated: false)
-		if let tabBarController = tabBarController as? AnaTabBarController {
-			tabBarController.ana_simulationTabBar.isHidden = false
-		}
 		if ana_models.count == 0 {
 			setProRightBarItemIfNeeded()
 		}
@@ -51,7 +47,7 @@ class KickCounterViewController: AnaLargeTitleTableViewController, UITextViewDel
 		
 		ana_models = DbManager.manager.kickModels()
 		
-		setTitle(title: "Pre Eggers")
+		setTitle(title: "BabyHear")
 		if ana_models.count > 0 {
 			let topButton = UIButton()
 			topButton.setImage(UIImage(named: "Kick_Add_Small"), for: .normal)

@@ -34,6 +34,11 @@ class RecordViewController: AnaLargeTitleViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 		setProRightBarItemIfNeeded()
+        
+        navigationController?.setNavigationBarHidden(false, animated: false)
+        if let tabBarController = tabBarController as? AnaTabBarController {
+            tabBarController.ana_simulationTabBar.isHidden = false
+        }
     }
 	
 	

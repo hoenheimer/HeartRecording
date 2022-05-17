@@ -39,7 +39,7 @@ class SettingViewController: AnaLargeTitleTableViewController, MFMailComposeView
 		let cell = tableView.dequeueReusableCell(withIdentifier: String(NSStringFromClass(SettingTableViewCell.self)), for: indexPath) as! SettingTableViewCell
 		switch indexPath.row {
 		case 0:
-			cell.set(imageName: "Setting_Pro", title: NBUserVipStatusManager.shard.getVipStatus() ? "You are pro!" : "Pre Eggers Premium-Unlock All Features")
+			cell.set(imageName: "Setting_Pro", title: NBUserVipStatusManager.shard.getVipStatus() ? "You are pro!" : "BabyHear Premium-Unlock All Features")
 		case 1:
 			cell.set(imageName: "Setting_Favorite", title: "Favorite")
 		case 2:
