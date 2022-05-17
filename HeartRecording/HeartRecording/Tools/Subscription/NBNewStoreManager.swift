@@ -63,7 +63,7 @@ class NBNewStoreManager: NSObject,SKPaymentTransactionObserver{
         case restoreFailed      //恢复失败
     }
 
-	let onceProductId = "com.preeggers.once"
+	let monthProductId = "com.babyhear.monthplan"
     let sharedSecret = "e2a31bb4d24646119675061c980eca35"
     
     private var products: [SKProduct]?
@@ -120,7 +120,7 @@ class NBNewStoreManager: NSObject,SKPaymentTransactionObserver{
     
     
     func allProuductIds() -> [String] {
-        return [onceProductId]
+        return [monthProductId]
     }
     
     /**获取所有产品信息*/
@@ -209,7 +209,7 @@ class NBNewStoreManager: NSObject,SKPaymentTransactionObserver{
         SwiftyStoreKit.verifyReceipt(using: appleValidator) { result in
             var cheackSuccess: Bool = false
 			//是否有买断状态
-            var haveOnetimePurchase: Bool = false
+            let haveOnetimePurchase: Bool = false
             //是否有订阅
             var haveSubscription: Bool = false
             //订阅到期时间
@@ -222,22 +222,22 @@ class NBNewStoreManager: NSObject,SKPaymentTransactionObserver{
                 cheackSuccess = true
 				
 				//一次购买状态
-				if let onetimeId = weakSelf?.onceProductId {
-					let onetimeResult = SwiftyStoreKit.verifyPurchase(productId: onetimeId, inReceipt: receipt)
-					switch onetimeResult {
-					case .purchased( _):
-						haveOnetimePurchase = true
-						haveSubscription = true
-					case .notPurchased:
-						haveOnetimePurchase = false
-						haveSubscription = false
-					}
-				}
+//				if let onetimeId = weakSelf?.onceProductId {
+//					let onetimeResult = SwiftyStoreKit.verifyPurchase(productId: onetimeId, inReceipt: receipt)
+//					switch onetimeResult {
+//					case .purchased( _):
+//						haveOnetimePurchase = true
+//						haveSubscription = true
+//					case .notPurchased:
+//						haveOnetimePurchase = false
+//						haveSubscription = false
+//					}
+//				}
 				 
-				let productIds = [String]()
-//                if let monthProductId = weakSelf?.monthProductId {
-//                    productIds.append(monthProductId)
-//                }
+				var productIds = [String]()
+                if let monthProductId = weakSelf?.monthProductId {
+                    productIds.append(monthProductId)
+                }
 //				if let sixMonthProductId = weakSelf?.yearProductId {
 //					productIds.append(sixMonthProductId)
 //				}

@@ -130,7 +130,7 @@ class SubscriptionViewController: UIViewController {
         ana_featuresBackView.addSubview(ana_featureLabel2)
 		
 		ana_priceLabel = UILabel()
-		ana_priceLabel.text = "$6.99 to open a permanent membership"
+		ana_priceLabel.text = "3 Days free trail, then only $4.99/month"
 		ana_priceLabel.textColor = .black
 		ana_priceLabel.font = UIFont(name: "Poppins-Light", size: 14)
 		ana_scrollView.addSubview(ana_priceLabel)
@@ -198,7 +198,7 @@ class SubscriptionViewController: UIViewController {
         ana_bottomLabel = UILabel()
         ana_bottomLabel.numberOfLines = 0
 		ana_bottomLabel.textAlignment = .justified
-        ana_bottomLabel.text = "BabyHear Premium offers onetime purchase subscription. You can subscribe to onetime purchase plan($6.99)."
+        ana_bottomLabel.text = "BabyHear Premium offers monthly purchase subscription. You can subscribe to monthly purchase plan($6.99)."
         ana_bottomLabel.textColor = .color(hexString: "#6a515e")
         ana_bottomLabel.font  = UIFont(name: "PingFangSC-Semibold", size: 10)
         ana_scrollView.addSubview(ana_bottomLabel)
@@ -248,8 +248,13 @@ class SubscriptionViewController: UIViewController {
     
     func requestSuccess() {
 		if let ana_product = ana_product {
-			ana_priceLabel.text = "\(ana_product.regularPrice) to open a permanent membership"
-			ana_bottomLabel.text = "BabyHear Premium offers onetime purchase subscription. You can subscribe to onetime purchase plan(\(ana_product.regularPrice)."
+            var priceString = ""
+            if ana_product.freeDays > 0 {
+                priceString.append("\(ana_product.freeDays) Days free trail, then ")
+            }
+            priceString.append("only \(ana_product.regularPrice)/month")
+			ana_priceLabel.text = priceString
+			ana_bottomLabel.text = "BabyHear Premium offers monthly purchase subscription. You can subscribe to monthly purchase plan(\(ana_product.regularPrice)."
 		}
 		view.layoutNow()
     }
@@ -264,7 +269,7 @@ extension SubscriptionViewController: NBInAppPurchaseProtocol {
     
     /**获取订阅产品成功*/
     func subscriptionProductsDidReciveSuccess(products: [SKProduct]) {
-		ana_product = products.filter({$0.productIdentifier == NBNewStoreManager.shard.onceProductId}).first
+		ana_product = products.filter({$0.productIdentifier == NBNewStoreManager.shard.monthProductId}).first
         requestSuccess()
     }
     /**获取订阅产品失败*/

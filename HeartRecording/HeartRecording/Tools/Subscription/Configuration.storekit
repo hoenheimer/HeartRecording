@@ -21,7 +21,10 @@
           "adHocOffers" : [
 
           ],
-          "displayPrice" : "6.99",
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "5.99",
           "familyShareable" : false,
           "groupNumber" : 1,
           "internalID" : "4D81E763",
@@ -37,7 +40,7 @@
               "locale" : "en_US"
             }
           ],
-          "productID" : "com.babycare.heartbeat.month",
+          "productID" : "com.babyhear.monthplan",
           "recurringSubscriptionPeriod" : "P1M",
           "referenceName" : null,
           "subscriptionGroupID" : "A5BA8A75",
@@ -45,6 +48,9 @@
         },
         {
           "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
 
           ],
           "displayPrice" : "39.99",
@@ -74,6 +80,6 @@
   ],
   "version" : {
     "major" : 1,
-    "minor" : 1
+    "minor" : 2
   }
 }
