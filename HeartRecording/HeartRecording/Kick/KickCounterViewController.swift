@@ -8,6 +8,7 @@
 import UIKit
 import ReactiveCocoa
 import ReactiveSwift
+import SafariServices
 
 
 class KickCounterViewController: AnaLargeTitleTableViewController, UITextViewDelegate {
@@ -238,7 +239,8 @@ class KickCounterViewController: AnaLargeTitleTableViewController, UITextViewDel
 	
 	// MARK: - UITextViewDelegate
 	func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-		UIApplication.shared.open(URL)
+        let vc = SFSafariViewController(url: URL)
+        present(vc, animated: true)
 		return false
 	}
 }
