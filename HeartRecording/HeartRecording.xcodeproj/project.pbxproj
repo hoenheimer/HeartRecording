@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1801C7CC27C370F0004D4B91 /* confuseAndBuild.sh in Resources */ = {isa = PBXBuildFile; fileRef = 1801C7CB27C370F0004D4B91 /* confuseAndBuild.sh */; };
+		18112ECA2862E852000FA36A /* Device+Addition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18112EC92862E852000FA36A /* Device+Addition.swift */; };
 		181B6E4D27C383D200E1F652 /* AnaTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181B6E4C27C383D200E1F652 /* AnaTabBarController.swift */; };
 		181B6E4F27C384CF00E1F652 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 181B6E4E27C384CF00E1F652 /* Poppins-Regular.ttf */; };
 		181B6E5127C38BDF00E1F652 /* Merriweather-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 181B6E5027C38BDF00E1F652 /* Merriweather-Regular.ttf */; };
@@ -92,6 +93,7 @@
 /* Begin PBXFileReference section */
 		10A0A03456011A891D4C9651 /* Pods_HeartRecording.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HeartRecording.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1801C7CB27C370F0004D4B91 /* confuseAndBuild.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = confuseAndBuild.sh; path = HeartRecording/confuseAndBuild.sh; sourceTree = SOURCE_ROOT; };
+		18112EC92862E852000FA36A /* Device+Addition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Device+Addition.swift"; sourceTree = "<group>"; };
 		181B6E4C27C383D200E1F652 /* AnaTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnaTabBarController.swift; sourceTree = "<group>"; };
 		181B6E4E27C384CF00E1F652 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		181B6E5027C38BDF00E1F652 /* Merriweather-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merriweather-Regular.ttf"; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 				1825C87C26285C05001C0FB3 /* UIView+Addition.swift */,
 				1825C87B26285C05001C0FB3 /* UIViewController+Addition.swift */,
 				1825C8EF2629D09B001C0FB3 /* String+Addition.swift */,
+				18112EC92862E852000FA36A /* Device+Addition.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -630,6 +633,7 @@
 				1825C87626285BD1001C0FB3 /* AnaNavigationController.swift in Sources */,
 				1825C8E82629C0A8001C0FB3 /* PlayerManager.swift in Sources */,
 				1825C98626303E22001C0FB3 /* FavoriteViewController.swift in Sources */,
+				18112ECA2862E852000FA36A /* Device+Addition.swift in Sources */,
 				1825C951262DE771001C0FB3 /* NBLoadingBox.swift in Sources */,
 				187FD53F27D08E7600E1B0F9 /* StarsView.swift in Sources */,
 				1825C937262DA106001C0FB3 /* SettingViewController.swift in Sources */,

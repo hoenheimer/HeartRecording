@@ -10,6 +10,7 @@ import ReactiveCocoa
 import ReactiveSwift
 import StoreKit
 import AVFoundation
+import DeviceKit
 
 
 class RecordViewController: AnaLargeTitleViewController {
@@ -64,7 +65,7 @@ class RecordViewController: AnaLargeTitleViewController {
         ana_timerLabel = UILabel()
 		ana_timerLabel.text = "00:00"
         ana_timerLabel.textColor = .color(hexString: "#504278")
-        ana_timerLabel.font = UIFont(name: "PingFangHK-Regular", size: 36)
+        ana_timerLabel.font = UIFont(name: "PingFangHK-Regular", size: Device.isSmallScreen() ? 28 : 36)
 		ana_contentView.addSubview(ana_timerLabel)
         
         ana_button = UIButton()
@@ -149,7 +150,10 @@ class RecordViewController: AnaLargeTitleViewController {
     
     override func layoutContentView() -> CGFloat {
 		ana_backImageView.sizeToFit()
-		ana_backImageView.center = CGPoint(x: ana_scrollView.halfWidth(), y: 72 + ana_backImageView.halfHeight())
+        if Device.isSmallScreen() {
+            ana_backImageView.bounds = CGRect(x: 0, y: 0, width: ana_backImageView.width() * 0.8, height: ana_backImageView.height() * 0.8)
+        }
+        ana_backImageView.center = CGPoint(x: ana_scrollView.halfWidth(), y: (Device.isSmallScreen() ? 36 : 72) + ana_backImageView.halfHeight())
 		ana_timerLabel.sizeToFit()
 		ana_timerLabel.center = ana_backImageView.center
 		ana_button.bounds = CGRect(origin: .zero, size: CGSize(width: 250, height: 54))

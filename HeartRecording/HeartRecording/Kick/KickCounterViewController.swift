@@ -9,6 +9,7 @@ import UIKit
 import ReactiveCocoa
 import ReactiveSwift
 import SafariServices
+import DeviceKit
 
 
 class KickCounterViewController: AnaLargeTitleTableViewController, UITextViewDelegate {
@@ -150,13 +151,16 @@ class KickCounterViewController: AnaLargeTitleTableViewController, UITextViewDel
 		super.viewWillLayoutSubviews()
 		
 		hintImageView.sizeToFit()
+        if Device.isSmallScreen() {
+            hintImageView.bounds = CGRect(x: 0, y: 0, width: hintImageView.width() * 0.8, height: hintImageView.height() * 0.8)
+        }
 		hintImageView.setOrigin(x: 0, y: 0)
 		ana_emptyImageView.sizeToFit()
 		ana_emptyImageView.setOrigin(x: 0, y: 0)
 		ana_emptyLabel.sizeToFit()
-		ana_emptyLabel.center = CGPoint(x: ana_emptyImageView.halfWidth(), y: ana_emptyImageView.maxY() + 6 + ana_emptyLabel.halfHeight())
+        ana_emptyLabel.center = CGPoint(x: ana_emptyImageView.halfWidth(), y: ana_emptyImageView.maxY() + (Device.isSmallScreen() ? 1 : 6) + ana_emptyLabel.halfHeight())
 		ana_emptyView.bounds = CGRect(origin: .zero, size: CGSize(width: ana_emptyImageView.width(), height: ana_emptyLabel.maxY()))
-		ana_emptyView.center = CGPoint(x: ana_tableView.halfWidth(), y: ana_tableView.halfHeight())
+        ana_emptyView.center = CGPoint(x: ana_tableView.halfWidth(), y: ana_tableView.halfHeight() - (Device.isSmallScreen() ? 20 : 0))
 		emptyButton.bounds = CGRect(x: 0, y: 0, width: 250, height: 54)
 		emptyButton.center = CGPoint(x: ana_tableView.halfWidth(), y: ana_tableView.height() * 0.8)
 		linkView.frame = CGRect(x: 24, y: view.height() - bottomSpacing() - 12 - 52, width: view.width() - 24 * 2, height: 52)

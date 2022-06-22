@@ -8,6 +8,7 @@
 import UIKit
 import ReactiveCocoa
 import ReactiveSwift
+import DeviceKit
 
 
 class DetailViewController: UIViewController, UITextFieldDelegate {
@@ -285,16 +286,19 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
 		ana_likeButton.center = CGPoint(x: ana_shareButton.minX() - 18 - ana_shareButton.halfWidth(), y: ana_closeButton.centerY())
 		ana_nameTextField.sizeToFit()
 		ana_nameTextField.bounds = CGRect(x: 0, y: 0, width: ana_nameTextField.width(), height: 44)
-		ana_nameTextField.center = CGPoint(x: view.halfWidth(), y: ana_closeButton.maxY() + 46 + ana_nameTextField.halfHeight())
+        ana_nameTextField.center = CGPoint(x: view.halfWidth(), y: ana_closeButton.maxY() + (Device.isSmallScreen() ? 26 : 46) + ana_nameTextField.halfHeight())
 		ana_editButton.sizeToFit()
 		ana_editButton.center = CGPoint(x: ana_nameTextField.maxX() + 8 + ana_editButton.halfWidth(), y: ana_nameTextField.centerY())
 		ana_dateLabel.sizeToFit()
 		ana_dateLabel.center = CGPoint(x: view.halfWidth(), y: ana_nameTextField.maxY() + ana_dateLabel.halfHeight())
 		backImageView.sizeToFit()
+        if Device.isSmallScreen() {
+            backImageView.bounds = CGRect(x: 0, y: 0, width: backImageView.width() * 0.8, height: backImageView.height() * 0.8)
+        }
 		backImageView.center = CGPoint(x: view.halfWidth(), y: ana_dateLabel.maxY() + 12 + backImageView.halfHeight())
 		ana_progressImageView.sizeToFit()
 		ana_progressBackView.frame = CGRect(x: 40,
-											y: backImageView.maxY() + 37,
+                                            y: backImageView.maxY() + (Device.isSmallScreen() ? 12 : 37),
 											width: view.width() - 80,
 											height: ana_progressImageView.height())
 		ana_progressBackLine.bounds = CGRect(origin: .zero, size: CGSize(width: ana_progressBackView.width(), height: 3))
@@ -308,7 +312,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
 		ana_totalTimeLabel.sizeToFit()
 		ana_totalTimeLabel.center = CGPoint(x: view.width() - 40 - ana_totalTimeLabel.halfWidth(), y: ana_progressTimeLabel.centerY())
         ana_playButton.bounds = CGRect(origin: .zero, size: CGSize(width: 72, height: 72))
-		ana_playButton.center = CGPoint(x: view.halfWidth(), y: ana_progressTimeLabel.maxY() + 18 + ana_playButton.halfHeight())
+        ana_playButton.center = CGPoint(x: view.halfWidth(), y: ana_progressTimeLabel.maxY() + (Device.isSmallScreen() ? 3 : 18) + ana_playButton.halfHeight())
         ana_leftButton.sizeToFit()
         ana_leftButton.center = CGPoint(x: ana_playButton.minX() - 60 - ana_leftButton.halfWidth(), y: ana_playButton.centerY())
         ana_rightButton.sizeToFit()

@@ -209,7 +209,7 @@ class NBNewStoreManager: NSObject,SKPaymentTransactionObserver{
         SwiftyStoreKit.verifyReceipt(using: appleValidator) { result in
             var cheackSuccess: Bool = false
 			//是否有买断状态
-            let haveOnetimePurchase: Bool = false
+//            let haveOnetimePurchase: Bool = false
             //是否有订阅
             var haveSubscription: Bool = false
             //订阅到期时间
@@ -268,10 +268,10 @@ class NBNewStoreManager: NSObject,SKPaymentTransactionObserver{
                 break
             }
             let purchaseState = NBPurchaseState(cheackSuccess: cheackSuccess, haveSubscription: haveSubscription, deadLine: deadLine, receiptItems: receiptItems)
-			if haveOnetimePurchase { //有一次性买断
+			/*if haveOnetimePurchase { //有一次性买断
 				NBUserVipStatusManager.shard.recordOnetimePurchase()
 				callBack(purchaseState)
-			} else if haveSubscription {  //有订阅
+			} else */if haveSubscription {  //有订阅
 				NBUserVipStatusManager.shard.recordSubscriptionStatus(deadLine)
 				callBack(purchaseState)
 			} else {
