@@ -91,7 +91,7 @@ class SubscriptionViewController: UIViewController {
         view.addSubview(ana_scrollView)
         
         ana_closeButton = UIButton()
-        ana_closeButton.setImage(UIImage(named: "Subscription_Close"), for: .normal)
+        ana_closeButton.setImage(UIImage(named: "Detail_Close"), for: .normal)
         ana_closeButton.reactive.controlEvents(.touchUpInside).observeValues {
             [weak self] _ in
             guard let self = self else { return }

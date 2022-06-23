@@ -25,8 +25,8 @@ class AnaTabBarController: UITabBarController {
 		tabBar.isHidden = true
 		
 		viewControllers = [
-			AnaNavigationController(rootViewController: UserDefaults.standard.bool(forKey: "Have_Launch_Once") ? KickCounterViewController() : BaseViewController1()),
-			AnaNavigationController(rootViewController: RecordViewController()),
+			AnaNavigationController(rootViewController: UserDefaults.standard.bool(forKey: "Have_Launch_Once") ? RecordViewController() : BaseViewController1()),
+			AnaNavigationController(rootViewController: KickCounterViewController()),
 			AnaNavigationController(rootViewController: RecordingListViewController()),
 			AnaNavigationController(rootViewController: SettingViewController())
 		]
@@ -65,8 +65,8 @@ class AnaTabBarController: UITabBarController {
 			return button
 		}
 		
-		button1 = newButton(index: 0, imageNameSuffix: "TabBar_Kicks", title: "Heartbeat")
-		button2 = newButton(index: 1, imageNameSuffix: "TabBar_Record", title: "Recording")
+		button1 = newButton(index: 0, imageNameSuffix: "TabBar_Record", title: "Recording")
+		button2 = newButton(index: 1, imageNameSuffix: "TabBar_Kicks", title: "Heartbeat")
 		button3 = newButton(index: 2, imageNameSuffix: "TabBar_List", title: "Audio")
 		button4 = newButton(index: 3, imageNameSuffix: "TabBar_Setting", title: "Setting")
 	}
